@@ -41,6 +41,9 @@ public class DroneController : MonoBehaviour
         set => _isPossession = value;
     }
 
+    [Header("빙의시 On/Off 필요한 스크립트")]
+    [SerializeField] private DroneController _droneController;
+    [SerializeField] private DroneCameraLook _droneCameraLook;
 
     private void Awake() => Init();
 
@@ -55,7 +58,7 @@ public class DroneController : MonoBehaviour
         // 하강 구독
         _playerDescendAction.started += DroneOnDescend;
         _playerDescendAction.canceled += DroneDescendCancle;
-        // 빙의 구동
+        // 빙의 구독
         _playerLeftMBAction.started += DroneOnPossession;
     }
 
@@ -192,10 +195,10 @@ public class DroneController : MonoBehaviour
     {
         if (!ctx.started || _isPossession == true) return;
         Debug.Log("마우스 왼쪽 버튼 누름");
-        TrtPossession();
+        TryPossession();
     }
     // 빙의 함수
-    private void TrtPossession()
+    private void TryPossession()
     {
         if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance))
         {
@@ -205,10 +208,32 @@ public class DroneController : MonoBehaviour
             transform.position = targetPos;
             // 자식 오브젝트로 들어감
             transform.SetParent(hit.transform, true);
-
+            transform.localRotation = Quaternion.identity;
             _isPossession = true;
+            // 입력값 초기화
+            _moveInput = Vector2.zero;
+            _verticalInput = 0f;
+         
+            DroneControllerOff();
             Debug.Log("빙의 성공");
         }
     }
     #endregion
+
+    #region 빙의시 스크립트 On/Off 함수들
+    public void DroneControllerOn()
+    {
+        _isPossession = false;
+        _droneController.enabled = true;
+        _droneCameraLook.enabled = true;
+        transform.SetParent(null, true);
+    }
+
+    public void DroneControllerOff()
+    {
+        _droneController.enabled = false;
+        _droneCameraLook.enabled = false;
+    }
+    #endregion
+
 }

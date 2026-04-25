@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 8009466082228118386}
   - component: {fileID: 3679402617380995310}
   - component: {fileID: 9216172038396605342}
+  - component: {fileID: 2170373601760561241}
   m_Layer: 0
   m_Name: PlayerDrone
   m_TagString: Untagged
@@ -414,6 +415,10 @@ MonoBehaviour:
   _playerSpeed: 15
   _playerVertical: 10
   _dronePivot: {fileID: 3591547512386981598}
+  _possessionDistance: 5
+  _possessionRayPivot: {fileID: 8799307660560936879}
+  _droneController: {fileID: 3679402617380995310}
+  _droneCameraLook: {fileID: 9216172038396605342}
 --- !u!114 &9216172038396605342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +433,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DroneCameraLook
   _cameraSpeed: 0.2
   _dronePivot: {fileID: 3591547512386981598}
+--- !u!114 &2170373601760561241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971913610480199745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9a7889a0829c24b9adf967c3bfd2e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroneCancelPossession
 --- !u!1 &2550690608123586003
 GameObject:
   m_ObjectHideFlags: 0
