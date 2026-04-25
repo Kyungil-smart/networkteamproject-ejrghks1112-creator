@@ -26,6 +26,22 @@ public class DroneController : MonoBehaviour
     private InputAction _playerTabAction;
     private InputAction _playerLeftMBAction;
 
+    // 빙의를 위한 레이캐스트
+    private Ray _possessionRay;
+    [Header("빙의 사정 거리")]
+    [SerializeField] private float _possessionDistance;
+    [Header("레이캐스트 피봇 위치")]
+    [SerializeField] private Transform _possessionRayPivot;
+
+    // 빙의 여부
+    private bool _isPossession = false;
+    public bool IsPossession
+    {
+        get => _isPossession;
+        set => _isPossession = value;
+    }
+
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -39,6 +55,8 @@ public class DroneController : MonoBehaviour
         // 하강 구독
         _playerDescendAction.started += DroneOnDescend;
         _playerDescendAction.canceled += DroneDescendCancle;
+        // 빙의 구동
+        _playerLeftMBAction.started += DroneOnPossession;
     }
 
     //public override void OnNetworkSpawn()
@@ -56,6 +74,12 @@ public class DroneController : MonoBehaviour
     //    _playerDescendAction.canceled += DroneDescendCancle;
 
     //}
+
+    private void Update()
+    {
+        // 빙의를 위한 레이캐스트 셋팅
+        _possessionRay = new Ray(_possessionRayPivot.position, _possessionRayPivot.forward);
+    }
 
     private void FixedUpdate()
     {
@@ -102,6 +126,19 @@ public class DroneController : MonoBehaviour
         // 하강 구독 취소
         _playerDescendAction.started -= DroneOnDescend;
         _playerDescendAction.canceled -= DroneDescendCancle;
+        // 빙의 구독 취소
+        _playerLeftMBAction.started -= DroneOnPossession;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Camera.main == null) return;
+
+        Gizmos.color = Color.red;
+
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+
+        Gizmos.DrawRay(_possessionRay.origin, _possessionRay.direction * _possessionDistance);
     }
 
     #region 초기화
@@ -150,4 +187,28 @@ public class DroneController : MonoBehaviour
     }
     #endregion
 
+    #region 빙의 조작
+    public void DroneOnPossession(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started || _isPossession == true) return;
+        Debug.Log("마우스 왼쪽 버튼 누름");
+        TrtPossession();
+    }
+    // 빙의 함수
+    private void TrtPossession()
+    {
+        if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance))
+        {
+            // 타겟 위로 위치 계산                                     ↓ 위치 값
+            Vector3 targetPos = hit.transform.position + Vector3.up * 1.5f;
+            // 타겟 위로 위치 이동
+            transform.position = targetPos;
+            // 자식 오브젝트로 들어감
+            transform.SetParent(hit.transform, true);
+
+            _isPossession = true;
+            Debug.Log("빙의 성공");
+        }
+    }
+    #endregion
 }
