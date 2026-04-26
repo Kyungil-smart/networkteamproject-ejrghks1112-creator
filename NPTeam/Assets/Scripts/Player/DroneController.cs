@@ -207,6 +207,13 @@ public class DroneController : MonoBehaviour
     {
         if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance))
         {
+            // 입력값 초기화
+            _moveInput = Vector2.zero;
+            _verticalInput = 0f;
+            // 이동 정지
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+
             // 타겟 위로 위치 계산                                     ↓ 위치 값
             Vector3 targetPos = hit.transform.position + Vector3.up * 1.5f;
             // 타겟 위로 위치 이동
@@ -215,9 +222,6 @@ public class DroneController : MonoBehaviour
             transform.SetParent(hit.transform, true);
             transform.localRotation = Quaternion.identity;
             _isPossession = true;
-            // 입력값 초기화
-            _moveInput = Vector2.zero;
-            _verticalInput = 0f;
 
             // 빙의 대상의 모든 Renderer 가져오기
             _currentPossessionRenderers = hit.transform.GetComponentsInChildren<Renderer>();
@@ -239,8 +243,8 @@ public class DroneController : MonoBehaviour
         // 빙의 취소후 원래 색상으로 복귀
         _playerColorChanger.Release(_currentPossessionRenderers);
         // 플레이어 색상 복구
-        _playerColorChanger.ApplyColor();
         _currentPossessionRenderers = null;
+        _playerColorChanger.ApplyColor();
         
         transform.SetParent(null, true);
     }
