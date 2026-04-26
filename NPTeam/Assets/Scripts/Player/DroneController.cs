@@ -219,6 +219,7 @@ public class DroneController : MonoBehaviour
             // 이동 정지
             _rigidbody.linearVelocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
+            _rigidbody.isKinematic = true;
 
             // 타겟 위로 위치 계산                                     ↓ 위치 값
             Vector3 targetPos = hit.transform.position + Vector3.up * 1.5f;
@@ -254,6 +255,7 @@ public class DroneController : MonoBehaviour
         _playerColorChanger.ApplyColor();
         
         transform.SetParent(null, true);
+        _rigidbody.isKinematic = false;
     }
 
     public void DroneControllerOff()
