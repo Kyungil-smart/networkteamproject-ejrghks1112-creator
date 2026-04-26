@@ -27,7 +27,6 @@ public class DroneCancelPossession : MonoBehaviour
     public void DroneOnPossessionCancle(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || _droneController.IsPossession == false) return;
-        Debug.Log("마우스 오른쪽 버튼 클릭");
         _droneController.DroneControllerOn();
     }
 

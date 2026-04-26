@@ -45,6 +45,11 @@ public class DroneController : MonoBehaviour
     [SerializeField] private DroneController _droneController;
     [SerializeField] private DroneCameraLook _droneCameraLook;
 
+    // 빙의시 색상 적용을 위한 변수
+    private PlayerColorChanger _playerColorChanger;
+    // 빙의 대상의 렌더러를 저장
+    private Renderer[] _currentPossessionRenderers;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -148,6 +153,7 @@ public class DroneController : MonoBehaviour
     private void Init()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _playerColorChanger = GetComponent<PlayerColorChanger>();
 
         _playerMoveAction = InputSystem.actions["PlayerMove"];
         _playerDescendAction = InputSystem.actions["PlayerDescend"];
@@ -194,7 +200,6 @@ public class DroneController : MonoBehaviour
     public void DroneOnPossession(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || _isPossession == true) return;
-        Debug.Log("마우스 왼쪽 버튼 누름");
         TryPossession();
     }
     // 빙의 함수
@@ -213,9 +218,13 @@ public class DroneController : MonoBehaviour
             // 입력값 초기화
             _moveInput = Vector2.zero;
             _verticalInput = 0f;
-         
+
+            // 빙의 대상의 모든 Renderer 가져오기
+            _currentPossessionRenderers = hit.transform.GetComponentsInChildren<Renderer>();
+            // 가져온 Renderer들에 플레이어 색 적용
+            _playerColorChanger.ApplyPossessColor(_currentPossessionRenderers);
+            
             DroneControllerOff();
-            Debug.Log("빙의 성공");
         }
     }
     #endregion
@@ -226,6 +235,13 @@ public class DroneController : MonoBehaviour
         _isPossession = false;
         _droneController.enabled = true;
         _droneCameraLook.enabled = true;
+        
+        // 빙의 취소후 원래 색상으로 복귀
+        _playerColorChanger.Release(_currentPossessionRenderers);
+        // 플레이어 색상 복구
+        _playerColorChanger.ApplyColor();
+        _currentPossessionRenderers = null;
+        
         transform.SetParent(null, true);
     }
 
