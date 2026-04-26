@@ -32,6 +32,8 @@ public class DroneController : MonoBehaviour
     [SerializeField] private float _possessionDistance;
     [Header("레이캐스트 피봇 위치")]
     [SerializeField] private Transform _possessionRayPivot;
+    [Header("빙의할 대상의 레이어 마스크를 선택")]
+    [SerializeField] private LayerMask _targetLayer;
 
     // 빙의 여부
     private bool _isPossession = false;
@@ -200,7 +202,11 @@ public class DroneController : MonoBehaviour
     public void DroneOnPossession(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || _isPossession == true) return;
-        TryPossession();
+        
+        if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance, _targetLayer))
+        {
+            TryPossession();
+        }
     }
     // 빙의 함수
     private void TryPossession()
@@ -221,13 +227,14 @@ public class DroneController : MonoBehaviour
             // 자식 오브젝트로 들어감
             transform.SetParent(hit.transform, true);
             transform.localRotation = Quaternion.identity;
-            _isPossession = true;
 
             // 빙의 대상의 모든 Renderer 가져오기
             _currentPossessionRenderers = hit.transform.GetComponentsInChildren<Renderer>();
             // 가져온 Renderer들에 플레이어 색 적용
             _playerColorChanger.ApplyPossessColor(_currentPossessionRenderers);
             
+            _isPossession = true;
+
             DroneControllerOff();
         }
     }
