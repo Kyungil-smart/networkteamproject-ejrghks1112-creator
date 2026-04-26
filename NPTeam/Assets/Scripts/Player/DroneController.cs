@@ -202,16 +202,13 @@ public class DroneController : MonoBehaviour
     public void DroneOnPossession(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || _isPossession == true) return;
-        
-        if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance, _targetLayer))
-        {
+  
             TryPossession();
-        }
     }
     // 빙의 함수
     private void TryPossession()
     {
-        if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance))
+        if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance, _targetLayer))
         {
             // 입력값 초기화
             _moveInput = Vector2.zero;
