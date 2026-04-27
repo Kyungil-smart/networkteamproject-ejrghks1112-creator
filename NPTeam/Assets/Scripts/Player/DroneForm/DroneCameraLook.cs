@@ -59,7 +59,7 @@ public class DroneCameraLook : MonoBehaviour
         _cameraMoveInput = Vector2.zero;
     }
 
-    public void CameraVectorBackup()
+    private void CameraVectorBackup()
     {
         _cameraX += _cameraMoveInput.x * _cameraSpeed;
         _cameraY -= _cameraMoveInput.y * _cameraSpeed;
