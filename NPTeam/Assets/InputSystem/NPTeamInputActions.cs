@@ -181,6 +181,33 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PlayerInteraction"",
+                    ""type"": ""Button"",
+                    ""id"": ""0021b137-86b9-4e02-8967-d3ff31612d7e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ea5afc3-2ab4-40fc-9d45-eebca3629e63"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerEnter"",
+                    ""type"": ""Button"",
+                    ""id"": ""d143c80c-8e6b-4c67-9a3e-4fd0bd1a814d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -337,6 +364,39 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PlayerCameraLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""860714ac-9d02-4cde-b905-82732cb46c6b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbc5f26a-7c11-482d-bc65-f7398a1a3040"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b279ba8c-df11-42e0-8a33-a63dfc93e4bb"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerEnter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -383,6 +443,9 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         m_Player_PlayerLeftMB = m_Player.FindAction("PlayerLeftMB", throwIfNotFound: true);
         m_Player_PlayerRightMB = m_Player.FindAction("PlayerRightMB", throwIfNotFound: true);
         m_Player_PlayerCameraLook = m_Player.FindAction("PlayerCameraLook", throwIfNotFound: true);
+        m_Player_PlayerInteraction = m_Player.FindAction("PlayerInteraction", throwIfNotFound: true);
+        m_Player_PlayerESC = m_Player.FindAction("PlayerESC", throwIfNotFound: true);
+        m_Player_PlayerEnter = m_Player.FindAction("PlayerEnter", throwIfNotFound: true);
     }
 
     ~@NPTeamInputActions()
@@ -473,6 +536,9 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PlayerLeftMB;
     private readonly InputAction m_Player_PlayerRightMB;
     private readonly InputAction m_Player_PlayerCameraLook;
+    private readonly InputAction m_Player_PlayerInteraction;
+    private readonly InputAction m_Player_PlayerESC;
+    private readonly InputAction m_Player_PlayerEnter;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -524,6 +590,18 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/PlayerCameraLook".
         /// </summary>
         public InputAction @PlayerCameraLook => m_Wrapper.m_Player_PlayerCameraLook;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PlayerInteraction".
+        /// </summary>
+        public InputAction @PlayerInteraction => m_Wrapper.m_Player_PlayerInteraction;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PlayerESC".
+        /// </summary>
+        public InputAction @PlayerESC => m_Wrapper.m_Player_PlayerESC;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PlayerEnter".
+        /// </summary>
+        public InputAction @PlayerEnter => m_Wrapper.m_Player_PlayerEnter;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -580,6 +658,15 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
             @PlayerCameraLook.started += instance.OnPlayerCameraLook;
             @PlayerCameraLook.performed += instance.OnPlayerCameraLook;
             @PlayerCameraLook.canceled += instance.OnPlayerCameraLook;
+            @PlayerInteraction.started += instance.OnPlayerInteraction;
+            @PlayerInteraction.performed += instance.OnPlayerInteraction;
+            @PlayerInteraction.canceled += instance.OnPlayerInteraction;
+            @PlayerESC.started += instance.OnPlayerESC;
+            @PlayerESC.performed += instance.OnPlayerESC;
+            @PlayerESC.canceled += instance.OnPlayerESC;
+            @PlayerEnter.started += instance.OnPlayerEnter;
+            @PlayerEnter.performed += instance.OnPlayerEnter;
+            @PlayerEnter.canceled += instance.OnPlayerEnter;
         }
 
         /// <summary>
@@ -621,6 +708,15 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
             @PlayerCameraLook.started -= instance.OnPlayerCameraLook;
             @PlayerCameraLook.performed -= instance.OnPlayerCameraLook;
             @PlayerCameraLook.canceled -= instance.OnPlayerCameraLook;
+            @PlayerInteraction.started -= instance.OnPlayerInteraction;
+            @PlayerInteraction.performed -= instance.OnPlayerInteraction;
+            @PlayerInteraction.canceled -= instance.OnPlayerInteraction;
+            @PlayerESC.started -= instance.OnPlayerESC;
+            @PlayerESC.performed -= instance.OnPlayerESC;
+            @PlayerESC.canceled -= instance.OnPlayerESC;
+            @PlayerEnter.started -= instance.OnPlayerEnter;
+            @PlayerEnter.performed -= instance.OnPlayerEnter;
+            @PlayerEnter.canceled -= instance.OnPlayerEnter;
         }
 
         /// <summary>
@@ -757,5 +853,26 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPlayerCameraLook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PlayerInteraction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlayerInteraction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PlayerESC" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlayerESC(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PlayerEnter" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlayerEnter(InputAction.CallbackContext context);
     }
 }
