@@ -86,6 +86,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PlayerCameraLook",
+                    "type": "Value",
+                    "id": "28969dc8-d4f8-41ba-a0f7-c7b4e5581e11",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PlayerInteraction",
+                    "type": "Button",
+                    "id": "0021b137-86b9-4e02-8967-d3ff31612d7e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlayerESC",
+                    "type": "Button",
+                    "id": "9ea5afc3-2ab4-40fc-9d45-eebca3629e63",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlayerEnter",
+                    "type": "Button",
+                    "id": "d143c80c-8e6b-4c67-9a3e-4fd0bd1a814d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -229,6 +265,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlayerRightMB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e05394d3-d182-4055-ae3f-3b2376c8be49",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerCameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "860714ac-9d02-4cde-b905-82732cb46c6b",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbc5f26a-7c11-482d-bc65-f7398a1a3040",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b279ba8c-df11-42e0-8a33-a63dfc93e4bb",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerEnter",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
