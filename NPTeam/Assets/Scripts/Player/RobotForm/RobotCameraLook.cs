@@ -5,7 +5,7 @@ public class RobotCameraLook : MonoBehaviour
 {
     [Header("카메라 이동 속도")]
     [SerializeField] private float _cameraSpeed;
-    [Header("카메라 이동을 위한 로봇 피봇")]
+    [Header("카메라 이동을 위한 로봇 상체 피봇")]
     [SerializeField] private Transform _robotPivot;
 
     // 카메라 축 백업

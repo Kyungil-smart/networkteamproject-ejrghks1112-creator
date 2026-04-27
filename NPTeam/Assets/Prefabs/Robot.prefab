@@ -167,6 +167,8 @@ MonoBehaviour:
   _playerSpeed: 5
   _jumpPower: 10
   _robotPivot: {fileID: 1871229821606095061}
+  _robotLegPivot: {fileID: 5605629391453565481}
+  _legFollowSpeed: 5
   _jumpCheckLayer:
     serializedVersion: 2
     m_Bits: 16

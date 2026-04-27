@@ -8,8 +8,12 @@ public class RobotFormMovement : MonoBehaviour
     [Header("점프 강도")]
     [SerializeField] private float _jumpPower;
 
-    [Header("카메라 이동을 위한 로봇 피봇")]
+    [Header("카메라 이동을 위한 로봇 상체 피봇")]
     [SerializeField] private Transform _robotPivot;
+    [Header("상체를 따라가기 위한 하체 피봇")]
+    [SerializeField] private Transform _robotLegPivot;
+    [Header("상체를 따라 하체 회전 속도")]
+    [SerializeField] private float _legFollowSpeed;
 
     private Rigidbody _rigidbody;
     // 로봇 이동 조작키 입력값 저장
@@ -38,6 +42,11 @@ public class RobotFormMovement : MonoBehaviour
         // 점프 구독
         _playerJumpAction.started += RobotOnJump;
         _playerJumpAction.canceled += RobotJumpCancle;
+    }
+
+    private void LateUpdate()
+    {
+        FollowLeg();
     }
 
     private void FixedUpdate()
@@ -130,6 +139,25 @@ public class RobotFormMovement : MonoBehaviour
         Vector3 origin = new Vector3(_jumpRayPivot.bounds.center.x, _jumpRayPivot.bounds.min.y + offset, _jumpRayPivot.bounds.center.z);
 
         return Physics.Raycast(origin, Vector3.down, _jumpRayDistance, _jumpCheckLayer);
+    }
+    #endregion
+
+    #region 상체 따라 하체 움직이는 함수
+    private void FollowLeg()
+    {
+        if (_robotPivot == null || _robotLegPivot == null) return;
+
+        // 상체 방향에서 Y 제거
+        Vector3 forward = _robotPivot.forward;
+        forward.y = 0f;
+
+        // 방향 벡터가 거의 0이면 LookRotation 에러 방지
+        if (forward.sqrMagnitude < 0.0001f) return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(forward);
+
+        // 목표로 천천히 회전
+        _robotLegPivot.rotation = Quaternion.Slerp(_robotLegPivot.rotation, targetRotation, _legFollowSpeed * Time.deltaTime);
     }
     #endregion
 }
