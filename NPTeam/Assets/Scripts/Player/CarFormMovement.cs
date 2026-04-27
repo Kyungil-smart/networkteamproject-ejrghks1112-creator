@@ -15,6 +15,7 @@ public class CarFormMovement : MonoBehaviour
 
     void Awake()
     {
+        int a = 5;
         _carFormInput = new NPTeamInputActions();
         _carFormRigidBody = GetComponent<Rigidbody>();
     }
