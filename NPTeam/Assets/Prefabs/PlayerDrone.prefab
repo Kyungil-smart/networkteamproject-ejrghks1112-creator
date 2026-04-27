@@ -418,6 +418,9 @@ MonoBehaviour:
   _dronePivot: {fileID: 3591547512386981598}
   _possessionDistance: 5
   _possessionRayPivot: {fileID: 8799307660560936879}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 16
   _droneController: {fileID: 3679402617380995310}
   _droneCameraLook: {fileID: 9216172038396605342}
 --- !u!114 &9216172038396605342

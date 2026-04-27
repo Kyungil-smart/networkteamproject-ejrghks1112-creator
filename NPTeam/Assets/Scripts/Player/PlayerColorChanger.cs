@@ -34,15 +34,15 @@ public class PlayerColorChanger : MonoBehaviour
     // 렌더러 색을 MPB로 덮어쓰는 함수
     public void ApplyColor()
     {
-        foreach (var r in _renderers)
+        foreach (Renderer renderer in _renderers)
         {
-            if (r.sharedMaterial == null) continue;
+            if (renderer.sharedMaterial == null) continue;
 
-            int id = r.sharedMaterial.HasProperty(BaseColorID) ? BaseColorID : ColorID;
+            int id = renderer.sharedMaterial.HasProperty(BaseColorID) ? BaseColorID : ColorID;
 
-            r.GetPropertyBlock(_mpb);
+            renderer.GetPropertyBlock(_mpb);
             _mpb.SetColor(id, _playerColor);
-            r.SetPropertyBlock(_mpb);
+            renderer.SetPropertyBlock(_mpb);
         }
     }
     #endregion
