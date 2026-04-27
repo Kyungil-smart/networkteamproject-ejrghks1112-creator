@@ -812,6 +812,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1191454434}
   - component: {fileID: 1191454435}
+  - component: {fileID: 1191454437}
+  - component: {fileID: 1191454436}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -834,7 +836,6 @@ Transform:
   m_Children:
   - {fileID: 1280131312}
   - {fileID: 1147722252}
-  - {fileID: 1718576175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1191454435
@@ -862,8 +863,41 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1191454436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191454433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195e92b2b3c76ef4ba0df87dc85d256f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotFormMovement
+  _playerSpeed: 5
+  _jumpPower: 10
+  _robotPivot: {fileID: 1280131312}
+  _jumpCheckLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  _jumpRayPivot: {fileID: 1147722253}
+--- !u!114 &1191454437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191454433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507e3f60be577ca40842ade8c027d4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotCameraLook
+  _cameraSpeed: 0.2
+  _robotPivot: {fileID: 1280131312}
 --- !u!1 &1256174540
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,6 +1010,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 882805401}
+  - {fileID: 1718576175}
   m_Father: {fileID: 1191454434}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1280131313
@@ -1081,12 +1116,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718576174}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.021814892, y: 0, z: 0, w: 0.999762}
-  m_LocalPosition: {x: 0, y: 1.5, z: -3}
+  m_LocalRotation: {x: 0.021814894, y: -0, z: -0, w: 0.99976206}
+  m_LocalPosition: {x: 0, y: 0.5, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1191454434}
+  m_Father: {fileID: 1280131312}
   m_LocalEulerAnglesHint: {x: 2.5, y: 0, z: 0}
 --- !u!114 &1718576176
 MonoBehaviour:

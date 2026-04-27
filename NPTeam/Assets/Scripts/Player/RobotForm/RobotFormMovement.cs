@@ -7,7 +7,6 @@ public class RobotFormMovement : MonoBehaviour
     [SerializeField] private float _playerSpeed;
     [Header("점프 강도")]
     [SerializeField] private float _jumpPower;
-    private float _jumpInput;
 
     [Header("카메라 이동을 위한 로봇 피봇")]
     [SerializeField] private Transform _robotPivot;
@@ -27,7 +26,7 @@ public class RobotFormMovement : MonoBehaviour
     [Header("점프를 위한 레이캐스트 피봇(콜라이더)")]
     [SerializeField] private Collider _jumpRayPivot;
     // 점프를 위한 레이캐스트 사거리
-    private float _jumpRayDistance = 0.05f;
+    private float _jumpRayDistance = 0.15f;
 
     private void Awake() => Init();
 
@@ -45,19 +44,18 @@ public class RobotFormMovement : MonoBehaviour
     {
         //if (!IsOwner) return;
 
-        // 카메라 방향 상관없이 Z축 이동
         Vector3 forward = _robotPivot.forward;
         forward.y = 0f;
 
-        // 카메라 방향 상관없이 X축 이동
         Vector3 right = _robotPivot.right;
         right.y = 0f;
 
-        // ↓ 대각선 입력시 속도 추가되는거 보정
         Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
+        Vector3 velocity = _rigidbody.linearVelocity;
+        velocity.x = move.x;
+        velocity.z = move.z;
 
-        // 드론 이동
-        _rigidbody.linearVelocity = new Vector3(move.x, _jumpInput * _jumpPower, move.z);
+        _rigidbody.linearVelocity = velocity;
     }
 
     private void OnDisable()
@@ -74,21 +72,16 @@ public class RobotFormMovement : MonoBehaviour
     {
         if (_jumpRayPivot == null) return;
 
-        Vector3 origin = new Vector3(
-            _jumpRayPivot.bounds.center.x,
-            _jumpRayPivot.bounds.min.y,
-            _jumpRayPivot.bounds.center.z
-        );
+        float offset = 0.05f;
 
-        Vector3 halfExtents = new Vector3(0.4f, 0.08f, 0.4f);
+        Vector3 origin = new Vector3(_jumpRayPivot.bounds.center.x, _jumpRayPivot.bounds.min.y + offset, _jumpRayPivot.bounds.center.z);
+
+        Ray ray = new Ray(origin, Vector3.down);
 
         Gizmos.color = Color.red;
-        // BoxCast 시작 박스
-        Gizmos.DrawWireCube(origin, halfExtents * 2f);
-
+        Gizmos.DrawRay(ray.origin, ray.direction * _jumpRayDistance);
         Gizmos.color = Color.green;
-        // BoxCast 끝 박스
-        Gizmos.DrawWireCube(origin + Vector3.down * _jumpRayDistance, halfExtents * 2f);
+        Gizmos.DrawSphere(ray.origin, 0.04f);
     }
 
     #region 초기화
@@ -117,24 +110,26 @@ public class RobotFormMovement : MonoBehaviour
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        //Debug.Log($"Jump called | started:{ctx.started} | grounded:{IsGrounded()}");
-        //if (!ctx.started || !IsGrounded()) return;
+        if (!ctx.started || !IsGrounded()) return;
 
-
-        _jumpInput = 1f;
-
-
+        _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
     }
     public void RobotJumpCancle(InputAction.CallbackContext ctx)
     {
-        _jumpInput = 0f;
+        if (_rigidbody.linearVelocity.y <= 0f) return;
+
+        Vector3 velocity = _rigidbody.linearVelocity;
+        velocity.y *= 0.4f;
+        _rigidbody.linearVelocity = velocity;
     }
     // 바닥인지 판별
     public bool IsGrounded()
     {
-        Vector3 origin = new Vector3(_jumpRayPivot.bounds.center.x, _jumpRayPivot.bounds.min.y, _jumpRayPivot.bounds.center.z);
+        float offset = 0.05f;
 
-        return Physics.BoxCast(origin, new Vector3(0.4f, 0.08f, 0.4f), Vector3.down, Quaternion.identity, _jumpRayDistance, _jumpCheckLayer);
+        Vector3 origin = new Vector3(_jumpRayPivot.bounds.center.x, _jumpRayPivot.bounds.min.y + offset, _jumpRayPivot.bounds.center.z);
+
+        return Physics.Raycast(origin, Vector3.down, _jumpRayDistance, _jumpCheckLayer);
     }
     #endregion
 }
