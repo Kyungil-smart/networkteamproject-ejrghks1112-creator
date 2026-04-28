@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/BuildScene/LobbyScene.unity
     guid: 5befb77a5882b6c4bbdfeaa0d4890ada
   - enabled: 1
-    path: Assets/Scenes/TestScene/FirstStage.unity
+    path: Assets/Scenes/BuildScene/Stage1.unity
     guid: ef23e8ba613de8f4ca4b3ce8e246bcfd
   - enabled: 1
     path: Assets/Scenes/TestScene/SampleScene.unity
