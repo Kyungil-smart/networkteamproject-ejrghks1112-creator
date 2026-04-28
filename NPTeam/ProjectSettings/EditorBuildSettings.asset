@@ -30,8 +30,14 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene/TestSceneKDH.unity
     guid: 27cab68adde9f4247afb9a9e2291221b
   - enabled: 1
-    path: Assets/Scenes/TestScene/YDJ_TestScene.unity
+    path: Assets/Scenes/TestScene/YDJ_Test/YDJ_TestScene.unity
     guid: 1cedeeafbfde74c4a80620fd6d1be186
+  - enabled: 1
+    path: Assets/Scenes/TestScene/YDJ_Test/InitScene_YDJ.unity
+    guid: 9eea501865d4b9647957e13cb44a0bcd
+  - enabled: 1
+    path: Assets/Scenes/TestScene/YDJ_Test/LobbyScene_YDJ.unity
+    guid: 3437781abc87e6841adc981f409eecd6
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: c263357e8dddcec4090e2830ccdca639, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: eaa63ffdd1c5ae94e86029c5f6967790, type: 3}
