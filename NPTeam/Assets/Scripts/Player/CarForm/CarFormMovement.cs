@@ -1,21 +1,27 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarFormMovement : MonoBehaviour
+public class CarFormMovement : NetworkBehaviour
 {
-    private NPTeamInputActions _carFormInput;
-    private Vector3 _move;
-    private Vector3 _turn;
-    private float direction;
+    private NPTeamInputActions _carFormInput; // 근형님이 만드신 inputSystem
+    private Vector3 _move; // 앞뒤 움직임
+    private Vector3 _turn; // 왼쪽 오른쪽 회전
+    private float _direction; // 전진, 후진 시 사용
     private Rigidbody _carFormRigidBody;
-    [SerializeField] private float _carFormSpeed = 5.0f;
-    [SerializeField] private float _carFormTurnSpeed = 5.0f;
-    [SerializeField] private float _rotateInterpolate = 5.0f;
-    private bool _isMove;
-
+    [SerializeField] private float carFormSpeed = 5.0f;
+    [SerializeField] private float carFormTurnSpeed = 5.0f;
+    // [SerializeField] private float rotateInterpolate = 5.0f; // 회전 속도
+    private bool _isMove; // 전진 중인지, 후진 중인지
+    
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) return;
+        // 소유자 전용 입력 바인딩 등 초기화
+    }
+    
     void Awake()
     {
-        int a = 5;
         _carFormInput = new NPTeamInputActions();
         _carFormRigidBody = GetComponent<Rigidbody>();
     }
@@ -29,13 +35,14 @@ public class CarFormMovement : MonoBehaviour
 
     void OnDisable()
     {
-        _carFormInput.asset.Disable();
         _carFormInput.Player.PlayerMove.performed -= CarForntAndBackMove;
         _carFormInput.Player.PlayerMove.canceled  -= CarForntAndBackMove;
+        _carFormInput.asset.Disable();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        if (!IsOwner) return;
         CarMove();
     }
 
@@ -53,14 +60,23 @@ public class CarFormMovement : MonoBehaviour
     
     void CarMove()
     {
+        // 전진, 후진 중일 때만 회전 할 수 있도록
         _isMove = _move.sqrMagnitude > 0;
-        direction = _move.z > 0 ?  1f : -1f;
+        // 전진시 1f, 후진시 -1f
+        _direction = _move.z > 0 ?  1f : -1f; 
 
         if (_isMove)
         {
-            transform.Rotate(Vector3.up * direction * _turn.x * _carFormTurnSpeed * Time.deltaTime);
+            transform.Rotate(_direction * _turn.x * carFormTurnSpeed * Time.deltaTime * Vector3.up);
         }
-        
-        _carFormRigidBody.linearVelocity = transform.forward * _move.z * _carFormSpeed;
+
+        // _carFormRigidBody.linearVelocity = _move.z * carFormSpeed * transform.forward;
+        Vector3 velocity = _carFormRigidBody.linearVelocity;
+
+        // y축이 중력을 받기 위해 x, z만 갱신
+        velocity.x = transform.forward.x * _move.z * carFormSpeed;
+        velocity.z = transform.forward.z * _move.z * carFormSpeed;
+
+        _carFormRigidBody.linearVelocity = velocity;
     }
 }
