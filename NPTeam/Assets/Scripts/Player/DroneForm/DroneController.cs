@@ -1,7 +1,8 @@
+using System;
+using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode;
-using System;
 
 public class DroneController : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class DroneController : MonoBehaviour
     [SerializeField] private Transform _possessionRayPivot;
     [Header("빙의할 대상의 레이어 마스크를 선택")]
     [SerializeField] private LayerMask _targetLayer;
+    [Header("빙의시 카메라 우선도를 위한 자신의 카메라 등록")]
+    [SerializeField] private CinemachineCamera _cinemachineCamera;
+    // 카메라 우선순위 변경을 위한 타겟 캠
+    private CinemachineCamera _targetCam;
 
     // 빙의 여부
     private bool _isPossession = false;
@@ -218,20 +223,38 @@ public class DroneController : MonoBehaviour
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.isKinematic = true;
 
-            // 타겟 위로 위치 계산                                     ↓ 위치 값
-            Vector3 targetPos = hit.transform.position + Vector3.up * 1.5f;
+            // 빙의 대상의 모든 Renderer 가져오기
+            _currentPossessionRenderers = hit.transform.GetComponentsInChildren<Renderer>();
+
+            // 렌더러 순회 하면서 제일 높은 값 구하기
+            float maxY = float.MinValue;
+            foreach (Renderer renderer in _currentPossessionRenderers)
+            {
+                if (renderer.bounds.max.y > maxY)
+                    maxY = renderer.bounds.max.y;
+            }
+
+            Vector3 targetPos = new Vector3( hit.transform.position.x, maxY + 2f, hit.transform.position.z);
+            
             // 타겟 위로 위치 이동
             transform.position = targetPos;
             // 자식 오브젝트로 들어감
             transform.SetParent(hit.transform, true);
             transform.localRotation = Quaternion.identity;
 
-            // 빙의 대상의 모든 Renderer 가져오기
-            _currentPossessionRenderers = hit.transform.GetComponentsInChildren<Renderer>();
             // 가져온 Renderer들에 플레이어 색 적용
             _playerColorChanger.ApplyPossessColor(_currentPossessionRenderers);
             
             _isPossession = true;
+
+            // 카메라 우선순위 조작
+            _cinemachineCamera.Priority = 0;
+            CinemachineCamera targetCam = hit.transform.GetComponentInChildren<CinemachineCamera>();
+            if (targetCam != null)
+            {
+                targetCam.Priority = 1;
+                _targetCam = targetCam;
+            }
 
             DroneControllerOff();
         }
@@ -253,6 +276,9 @@ public class DroneController : MonoBehaviour
         
         transform.SetParent(null, true);
         _rigidbody.isKinematic = false;
+
+        _targetCam.Priority = 0;
+        _cinemachineCamera.Priority = 1;
     }
 
     public void DroneControllerOff()
