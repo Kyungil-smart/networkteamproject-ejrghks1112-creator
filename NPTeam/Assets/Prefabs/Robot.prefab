@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4999722205553183540}
   - component: {fileID: 8757895028474456044}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6530651090230941225}
   - component: {fileID: 5221148021317211286}
   - component: {fileID: 4389730102333417263}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ MonoBehaviour:
   _legFollowSpeed: 5
   _jumpCheckLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 17
   _jumpRayPivot: {fileID: 8918733831979812496}
 --- !u!1 &5803778702791277401
 GameObject:
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4629644242808857733}
   - component: {fileID: 6291713494190016105}
   - component: {fileID: 4025236452788629640}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 3490072945480678727}
   - component: {fileID: 6871653984578691164}
   - component: {fileID: 8918733831979812496}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 3532044467608337038}
   - component: {fileID: 6261814495038067499}
   - component: {fileID: 4722278552468347943}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
