@@ -20,10 +20,12 @@ public class RobotFormMovement : MonoBehaviour
     private Vector2 _moveInput;
 
     // 로봇 조작키
-    private InputAction _playerMoveAction;
-    private InputAction _playerJumpAction;
-    private InputAction _playerLeftMBAction;
-    private InputAction _playerRightMBAction;
+    private NPTeamInputActions _playerInput;
+    public NPTeamInputActions PlayerInput
+    {
+        get => _playerInput;
+        set => _playerInput = value;
+    }
 
     [Header("점프를 위한 바닥 레이어 마스크를 선택")]
     [SerializeField] private LayerMask _jumpCheckLayer;
@@ -36,13 +38,17 @@ public class RobotFormMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        _playerInput.Enable();
+
         // 이동 구독
-        _playerMoveAction.performed += RobotOnMove;
-        _playerMoveAction.canceled += RobotMoveCancle;
+        _playerInput.Player.PlayerMove.performed += RobotOnMove;
+        _playerInput.Player.PlayerMove.canceled += RobotMoveCancle;
         // 점프 구독
-        _playerJumpAction.started += RobotOnJump;
-        _playerJumpAction.canceled += RobotJumpCancle;
+        _playerInput.Player.PlayerAscend.started += RobotOnJump;
+        _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
     }
+
+    private void Start() => _playerInput.Disable();
 
     private void LateUpdate()
     {
@@ -70,11 +76,13 @@ public class RobotFormMovement : MonoBehaviour
     private void OnDisable()
     {
         // 이동 구독 취소
-        _playerMoveAction.performed -= RobotOnMove;
-        _playerMoveAction.canceled -= RobotMoveCancle;
+        _playerInput.Player.PlayerMove.performed -= RobotOnMove;
+        _playerInput.Player.PlayerMove.canceled -= RobotMoveCancle;
         // 점프 구독 취소
-        _playerJumpAction.started -= RobotOnJump;
-        _playerJumpAction.canceled -= RobotJumpCancle;
+        _playerInput.Player.PlayerAscend.started -= RobotOnJump;
+        _playerInput.Player.PlayerAscend.canceled -= RobotJumpCancle;
+        
+        _playerInput.Disable();
     }
 
     private void OnDrawGizmos()
@@ -98,10 +106,7 @@ public class RobotFormMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
 
-        _playerMoveAction = InputSystem.actions["PlayerMove"];
-        _playerJumpAction = InputSystem.actions["PlayerAscend"];
-        _playerLeftMBAction = InputSystem.actions["PlayerLeftMB"];
-        _playerRightMBAction = InputSystem.actions["PlayerRightMB"];
+        _playerInput = new NPTeamInputActions();
     }
     #endregion
 
