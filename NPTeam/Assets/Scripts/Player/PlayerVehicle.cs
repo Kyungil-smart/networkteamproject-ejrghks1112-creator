@@ -15,6 +15,8 @@ public class PlayerVehicle : MonoBehaviour
     [SerializeField] private CinemachineCamera _robotCamera;
     [SerializeField] private CinemachineCamera _componentCamera;
 
+    private Rigidbody _rigidbody;
+
     // 조작키
     private NPTeamInputActions _playerInput;
     public NPTeamInputActions PlayerInput
@@ -49,6 +51,7 @@ public class PlayerVehicle : MonoBehaviour
     private void Init()
     {
         _playerInput = new NPTeamInputActions();
+        _rigidbody = GetComponent<Rigidbody>();
     }
     #endregion
 
@@ -82,6 +85,8 @@ public class PlayerVehicle : MonoBehaviour
         _carForm.SetActive(target == _carForm);
         _robotForm.SetActive(target == _robotForm);
         _componentForm.SetActive(target == _componentForm);
+
+        _rigidbody.useGravity = (target != _componentForm);
 
         SetCamera(target);
     }

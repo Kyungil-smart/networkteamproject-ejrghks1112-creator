@@ -235,7 +235,7 @@ public class DroneController : MonoBehaviour
                     maxY = renderer.bounds.max.y;
             }
 
-            Vector3 targetPos = new Vector3( hit.transform.position.x, maxY + 2f, hit.transform.position.z);
+            Vector3 targetPos = new Vector3( hit.transform.position.x, maxY + 4f, hit.transform.position.z);
             
             // 타겟 위로 위치 이동
             transform.position = targetPos;
@@ -285,7 +285,7 @@ public class DroneController : MonoBehaviour
         _rigidbody.isKinematic = false;
 
         if (_targetCam != null) _targetCam.Priority = 0;
-        _cinemachineCamera.Priority = 1;
+        _cinemachineCamera.Priority = 10;
 
         if (_targetInput != null) _targetInput.PlayerInput.Disable();
     }

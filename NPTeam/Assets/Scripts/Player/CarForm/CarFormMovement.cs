@@ -8,22 +8,21 @@ public class CarFormMovement : NetworkBehaviour
     private Vector3 _move; // 앞뒤 움직임
     private Vector3 _turn; // 왼쪽 오른쪽 회전
     private float _direction; // 전진, 후진 시 사용
-    private Rigidbody _carFormRigidBody;
+    [SerializeField] private Rigidbody _carFormRigidBody;
     [SerializeField] private float carFormSpeed = 5.0f;
     [SerializeField] private float carFormTurnSpeed = 5.0f;
     // [SerializeField] private float rotateInterpolate = 5.0f; // 회전 속도
     private bool _isMove; // 전진 중인지, 후진 중인지
     
-    public override void OnNetworkSpawn()
-    {
-        if (!IsOwner) return;
-        // 소유자 전용 입력 바인딩 등 초기화
-    }
+    //public override void OnNetworkSpawn()
+    //{
+    //    if (!IsOwner) return;
+    //    // 소유자 전용 입력 바인딩 등 초기화
+    //}
     
     void Awake()
     {
         _carFormInput = new NPTeamInputActions();
-        _carFormRigidBody = GetComponent<Rigidbody>();
     }
 
     void OnEnable()
@@ -42,7 +41,7 @@ public class CarFormMovement : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
         CarMove();
     }
 

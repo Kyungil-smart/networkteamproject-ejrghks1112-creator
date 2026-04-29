@@ -15,7 +15,8 @@ public class RobotFormMovement : MonoBehaviour
     [Header("상체를 따라 하체 회전 속도")]
     [SerializeField] private float _legFollowSpeed;
 
-    private Rigidbody _rigidbody;
+    [Header("부모의 Rigidbody 등록")]
+    [SerializeField] private Rigidbody _rigidbody;
     // 로봇 이동 조작키 입력값 저장
     private Vector2 _moveInput;
 
@@ -48,7 +49,7 @@ public class RobotFormMovement : MonoBehaviour
         _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
     }
 
-    private void Start() => _playerInput.Disable();
+    //private void Start() => _playerInput.Disable();
 
     private void LateUpdate()
     {
@@ -104,8 +105,6 @@ public class RobotFormMovement : MonoBehaviour
     #region 초기화
     private void Init()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-
         _playerInput = new NPTeamInputActions();
     }
     #endregion

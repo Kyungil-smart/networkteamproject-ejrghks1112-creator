@@ -12,7 +12,8 @@ public class ComponentFormMovement : NetworkBehaviour
     [SerializeField] private float _flySpeed;
     
     private NPTeamInputActions _input;
-    private Rigidbody _rb;
+    [Header("부모의 Rigidbody 등록")]
+    [SerializeField] private Rigidbody _rigidbody;
     private Vector3 _move;
     private float _flyUp;
     private float _flyDown;
@@ -22,9 +23,6 @@ public class ComponentFormMovement : NetworkBehaviour
     private void Init()
     {
         _input = new NPTeamInputActions();
-        _rb = GetComponent<Rigidbody>();
-        _rb.useGravity = false;
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     // public override void OnNetworkSpawn()
@@ -90,7 +88,7 @@ public class ComponentFormMovement : NetworkBehaviour
         Vector3 flyVelocity = transform.up * flyDir;
         
         Vector3 componentMove = moveDir * _moveSpeed + flyVelocity * _flySpeed;
-        
-        _rb.linearVelocity = Vector3.Lerp(_rb.linearVelocity, componentMove, Time.deltaTime);
+
+        _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
     }
 }
