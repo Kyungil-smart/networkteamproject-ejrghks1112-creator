@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2947449268
+  GlobalObjectIdHash: 381820684
   InScenePlacedSourceGlobalObjectIdHash: 836585802
   DeferredDespawnTick: 0
   Ownership: 1
@@ -73,11 +73,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _playerPrefab: {fileID: 3902110802588556122, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
   _spawnPoints:
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
-  - {fileID: 1462502749778478622, guid: 6da4d8b89b182094ab0463127f2a01f3, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
