@@ -39,14 +39,6 @@ public class DroneController : MonoBehaviour
     // 빙의할 타겟의 컴포넌트를 받아올 필드
     private RobotFormMovement _targetInput;
 
-    // 빙의 여부
-    private bool _isPossession = false;
-    public bool IsPossession
-    {
-        get => _isPossession;
-        set => _isPossession = value;
-    }
-
     [Header("빙의시 On/Off 필요한 스크립트")]
     [SerializeField] private DroneController _droneController;
     [SerializeField] private DroneCameraLook _droneCameraLook;
@@ -207,7 +199,7 @@ public class DroneController : MonoBehaviour
     #region 빙의 조작
     public void DroneOnPossession(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || _isPossession == true) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
   
             TryPossession();
     }
@@ -246,7 +238,7 @@ public class DroneController : MonoBehaviour
             // 가져온 Renderer들에 플레이어 색 적용
             _playerColorChanger.ApplyPossessColor(_currentPossessionRenderers);
             
-            _isPossession = true;
+            PlayerState.Instance.IsPossession = true;
 
             // 카메라 우선순위 조작
             _cinemachineCamera.Priority = 0;
@@ -271,7 +263,7 @@ public class DroneController : MonoBehaviour
     #region 빙의시 스크립트 On/Off 함수들
     public void DroneControllerOn()
     {
-        _isPossession = false;
+        PlayerState.Instance.IsPossession = false;
         _playerInput.Enable();
         _droneCameraLook.enabled = true;
         

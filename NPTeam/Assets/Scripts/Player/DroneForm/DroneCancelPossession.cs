@@ -26,7 +26,7 @@ public class DroneCancelPossession : MonoBehaviour
     #region 빙의 취소
     public void DroneOnPossessionCancle(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || _droneController.IsPossession == false) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
         _droneController.DroneControllerOn();
     }
 
