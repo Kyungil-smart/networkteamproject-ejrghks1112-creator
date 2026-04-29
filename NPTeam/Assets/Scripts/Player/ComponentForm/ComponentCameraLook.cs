@@ -1,20 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RobotCameraLook : MonoBehaviour
+public class ComponentCameraLook : MonoBehaviour
 {
     [Header("카메라 이동 속도")]
     [SerializeField] private float _cameraSpeed;
-    [Header("카메라 이동을 위한 로봇 상체 피봇")]
-    [SerializeField] private Transform _robotPivot;
+    [Header("카메라 이동을 위한 합체폼 피봇")]
+    [SerializeField] private Transform _componentPivot;
 
     // 카메라 축 백업
     private float _cameraX;
     private float _cameraY;
 
-    // 로봇 시야 조작키 입력값 저장
+    // 드론 시야 조작키 입력값 저장
     private Vector2 _cameraMoveInput;
-    // 로봇 시야 조작키
+    // 드론 시야 조작키
     private InputAction _playerCameraAction;
 
     private void Awake() => Init();
@@ -22,22 +22,22 @@ public class RobotCameraLook : MonoBehaviour
     private void OnEnable()
     {
         // 카메라 시점 이동 구독
-        _playerCameraAction.performed += RobotOnCameraMove;
-        _playerCameraAction.canceled += RobotCameraMoveCancle;
+        _playerCameraAction.performed += DroneOnCameraMove;
+        _playerCameraAction.canceled += DroneCameraMoveCancle;
     }
 
     private void LateUpdate()
     {
-        RobotCameraVectorBackup();
+        CameraVectorBackup();
         // 카메라 시점 이동
-        _robotPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
+        _componentPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
     }
 
     private void OnDisable()
     {
         // 카메라 시점 이동 구독 취소
-        _playerCameraAction.performed -= RobotOnCameraMove;
-        _playerCameraAction.canceled -= RobotCameraMoveCancle;
+        _playerCameraAction.performed -= DroneOnCameraMove;
+        _playerCameraAction.canceled -= DroneCameraMoveCancle;
     }
 
     #region 초기화
@@ -48,18 +48,18 @@ public class RobotCameraLook : MonoBehaviour
     #endregion
 
     #region 카메라 시점 이동 조작
-    public void RobotOnCameraMove(InputAction.CallbackContext ctx)
+    public void DroneOnCameraMove(InputAction.CallbackContext ctx)
     {
         if (PlayerState.Instance.IsPossession == false) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 
-    public void RobotCameraMoveCancle(InputAction.CallbackContext ctx)
+    public void DroneCameraMoveCancle(InputAction.CallbackContext ctx)
     {
         _cameraMoveInput = Vector2.zero;
     }
 
-    private void RobotCameraVectorBackup()
+    private void CameraVectorBackup()
     {
         _cameraX += _cameraMoveInput.x * _cameraSpeed;
         _cameraY -= _cameraMoveInput.y * _cameraSpeed;

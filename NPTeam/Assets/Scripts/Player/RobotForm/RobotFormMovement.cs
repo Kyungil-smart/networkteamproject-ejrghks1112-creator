@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class RobotFormMovement : MonoBehaviour
+public class RobotFormMovement : NetworkBehaviour
 {
     [Header("이동 속도")]
     [SerializeField] private float _playerSpeed;
@@ -15,15 +16,13 @@ public class RobotFormMovement : MonoBehaviour
     [Header("상체를 따라 하체 회전 속도")]
     [SerializeField] private float _legFollowSpeed;
 
-    private Rigidbody _rigidbody;
+    [Header("부모의 Rigidbody 등록")]
+    [SerializeField] private Rigidbody _rigidbody;
     // 로봇 이동 조작키 입력값 저장
     private Vector2 _moveInput;
 
     // 로봇 조작키
-    private InputAction _playerMoveAction;
-    private InputAction _playerJumpAction;
-    private InputAction _playerLeftMBAction;
-    private InputAction _playerRightMBAction;
+    private NPTeamInputActions _playerInput;
 
     [Header("점프를 위한 바닥 레이어 마스크를 선택")]
     [SerializeField] private LayerMask _jumpCheckLayer;
@@ -36,12 +35,14 @@ public class RobotFormMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        _playerInput.Enable();
+
         // 이동 구독
-        _playerMoveAction.performed += RobotOnMove;
-        _playerMoveAction.canceled += RobotMoveCancle;
+        _playerInput.Player.PlayerMove.performed += RobotOnMove;
+        _playerInput.Player.PlayerMove.canceled += RobotMoveCancle;
         // 점프 구독
-        _playerJumpAction.started += RobotOnJump;
-        _playerJumpAction.canceled += RobotJumpCancle;
+        _playerInput.Player.PlayerAscend.started += RobotOnJump;
+        _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
     }
 
     private void LateUpdate()
@@ -51,30 +52,19 @@ public class RobotFormMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (!IsOwner) return;
-
-        Vector3 forward = _robotPivot.forward;
-        forward.y = 0f;
-
-        Vector3 right = _robotPivot.right;
-        right.y = 0f;
-
-        Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
-        Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.x = move.x;
-        velocity.z = move.z;
-
-        _rigidbody.linearVelocity = velocity;
+        RobotMove();
     }
 
     private void OnDisable()
     {
         // 이동 구독 취소
-        _playerMoveAction.performed -= RobotOnMove;
-        _playerMoveAction.canceled -= RobotMoveCancle;
+        _playerInput.Player.PlayerMove.performed -= RobotOnMove;
+        _playerInput.Player.PlayerMove.canceled -= RobotMoveCancle;
         // 점프 구독 취소
-        _playerJumpAction.started -= RobotOnJump;
-        _playerJumpAction.canceled -= RobotJumpCancle;
+        _playerInput.Player.PlayerAscend.started -= RobotOnJump;
+        _playerInput.Player.PlayerAscend.canceled -= RobotJumpCancle;
+        
+        _playerInput.Disable();
     }
 
     private void OnDrawGizmos()
@@ -96,18 +86,14 @@ public class RobotFormMovement : MonoBehaviour
     #region 초기화
     private void Init()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-
-        _playerMoveAction = InputSystem.actions["PlayerMove"];
-        _playerJumpAction = InputSystem.actions["PlayerAscend"];
-        _playerLeftMBAction = InputSystem.actions["PlayerLeftMB"];
-        _playerRightMBAction = InputSystem.actions["PlayerRightMB"];
+        _playerInput = new NPTeamInputActions();
     }
     #endregion
 
     #region 로봇폼 이동
     public void RobotOnMove(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
@@ -116,10 +102,29 @@ public class RobotFormMovement : MonoBehaviour
     }
     #endregion
 
+    #region 이동 함수
+    private void RobotMove()
+    {
+        Vector3 forward = _robotPivot.forward;
+        forward.y = 0f;
+
+        Vector3 right = _robotPivot.right;
+        right.y = 0f;
+
+        Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
+        Vector3 velocity = _rigidbody.linearVelocity;
+        velocity.x = move.x;
+        velocity.z = move.z;
+
+        _rigidbody.linearVelocity = velocity;
+    }
+    #endregion
+
+
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || !IsGrounded()) return;
+        if (!ctx.started || !IsGrounded() || PlayerState.Instance.IsPossession == false) return;
 
         _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
     }
