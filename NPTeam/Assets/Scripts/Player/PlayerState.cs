@@ -1,7 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerState : MonoBehaviour
+
+public class PlayerState : NetworkBehaviour
 {
     public static PlayerState Instance { get; private set; }
 

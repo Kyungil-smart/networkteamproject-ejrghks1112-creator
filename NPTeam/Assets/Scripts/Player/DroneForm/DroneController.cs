@@ -61,21 +61,28 @@ public class DroneController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
+        if (IsOwner)
+        {
+            _cinemachineCamera.gameObject.SetActive(true);
 
-        _playerInput.Enable();
+            _playerInput.Enable();
 
-        // 이동 구독
-        _playerInput.Player.PlayerMove.performed += DroneOnMove;
-        _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
-        // 상승 구독
-        _playerInput.Player.PlayerAscend.started += DroneOnAscend;
-        _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
-        // 하강 구독
-        _playerInput.Player.PlayerDescend.started += DroneOnDescend;
-        _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
-        // 빙의 구독
-        _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
+            // 이동 구독
+            _playerInput.Player.PlayerMove.performed += DroneOnMove;
+            _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
+            // 상승 구독
+            _playerInput.Player.PlayerAscend.started += DroneOnAscend;
+            _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
+            // 하강 구독
+            _playerInput.Player.PlayerDescend.started += DroneOnDescend;
+            _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
+            // 빙의 구독
+            _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
+        }
+        else
+        {
+            _cinemachineCamera.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -124,7 +131,7 @@ public class DroneController : NetworkBehaviour
     //    _playerInput.Player.PlayerDescend.canceled -= DroneOnDescend;
     //    // 빙의 구독 취소
     //    _playerInput.Player.PlayerInteraction.started -= DroneOnPossession;
-        
+
     //    _playerInput.Disable();
     //}
 
@@ -206,8 +213,8 @@ public class DroneController : NetworkBehaviour
     public void DroneOnPossession(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
-  
-            TryPossession();
+
+        TryPossession();
     }
     // 빙의 함수
     private void TryPossession()
@@ -233,8 +240,8 @@ public class DroneController : NetworkBehaviour
                     maxY = renderer.bounds.max.y;
             }
 
-            Vector3 targetPos = new Vector3( hit.transform.position.x, maxY + 4f, hit.transform.position.z);
-            
+            Vector3 targetPos = new Vector3(hit.transform.position.x, maxY + 4f, hit.transform.position.z);
+
             // 타겟 위로 위치 이동
             transform.position = targetPos;
             // 자식 오브젝트로 들어감
@@ -243,7 +250,7 @@ public class DroneController : NetworkBehaviour
 
             // 가져온 Renderer들에 플레이어 색 적용
             _playerColorChanger.ApplyPossessColor(_currentPossessionRenderers);
-            
+
             PlayerState.Instance.IsPossession = true;
 
             // 카메라 우선순위 조작
@@ -256,13 +263,13 @@ public class DroneController : NetworkBehaviour
     public void DroneControllerOn()
     {
         PlayerState.Instance.IsPossession = false;
-        
+
         // 빙의 취소후 원래 색상으로 복귀
         _playerColorChanger.Release(_currentPossessionRenderers);
         // 플레이어 색상 복구
         _currentPossessionRenderers = null;
         _playerColorChanger.ApplyColor();
-        
+
         transform.SetParent(null, true);
         _rigidbody.isKinematic = false;
 

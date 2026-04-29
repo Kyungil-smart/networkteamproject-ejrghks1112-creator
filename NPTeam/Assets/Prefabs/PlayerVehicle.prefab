@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3258869572978238480}
   - component: {fileID: 3285019482104072620}
-  - component: {fileID: 743696561927525670}
   - component: {fileID: 8126048340682314727}
+  - component: {fileID: 743696561927525670}
   - component: {fileID: 6065807456793869565}
   - component: {fileID: 9085945142113781212}
   m_Layer: 4
@@ -66,24 +66,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &743696561927525670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570259725822164077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e79489706450ec4abeea92b61eea123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerVehicle
-  _carForm: {fileID: 8064360928733377123}
-  _robotForm: {fileID: 8510534068441920597}
-  _componentForm: {fileID: 1044581888009181019}
-  _carCamera: {fileID: 3323504256503119897}
-  _robotCamera: {fileID: 5372560156510936912}
-  _componentCamera: {fileID: 5680166579857090762}
 --- !u!114 &8126048340682314727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +91,25 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &743696561927525670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570259725822164077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e79489706450ec4abeea92b61eea123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerVehicle
+  ShowTopMostFoldoutHeaderGroup: 1
+  _carForm: {fileID: 8064360928733377123}
+  _robotForm: {fileID: 8510534068441920597}
+  _componentForm: {fileID: 1044581888009181019}
+  _carCamera: {fileID: 3323504256503119897}
+  _robotCamera: {fileID: 5372560156510936912}
+  _componentCamera: {fileID: 5680166579857090762}
 --- !u!114 &6065807456793869565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3093192261
+      value: 1148732070
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -268,7 +269,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 658051396
+      value: 3892769525
       objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: m_Name
@@ -402,7 +403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 479249201
+      value: 3967895034
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
