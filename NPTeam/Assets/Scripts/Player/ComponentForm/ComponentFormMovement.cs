@@ -85,7 +85,7 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void Move()
     {
-        Vector3 moveDir = transform.forward * -(_move.x) + transform.right * _move.y; 
+        Vector3 moveDir = transform.forward * _move.y + transform.right * _move.x; 
         float flyDir = _flyUp - _flyDown;
         Vector3 flyVelocity = transform.up * flyDir;
         
