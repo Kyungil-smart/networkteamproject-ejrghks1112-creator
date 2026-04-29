@@ -18,12 +18,40 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 103001
-    m_Localized: AUTO
+  - m_Id: 10101001
+    m_Localized: "\u8D85\u5B87\u5B99\u52C7\u8005\u7279\u653B\u968A\u5909\u8EAB\u30ED\u30DC"
     m_Metadata:
       m_Items: []
-  - m_Id: 200001
-    m_Localized: hh
+  - m_Id: 10101002
+    m_Localized: "\u6226\u3044\u3092\u59CB\u3081\u308B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102001
+    m_Localized: "\u30DE\u30EB\u30C1\u30D7\u30EC\u30A4\u30ED\u30D3\u30FC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102002
+    m_Localized: "\u30EB\u30FC\u30E0\u4F5C\u6210\u8005"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102003
+    m_Localized: "\u30EB\u30FC\u30E0\u3092\u4F5C\u308B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102004
+    m_Localized: "\u53C2\u52A0\u8005"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102005
+    m_Localized: "\u53C2\u52A0\u3059\u308B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102006
+    m_Localized: "\u30B3\u30FC\u30C9\u3092\u5165\u529B\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103001
+    m_Localized: "\u8A2D\u5B9A"
     m_Metadata:
       m_Items: []
   references:
