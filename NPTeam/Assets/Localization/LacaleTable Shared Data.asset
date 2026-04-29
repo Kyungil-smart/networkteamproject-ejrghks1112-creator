@@ -15,14 +15,45 @@ MonoBehaviour:
   m_TableCollectionName: LacaleTable
   m_TableCollectionNameGuidString: d8ec86738dcf2b44c9ec110200a3dbb1
   m_Entries:
-  - m_Id: 103001
-    m_Key: UI_Skill_Auto
+  - m_Id: 10101001
+    m_Key: UI_Title_Name
+    m_Metadata:
+      m_Items:
+      - rid: 3634113091576005046
+  - m_Id: 10101002
+    m_Key: UI_Title_Press
     m_Metadata:
       m_Items: []
-  - m_Id: 200001
-    m_Key: Stat_MaxHP
+  - m_Id: 10102001
+    m_Key: UI_Lobby_Name
+    m_Metadata:
+      m_Items:
+      - rid: 3634113091576005047
+  - m_Id: 10102002
+    m_Key: UI_Lobby_Host_Name
     m_Metadata:
       m_Items: []
+  - m_Id: 10102003
+    m_Key: UI_Lobby_Host_Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102004
+    m_Key: UI_Lobby_Client_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102005
+    m_Key: UI_Lobby_Client_Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102006
+    m_Key: UI_Lobby_Client_Code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103001
+    m_Key: UI_Settings_Name
+    m_Metadata:
+      m_Items:
+      - rid: 3634113091576005048
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -34,3 +65,15 @@ MonoBehaviour:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
         m_CustomEpoch: 1777280359011
+    - rid: 3634113091576005046
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "\uD0C0\uC774\uD2C0 \uC52C"
+    - rid: 3634113091576005047
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "\uB85C\uBE44 \uC52C"
+    - rid: 3634113091576005048
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "\uACF5\uC6A9 \uC124\uC815 \uCC3D"
