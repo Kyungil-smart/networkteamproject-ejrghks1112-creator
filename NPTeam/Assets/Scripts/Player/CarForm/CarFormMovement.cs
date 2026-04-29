@@ -29,13 +29,13 @@ public class CarFormMovement : NetworkBehaviour
     {
         _carFormInput.asset.Enable();
         _carFormInput.Player.PlayerMove.performed += CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  += CarForntAndBackMove;
+        _carFormInput.Player.PlayerMove.canceled  += CarMoveCancel;
     }
 
     void OnDisable()
     {
         _carFormInput.Player.PlayerMove.performed -= CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  -= CarForntAndBackMove;
+        _carFormInput.Player.PlayerMove.canceled  -= CarMoveCancel;
         _carFormInput.asset.Disable();
     }
 
@@ -57,7 +57,18 @@ public class CarFormMovement : NetworkBehaviour
         _move = new Vector3(0, 0, input.y).normalized;
         Debug.Log($"moveDir: {_move.z}");
     }
-    
+
+    void CarMoveCancel(InputAction.CallbackContext ctx)
+    {
+        _move = Vector3.zero;
+        _turn = Vector3.zero;
+        _isMove = false;
+        _direction = 0f;
+
+        _carFormRigidBody.linearVelocity = Vector3.zero;
+        _carFormRigidBody.angularVelocity = Vector3.zero;
+    }
+
     void CarMove()
     {
         // 전진, 후진 중일 때만 회전 할 수 있도록
