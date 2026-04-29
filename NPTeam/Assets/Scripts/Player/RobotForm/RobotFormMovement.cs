@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class RobotFormMovement : MonoBehaviour
+public class RobotFormMovement : NetworkBehaviour
 {
     [Header("이동 속도")]
     [SerializeField] private float _playerSpeed;
@@ -22,11 +23,6 @@ public class RobotFormMovement : MonoBehaviour
 
     // 로봇 조작키
     private NPTeamInputActions _playerInput;
-    public NPTeamInputActions PlayerInput
-    {
-        get => _playerInput;
-        set => _playerInput = value;
-    }
 
     [Header("점프를 위한 바닥 레이어 마스크를 선택")]
     [SerializeField] private LayerMask _jumpCheckLayer;
@@ -49,8 +45,6 @@ public class RobotFormMovement : MonoBehaviour
         _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
     }
 
-    //private void Start() => _playerInput.Disable();
-
     private void LateUpdate()
     {
         FollowLeg();
@@ -58,8 +52,6 @@ public class RobotFormMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (!IsOwner) return;
-
         RobotMove();
     }
 

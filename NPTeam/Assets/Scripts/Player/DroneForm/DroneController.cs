@@ -1,11 +1,9 @@
-using System;
 using Unity.Cinemachine;
-using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.AdaptivePerformance;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class DroneController : MonoBehaviour
+public class DroneController : NetworkBehaviour
 {
     [Header("이동&상승/하강 속도")]
     [SerializeField] private float _playerSpeed;
@@ -44,8 +42,27 @@ public class DroneController : MonoBehaviour
 
     private void Awake() => Init();
 
-    private void OnEnable()
+    //private void OnEnable()
+    //{
+    //    _playerInput.Enable();
+
+    //    // 이동 구독
+    //    _playerInput.Player.PlayerMove.performed += DroneOnMove;
+    //    _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
+    //    // 상승 구독
+    //    _playerInput.Player.PlayerAscend.started += DroneOnAscend;
+    //    _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
+    //    // 하강 구독
+    //    _playerInput.Player.PlayerDescend.started += DroneOnDescend;
+    //    _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
+    //    // 빙의 구독
+    //    _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
+    //}
+
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+
         _playerInput.Enable();
 
         // 이동 구독
@@ -61,52 +78,24 @@ public class DroneController : MonoBehaviour
         _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
     }
 
-    //public override void OnNetworkSpawn()
-    //{
-    //    if (!IsOwner) return;
-
-    //    // 이동 구독
-    //    _playerMoveAction.performed += DroneOnMove;
-    //    _playerMoveAction.canceled += DroneMoveCancle;
-    //    // 상승 구독
-    //    _playerAscendAction.started += DroneOnAscend;
-    //    _playerAscendAction.canceled += DroneAscendCancle;
-    //    // 하강 구독
-    //    _playerDescendAction.started += DroneOnDescend;
-    //    _playerDescendAction.canceled += DroneDescendCancle;
-
-    //}
-
     private void Update()
     {
+        if (!IsOwner) return;
         // 빙의를 위한 레이캐스트 셋팅
         _possessionRay = new Ray(_possessionRayPivot.position, _possessionRayPivot.forward);
     }
 
     private void FixedUpdate()
     {
-        //if (!IsOwner) return;
+        if (!IsOwner) return;
 
         DroneMove();
     }
 
-    //public override void OnNetworkDespawn()
-    //{
-    //    if (!IsOwner) return;
-
-    //    // 이동 구독 취소
-    //    _playerMoveAction.performed -= DroneOnMove;
-    //    _playerMoveAction.canceled -= DroneMoveCancle;
-    //    // 상승 구독 취소
-    //    _playerAscendAction.started -= DroneOnAscend;
-    //    _playerAscendAction.canceled -= DroneAscendCancle;
-    //    // 하강 구독 취소
-    //    _playerDescendAction.started -= DroneOnDescend;
-    //    _playerDescendAction.canceled -= DroneDescendCancle;
-    //}
-
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
+        if (!IsOwner) return;
+
         // 이동 구독 취소
         _playerInput.Player.PlayerMove.performed -= DroneOnMove;
         _playerInput.Player.PlayerMove.canceled -= DroneMoveCancle;
@@ -118,9 +107,26 @@ public class DroneController : MonoBehaviour
         _playerInput.Player.PlayerDescend.canceled -= DroneOnDescend;
         // 빙의 구독 취소
         _playerInput.Player.PlayerInteraction.started -= DroneOnPossession;
-        
+
         _playerInput.Disable();
     }
+
+    //private void OnDisable()
+    //{
+    //    // 이동 구독 취소
+    //    _playerInput.Player.PlayerMove.performed -= DroneOnMove;
+    //    _playerInput.Player.PlayerMove.canceled -= DroneMoveCancle;
+    //    // 상승 구독 취소
+    //    _playerInput.Player.PlayerAscend.started -= DroneOnAscend;
+    //    _playerInput.Player.PlayerAscend.canceled -= DroneOnAscend;
+    //    // 하강 구독 취소
+    //    _playerInput.Player.PlayerDescend.started -= DroneOnDescend;
+    //    _playerInput.Player.PlayerDescend.canceled -= DroneOnDescend;
+    //    // 빙의 구독 취소
+    //    _playerInput.Player.PlayerInteraction.started -= DroneOnPossession;
+        
+    //    _playerInput.Disable();
+    //}
 
     private void OnDrawGizmos()
     {

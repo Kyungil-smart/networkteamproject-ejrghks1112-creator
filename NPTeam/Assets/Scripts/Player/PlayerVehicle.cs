@@ -1,8 +1,9 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class PlayerVehicle : MonoBehaviour
+public class PlayerVehicle : NetworkBehaviour
 {
     [Header("각 변신폼 등록")]
     [SerializeField] private GameObject _carForm;
