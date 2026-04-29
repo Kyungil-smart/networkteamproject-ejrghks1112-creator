@@ -60,18 +60,7 @@ public class RobotFormMovement : MonoBehaviour
     {
         //if (!IsOwner) return;
 
-        Vector3 forward = _robotPivot.forward;
-        forward.y = 0f;
-
-        Vector3 right = _robotPivot.right;
-        right.y = 0f;
-
-        Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
-        Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.x = move.x;
-        velocity.z = move.z;
-
-        _rigidbody.linearVelocity = velocity;
+        RobotMove();
     }
 
     private void OnDisable()
@@ -120,6 +109,25 @@ public class RobotFormMovement : MonoBehaviour
         _moveInput = Vector2.zero;
     }
     #endregion
+
+    #region 이동 함수
+    private void RobotMove()
+    {
+        Vector3 forward = _robotPivot.forward;
+        forward.y = 0f;
+
+        Vector3 right = _robotPivot.right;
+        right.y = 0f;
+
+        Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
+        Vector3 velocity = _rigidbody.linearVelocity;
+        velocity.x = move.x;
+        velocity.z = move.z;
+
+        _rigidbody.linearVelocity = velocity;
+    }
+    #endregion
+
 
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
