@@ -41,21 +41,21 @@ public class ComponentFormMovement : NetworkBehaviour
     {
         _input.Enable();
         _input.Player.PlayerMove.performed += OnMove;
-        _input.Player.PlayerMove.canceled += OnMove;
+        _input.Player.PlayerMove.canceled += OnMoveCancel;
         _input.Player.PlayerDescend.performed += OnDescend;
-        _input.Player.PlayerDescend.canceled += OnDescend;
+        _input.Player.PlayerDescend.canceled += OnDescendCancel;
         _input.Player.PlayerAscend.performed += OnAscend;
-        _input.Player.PlayerAscend.canceled += OnAscend;
+        _input.Player.PlayerAscend.canceled += OnAscendCancel;
     }
 
     private void OnDisable()
     {
         _input.Player.PlayerMove.performed -= OnMove;
-        _input.Player.PlayerMove.canceled -= OnMove;
+        _input.Player.PlayerMove.canceled -= OnMoveCancel;
         _input.Player.PlayerDescend.performed -= OnDescend;
-        _input.Player.PlayerDescend.canceled -= OnDescend;
+        _input.Player.PlayerDescend.canceled -= OnDescendCancel;
         _input.Player.PlayerAscend.performed -= OnAscend;
-        _input.Player.PlayerAscend.canceled -= OnAscend;
+        _input.Player.PlayerAscend.canceled -= OnAscendCancel;
         _input.Disable();
     }
 
@@ -71,17 +71,30 @@ public class ComponentFormMovement : NetworkBehaviour
         if (PlayerState.Instance.IsPossession == false) return;
         _move = ctx.ReadValue<Vector2>();
     }
+    private void OnMoveCancel(InputAction.CallbackContext ctx)
+    {
+        _move = Vector2.zero;
+    }
 
     private void OnDescend(InputAction.CallbackContext ctx)
     {
         if (PlayerState.Instance.IsPossession == false) return;
         _flyDown = ctx.ReadValue<float>();
     }
+    private void OnDescendCancel(InputAction.CallbackContext ctx)
+    {
+        _flyDown = 0f;
+    }
+
 
     private void OnAscend(InputAction.CallbackContext ctx)
     {
         if (PlayerState.Instance.IsPossession == false) return;
         _flyUp = ctx.ReadValue<float>();
+    }
+    private void OnAscendCancel(InputAction.CallbackContext ctx)
+    {
+        _flyUp = 0f;
     }
 
     private void Move()
