@@ -87,21 +87,7 @@ public class DroneController : MonoBehaviour
     {
         //if (!IsOwner) return;
 
-        if (_rigidbody.isKinematic) return;
-
-        // 카메라 방향 상관없이 Z축 이동
-        Vector3 forward = _dronePivot.forward;
-        forward.y = 0f;
-
-        // 카메라 방향 상관없이 X축 이동
-        Vector3 right = _dronePivot.right;
-        right.y = 0f;
-
-                                                                     // ↓ 대각선 입력시 속도 추가되는거 보정
-        Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
-
-        // 드론 이동
-        _rigidbody.linearVelocity = new Vector3(move.x, _verticalInput * _playerVertical, move.z);
+        DroneMove();
     }
 
     //public override void OnNetworkDespawn()
@@ -186,6 +172,27 @@ public class DroneController : MonoBehaviour
     private void UpdateVertical()
     {
         _verticalInput = _ascend - _descend;
+    }
+    #endregion
+
+    #region 이동 함수
+    private void DroneMove()
+    {
+        if (_rigidbody.isKinematic) return;
+
+        // 카메라 방향 상관없이 Z축 이동
+        Vector3 forward = _dronePivot.forward;
+        forward.y = 0f;
+
+        // 카메라 방향 상관없이 X축 이동
+        Vector3 right = _dronePivot.right;
+        right.y = 0f;
+
+        // ↓ 대각선 입력시 속도 추가되는거 보정
+        Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
+
+        // 드론 이동
+        _rigidbody.linearVelocity = new Vector3(move.x, _verticalInput * _playerVertical, move.z);
     }
     #endregion
 
