@@ -102,3 +102,4 @@ InitTestScene*.unity*
 
 # Ignore imported assets
 Assets/Imports/**
+Assets/PrivateAssets/**
