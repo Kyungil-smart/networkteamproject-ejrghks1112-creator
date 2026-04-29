@@ -13,6 +13,8 @@ public class DroneController : MonoBehaviour
     [SerializeField] private float _playerVertical;
     // 상승/하강 입력을 위한
     private float _verticalInput;
+    private float _ascend;
+    private float _descend;
 
     [Header("카메라 이동을 위한 드론 피봇")]
     [SerializeField] private Transform _dronePivot;
@@ -34,14 +36,6 @@ public class DroneController : MonoBehaviour
     [SerializeField] private LayerMask _targetLayer;
     [Header("빙의시 카메라 우선도를 위한 자신의 카메라 등록")]
     [SerializeField] private CinemachineCamera _cinemachineCamera;
-    // 카메라 우선순위 변경을 위한 타겟 캠
-    private CinemachineCamera _targetCam;
-    // 빙의할 타겟의 컴포넌트를 받아올 필드
-    private RobotFormMovement _targetInput;
-
-    [Header("빙의시 On/Off 필요한 스크립트")]
-    [SerializeField] private DroneController _droneController;
-    [SerializeField] private DroneCameraLook _droneCameraLook;
 
     // 빙의시 색상 적용을 위한 변수
     private PlayerColorChanger _playerColorChanger;
@@ -59,10 +53,10 @@ public class DroneController : MonoBehaviour
         _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
         // 상승 구독
         _playerInput.Player.PlayerAscend.started += DroneOnAscend;
-        _playerInput.Player.PlayerAscend.canceled += DroneAscendCancle;
+        _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
         // 하강 구독
         _playerInput.Player.PlayerDescend.started += DroneOnDescend;
-        _playerInput.Player.PlayerDescend.canceled += DroneDescendCancle;
+        _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
         // 빙의 구독
         _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
     }
@@ -132,10 +126,10 @@ public class DroneController : MonoBehaviour
         _playerInput.Player.PlayerMove.canceled -= DroneMoveCancle;
         // 상승 구독 취소
         _playerInput.Player.PlayerAscend.started -= DroneOnAscend;
-        _playerInput.Player.PlayerAscend.canceled -= DroneAscendCancle;
+        _playerInput.Player.PlayerAscend.canceled -= DroneOnAscend;
         // 하강 구독 취소
         _playerInput.Player.PlayerDescend.started -= DroneOnDescend;
-        _playerInput.Player.PlayerDescend.canceled -= DroneDescendCancle;
+        _playerInput.Player.PlayerDescend.canceled -= DroneOnDescend;
         // 빙의 구독 취소
         _playerInput.Player.PlayerInteraction.started -= DroneOnPossession;
         
@@ -166,33 +160,32 @@ public class DroneController : MonoBehaviour
     #region 이동 조작
     public void DroneOnMove(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == true) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
     public void DroneMoveCancle(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == true) return;
         _moveInput = Vector2.zero;
     }
     #endregion
 
-    #region 상승 조작
+    #region 상승/하강 조작
     public void DroneOnAscend(InputAction.CallbackContext ctx)
     {
-        _verticalInput = 1f;
+        if (PlayerState.Instance.IsPossession == true) return;
+        _ascend = ctx.ReadValue<float>();
+        UpdateVertical();
     }
-    public void DroneAscendCancle(InputAction.CallbackContext ctx)
-    {
-        _verticalInput = 0f;
-    }
-    #endregion
-
-    #region 하강 조작
     public void DroneOnDescend(InputAction.CallbackContext ctx)
     {
-        _verticalInput = -1f;
+        if (PlayerState.Instance.IsPossession) return;
+        _descend = ctx.ReadValue<float>();
+        UpdateVertical();
     }
-    public void DroneDescendCancle(InputAction.CallbackContext ctx)
+    private void UpdateVertical()
     {
-        _verticalInput = 0f;
+        _verticalInput = _ascend - _descend;
     }
     #endregion
 
@@ -242,20 +235,6 @@ public class DroneController : MonoBehaviour
 
             // 카메라 우선순위 조작
             _cinemachineCamera.Priority = 0;
-            CinemachineCamera targetCam = hit.transform.GetComponentInChildren<CinemachineCamera>();
-            if (targetCam != null)
-            {
-                targetCam.Priority = 1;
-                _targetCam = targetCam;
-            }
-
-            RobotFormMovement targetInput = hit.transform.GetComponentInChildren<RobotFormMovement>();
-            if (targetInput != null)
-            {
-                _targetInput = targetInput;
-                _targetInput.PlayerInput.Enable();
-            }
-            DroneControllerOff();
         }
     }
     #endregion
@@ -264,8 +243,6 @@ public class DroneController : MonoBehaviour
     public void DroneControllerOn()
     {
         PlayerState.Instance.IsPossession = false;
-        _playerInput.Enable();
-        _droneCameraLook.enabled = true;
         
         // 빙의 취소후 원래 색상으로 복귀
         _playerColorChanger.Release(_currentPossessionRenderers);
@@ -276,17 +253,7 @@ public class DroneController : MonoBehaviour
         transform.SetParent(null, true);
         _rigidbody.isKinematic = false;
 
-        if (_targetCam != null) _targetCam.Priority = 0;
-        _cinemachineCamera.Priority = 10;
-
-        if (_targetInput != null) _targetInput.PlayerInput.Disable();
-    }
-
-    public void DroneControllerOff()
-    {
-        _playerInput.Disable();
-        _droneCameraLook.enabled = false;
+        _cinemachineCamera.Priority = 3;
     }
     #endregion
-
 }

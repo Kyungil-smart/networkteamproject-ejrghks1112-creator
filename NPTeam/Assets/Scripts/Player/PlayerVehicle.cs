@@ -19,12 +19,7 @@ public class PlayerVehicle : MonoBehaviour
 
     // 조작키
     private NPTeamInputActions _playerInput;
-    public NPTeamInputActions PlayerInput
-    {
-        get => _playerInput;
-        set => _playerInput = value;
-    }
-
+  
     private void Awake() => Init();
 
     private void OnEnable()
@@ -58,19 +53,19 @@ public class PlayerVehicle : MonoBehaviour
     #region 플레이어 변신
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
-       if (!ctx.started) return;
+       if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
 
         SetForm(_carForm);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
 
         SetForm(_robotForm);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
 
         SetForm(_componentForm);
     }
@@ -97,9 +92,9 @@ public class PlayerVehicle : MonoBehaviour
     {
         if (_carCamera == null || _robotCamera == null || _componentCamera == null) return;
 
-        _carCamera.Priority = (target == _carForm) ? 2 : 0;
-        _robotCamera.Priority = (target == _robotForm) ? 2 : 0;
-        _componentCamera.Priority = (target == _componentForm) ? 2 : 0;
+        _carCamera.Priority = (target == _carForm) ? 2 : 1;
+        _robotCamera.Priority = (target == _robotForm) ? 2 : 1;
+        _componentCamera.Priority = (target == _componentForm) ? 2 : 1;
     }
     #endregion
 }

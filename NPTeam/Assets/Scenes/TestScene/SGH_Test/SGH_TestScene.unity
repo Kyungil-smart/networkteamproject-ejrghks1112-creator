@@ -770,9 +770,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3323504256503119897, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
+      propertyPath: Priority.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3323504256503119897, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
+      propertyPath: Priority.m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2170365881
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372560156510936912, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
+      propertyPath: Priority.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372560156510936912, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
+      propertyPath: Priority.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680166579857090762, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
+      propertyPath: Priority.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680166579857090762, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
+      propertyPath: Priority.m_Value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

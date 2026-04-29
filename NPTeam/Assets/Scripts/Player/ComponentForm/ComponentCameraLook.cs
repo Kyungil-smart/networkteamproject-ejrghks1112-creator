@@ -50,6 +50,7 @@ public class ComponentCameraLook : MonoBehaviour
     #region 카메라 시점 이동 조작
     public void DroneOnCameraMove(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 

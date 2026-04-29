@@ -112,6 +112,7 @@ public class RobotFormMovement : MonoBehaviour
     #region 로봇폼 이동
     public void RobotOnMove(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
@@ -123,7 +124,7 @@ public class RobotFormMovement : MonoBehaviour
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || !IsGrounded()) return;
+        if (!ctx.started || !IsGrounded() || PlayerState.Instance.IsPossession == false) return;
 
         _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
     }

@@ -68,16 +68,19 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _move = ctx.ReadValue<Vector2>();
     }
 
     private void OnDescend(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _flyDown = ctx.ReadValue<float>();
     }
 
     private void OnAscend(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _flyUp = ctx.ReadValue<float>();
     }
 

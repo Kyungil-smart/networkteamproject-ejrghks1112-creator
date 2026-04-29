@@ -15,6 +15,7 @@ public class PlayerState : MonoBehaviour
 
     private void Awake() => Init();
 
+    #region 초기화
     private void Init()
     {
         if (Instance != null && Instance != this)
@@ -25,4 +26,5 @@ public class PlayerState : MonoBehaviour
 
         Instance = this;
     }
+    #endregion
 }

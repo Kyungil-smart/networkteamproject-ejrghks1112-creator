@@ -50,6 +50,7 @@ public class RobotCameraLook : MonoBehaviour
     #region 카메라 시점 이동 조작
     public void RobotOnCameraMove(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 

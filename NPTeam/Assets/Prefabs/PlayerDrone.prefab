@@ -422,8 +422,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   _cinemachineCamera: {fileID: 3820322090921818748}
-  _droneController: {fileID: 3679402617380995310}
-  _droneCameraLook: {fileID: 9216172038396605342}
 --- !u!114 &9216172038396605342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,7 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
     Enabled: 1
-    m_Value: 1
+    m_Value: 3
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
