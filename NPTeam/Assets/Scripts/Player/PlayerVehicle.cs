@@ -78,21 +78,19 @@ public class PlayerVehicle : NetworkBehaviour
     }
     private void SetForm(int index)
     {
-        if (!IsOwner) return;
         ChangeFormServerRpc(index);
     }
 
-    [ServerRpc]
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     private void ChangeFormServerRpc(int index)
     {
         ApplyForm(index);
         ChangeFormClientRpc(index);
     }
 
-    [ClientRpc]
+    [Rpc(SendTo.ClientsAndHost)]
     private void ChangeFormClientRpc(int index)
     {
-        if (IsOwner) return;
         ApplyForm(index);
     }
 
@@ -116,7 +114,7 @@ public class PlayerVehicle : NetworkBehaviour
     #region 폼에 따른 카메라 우선도
     private void SetCamera(int index)
     {
-        if (!IsOwner) return;
+        if (PlayerState.Instance.CurrentPossessed != gameObject) return;
 
         _carCamera.Priority = (index == 0) ? 2 : 1;
         _robotCamera.Priority = (index == 1) ? 2 : 1;
@@ -140,8 +138,6 @@ public class PlayerVehicle : NetworkBehaviour
     #region 빙의시 카메라 우선순위
     public void OnPossessedCameraSync()
     {
-        if (!IsOwner) return;
-
         SetCamera(_currentFormIndex);
     }
     #endregion

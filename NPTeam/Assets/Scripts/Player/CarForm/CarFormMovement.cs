@@ -49,21 +49,25 @@ public class CarFormMovement : NetworkBehaviour
     {
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
         Vector2 input = ctx.ReadValue<Vector2>();
-        Debug.Log($"Input: {input}");
-        
+
+        MoveServerRpc(input);
+    }
+    [Rpc(SendTo.Server)]
+    void MoveServerRpc(Vector2 input)
+    {
         _turn = new Vector3(input.x, 0, 0);
-        Debug.Log($"turnDir: {_turn.x}");
-        
         _move = new Vector3(0, 0, input.y).normalized;
-        Debug.Log($"moveDir: {_move.z}");
     }
 
     void CarMoveCancel(InputAction.CallbackContext ctx)
     {
+        CancelServerRpc();
+    }
+    [Rpc(SendTo.Server)]
+    void CancelServerRpc()
+    {
         _move = Vector3.zero;
         _turn = Vector3.zero;
-        _isMove = false;
-        _direction = 0f;
 
         _carFormRigidBody.linearVelocity = Vector3.zero;
         _carFormRigidBody.angularVelocity = Vector3.zero;

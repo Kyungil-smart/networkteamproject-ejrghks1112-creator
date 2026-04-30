@@ -373,10 +373,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car
       objectReference: {fileID: 0}
-    - target: {fileID: 1664890472010085759, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 1682309855001488819, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -416,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 1682309855001488819, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
+      propertyPath: AuthorityMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: GlobalObjectIdHash

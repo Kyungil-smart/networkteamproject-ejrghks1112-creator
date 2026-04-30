@@ -245,7 +245,7 @@ public class DroneController : NetworkBehaviour
             // 타겟 위로 위치 이동
             transform.position = targetPos;
             // 자식 오브젝트로 들어감
-            transform.SetParent(hit.transform, true);
+            //transform.SetParent(hit.transform, true);
             transform.localRotation = Quaternion.identity;
 
             // 가져온 Renderer들에 플레이어 색 적용
@@ -278,7 +278,7 @@ public class DroneController : NetworkBehaviour
         _currentPossessionRenderers = null;
         _playerColorChanger.ApplyColor();
 
-        transform.SetParent(null, true);
+        //transform.SetParent(null, true);
         PlayerState.Instance.CurrentPossessed = null;
         PlayerState.Instance.CurrentFrom = null;
         _rigidbody.isKinematic = false;
