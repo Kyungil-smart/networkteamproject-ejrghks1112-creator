@@ -355,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3285019482104072620, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -638,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3285019482104072620, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -744,7 +744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3285019482104072620, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -850,7 +850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3285019482104072620, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash

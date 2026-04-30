@@ -59,14 +59,12 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        // if (!IsOwner) return;
-        
         Move();
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
         _move = ctx.ReadValue<Vector2>();
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
@@ -76,7 +74,7 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnDescend(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
         _flyDown = ctx.ReadValue<float>();
     }
     private void OnDescendCancel(InputAction.CallbackContext ctx)
@@ -87,7 +85,7 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnAscend(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
         _flyUp = ctx.ReadValue<float>();
     }
     private void OnAscendCancel(InputAction.CallbackContext ctx)
