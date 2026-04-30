@@ -9,7 +9,8 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private GameObject _carForm;
     [SerializeField] private GameObject _robotForm;
     [SerializeField] private GameObject _componentForm;
-    private GameObject _currentForm;
+    // Car = 0, Robot = 1, Component = 2 로 사용
+    private int _currentFormIndex;
 
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
@@ -20,7 +21,7 @@ public class PlayerVehicle : NetworkBehaviour
 
     // 조작키
     private NPTeamInputActions _playerInput;
-  
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -39,7 +40,7 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode1.started -= OnCarChanged;
         _playerInput.Player.PlayerMode2.started -= OnRobotChanged;
         _playerInput.Player.PlayerMode3.started -= OnComponentChanged;
-        
+
         _playerInput.Disable();
     }
 
@@ -54,48 +55,76 @@ public class PlayerVehicle : NetworkBehaviour
     #region 플레이어 변신
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
-       if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
 
-        SetForm(_carForm);
+        SetForm(0);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
 
-        SetForm(_robotForm);
+        SetForm(1);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
 
-        SetForm(_componentForm);
+        SetForm(2);
     }
-    private void SetForm(GameObject target)
+    private void SetForm(int index)
     {
-        if (_carForm == null || _robotForm == null || _componentForm == null) return;
-        if (target == null) return;
-        if (_currentForm == target) return;
+        if (!IsOwner) return;
+        ChangeFormServerRpc(index);
+    }
 
-        _currentForm = target;
+    [ServerRpc]
+    private void ChangeFormServerRpc(int index)
+    {
+        ApplyForm(index);
+        ChangeFormClientRpc(index);
+    }
 
-        _carForm.SetActive(target == _carForm);
-        _robotForm.SetActive(target == _robotForm);
-        _componentForm.SetActive(target == _componentForm);
+    [ClientRpc]
+    private void ChangeFormClientRpc(int index)
+    {
+        if (IsOwner) return;
+        ApplyForm(index);
+    }
 
-        _rigidbody.useGravity = (target != _componentForm);
+    private void ApplyForm(int index)
+    {
+        if (_currentFormIndex == index) return;
+        _currentFormIndex = index;
 
-        SetCamera(target);
+        _carForm.SetActive(index == 0);
+        _robotForm.SetActive(index == 1);
+        _componentForm.SetActive(index == 2);
+
+        _rigidbody.useGravity = (index != 2);
+
+        SetCamera(index);
     }
     #endregion
 
     #region 폼에 따른 카메라 우선도
-    private void SetCamera(GameObject target)
+    private void SetCamera(int index)
     {
-        if (_carCamera == null || _robotCamera == null || _componentCamera == null) return;
+        if (!IsOwner) return;
 
-        _carCamera.Priority = (target == _carForm) ? 2 : 1;
-        _robotCamera.Priority = (target == _robotForm) ? 2 : 1;
-        _componentCamera.Priority = (target == _componentForm) ? 2 : 1;
+        _carCamera.Priority = (index == 0) ? 2 : 1;
+        _robotCamera.Priority = (index == 1) ? 2 : 1;
+        _componentCamera.Priority = (index == 2) ? 2 : 1;
+    }
+    #endregion
+
+    #region 적 AI 관련 함수 관리
+    [ClientRpc]
+    public void KnockbackClientRpc(Vector3 force)
+    {
+        if (IsOwner)
+        {
+            _rigidbody.AddForce(force, ForceMode.Impulse);
+        }
     }
     #endregion
 }
