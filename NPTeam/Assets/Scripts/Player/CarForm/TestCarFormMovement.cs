@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestCarFormMovement : NetworkBehaviour
+public class TestCarFormMovement : NetworkBehaviour, IStunable
 {
     private NPTeamInputActions _carFormInput; // 근형님이 만드신 inputSystem
     private Vector3 _move; // 앞뒤 움직임
