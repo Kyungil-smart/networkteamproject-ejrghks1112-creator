@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class CarCameraLook : MonoBehaviour
+public class CarCameraLook : NetworkBehaviour
 {
     [Header("카메라 이동 속도")]
     [SerializeField] private float _cameraSpeed;
@@ -50,7 +51,7 @@ public class CarCameraLook : MonoBehaviour
     #region 카메라 시점 이동 조작
     public void DroneOnCameraMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 

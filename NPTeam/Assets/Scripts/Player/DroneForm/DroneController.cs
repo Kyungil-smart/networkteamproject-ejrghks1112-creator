@@ -61,10 +61,12 @@ public class DroneController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (IsOwner)
+        if (!IsOwner)
         {
-            _cinemachineCamera.gameObject.SetActive(true);
-
+            _cinemachineCamera.gameObject.SetActive(false);
+            return;
+        }
+       
             _playerInput.Enable();
 
             // 이동 구독
@@ -78,11 +80,6 @@ public class DroneController : NetworkBehaviour
             _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
             // 빙의 구독
             _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
-        }
-        else
-        {
-            _cinemachineCamera.gameObject.SetActive(false);
-        }
     }
 
     private void Update()
@@ -229,6 +226,9 @@ public class DroneController : NetworkBehaviour
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.isKinematic = true;
 
+            // 현재 빙의 대상 저장
+            PlayerState.Instance.CurrentPossessed = hit.transform.gameObject;
+
             // 빙의 대상의 모든 Renderer 가져오기
             _currentPossessionRenderers = hit.transform.GetComponentsInChildren<Renderer>();
 
@@ -253,6 +253,14 @@ public class DroneController : NetworkBehaviour
 
             PlayerState.Instance.IsPossession = true;
 
+            PlayerVehicle vehicle = hit.transform.GetComponent<PlayerVehicle>();
+            if (vehicle != null)
+            {
+                vehicle.OnPossessedCameraSync();
+
+                PlayerState.Instance.CurrentFrom = vehicle.GetCurrentFormObject(vehicle.CurrentFormIndex);
+            }
+
             // 카메라 우선순위 조작
             _cinemachineCamera.Priority = 0;
         }
@@ -271,6 +279,8 @@ public class DroneController : NetworkBehaviour
         _playerColorChanger.ApplyColor();
 
         transform.SetParent(null, true);
+        PlayerState.Instance.CurrentPossessed = null;
+        PlayerState.Instance.CurrentFrom = null;
         _rigidbody.isKinematic = false;
 
         _cinemachineCamera.Priority = 3;
