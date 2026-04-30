@@ -54,6 +54,34 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 3634113091576005048
+  - m_Id: 10103002
+    m_Key: UI_Settings_Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103003
+    m_Key: UI_Settings_Sound_SE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103004
+    m_Key: UI_Settings_Sound_BGM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103005
+    m_Key: UI_Settings_Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103006
+    m_Key: UI_Settings_Language_English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103007
+    m_Key: UI_Settings_Language_Japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103008
+    m_Key: UI_Settings_Language_Korean
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

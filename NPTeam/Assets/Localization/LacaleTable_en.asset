@@ -54,6 +54,34 @@ MonoBehaviour:
     m_Localized: Settings
     m_Metadata:
       m_Items: []
+  - m_Id: 10103002
+    m_Localized: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103003
+    m_Localized: SE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103004
+    m_Localized: BGM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103005
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103006
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103007
+    m_Localized: "\u65E5\u672C\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103008
+    m_Localized: "\uD55C\uAD6D\uC5B4"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
