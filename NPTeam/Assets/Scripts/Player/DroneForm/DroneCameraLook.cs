@@ -1,8 +1,8 @@
-using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DroneCameraLook : MonoBehaviour
+public class DroneCameraLook : NetworkBehaviour
 {
     [Header("카메라 이동 속도")]
     [SerializeField] private float _cameraSpeed;
@@ -20,8 +20,16 @@ public class DroneCameraLook : MonoBehaviour
 
     private void Awake() => Init();
 
-    private void OnEnable()
+    //private void OnEnable()
+    //{
+    //    // 카메라 시점 이동 구독
+    //    _playerCameraAction.performed += DroneOnCameraMove;
+    //    _playerCameraAction.canceled += DroneCameraMoveCancle;
+    //}
+
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
         // 카메라 시점 이동 구독
         _playerCameraAction.performed += DroneOnCameraMove;
         _playerCameraAction.canceled += DroneCameraMoveCancle;
@@ -29,17 +37,27 @@ public class DroneCameraLook : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!IsOwner) return;
+
         CameraVectorBackup();
         // 카메라 시점 이동
         _dronePivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
+        if (!IsOwner) return;
         // 카메라 시점 이동 구독 취소
         _playerCameraAction.performed -= DroneOnCameraMove;
         _playerCameraAction.canceled -= DroneCameraMoveCancle;
     }
+
+    //private void OnDisable()
+    //{
+    //    // 카메라 시점 이동 구독 취소
+    //    _playerCameraAction.performed -= DroneOnCameraMove;
+    //    _playerCameraAction.canceled -= DroneCameraMoveCancle;
+    //}
 
     #region 초기화
     private void Init()
