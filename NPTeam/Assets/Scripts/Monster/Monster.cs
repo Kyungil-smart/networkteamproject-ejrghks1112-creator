@@ -116,7 +116,7 @@ public class Monster : NetworkBehaviour, IDamagable
             
             Vector3 direction = (_targetPlayer.position - transform.position).normalized;
             direction += Vector3.up * 0.5f;
-            // player.KnockbackClientRpc(direction * knockbackPower);
+            player.KnockbackClientRpc(direction * knockbackPower);
         }
     }
 
