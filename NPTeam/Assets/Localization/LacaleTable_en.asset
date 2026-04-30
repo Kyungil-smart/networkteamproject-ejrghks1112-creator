@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LacaleTable_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: d8ec86738dcf2b44c9ec110200a3dbb1, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 10101001
+    m_Localized: 'Super Galactic Brave Squad: Transforming Robot'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10101002
+    m_Localized: Press any key to begin your journey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102001
+    m_Localized: MULTIPLAYER LOBBY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102002
+    m_Localized: HOST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102003
+    m_Localized: Creat a Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102004
+    m_Localized: CLIENT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102005
+    m_Localized: StartClient
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102006
+    m_Localized: "Enter Code\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103001
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103002
+    m_Localized: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103003
+    m_Localized: SE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103004
+    m_Localized: BGM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103005
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103006
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103007
+    m_Localized: "\u65E5\u672C\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103008
+    m_Localized: "\uD55C\uAD6D\uC5B4"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
