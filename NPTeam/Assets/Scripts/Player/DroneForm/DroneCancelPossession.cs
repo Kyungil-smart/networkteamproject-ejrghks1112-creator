@@ -1,7 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DroneCancelPossession : MonoBehaviour
+public class DroneCancelPossession : NetworkBehaviour
 {
     private DroneController _droneController;
 
@@ -10,9 +11,23 @@ public class DroneCancelPossession : MonoBehaviour
 
     private void Awake() => Init();
 
-    private void OnEnable() => _playerInteractionCancelAction.performed += DroneOnPossessionCancle;
+    //private void OnEnable() => _playerInteractionCancelAction.performed += DroneOnPossessionCancle;
 
-    private void OnDisable() => _playerInteractionCancelAction.performed -= DroneOnPossessionCancle;
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) return;
+
+        _playerInteractionCancelAction.performed += DroneOnPossessionCancle;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if (!IsOwner) return;
+
+        _playerInteractionCancelAction.performed -= DroneOnPossessionCancle;
+    }
+
+    //private void OnDisable() => _playerInteractionCancelAction.performed -= DroneOnPossessionCancle;
 
     #region 초기화
     private void Init()
