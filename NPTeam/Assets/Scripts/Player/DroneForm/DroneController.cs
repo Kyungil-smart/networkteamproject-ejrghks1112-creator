@@ -61,10 +61,12 @@ public class DroneController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (IsOwner)
+        if (!IsOwner)
         {
-            _cinemachineCamera.gameObject.SetActive(true);
-
+            _cinemachineCamera.gameObject.SetActive(false);
+            return;
+        }
+       
             _playerInput.Enable();
 
             // 이동 구독
@@ -78,11 +80,6 @@ public class DroneController : NetworkBehaviour
             _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
             // 빙의 구독
             _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
-        }
-        else
-        {
-            _cinemachineCamera.gameObject.SetActive(false);
-        }
     }
 
     private void Update()

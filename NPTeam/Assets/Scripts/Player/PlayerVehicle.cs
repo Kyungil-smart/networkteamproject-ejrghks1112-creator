@@ -17,7 +17,6 @@ public class PlayerVehicle : NetworkBehaviour
         set => _currentFormIndex = value;
     }
 
-
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
     [SerializeField] private CinemachineCamera _robotCamera;
