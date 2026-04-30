@@ -229,6 +229,9 @@ public class DroneController : NetworkBehaviour
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.isKinematic = true;
 
+            // 현재 빙의 대상 저장
+            PlayerState.Instance.CurrentPossessed = hit.transform.gameObject;
+
             // 빙의 대상의 모든 Renderer 가져오기
             _currentPossessionRenderers = hit.transform.GetComponentsInChildren<Renderer>();
 
@@ -271,6 +274,7 @@ public class DroneController : NetworkBehaviour
         _playerColorChanger.ApplyColor();
 
         transform.SetParent(null, true);
+        PlayerState.Instance.CurrentPossessed = null;
         _rigidbody.isKinematic = false;
 
         _cinemachineCamera.Priority = 3;

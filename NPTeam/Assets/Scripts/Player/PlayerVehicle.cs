@@ -55,19 +55,19 @@ public class PlayerVehicle : NetworkBehaviour
     #region 플레이어 변신
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
 
         SetForm(0);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
 
         SetForm(1);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || PlayerState.Instance.IsPossession == false) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
 
         SetForm(2);
     }
