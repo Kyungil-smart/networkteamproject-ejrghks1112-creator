@@ -84,9 +84,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4700365608077339858}
+  - component: {fileID: 5487994405948797901}
   - component: {fileID: 5221148021317211286}
   - component: {fileID: 4389730102333417263}
-  - component: {fileID: 5487994405948797901}
   m_Layer: 4
   m_Name: Robot
   m_TagString: Untagged
@@ -111,6 +111,31 @@ Transform:
   - {fileID: 5605629391453565481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5487994405948797901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4980449553488956649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 70585240
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &5221148021317211286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507e3f60be577ca40842ade8c027d4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobotCameraLook
+  ShowTopMostFoldoutHeaderGroup: 1
   _cameraSpeed: 0.2
   _robotPivot: {fileID: 1871229821606095061}
 --- !u!114 &4389730102333417263
@@ -137,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195e92b2b3c76ef4ba0df87dc85d256f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobotFormMovement
+  ShowTopMostFoldoutHeaderGroup: 1
   _playerSpeed: 7
   _jumpPower: 10
   _robotPivot: {fileID: 1871229821606095061}
@@ -147,31 +174,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 17
   _jumpRayPivot: {fileID: 8918733831979812496}
---- !u!114 &5487994405948797901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4980449553488956649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3093192261
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &5803778702791277401
 GameObject:
   m_ObjectHideFlags: 0
