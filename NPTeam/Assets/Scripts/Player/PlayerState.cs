@@ -13,6 +13,13 @@ public class PlayerState : NetworkBehaviour
         get => _currentPossessed;
         set => _currentPossessed = value;
     }
+    // 현재 폼 저장(플레이어만 조작 가능하게 하기위해)
+    private GameObject _currentFrom;
+    public GameObject CurrentFrom
+    {
+        get => _currentFrom;
+        set => _currentFrom = value;
+    }
     // 드론 빙의 여부
     private bool _isPossession = false;
     public bool IsPossession

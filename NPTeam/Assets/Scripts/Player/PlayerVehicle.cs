@@ -11,6 +11,12 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private GameObject _componentForm;
     // Car = 0, Robot = 1, Component = 2 로 사용
     private int _currentFormIndex;
+    public int CurrentFormIndex
+    {
+        get => _currentFormIndex;
+        set => _currentFormIndex = value;
+    }
+
 
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
@@ -103,6 +109,8 @@ public class PlayerVehicle : NetworkBehaviour
         _rigidbody.useGravity = (index != 2);
 
         SetCamera(index);
+
+        PlayerState.Instance.CurrentFrom = GetCurrentFormObject(index);
     }
     #endregion
 
@@ -114,6 +122,28 @@ public class PlayerVehicle : NetworkBehaviour
         _carCamera.Priority = (index == 0) ? 2 : 1;
         _robotCamera.Priority = (index == 1) ? 2 : 1;
         _componentCamera.Priority = (index == 2) ? 2 : 1;
+    }
+    #endregion
+
+    #region 현재 폼 반환 함수
+    public GameObject GetCurrentFormObject(int index)
+    {
+        return index switch
+        {
+            0 => _carForm,
+            1 => _robotForm,
+            2 => _componentForm,
+            _ => null
+        };
+    }
+    #endregion
+
+    #region 빙의시 카메라 우선순위
+    public void OnPossessedCameraSync()
+    {
+        if (!IsOwner) return;
+
+        SetCamera(_currentFormIndex);
     }
     #endregion
 

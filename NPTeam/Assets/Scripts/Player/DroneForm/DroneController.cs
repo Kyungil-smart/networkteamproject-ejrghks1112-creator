@@ -256,6 +256,14 @@ public class DroneController : NetworkBehaviour
 
             PlayerState.Instance.IsPossession = true;
 
+            PlayerVehicle vehicle = hit.transform.GetComponent<PlayerVehicle>();
+            if (vehicle != null)
+            {
+                vehicle.OnPossessedCameraSync();
+
+                PlayerState.Instance.CurrentFrom = vehicle.GetCurrentFormObject(vehicle.CurrentFormIndex);
+            }
+
             // 카메라 우선순위 조작
             _cinemachineCamera.Priority = 0;
         }
@@ -275,6 +283,7 @@ public class DroneController : NetworkBehaviour
 
         transform.SetParent(null, true);
         PlayerState.Instance.CurrentPossessed = null;
+        PlayerState.Instance.CurrentFrom = null;
         _rigidbody.isKinematic = false;
 
         _cinemachineCamera.Priority = 3;
