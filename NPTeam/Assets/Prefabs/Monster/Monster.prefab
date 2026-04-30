@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 892279010
+  GlobalObjectIdHash: 120845250
   InScenePlacedSourceGlobalObjectIdHash: 120845250
   DeferredDespawnTick: 0
   Ownership: 1
@@ -194,6 +194,8 @@ MonoBehaviour:
   patrolSpeed: 10
   knockbackPower: 5
   knockbackCooltime: 2
+  monsterPrefab: {fileID: 2035411846907976361}
+  spawnCount: 2
 --- !u!114 &8213990461498524054
 MonoBehaviour:
   m_ObjectHideFlags: 0

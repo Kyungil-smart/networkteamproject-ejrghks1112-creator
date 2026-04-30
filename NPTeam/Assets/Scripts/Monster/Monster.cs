@@ -11,7 +11,9 @@ public class Monster : NetworkBehaviour, IDamagable
     private NavMeshAgent _navmeshAgent;
     private Transform _targetPlayer;
     private int _randomWayPoint;
+    private float _detectTime = 0f;
     private bool _isCooldown = false;
+    public bool spawnMonster = false;
     
     [Header("몹 체력")]
     [SerializeField] private NetworkVariable<int> health;
@@ -40,6 +42,12 @@ public class Monster : NetworkBehaviour, IDamagable
 
     [Header("넉백 쿨타임")] 
     [SerializeField] private float knockbackCooltime;
+    
+    [Header("추가 스폰될 몬스터")]
+    [SerializeField] private GameObject monsterPrefab;
+    
+    [Header("추가 스폰될 몬스터의 개채 수")]
+    [SerializeField] private int spawnCount;
 
     private void Awake() => _navmeshAgent = GetComponent<NavMeshAgent>();
 
@@ -56,21 +64,44 @@ public class Monster : NetworkBehaviour, IDamagable
         if (!IsServer) return;
         
         SetTargetPlayer();
-
-        if (_targetPlayer == null)
-        {
-            Patrol();
-            return;
-        }
-        
-        float distance = Vector3.Distance(transform.position, _targetPlayer.position);
         
         if (_targetPlayer != null && FOV())
         {
+            _detectTime += Time.deltaTime;
+
+            if (_detectTime > 5f && !spawnMonster)
+            {
+                SpawnMonster();
+            }
+            
             Chase();
+            
+            float distance = Vector3.Distance(transform.position, _targetPlayer.position);
             if (distance < knockbackRange && !_isCooldown) StartCoroutine(KnockbackRoution());
         }
-        else Patrol();
+        else
+        {
+            _detectTime = 0f;
+            Patrol();
+        }
+    }
+
+    private void SpawnMonster()
+    {
+        if (!IsServer) return;
+        
+        spawnMonster = true;
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Vector3 spawnPos = transform.position + Random.insideUnitSphere * 2f;
+        
+            GameObject monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
+        
+            var networkObject = monster.GetComponent<NetworkObject>();
+            if (networkObject != null) networkObject.Spawn();
+        }
+        
     }
 
     private void KnockbackPlayer()
@@ -79,11 +110,12 @@ public class Monster : NetworkBehaviour, IDamagable
         
         var player = _targetPlayer.GetComponent<PlayerVehicle>();
 
+        Debug.Log("플레이어 공격");
         if (player != null)
         {
+            
             Vector3 direction = (_targetPlayer.position - transform.position).normalized;
             direction += Vector3.up * 0.5f;
-            Debug.Log("플레이어 공격");
             // player.KnockbackClientRpc(direction * knockbackPower);
         }
     }
@@ -91,10 +123,17 @@ public class Monster : NetworkBehaviour, IDamagable
     private IEnumerator KnockbackRoution()
     {
         _isCooldown = true;
+
+        if (_navmeshAgent.hasPath)
+        {
+            _navmeshAgent.isStopped = true;
+            _navmeshAgent.velocity = Vector3.zero;
+        }
         
         KnockbackPlayer();
         yield return new WaitForSeconds(knockbackCooltime);
         
+        _navmeshAgent.isStopped = false;
         _isCooldown = false;
     }
 
