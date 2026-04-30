@@ -1,8 +1,6 @@
-using System;
-using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
 public class ComponentFormMovement : NetworkBehaviour
 {
@@ -12,7 +10,8 @@ public class ComponentFormMovement : NetworkBehaviour
     [SerializeField] private float _flySpeed;
     
     private NPTeamInputActions _input;
-    private Rigidbody _rb;
+    [Header("부모의 Rigidbody 등록")]
+    [SerializeField] private Rigidbody _rigidbody;
     private Vector3 _move;
     private float _flyUp;
     private float _flyDown;
@@ -22,9 +21,6 @@ public class ComponentFormMovement : NetworkBehaviour
     private void Init()
     {
         _input = new NPTeamInputActions();
-        _rb = GetComponent<Rigidbody>();
-        _rb.useGravity = false;
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     // public override void OnNetworkSpawn()
@@ -43,21 +39,21 @@ public class ComponentFormMovement : NetworkBehaviour
     {
         _input.Enable();
         _input.Player.PlayerMove.performed += OnMove;
-        _input.Player.PlayerMove.canceled += OnMove;
+        _input.Player.PlayerMove.canceled += OnMoveCancel;
         _input.Player.PlayerDescend.performed += OnDescend;
-        _input.Player.PlayerDescend.canceled += OnDescend;
+        _input.Player.PlayerDescend.canceled += OnDescendCancel;
         _input.Player.PlayerAscend.performed += OnAscend;
-        _input.Player.PlayerAscend.canceled += OnAscend;
+        _input.Player.PlayerAscend.canceled += OnAscendCancel;
     }
 
     private void OnDisable()
     {
         _input.Player.PlayerMove.performed -= OnMove;
-        _input.Player.PlayerMove.canceled -= OnMove;
+        _input.Player.PlayerMove.canceled -= OnMoveCancel;
         _input.Player.PlayerDescend.performed -= OnDescend;
-        _input.Player.PlayerDescend.canceled -= OnDescend;
+        _input.Player.PlayerDescend.canceled -= OnDescendCancel;
         _input.Player.PlayerAscend.performed -= OnAscend;
-        _input.Player.PlayerAscend.canceled -= OnAscend;
+        _input.Player.PlayerAscend.canceled -= OnAscendCancel;
         _input.Disable();
     }
 
@@ -70,27 +66,43 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _move = ctx.ReadValue<Vector2>();
+    }
+    private void OnMoveCancel(InputAction.CallbackContext ctx)
+    {
+        _move = Vector2.zero;
     }
 
     private void OnDescend(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _flyDown = ctx.ReadValue<float>();
     }
+    private void OnDescendCancel(InputAction.CallbackContext ctx)
+    {
+        _flyDown = 0f;
+    }
+
 
     private void OnAscend(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false) return;
         _flyUp = ctx.ReadValue<float>();
+    }
+    private void OnAscendCancel(InputAction.CallbackContext ctx)
+    {
+        _flyUp = 0f;
     }
 
     private void Move()
     {
-        Vector3 moveDir = transform.forward * -(_move.x) + transform.right * _move.y; 
+        Vector3 moveDir = transform.forward * _move.y + transform.right * _move.x; 
         float flyDir = _flyUp - _flyDown;
         Vector3 flyVelocity = transform.up * flyDir;
         
         Vector3 componentMove = moveDir * _moveSpeed + flyVelocity * _flySpeed;
-        
-        _rb.linearVelocity = Vector3.Lerp(_rb.linearVelocity, componentMove, Time.deltaTime);
+
+        _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
     }
 }

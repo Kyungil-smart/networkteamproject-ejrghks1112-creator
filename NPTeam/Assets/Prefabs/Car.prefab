@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6299204119740292979}
   - component: {fileID: 3943864980724063606}
   - component: {fileID: 9216936160080338323}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Tire_BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,11 +122,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1682309855001488819}
   - component: {fileID: 5644218411385635002}
-  - component: {fileID: 7263553418314289965}
   - component: {fileID: 639925063970013624}
   - component: {fileID: 2233208743250253248}
-  - component: {fileID: 2731819079269981835}
-  m_Layer: 0
+  - component: {fileID: 8523679854449922528}
+  m_Layer: 4
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +146,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5003993086272213275}
+  - {fileID: 4585214985279756729}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5644218411385635002
@@ -161,65 +161,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1001791005
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3967895034
+  InScenePlacedSourceGlobalObjectIdHash: 1001791005
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &7263553418314289965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664890472010085759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkTransform
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkTransformExpanded: 0
-  AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
-  ScaleInterpolationType: 0
-  PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.1
-  RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
-  ScaleLerpSmoothing: 1
-  ScaleMaxInterpolationTime: 0.1
-  AuthorityMode: 1
-  TickSyncChildren: 0
-  UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
-  SlerpPosition: 0
 --- !u!114 &639925063970013624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarFormMovement
   ShowTopMostFoldoutHeaderGroup: 1
-  carFormSpeed: 8
+  _carFormRigidBody: {fileID: 0}
+  carFormSpeed: 9
   carFormTurnSpeed: 100
-  rotateInterpolate: 10
 --- !u!114 &2233208743250253248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,33 +203,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrushObstacle
   CrushPower: 100
---- !u!54 &2731819079269981835
-Rigidbody:
+--- !u!114 &8523679854449922528
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664890472010085759}
-  serializedVersion: 5
-  m_Mass: 500
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e5c722ac0c70b4cb832879241390d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarCameraLook
+  _cameraSpeed: 0.2
+  _carPivot: {fileID: 4585214985279756729}
 --- !u!1 &2112985861135497130
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +229,7 @@ GameObject:
   - component: {fileID: 1600658669224284639}
   - component: {fileID: 8246222368662481937}
   - component: {fileID: 7845474421426770049}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: CarBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +346,7 @@ GameObject:
   - component: {fileID: 7129213143629746723}
   - component: {fileID: 3979697457849270911}
   - component: {fileID: 5395213751717391584}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Tire_BL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +458,7 @@ GameObject:
   - component: {fileID: 2670149813141018126}
   - component: {fileID: 7882274719488141481}
   - component: {fileID: 3657008151775499577}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Tire_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,6 +558,81 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &3522182079497975978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300762204976154556}
+  - component: {fileID: 6264446723389179653}
+  m_Layer: 4
+  m_Name: CinemachineCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1300762204976154556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522182079497975978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.14780942, y: -0, z: -0, w: 0.9890159}
+  m_LocalPosition: {x: 0, y: 2.5, z: -3.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4585214985279756729}
+  m_LocalEulerAnglesHint: {x: 17, y: 0, z: 0}
+--- !u!114 &6264446723389179653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522182079497975978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &5097606091970585271
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +645,7 @@ GameObject:
   - component: {fileID: 86483207208114447}
   - component: {fileID: 8039213166331298029}
   - component: {fileID: 7492384575700292738}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: FrontWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,6 +745,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7525799472090141039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4585214985279756729}
+  m_Layer: 4
+  m_Name: CameraPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4585214985279756729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7525799472090141039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1300762204976154556}
+  m_Father: {fileID: 1682309855001488819}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8626088823088630661
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +789,7 @@ GameObject:
   - component: {fileID: 2226794570612879335}
   - component: {fileID: 2999277965700954329}
   - component: {fileID: 7443492294651398868}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Tire_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

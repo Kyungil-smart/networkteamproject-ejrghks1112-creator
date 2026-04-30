@@ -208,6 +208,15 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerInteractionCancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc294003-4509-4abb-917d-4a7c3fe99dbe"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1.5)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -397,6 +406,17 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PlayerEnter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5de77da-6494-4355-8105-f834f6ff32c2"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerInteractionCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -446,6 +466,7 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         m_Player_PlayerInteraction = m_Player.FindAction("PlayerInteraction", throwIfNotFound: true);
         m_Player_PlayerESC = m_Player.FindAction("PlayerESC", throwIfNotFound: true);
         m_Player_PlayerEnter = m_Player.FindAction("PlayerEnter", throwIfNotFound: true);
+        m_Player_PlayerInteractionCancel = m_Player.FindAction("PlayerInteractionCancel", throwIfNotFound: true);
     }
 
     ~@NPTeamInputActions()
@@ -539,6 +560,7 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PlayerInteraction;
     private readonly InputAction m_Player_PlayerESC;
     private readonly InputAction m_Player_PlayerEnter;
+    private readonly InputAction m_Player_PlayerInteractionCancel;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -602,6 +624,10 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/PlayerEnter".
         /// </summary>
         public InputAction @PlayerEnter => m_Wrapper.m_Player_PlayerEnter;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PlayerInteractionCancel".
+        /// </summary>
+        public InputAction @PlayerInteractionCancel => m_Wrapper.m_Player_PlayerInteractionCancel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -667,6 +693,9 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
             @PlayerEnter.started += instance.OnPlayerEnter;
             @PlayerEnter.performed += instance.OnPlayerEnter;
             @PlayerEnter.canceled += instance.OnPlayerEnter;
+            @PlayerInteractionCancel.started += instance.OnPlayerInteractionCancel;
+            @PlayerInteractionCancel.performed += instance.OnPlayerInteractionCancel;
+            @PlayerInteractionCancel.canceled += instance.OnPlayerInteractionCancel;
         }
 
         /// <summary>
@@ -717,6 +746,9 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
             @PlayerEnter.started -= instance.OnPlayerEnter;
             @PlayerEnter.performed -= instance.OnPlayerEnter;
             @PlayerEnter.canceled -= instance.OnPlayerEnter;
+            @PlayerInteractionCancel.started -= instance.OnPlayerInteractionCancel;
+            @PlayerInteractionCancel.performed -= instance.OnPlayerInteractionCancel;
+            @PlayerInteractionCancel.canceled -= instance.OnPlayerInteractionCancel;
         }
 
         /// <summary>
@@ -874,5 +906,12 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPlayerEnter(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PlayerInteractionCancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlayerInteractionCancel(InputAction.CallbackContext context);
     }
 }

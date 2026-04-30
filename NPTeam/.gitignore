@@ -102,6 +102,8 @@ InitTestScene*.unity*
 
 # Ignore imported assets
 Assets/Imports/**
-Assets/PrivateAssets/**
+
+Assets/PrivateAssets/
+Assets/PrivateAssets.meta
 
 UMotionData/

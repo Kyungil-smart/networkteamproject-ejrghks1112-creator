@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4999722205553183540}
   - component: {fileID: 8757895028474456044}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,16 +84,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4700365608077339858}
-  - component: {fileID: 6530651090230941225}
   - component: {fileID: 5221148021317211286}
   - component: {fileID: 4389730102333417263}
-  m_Layer: 0
+  - component: {fileID: 5487994405948797901}
+  m_Layer: 4
   m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4700365608077339858
 Transform:
   m_ObjectHideFlags: 0
@@ -111,33 +111,6 @@ Transform:
   - {fileID: 5605629391453565481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &6530651090230941225
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4980449553488956649}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!114 &5221148021317211286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,15 +137,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195e92b2b3c76ef4ba0df87dc85d256f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobotFormMovement
-  _playerSpeed: 5
+  _playerSpeed: 7
   _jumpPower: 10
   _robotPivot: {fileID: 1871229821606095061}
   _robotLegPivot: {fileID: 5605629391453565481}
   _legFollowSpeed: 5
+  _rigidbody: {fileID: 0}
   _jumpCheckLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 17
   _jumpRayPivot: {fileID: 8918733831979812496}
+--- !u!114 &5487994405948797901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4980449553488956649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 3093192261
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &5803778702791277401
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +184,7 @@ GameObject:
   - component: {fileID: 4629644242808857733}
   - component: {fileID: 6291713494190016105}
   - component: {fileID: 4025236452788629640}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +298,7 @@ GameObject:
   - component: {fileID: 3490072945480678727}
   - component: {fileID: 6871653984578691164}
   - component: {fileID: 8918733831979812496}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +410,7 @@ GameObject:
   - component: {fileID: 3532044467608337038}
   - component: {fileID: 6261814495038067499}
   - component: {fileID: 4722278552468347943}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
