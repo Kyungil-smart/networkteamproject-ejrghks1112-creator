@@ -83,6 +83,7 @@ public class Monster : NetworkBehaviour, IDamagable
         {
             Vector3 direction = (_targetPlayer.position - transform.position).normalized;
             direction += Vector3.up * 0.5f;
+            Debug.Log("플레이어 공격");
             // player.KnockbackClientRpc(direction * knockbackPower);
         }
     }
@@ -107,10 +108,12 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         float checkDistance = float.MaxValue;
         Transform checkPlayer = null;
+        GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         
-        foreach (var players in NetworkManager.Singleton.ConnectedClientsList)
+        foreach (var player in Players)
         {
-            var player = players.PlayerObject;
+            if (player == null) continue;
+            
             if (player != null)
             {
                 float distance = Vector3.Distance(transform.position, player.transform.position);
@@ -153,6 +156,15 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         _navmeshAgent.speed = chaseSpeed;
         _navmeshAgent.SetDestination(_targetPlayer.position);
+        
+        Vector3 direction = (_targetPlayer.position - transform.position).normalized;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * chaseSpeed);
+        }
     }
 
     private void OnDrawGizmos()

@@ -727,6 +727,26 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -6.5000005, y: 0, z: 6.5000005}
   m_TimeToStationary: 0.5
+--- !u!4 &445872382 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3559696023022866763, guid: a9754dc20d6555842992797a00094ce1, type: 3}
+  m_PrefabInstance: {fileID: 7309187883470669525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &445872383 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6180321795315310263, guid: a9754dc20d6555842992797a00094ce1, type: 3}
+  m_PrefabInstance: {fileID: 7309187883470669525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &445872384 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3863464513599320082, guid: a9754dc20d6555842992797a00094ce1, type: 3}
+  m_PrefabInstance: {fileID: 7309187883470669525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &445872385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 828725049456531498, guid: a9754dc20d6555842992797a00094ce1, type: 3}
+  m_PrefabInstance: {fileID: 7309187883470669525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!208 &459626737
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -2440,6 +2460,22 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3890122714
       objectReference: {fileID: 0}
+    - target: {fileID: 1705671459318725754, guid: ccdb7f67a87a0ac488d6edc8919191a9, type: 3}
+      propertyPath: 'patrolPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 445872385}
+    - target: {fileID: 1705671459318725754, guid: ccdb7f67a87a0ac488d6edc8919191a9, type: 3}
+      propertyPath: 'patrolPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 445872384}
+    - target: {fileID: 1705671459318725754, guid: ccdb7f67a87a0ac488d6edc8919191a9, type: 3}
+      propertyPath: 'patrolPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 445872383}
+    - target: {fileID: 1705671459318725754, guid: ccdb7f67a87a0ac488d6edc8919191a9, type: 3}
+      propertyPath: 'patrolPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 445872382}
     - target: {fileID: 2035411846907976361, guid: ccdb7f67a87a0ac488d6edc8919191a9, type: 3}
       propertyPath: m_Name
       value: Monster
