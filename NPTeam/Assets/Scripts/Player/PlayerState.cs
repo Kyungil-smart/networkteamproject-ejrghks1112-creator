@@ -12,6 +12,9 @@ public class PlayerState : NetworkBehaviour
     // 드론 빙의 여부
     public bool IsPossession { get; set; }
 
+    // 플레이어 색상 백업
+    public Color _playerColor;
+
     private void Awake() => Init();
 
     #region 초기화

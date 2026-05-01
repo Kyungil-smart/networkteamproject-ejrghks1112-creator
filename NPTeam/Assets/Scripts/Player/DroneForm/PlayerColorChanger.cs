@@ -10,6 +10,8 @@ public class PlayerColorChanger : NetworkBehaviour
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server);
 
+    public Color CurrentColor => _playerColor.Value;
+
     private Renderer[] _renderers;
     // 머티리얼을 복사하지 않고, 렌더러별로 값만 덮어쓰는 객체
     private MaterialPropertyBlock _mpb;
@@ -37,9 +39,9 @@ public class PlayerColorChanger : NetworkBehaviour
         ApplyColor();
     }
 
-    private void OnColorChanged(Color oldColor, Color newColor)
+    public override void OnNetworkDespawn()
     {
-        ApplyColor();
+        _playerColor.OnValueChanged -= OnColorChanged;
     }
 
     #region 초기화
@@ -50,7 +52,14 @@ public class PlayerColorChanger : NetworkBehaviour
     }
     #endregion
 
+    // 이벤트 콜백
+    private void OnColorChanged(Color oldColor, Color newColor)
+    {
+        ApplyColor();
+    }
+
     #region 플레이어 색상 변경
+
     // 렌더러 색을 MPB로 덮어쓰는 함수
     public void ApplyColor()
     {

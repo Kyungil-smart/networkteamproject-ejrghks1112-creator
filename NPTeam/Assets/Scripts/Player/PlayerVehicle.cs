@@ -17,6 +17,10 @@ public class PlayerVehicle : NetworkBehaviour
         set => _currentFormIndex = value;
     }
 
+    private MaterialPropertyBlock _mpb;
+    private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
+    private static readonly int ColorID = Shader.PropertyToID("_Color");
+
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
     [SerializeField] private CinemachineCamera _robotCamera;
@@ -26,6 +30,13 @@ public class PlayerVehicle : NetworkBehaviour
 
     // 조작키
     private NPTeamInputActions _playerInput;
+
+    // 폼 체인지시 컬러
+    private NetworkVariable<Color> _playerColor =
+    new NetworkVariable<Color>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
 
     private void Awake() => Init();
 
@@ -54,6 +65,7 @@ public class PlayerVehicle : NetworkBehaviour
     {
         _playerInput = new NPTeamInputActions();
         _rigidbody = GetComponent<Rigidbody>();
+        _mpb = new MaterialPropertyBlock();
     }
     #endregion
 
@@ -105,6 +117,8 @@ public class PlayerVehicle : NetworkBehaviour
 
         _rigidbody.useGravity = (index != 2);
 
+        ApplyCurrentFormColor();
+
         SetCamera(index);
     }
     #endregion
@@ -148,6 +162,38 @@ public class PlayerVehicle : NetworkBehaviour
         {
             _rigidbody.AddForce(force, ForceMode.Impulse);
         }
+    }
+    #endregion
+
+    #region 폼 체인지 색상 변환
+    private void ApplyCurrentFormColor()
+    {
+        GameObject obj = GetCurrentFormObject(_currentFormIndex);
+        if (obj == null) return;
+
+        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            if (renderer.sharedMaterial == null) continue;
+
+            int id = renderer.sharedMaterial.HasProperty(BaseColorID) ? BaseColorID : ColorID;
+
+            renderer.GetPropertyBlock(_mpb);
+            _mpb.SetColor(id, _playerColor.Value);
+            renderer.SetPropertyBlock(_mpb);
+        }
+    }
+    // 색상 얻어오기
+    public void SetCachedColor(Color color)
+    {
+        SetCachedColorServerRpc(color);
+    }
+    // 색상 얻어오기 네트워크
+    [ServerRpc]
+    private void SetCachedColorServerRpc(Color color)
+    {
+        _playerColor.Value = color;
     }
     #endregion
 }

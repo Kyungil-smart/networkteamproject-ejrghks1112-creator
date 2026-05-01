@@ -66,20 +66,20 @@ public class DroneController : NetworkBehaviour
             _cinemachineCamera.gameObject.SetActive(false);
             return;
         }
-       
-            _playerInput.Enable();
 
-            // 이동 구독
-            _playerInput.Player.PlayerMove.performed += DroneOnMove;
-            _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
-            // 상승 구독
-            _playerInput.Player.PlayerAscend.started += DroneOnAscend;
-            _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
-            // 하강 구독
-            _playerInput.Player.PlayerDescend.started += DroneOnDescend;
-            _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
-            // 빙의 구독
-            _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
+        _playerInput.Enable();
+
+        // 이동 구독
+        _playerInput.Player.PlayerMove.performed += DroneOnMove;
+        _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
+        // 상승 구독
+        _playerInput.Player.PlayerAscend.started += DroneOnAscend;
+        _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
+        // 하강 구독
+        _playerInput.Player.PlayerDescend.started += DroneOnDescend;
+        _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
+        // 빙의 구독
+        _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
     }
 
     private void Update()
@@ -98,8 +98,6 @@ public class DroneController : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        if (!IsOwner) return;
-
         // 이동 구독 취소
         _playerInput.Player.PlayerMove.performed -= DroneOnMove;
         _playerInput.Player.PlayerMove.canceled -= DroneMoveCancle;
@@ -175,7 +173,7 @@ public class DroneController : NetworkBehaviour
     }
     public void DroneOnDescend(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession) return;
+        if (PlayerState.Instance.IsPossession == true) return;
         _descend = ctx.ReadValue<float>();
         UpdateVertical();
     }
@@ -226,6 +224,11 @@ public class DroneController : NetworkBehaviour
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.isKinematic = true;
 
+            // 대상의 네트워크 오브젝트 저장
+            NetworkObject networkObject = hit.transform.GetComponent<NetworkObject>();
+            if (networkObject == null) return;
+
+
             // 현재 빙의 대상 저장
             PlayerState.Instance.CurrentPossessed = hit.transform.gameObject;
 
@@ -242,14 +245,11 @@ public class DroneController : NetworkBehaviour
 
             Vector3 targetPos = new Vector3(hit.transform.position.x, maxY + 4f, hit.transform.position.z);
 
-            // 타겟 위로 위치 이동
-            transform.position = targetPos;
             // 자식 오브젝트로 들어감
-            GetComponent<NetworkObject>().TrySetParent(hit.transform.GetComponent<NetworkObject>(),true);
-            transform.localRotation = Quaternion.identity;
+            SetParentServerRpc(networkObject.NetworkObjectId, targetPos);
 
             // 가져온 Renderer들에 플레이어 색 적용
-            _playerColorChanger.ApplyPossessColor(_currentPossessionRenderers);
+            SetPossessionColorServerRpc(networkObject.NetworkObjectId);
 
             PlayerState.Instance.IsPossession = true;
 
@@ -257,6 +257,7 @@ public class DroneController : NetworkBehaviour
             if (vehicle != null)
             {
                 vehicle.OnPossessedCameraSync();
+                vehicle.SetCachedColor(_playerColorChanger.CurrentColor);
             }
 
             // 카메라 우선순위 조작
@@ -270,17 +271,75 @@ public class DroneController : NetworkBehaviour
     {
         PlayerState.Instance.IsPossession = false;
 
+        NetworkObject networkObject = PlayerState.Instance.CurrentPossessed.GetComponent<NetworkObject>();
+
         // 빙의 취소후 원래 색상으로 복귀
         _playerColorChanger.Release(_currentPossessionRenderers);
         // 플레이어 색상 복구
         _currentPossessionRenderers = null;
         _playerColorChanger.ApplyColor();
-
-        GetComponent<NetworkObject>().TryRemoveParent(true);
+        ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
+        ReleaseParentServerRpc();
         PlayerState.Instance.CurrentPossessed = null;
         _rigidbody.isKinematic = false;
 
         _cinemachineCamera.Priority = 3;
+    }
+    #endregion
+
+    #region 빙의시 색상 변경 네트워크 처리
+    [ServerRpc]
+    private void SetPossessionColorServerRpc(ulong targetNetId)
+    {
+        SetPossessionColorClientRpc(targetNetId);
+    }
+
+    [ClientRpc]
+    private void SetPossessionColorClientRpc(ulong targetNetId)
+    {
+        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject networkObject))
+            return;
+
+        Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
+        _playerColorChanger.ApplyPossessColor(renderers);
+    }
+
+    [ServerRpc]
+    private void ReleasePossessionColorServerRpc(ulong targetNetId)
+    {
+        ReleasePossessionColorClientRpc(targetNetId);
+    }
+
+    [ClientRpc]
+    private void ReleasePossessionColorClientRpc(ulong targetNetId)
+    {
+        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject networkObject))
+            return;
+
+        Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
+        _playerColorChanger.Release(renderers);
+    }
+    #endregion
+
+    #region 빙의시 자식오브젝트로 들어가는 네트워크 처리
+    [ServerRpc]
+    private void SetParentServerRpc(ulong targetNetId, Vector3 targetPos)
+    {
+        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject target)) return;
+
+        NetworkObject networkObject = GetComponent<NetworkObject>();
+
+        // 위치 조정
+        transform.position = targetPos;
+        transform.localRotation = Quaternion.identity;
+
+        networkObject.TrySetParent(target, true);
+    }
+
+    [ServerRpc]
+    private void ReleaseParentServerRpc()
+    {
+        GetComponent<NetworkObject>().TryRemoveParent(true);
     }
     #endregion
 }
