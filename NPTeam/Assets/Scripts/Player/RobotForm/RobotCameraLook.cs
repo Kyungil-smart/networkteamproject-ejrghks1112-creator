@@ -18,6 +18,9 @@ public class RobotCameraLook : NetworkBehaviour
     // 로봇 시야 조작키
     private InputAction _playerCameraAction;
 
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -51,7 +54,7 @@ public class RobotCameraLook : NetworkBehaviour
     #region 카메라 시점 이동 조작
     public void RobotOnCameraMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 

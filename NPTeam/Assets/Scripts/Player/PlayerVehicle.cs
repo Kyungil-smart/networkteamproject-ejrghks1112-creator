@@ -106,8 +106,6 @@ public class PlayerVehicle : NetworkBehaviour
         _rigidbody.useGravity = (index != 2);
 
         SetCamera(index);
-
-        PlayerState.Instance.CurrentFrom = GetCurrentFormObject(index);
     }
     #endregion
 

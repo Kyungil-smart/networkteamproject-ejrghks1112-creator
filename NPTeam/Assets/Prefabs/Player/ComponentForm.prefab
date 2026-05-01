@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8167111874173943946}
   m_Layer: 4
   m_Name: ComponentForm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3892769525
+  GlobalObjectIdHash: 658051396
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 1
@@ -152,6 +152,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _moveSpeed: 10
   _flySpeed: 10
+  _playerVehicle: {fileID: 0}
   _rigidbody: {fileID: 0}
 --- !u!114 &5598839670629456365
 MonoBehaviour:
@@ -165,8 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fad74f666ef2c4693e2f2b9472a29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComponentCameraLook
+  ShowTopMostFoldoutHeaderGroup: 1
   _cameraSpeed: 0.2
   _componentPivot: {fileID: 5766429628836825886}
+  _playerVehicle: {fileID: 0}
 --- !u!65 &8167111874173943946
 BoxCollider:
   m_ObjectHideFlags: 0

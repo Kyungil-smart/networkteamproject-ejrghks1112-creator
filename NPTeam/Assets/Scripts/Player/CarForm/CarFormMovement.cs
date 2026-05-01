@@ -13,13 +13,16 @@ public class CarFormMovement : NetworkBehaviour
     [SerializeField] private float carFormTurnSpeed = 5.0f;
     // [SerializeField] private float rotateInterpolate = 5.0f; // 회전 속도
     private bool _isMove; // 전진 중인지, 후진 중인지
-    
+
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
+
     //public override void OnNetworkSpawn()
     //{
     //    if (!IsOwner) return;
     //    // 소유자 전용 입력 바인딩 등 초기화
     //}
-    
+
     void Awake()
     {
         _carFormInput = new NPTeamInputActions();
@@ -47,7 +50,7 @@ public class CarFormMovement : NetworkBehaviour
 
     void CarForntAndBackMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector2 input = ctx.ReadValue<Vector2>();
 
         MoveServerRpc(input);

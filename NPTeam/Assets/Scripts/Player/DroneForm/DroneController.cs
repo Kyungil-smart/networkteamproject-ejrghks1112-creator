@@ -218,13 +218,13 @@ public class DroneController : NetworkBehaviour
     {
         if (Physics.Raycast(_possessionRay, out RaycastHit hit, _possessionDistance, _targetLayer))
         {
-            // 입력값 초기화
-            _moveInput = Vector2.zero;
-            _verticalInput = 0f;
-            // 이동 정지
-            _rigidbody.linearVelocity = Vector3.zero;
-            _rigidbody.angularVelocity = Vector3.zero;
-            _rigidbody.isKinematic = true;
+            //// 입력값 초기화
+            //_moveInput = Vector2.zero;
+            //_verticalInput = 0f;
+            //// 이동 정지
+            //_rigidbody.linearVelocity = Vector3.zero;
+            //_rigidbody.angularVelocity = Vector3.zero;
+            ////_rigidbody.isKinematic = true;
 
             // 현재 빙의 대상 저장
             PlayerState.Instance.CurrentPossessed = hit.transform.gameObject;
@@ -240,13 +240,13 @@ public class DroneController : NetworkBehaviour
                     maxY = renderer.bounds.max.y;
             }
 
-            Vector3 targetPos = new Vector3(hit.transform.position.x, maxY + 4f, hit.transform.position.z);
+            //Vector3 targetPos = new Vector3(hit.transform.position.x, maxY + 4f, hit.transform.position.z);
 
-            // 타겟 위로 위치 이동
-            transform.position = targetPos;
-            // 자식 오브젝트로 들어감
-            //transform.SetParent(hit.transform, true);
-            transform.localRotation = Quaternion.identity;
+            //// 타겟 위로 위치 이동
+            //transform.position = targetPos;
+            //// 자식 오브젝트로 들어감
+            ////transform.SetParent(hit.transform, true);
+            //transform.localRotation = Quaternion.identity;
 
             // 가져온 Renderer들에 플레이어 색 적용
             _playerColorChanger.ApplyPossessColor(_currentPossessionRenderers);
@@ -257,8 +257,6 @@ public class DroneController : NetworkBehaviour
             if (vehicle != null)
             {
                 vehicle.OnPossessedCameraSync();
-
-                PlayerState.Instance.CurrentFrom = vehicle.GetCurrentFormObject(vehicle.CurrentFormIndex);
             }
 
             // 카메라 우선순위 조작
@@ -280,8 +278,7 @@ public class DroneController : NetworkBehaviour
 
         //transform.SetParent(null, true);
         PlayerState.Instance.CurrentPossessed = null;
-        PlayerState.Instance.CurrentFrom = null;
-        _rigidbody.isKinematic = false;
+        //_rigidbody.isKinematic = false;
 
         _cinemachineCamera.Priority = 3;
     }

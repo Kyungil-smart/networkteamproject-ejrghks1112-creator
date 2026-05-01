@@ -10,6 +10,8 @@ public class ComponentFormMovement : NetworkBehaviour
     [SerializeField] private float _flySpeed;
     
     private NPTeamInputActions _input;
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
     [Header("부모의 Rigidbody 등록")]
     [SerializeField] private Rigidbody _rigidbody;
     private Vector3 _move;
@@ -64,7 +66,7 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _move = ctx.ReadValue<Vector2>();
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
@@ -74,7 +76,7 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnDescend(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _flyDown = ctx.ReadValue<float>();
     }
     private void OnDescendCancel(InputAction.CallbackContext ctx)
@@ -85,7 +87,7 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnAscend(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _flyUp = ctx.ReadValue<float>();
     }
     private void OnAscendCancel(InputAction.CallbackContext ctx)

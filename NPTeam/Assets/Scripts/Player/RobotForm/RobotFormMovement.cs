@@ -16,6 +16,8 @@ public class RobotFormMovement : NetworkBehaviour
     [Header("상체를 따라 하체 회전 속도")]
     [SerializeField] private float _legFollowSpeed;
 
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
     [Header("부모의 Rigidbody 등록")]
     [SerializeField] private Rigidbody _rigidbody;
     // 로봇 이동 조작키 입력값 저장
@@ -93,7 +95,7 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 이동
     public void RobotOnMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
@@ -124,7 +126,7 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || !IsGrounded() || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (!ctx.started || !IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
 
         _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
     }
