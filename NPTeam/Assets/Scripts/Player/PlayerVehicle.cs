@@ -93,7 +93,7 @@ public class PlayerVehicle : NetworkBehaviour
 
         SetForm(2);
     }
-    private void SetForm(int index)
+    public void SetForm(int index)
     {
         ChangeFormServerRpc(index);
     }
@@ -113,7 +113,6 @@ public class PlayerVehicle : NetworkBehaviour
 
     private void ApplyForm(int index)
     {
-        if (_currentFormIndex == index) return;
         _currentFormIndex = index;
 
         _carForm.SetActive(index == 0);
@@ -189,16 +188,25 @@ public class PlayerVehicle : NetworkBehaviour
             renderer.SetPropertyBlock(_mpb);
         }
     }
-    // 색상 얻어오기
-    public void SetCachedColor(Color color)
+
+    // 색상 + 폼 동시 적용 (순서 보장)
+    public void SetColorAndForm(Color color, int formIndex)
     {
-        SetCachedColorServerRpc(color);
+        SetColorAndFormServerRpc(color, formIndex);
     }
-    // 색상 얻어오기 네트워크
-    [ServerRpc]
-    private void SetCachedColorServerRpc(Color color)
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetColorAndFormServerRpc(Color color, int formIndex)
     {
         _playerColor.Value = color;
+        ApplyForm(formIndex);
+        SetColorAndFormClientRpc(color, formIndex);
+    }
+
+    [ClientRpc]
+    private void SetColorAndFormClientRpc(Color color, int formIndex)
+    {
+        ApplyForm(formIndex);
     }
     #endregion
 }

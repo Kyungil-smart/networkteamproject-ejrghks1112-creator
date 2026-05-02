@@ -253,15 +253,16 @@ public class DroneController : NetworkBehaviour
 
             PlayerState.Instance.IsPossession = true;
 
+            // 카메라 우선순위 조작
+            _cinemachineCamera.Priority = 0;
+            
             PlayerVehicle vehicle = hit.transform.GetComponent<PlayerVehicle>();
             if (vehicle != null)
             {
                 vehicle.OnPossessedCameraSync();
-                vehicle.SetCachedColor(_playerColorChanger.CurrentColor);
+                vehicle.SetColorAndForm(_playerColorChanger.CurrentColor, vehicle.CurrentFormIndex);
+                vehicle.SetForm(vehicle.CurrentFormIndex);
             }
-
-            // 카메라 우선순위 조작
-            _cinemachineCamera.Priority = 0;
         }
     }
     #endregion
