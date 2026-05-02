@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
-public class RobotFormMovement : NetworkBehaviour
+public class RobotFormMovement : NetworkBehaviour, IStunable
 {
     [Header("이동 속도")]
     [SerializeField] private float _playerSpeed;
@@ -33,6 +34,9 @@ public class RobotFormMovement : NetworkBehaviour
     // 점프를 위한 레이캐스트 사거리
     private float _jumpRayDistance = 0.2f;
 
+    // 스턴 판정
+    private bool _isStunned;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -48,11 +52,13 @@ public class RobotFormMovement : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (_isStunned) return;
         FollowLeg();
     }
 
     private void FixedUpdate()
     {
+        if (_isStunned) return;
         RobotMove();
     }
 
@@ -173,6 +179,20 @@ public class RobotFormMovement : NetworkBehaviour
 
         // 목표로 천천히 회전
         _robotLegPivot.rotation = Quaternion.Slerp(_robotLegPivot.rotation, targetRotation, _legFollowSpeed * Time.deltaTime);
+    }
+    #endregion
+
+    #region 스턴 함수
+    public void SetStun(float time)
+    {
+        StartCoroutine(StunRoutine(time));
+    }
+
+    private IEnumerator StunRoutine(float time)
+    {
+        _isStunned = true;
+        yield return new WaitForSeconds(time);
+        _isStunned = false;
     }
     #endregion
 }

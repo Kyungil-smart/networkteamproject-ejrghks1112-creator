@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
-public class ComponentFormMovement : NetworkBehaviour
+public class ComponentFormMovement : NetworkBehaviour, IStunable
 {
     [Header("이동 속도")]
     [SerializeField] private float _moveSpeed;
@@ -17,6 +18,9 @@ public class ComponentFormMovement : NetworkBehaviour
     private Vector3 _move;
     private float _flyUp;
     private float _flyDown;
+
+    // 스턴 판정
+    private bool _isStunned;
 
     private void Awake() => Init();
 
@@ -61,6 +65,7 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (_isStunned) return;
         Move();
     }
 
@@ -113,4 +118,18 @@ public class ComponentFormMovement : NetworkBehaviour
     {
         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
     }
+
+    #region 스턴 함수
+    public void SetStun(float time)
+    {
+        StartCoroutine(StunRoutine(time));
+    }
+
+    private IEnumerator StunRoutine(float time)
+    {
+        _isStunned = true;
+        yield return new WaitForSeconds(time);
+        _isStunned = false;
+    }
+    #endregion
 }
