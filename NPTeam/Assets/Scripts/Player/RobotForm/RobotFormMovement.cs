@@ -31,7 +31,7 @@ public class RobotFormMovement : NetworkBehaviour
     [Header("점프를 위한 레이캐스트 피봇(콜라이더)")]
     [SerializeField] private Collider _jumpRayPivot;
     // 점프를 위한 레이캐스트 사거리
-    private float _jumpRayDistance = 0.15f;
+    private float _jumpRayDistance = 0.2f;
 
     private void Awake() => Init();
 
@@ -115,16 +115,16 @@ public class RobotFormMovement : NetworkBehaviour
         right.y = 0f;
 
         Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
-        Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.x = move.x;
-        velocity.z = move.z;
-
-        RobotMoveServerRpc(velocity);
+        
+        RobotMoveServerRpc(move.x, move.z);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void RobotMoveServerRpc(Vector3 velocity)
+    private void RobotMoveServerRpc(float x, float z)
     {
+        Vector3 velocity = _rigidbody.linearVelocity;
+        velocity.x = x;
+        velocity.z = z;
         _rigidbody.linearVelocity = velocity;
     }
     #endregion
@@ -136,12 +136,14 @@ public class RobotFormMovement : NetworkBehaviour
         if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
 
         Vector3 jumpVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
-        RobotJumpServerRpc(jumpVelocity);
+        RobotJumpServerRpc(_jumpPower);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void RobotJumpServerRpc(Vector3 velocity)
+    private void RobotJumpServerRpc(float jumpPower)
     {
+        Vector3 velocity = _rigidbody.linearVelocity;
+        velocity.y = jumpPower;
         _rigidbody.linearVelocity = velocity;
     }
     // 바닥인지 판별
