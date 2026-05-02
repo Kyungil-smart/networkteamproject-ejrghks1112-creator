@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6299204119740292979}
   - component: {fileID: 3943864980724063606}
   - component: {fileID: 9216936160080338323}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Tire_BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 2233208743250253248}
   - component: {fileID: 8523679854449922528}
   - component: {fileID: 1854654448606354842}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Car
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 1600658669224284639}
   - component: {fileID: 8246222368662481937}
   - component: {fileID: 7845474421426770049}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: CarBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112985861135497130}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 59d7f09b5bf6cb248ae6473a0c8903ee, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 7129213143629746723}
   - component: {fileID: 3979697457849270911}
   - component: {fileID: 5395213751717391584}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Tire_BL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 2670149813141018126}
   - component: {fileID: 7882274719488141481}
   - component: {fileID: 3657008151775499577}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Tire_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1300762204976154556}
   - component: {fileID: 6264446723389179653}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 86483207208114447}
   - component: {fileID: 8039213166331298029}
   - component: {fileID: 7492384575700292738}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: FrontWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -804,7 +804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4585214985279756729}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: CameraPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 2226794570612879335}
   - component: {fileID: 2999277965700954329}
   - component: {fileID: 7443492294651398868}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Tire_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 743696561927525670}
   - component: {fileID: 6065807456793869565}
   - component: {fileID: 9085945142113781212}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: PlayerVehicle
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -181,6 +181,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
+    - target: {fileID: 4025236452788629640, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
       value: 
@@ -233,18 +237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot
       objectReference: {fileID: 0}
-    - target: {fileID: 4980449553488956649, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5221148021317211286, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
-    - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: Ownership
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3093192261
@@ -284,24 +280,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
-      propertyPath: Ownership
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2119100855897093736, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
-      propertyPath: AllowOwnerToParent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2119100855897093736, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 658051396
       objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: m_Name
       value: ComponentForm
-      objectReference: {fileID: 0}
-    - target: {fileID: 3762503520255719836, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5598839670629456365, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: _playerVehicle

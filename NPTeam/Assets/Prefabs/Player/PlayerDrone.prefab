@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1052744009010035821}
   - component: {fileID: 2296022957615103542}
   - component: {fileID: 9110986449895352208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBlade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 3841093910944170916}
   - component: {fileID: 8027234651498776751}
   - component: {fileID: 7797861256625933374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBlade2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 2391923365474951513}
   - component: {fileID: 5784524292962937154}
   - component: {fileID: 8304373443690280241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,8 +352,7 @@ GameObject:
   - component: {fileID: 2170373601760561241}
   - component: {fileID: 4139895794714707164}
   - component: {fileID: 8495530041224638626}
-  - component: {fileID: 3681753867244521728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +384,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971913610480199745}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -449,7 +448,7 @@ MonoBehaviour:
   _possessionRayPivot: {fileID: 8799307660560936879}
   _targetLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 128
   _cinemachineCamera: {fileID: 3820322090921818748}
 --- !u!114 &9216172038396605342
 MonoBehaviour:
@@ -538,23 +537,6 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 1
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &3681753867244521728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971913610480199745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkRigidbody
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkRigidbodyBaseExpanded: 0
-  UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
-  AutoSetKinematicOnDespawn: 1
 --- !u!1 &2550690608123586003
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +549,7 @@ GameObject:
   - component: {fileID: 4261729084107362703}
   - component: {fileID: 1198248657376550026}
   - component: {fileID: 4151897620519770550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBlade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -679,7 +661,7 @@ GameObject:
   - component: {fileID: 1671717142191331946}
   - component: {fileID: 8234398410483712040}
   - component: {fileID: 999321408515091421}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LShaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +777,7 @@ GameObject:
   - component: {fileID: 7831431050608013665}
   - component: {fileID: 97342604687053018}
   - component: {fileID: 6304664404363064872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBlade2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +889,7 @@ GameObject:
   - component: {fileID: 2514539835038910626}
   - component: {fileID: 1492084939373386915}
   - component: {fileID: 6586187324835021036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RShaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1021,7 +1003,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6627420838499226448}
   - component: {fileID: 3820322090921818748}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1098,7 +1080,7 @@ GameObject:
   - component: {fileID: 2114216025662612038}
   - component: {fileID: 8057690161230645059}
   - component: {fileID: 4468104417182100511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DroneBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,7 +1169,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8407982068230389039}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 59d7f09b5bf6cb248ae6473a0c8903ee, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
