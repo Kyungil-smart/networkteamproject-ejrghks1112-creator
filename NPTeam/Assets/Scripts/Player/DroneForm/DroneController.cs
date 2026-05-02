@@ -323,7 +323,7 @@ public class DroneController : NetworkBehaviour
 
     #region 빙의시 자식오브젝트로 들어가는 네트워크 처리
     [ServerRpc]
-    private void SetParentServerRpc(ulong targetNetId, Vector3 targetPos, ServerRpcParams rpcParams = default)
+    private void SetParentServerRpc(ulong targetNetId, Vector3 targetPos)
     {
         if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject target)) return;
 
@@ -334,18 +334,12 @@ public class DroneController : NetworkBehaviour
         transform.localRotation = Quaternion.identity;
 
         networkObject.TrySetParent(target, true);
-
-        target.ChangeOwnership(rpcParams.Receive.SenderClientId);
     }
 
     [ServerRpc]
     private void ReleaseParentServerRpc()
     {
-        NetworkObject target = PlayerState.Instance.CurrentPossessed.GetComponent<NetworkObject>();
-
         GetComponent<NetworkObject>().TryRemoveParent(true);
-
-        target.ChangeOwnership(NetworkManager.ServerClientId);
     }
     #endregion
 }

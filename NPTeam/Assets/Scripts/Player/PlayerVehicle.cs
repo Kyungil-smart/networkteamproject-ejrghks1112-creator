@@ -50,6 +50,11 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode3.started += OnComponentChanged;
     }
 
+    private void Update()
+    {
+        if (_rigidbody.isKinematic == true) _rigidbody.isKinematic = false;
+    }
+
     private void OnDisable()
     {
         // 변신 구독 취소
