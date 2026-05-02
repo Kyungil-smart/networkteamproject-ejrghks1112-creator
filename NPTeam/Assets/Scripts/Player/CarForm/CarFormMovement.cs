@@ -64,6 +64,7 @@ public class CarFormMovement : NetworkBehaviour
 
     void CarMoveCancel(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         CancelServerRpc();
     }
     [Rpc(SendTo.Server)]

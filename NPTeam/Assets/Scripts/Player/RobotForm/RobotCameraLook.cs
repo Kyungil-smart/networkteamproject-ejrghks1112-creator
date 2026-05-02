@@ -60,6 +60,7 @@ public class RobotCameraLook : NetworkBehaviour
 
     public void RobotCameraMoveCancle(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = Vector2.zero;
     }
 

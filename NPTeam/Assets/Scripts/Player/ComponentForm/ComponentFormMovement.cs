@@ -71,6 +71,7 @@ public class ComponentFormMovement : NetworkBehaviour
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _move = Vector2.zero;
     }
 
@@ -81,6 +82,7 @@ public class ComponentFormMovement : NetworkBehaviour
     }
     private void OnDescendCancel(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _flyDown = 0f;
     }
 
@@ -92,6 +94,7 @@ public class ComponentFormMovement : NetworkBehaviour
     }
     private void OnAscendCancel(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _flyUp = 0f;
     }
 
