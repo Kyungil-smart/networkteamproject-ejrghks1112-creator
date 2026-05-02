@@ -44,7 +44,6 @@ public class RobotFormMovement : NetworkBehaviour
         _playerInput.Player.PlayerMove.canceled += RobotMoveCancle;
         // 점프 구독
         _playerInput.Player.PlayerAscend.started += RobotOnJump;
-        _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
     }
 
     private void LateUpdate()
@@ -64,8 +63,7 @@ public class RobotFormMovement : NetworkBehaviour
         _playerInput.Player.PlayerMove.canceled -= RobotMoveCancle;
         // 점프 구독 취소
         _playerInput.Player.PlayerAscend.started -= RobotOnJump;
-        _playerInput.Player.PlayerAscend.canceled -= RobotJumpCancle;
-        
+
         _playerInput.Disable();
     }
 
@@ -98,6 +96,7 @@ public class RobotFormMovement : NetworkBehaviour
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
+
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
     {
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
@@ -108,6 +107,7 @@ public class RobotFormMovement : NetworkBehaviour
     #region 이동 함수
     private void RobotMove()
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector3 forward = _robotPivot.forward;
         forward.y = 0f;
 
@@ -119,6 +119,12 @@ public class RobotFormMovement : NetworkBehaviour
         velocity.x = move.x;
         velocity.z = move.z;
 
+        RobotMoveServerRpc(velocity);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RobotMoveServerRpc(Vector3 velocity)
+    {
         _rigidbody.linearVelocity = velocity;
     }
     #endregion
@@ -127,16 +133,15 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || !IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
 
-        _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
+        Vector3 jumpVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
+        RobotJumpServerRpc(jumpVelocity);
     }
-    public void RobotJumpCancle(InputAction.CallbackContext ctx)
-    {
-        if (_rigidbody.linearVelocity.y <= 0f || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
 
-        Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.y *= 0.4f;
+    [ServerRpc(RequireOwnership = false)]
+    private void RobotJumpServerRpc(Vector3 velocity)
+    {
         _rigidbody.linearVelocity = velocity;
     }
     // 바닥인지 판별

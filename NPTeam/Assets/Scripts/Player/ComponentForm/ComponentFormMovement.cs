@@ -8,7 +8,7 @@ public class ComponentFormMovement : NetworkBehaviour
     [SerializeField] private float _moveSpeed;
     [Header("상승,하강 속도")]
     [SerializeField] private float _flySpeed;
-    
+
     private NPTeamInputActions _input;
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
@@ -36,7 +36,7 @@ public class ComponentFormMovement : NetworkBehaviour
     //     
     //     _input.Enable();
     // }
-    
+
     private void OnEnable()
     {
         _input.Enable();
@@ -100,12 +100,17 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void Move()
     {
-        Vector3 moveDir = transform.forward * _move.y + transform.right * _move.x; 
+        Vector3 moveDir = transform.forward * _move.y + transform.right * _move.x;
         float flyDir = _flyUp - _flyDown;
         Vector3 flyVelocity = transform.up * flyDir;
-        
         Vector3 componentMove = moveDir * _moveSpeed + flyVelocity * _flySpeed;
 
+        MoveServerRpc(componentMove);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void MoveServerRpc(Vector3 componentMove)
+    {
         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
     }
 }
