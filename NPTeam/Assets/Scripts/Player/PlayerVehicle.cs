@@ -209,4 +209,13 @@ public class PlayerVehicle : NetworkBehaviour
         ApplyForm(formIndex);
     }
     #endregion
+
+    #region 빙의 해제시 빙의 대상 카메라 우선도 전부 낮추는 코드
+    public void DisableCurrentCamera()
+    {
+        _carCamera.Priority = 1;
+        _robotCamera.Priority = 1;
+        _componentCamera.Priority = 1;
+    }
+    #endregion
 }

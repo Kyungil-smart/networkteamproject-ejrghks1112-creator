@@ -39,6 +39,8 @@ public class DroneController : NetworkBehaviour
     private PlayerColorChanger _playerColorChanger;
     // 빙의 대상의 렌더러를 저장
     private Renderer[] _currentPossessionRenderers;
+    // PlayerVehicle 백업
+    private PlayerVehicle _playerVehicle;
 
     private void Awake() => Init();
 
@@ -262,6 +264,7 @@ public class DroneController : NetworkBehaviour
                 vehicle.OnPossessedCameraSync();
                 vehicle.SetColorAndForm(_playerColorChanger.CurrentColor, vehicle.CurrentFormIndex);
                 vehicle.SetForm(vehicle.CurrentFormIndex);
+                _playerVehicle = vehicle;
             }
         }
     }
@@ -281,9 +284,10 @@ public class DroneController : NetworkBehaviour
         _playerColorChanger.ApplyColor();
         ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
         ReleaseParentServerRpc();
+        _playerVehicle.DisableCurrentCamera();
+        _playerVehicle = null;
         PlayerState.Instance.CurrentPossessed = null;
         _rigidbody.isKinematic = false;
-
         _cinemachineCamera.Priority = 3;
     }
     #endregion
