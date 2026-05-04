@@ -15,6 +15,7 @@ public class Monster : NetworkBehaviour, IDamagable
     private float _detectTime = 0f;
     private bool _isCooldown = false;
     public NetworkVariable<bool> spawnMonster;
+    private bool canSpawnMonster = true;
     
     [Header("몹 체력")]
     [SerializeField] private NetworkVariable<int> health;
@@ -56,7 +57,7 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         if (!IsServer) return;
 
-        MonsterPath[] paths = GetComponents<MonsterPath>();
+        MonsterPath[] paths = FindObjectsByType<MonsterPath>(FindObjectsSortMode.None);
 
         patrolPoints = new Transform[paths.Length];
         
@@ -81,7 +82,7 @@ public class Monster : NetworkBehaviour, IDamagable
         {
             _detectTime += Time.deltaTime;
 
-            if (_detectTime > 5f && !spawnMonster.Value)
+            if (_detectTime > 5f && !spawnMonster.Value && canSpawnMonster)
             {
                 SpawnMonster();
             }
@@ -108,10 +109,16 @@ public class Monster : NetworkBehaviour, IDamagable
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 spawnPos = transform.position + Random.insideUnitSphere * 2f;
+            Vector3 direction = (_targetPlayer.position - spawnPos).normalized;
+            direction.y = 0;
+            Quaternion spawnRot = Quaternion.LookRotation(direction);
         
-            GameObject monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
+            GameObject monster = Instantiate(monsterPrefab, spawnPos, spawnRot);
         
-            var networkObject = monster.GetComponent<NetworkObject>();
+            var plusMonster = monster.GetComponent<Monster>();
+            if (plusMonster != null) plusMonster.canSpawnMonster = false;
+            
+            var networkObject = plusMonster.GetComponent<NetworkObject>();
             if (networkObject != null) networkObject.Spawn();
         }
     }
@@ -143,15 +150,24 @@ public class Monster : NetworkBehaviour, IDamagable
         }
         
         KnockbackPlayer();
+        
+        CheckPlayerPos();
+        
         yield return new WaitForSeconds(knockbackCooltime);
         
         _navmeshAgent.isStopped = false;
+
+        if (_targetPlayer != null)
+        {
+            _navmeshAgent.SetDestination(_targetPlayer.position);
+        }
+        
         _isCooldown = false;
     }
 
     private void SetWayPoint()
     {
-        if (patrolPoints == null) return;
+        if (patrolPoints == null || patrolPoints.Length == 0) return;
         
         _randomWayPoint = Random.Range(0, patrolPoints.Length);
         _navmeshAgent.SetDestination(patrolPoints[_randomWayPoint].position);
@@ -211,7 +227,12 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         _navmeshAgent.speed = chaseSpeed;
         _navmeshAgent.SetDestination(_targetPlayer.position);
-        
+
+        CheckPlayerPos();
+    }
+
+    private void CheckPlayerPos()
+    {
         Vector3 direction = (_targetPlayer.position - transform.position).normalized;
         direction.y = 0;
 
