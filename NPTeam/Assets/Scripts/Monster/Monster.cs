@@ -15,6 +15,7 @@ public class Monster : NetworkBehaviour, IDamagable
     private float _detectTime = 0f;
     private bool _isCooldown = false;
     public NetworkVariable<bool> spawnMonster;
+    private bool canSpawnMonster = true;
     
     [Header("몹 체력")]
     [SerializeField] private NetworkVariable<int> health;
@@ -81,7 +82,7 @@ public class Monster : NetworkBehaviour, IDamagable
         {
             _detectTime += Time.deltaTime;
 
-            if (_detectTime > 5f && !spawnMonster.Value)
+            if (_detectTime > 5f && !spawnMonster.Value && canSpawnMonster)
             {
                 SpawnMonster();
             }
@@ -115,7 +116,7 @@ public class Monster : NetworkBehaviour, IDamagable
             GameObject monster = Instantiate(monsterPrefab, spawnPos, spawnRot);
         
             var plusMonster = monster.GetComponent<Monster>();
-            if (plusMonster != null) plusMonster.spawnMonster = new NetworkVariable<bool>(true);
+            if (plusMonster != null) plusMonster.canSpawnMonster = false;
             
             var networkObject = plusMonster.GetComponent<NetworkObject>();
             if (networkObject != null) networkObject.Spawn();
@@ -149,9 +150,18 @@ public class Monster : NetworkBehaviour, IDamagable
         }
         
         KnockbackPlayer();
+        
+        CheckPlayerPos();
+        
         yield return new WaitForSeconds(knockbackCooltime);
         
         _navmeshAgent.isStopped = false;
+
+        if (_targetPlayer != null)
+        {
+            _navmeshAgent.SetDestination(_targetPlayer.position);
+        }
+        
         _isCooldown = false;
     }
 
@@ -217,7 +227,12 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         _navmeshAgent.speed = chaseSpeed;
         _navmeshAgent.SetDestination(_targetPlayer.position);
-        
+
+        CheckPlayerPos();
+    }
+
+    private void CheckPlayerPos()
+    {
         Vector3 direction = (_targetPlayer.position - transform.position).normalized;
         direction.y = 0;
 
