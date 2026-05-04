@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerColorChanger : MonoBehaviour
+public class PlayerColorChanger : NetworkBehaviour
 {
-    [Header("플레이어 색상")]
-    [SerializeField] private Color _playerColor;
+    private NetworkVariable<Color> _playerColor =
+    new NetworkVariable<Color>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
+
+    public Color CurrentColor => _playerColor.Value;
 
     private Renderer[] _renderers;
     // 머티리얼을 복사하지 않고, 렌더러별로 값만 덮어쓰는 객체
@@ -20,17 +26,40 @@ public class PlayerColorChanger : MonoBehaviour
 
     private void Awake() => Init();
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            _playerColor.Value = Random.ColorHSV();
+        }
+
+        _playerColor.OnValueChanged -= OnColorChanged; 
+        _playerColor.OnValueChanged += OnColorChanged;
+
+        ApplyColor();
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        _playerColor.OnValueChanged -= OnColorChanged;
+    }
+
     #region 초기화
     private void Init()
     {
         _renderers = GetComponentsInChildren<Renderer>();
         _mpb = new MaterialPropertyBlock();
-
-        ApplyColor();
     }
     #endregion
 
+    // 이벤트 콜백
+    private void OnColorChanged(Color oldColor, Color newColor)
+    {
+        ApplyColor();
+    }
+
     #region 플레이어 색상 변경
+
     // 렌더러 색을 MPB로 덮어쓰는 함수
     public void ApplyColor()
     {
@@ -41,7 +70,7 @@ public class PlayerColorChanger : MonoBehaviour
             int id = renderer.sharedMaterial.HasProperty(BaseColorID) ? BaseColorID : ColorID;
 
             renderer.GetPropertyBlock(_mpb);
-            _mpb.SetColor(id, _playerColor);
+            _mpb.SetColor(id, _playerColor.Value);
             renderer.SetPropertyBlock(_mpb);
         }
     }
@@ -62,7 +91,7 @@ public class PlayerColorChanger : MonoBehaviour
             _originColors[renderer] = renderer.sharedMaterial.GetColor(id);
 
             renderer.GetPropertyBlock(_mpb);
-            _mpb.SetColor(id, _playerColor);
+            _mpb.SetColor(id, _playerColor.Value);
             renderer.SetPropertyBlock(_mpb);
         }
     }

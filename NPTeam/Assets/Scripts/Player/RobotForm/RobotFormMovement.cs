@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
-public class RobotFormMovement : NetworkBehaviour
+public class RobotFormMovement : NetworkBehaviour, IStunable
 {
     [Header("이동 속도")]
     [SerializeField] private float _playerSpeed;
@@ -16,6 +17,8 @@ public class RobotFormMovement : NetworkBehaviour
     [Header("상체를 따라 하체 회전 속도")]
     [SerializeField] private float _legFollowSpeed;
 
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
     [Header("부모의 Rigidbody 등록")]
     [SerializeField] private Rigidbody _rigidbody;
     // 로봇 이동 조작키 입력값 저장
@@ -29,7 +32,10 @@ public class RobotFormMovement : NetworkBehaviour
     [Header("점프를 위한 레이캐스트 피봇(콜라이더)")]
     [SerializeField] private Collider _jumpRayPivot;
     // 점프를 위한 레이캐스트 사거리
-    private float _jumpRayDistance = 0.15f;
+    private float _jumpRayDistance = 0.2f;
+
+    // 스턴 판정
+    private bool _isStunned;
 
     private void Awake() => Init();
 
@@ -42,16 +48,17 @@ public class RobotFormMovement : NetworkBehaviour
         _playerInput.Player.PlayerMove.canceled += RobotMoveCancle;
         // 점프 구독
         _playerInput.Player.PlayerAscend.started += RobotOnJump;
-        _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
     }
 
     private void LateUpdate()
     {
+        if (_isStunned) return;
         FollowLeg();
     }
 
     private void FixedUpdate()
     {
+        if (_isStunned) return;
         RobotMove();
     }
 
@@ -62,8 +69,7 @@ public class RobotFormMovement : NetworkBehaviour
         _playerInput.Player.PlayerMove.canceled -= RobotMoveCancle;
         // 점프 구독 취소
         _playerInput.Player.PlayerAscend.started -= RobotOnJump;
-        _playerInput.Player.PlayerAscend.canceled -= RobotJumpCancle;
-        
+
         _playerInput.Disable();
     }
 
@@ -93,11 +99,13 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 이동
     public void RobotOnMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
+
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = Vector2.zero;
     }
     #endregion
@@ -105,6 +113,7 @@ public class RobotFormMovement : NetworkBehaviour
     #region 이동 함수
     private void RobotMove()
     {
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector3 forward = _robotPivot.forward;
         forward.y = 0f;
 
@@ -112,10 +121,16 @@ public class RobotFormMovement : NetworkBehaviour
         right.y = 0f;
 
         Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
-        Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.x = move.x;
-        velocity.z = move.z;
+        
+        RobotMoveServerRpc(move.x, move.z);
+    }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void RobotMoveServerRpc(float x, float z)
+    {
+        Vector3 velocity = _rigidbody.linearVelocity;
+        velocity.x = x;
+        velocity.z = z;
         _rigidbody.linearVelocity = velocity;
     }
     #endregion
@@ -124,16 +139,17 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || !IsGrounded() || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
 
-        _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
+        Vector3 jumpVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
+        RobotJumpServerRpc(_jumpPower);
     }
-    public void RobotJumpCancle(InputAction.CallbackContext ctx)
-    {
-        if (_rigidbody.linearVelocity.y <= 0f) return;
 
+    [ServerRpc(RequireOwnership = false)]
+    private void RobotJumpServerRpc(float jumpPower)
+    {
         Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.y *= 0.4f;
+        velocity.y = jumpPower;
         _rigidbody.linearVelocity = velocity;
     }
     // 바닥인지 판별
@@ -163,6 +179,20 @@ public class RobotFormMovement : NetworkBehaviour
 
         // 목표로 천천히 회전
         _robotLegPivot.rotation = Quaternion.Slerp(_robotLegPivot.rotation, targetRotation, _legFollowSpeed * Time.deltaTime);
+    }
+    #endregion
+
+    #region 스턴 함수
+    public void SetStun(float time)
+    {
+        StartCoroutine(StunRoutine(time));
+    }
+
+    private IEnumerator StunRoutine(float time)
+    {
+        _isStunned = true;
+        yield return new WaitForSeconds(time);
+        _isStunned = false;
     }
     #endregion
 }
