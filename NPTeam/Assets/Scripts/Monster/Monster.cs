@@ -56,7 +56,7 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         if (!IsServer) return;
 
-        MonsterPath[] paths = GetComponents<MonsterPath>();
+        MonsterPath[] paths = FindObjectsByType<MonsterPath>(FindObjectsSortMode.None);
 
         patrolPoints = new Transform[paths.Length];
         
@@ -108,10 +108,16 @@ public class Monster : NetworkBehaviour, IDamagable
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 spawnPos = transform.position + Random.insideUnitSphere * 2f;
+            Vector3 direction = (_targetPlayer.position - spawnPos).normalized;
+            direction.y = 0;
+            Quaternion spawnRot = Quaternion.LookRotation(direction);
         
-            GameObject monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
+            GameObject monster = Instantiate(monsterPrefab, spawnPos, spawnRot);
         
-            var networkObject = monster.GetComponent<NetworkObject>();
+            var plusMonster = monster.GetComponent<Monster>();
+            if (plusMonster != null) plusMonster.spawnMonster = new NetworkVariable<bool>(true);
+            
+            var networkObject = plusMonster.GetComponent<NetworkObject>();
             if (networkObject != null) networkObject.Spawn();
         }
     }
@@ -151,7 +157,7 @@ public class Monster : NetworkBehaviour, IDamagable
 
     private void SetWayPoint()
     {
-        if (patrolPoints == null) return;
+        if (patrolPoints == null || patrolPoints.Length == 0) return;
         
         _randomWayPoint = Random.Range(0, patrolPoints.Length);
         _navmeshAgent.SetDestination(patrolPoints[_randomWayPoint].position);
