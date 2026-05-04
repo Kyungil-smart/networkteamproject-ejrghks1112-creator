@@ -48,7 +48,7 @@ public class CarFormMovement : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (_stun.IsStunned) return;
+        // if (_stun.IsStunned) return;
         CarMove();
     }
 
