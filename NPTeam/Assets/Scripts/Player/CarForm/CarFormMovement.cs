@@ -54,7 +54,7 @@ public class CarFormMovement : NetworkBehaviour
 
     void CarForntAndBackMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
         Vector2 input = ctx.ReadValue<Vector2>();
 
         MoveServerRpc(input);

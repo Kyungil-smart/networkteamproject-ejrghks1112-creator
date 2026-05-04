@@ -71,35 +71,35 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
         _move = ctx.ReadValue<Vector2>();
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
         _move = Vector2.zero;
     }
 
     private void OnDescend(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
         _flyDown = ctx.ReadValue<float>();
     }
     private void OnDescendCancel(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
         _flyDown = 0f;
     }
 
 
     private void OnAscend(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
         _flyUp = ctx.ReadValue<float>();
     }
     private void OnAscendCancel(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
         _flyUp = 0f;
     }
 
