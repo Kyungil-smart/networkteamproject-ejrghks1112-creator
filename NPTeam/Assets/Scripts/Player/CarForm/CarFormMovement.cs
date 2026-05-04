@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
-public class CarFormMovement : NetworkBehaviour, IStunable
+public class CarFormMovement : NetworkBehaviour
 {
     private NPTeamInputActions _carFormInput; // 근형님이 만드신 inputSystem
     private Vector3 _move; // 앞뒤 움직임
@@ -14,12 +14,9 @@ public class CarFormMovement : NetworkBehaviour, IStunable
     [SerializeField] private float carFormTurnSpeed = 5.0f;
     // [SerializeField] private float rotateInterpolate = 5.0f; // 회전 속도
     private bool _isMove; // 전진 중인지, 후진 중인지
-    // 스턴 판정
-    private bool _isStunned;
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
-
     
     private PlayerStun _stun;
     
@@ -52,8 +49,6 @@ public class CarFormMovement : NetworkBehaviour, IStunable
     void FixedUpdate()
     {
         if (_stun.IsStunned) return;
-        //if (!IsOwner) return;
-        if (_isStunned) return;
         CarMove();
     }
 
@@ -107,18 +102,4 @@ public class CarFormMovement : NetworkBehaviour, IStunable
 
         _carFormRigidBody.linearVelocity = velocity;
     }
-
-    #region 스턴 함수
-    public void SetStun(float time)
-    {
-        StartCoroutine(StunRoutine(time));
-    }
-
-    private IEnumerator StunRoutine(float time)
-    {
-        _isStunned = true;
-        yield return new WaitForSeconds(time);
-        _isStunned = false;
-    }
-    #endregion
 }
