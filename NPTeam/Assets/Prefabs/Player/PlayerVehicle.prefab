@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkRigidbody
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
-  UseRigidBodyForMotion: 0
+  UseRigidBodyForMotion: 1
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
 --- !u!114 &5137585688078573009
@@ -271,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 570259725822164077}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1148732070
+      value: 3093192261
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -309,7 +309,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3892769525
+      value: 658051396
       objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: m_Name
@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3967895034
+      value: 479249201
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: _playerVehicle

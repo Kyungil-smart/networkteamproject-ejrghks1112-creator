@@ -8,8 +8,8 @@ public class CrushObstacle : MonoBehaviour
 
     void Awake()
     {
-        // rigidbody = GetComponent<Rigidbody>();
-        rigidbody = GetComponentInParent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
+        //rigidbody = GetComponentInParent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
