@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 518614910
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -414,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 107106961
+      value: 2752709061
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -466,7 +466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3999266722
+      value: 3560878008
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -474,7 +474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1121921734
+      value: 962231599
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -486,7 +486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 991643835
+      value: 2702831923
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -562,6 +562,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSpawnManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8182499601325795377, guid: 0a3e13d9cac98b94ea9ce2f099e2ecbf, type: 3}
+      propertyPath: _playerPrefab
+      value: 
+      objectReference: {fileID: 971913610480199745, guid: 01513dd73e3e9d84e8e2d0a10a43837a, type: 3}
     - target: {fileID: 8182499601325795377, guid: 0a3e13d9cac98b94ea9ce2f099e2ecbf, type: 3}
       propertyPath: '_spawnPoints.Array.data[0]'
       value: 
@@ -697,7 +701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1636163846
+      value: 1627866765
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -749,7 +753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1903677858
+      value: 3332453359
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -757,7 +761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 831526145
+      value: 599384203
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -769,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 579246577
+      value: 2883592722
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -803,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3679338459
+      value: 202248618
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -855,7 +859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2382809023
+      value: 385035588
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -863,7 +867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2217741060
+      value: 2734271321
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -875,7 +879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4134453047
+      value: 3761781937
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -909,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1154459332
+      value: 1812339885
       objectReference: {fileID: 0}
     - target: {fileID: 2819411375185418415, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -961,7 +965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2946968929
+      value: 4044924946
       objectReference: {fileID: 0}
     - target: {fileID: 3937542609294755750, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -969,7 +973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2320638469
+      value: 2935094746
       objectReference: {fileID: 0}
     - target: {fileID: 8126048340682314727, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -981,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3889484326
+      value: 956565288
       objectReference: {fileID: 0}
     - target: {fileID: 9163738967710485361, guid: 2719e2a30bf259b4fa5267ecc9637b21, type: 3}
       propertyPath: SceneMigrationSynchronization
