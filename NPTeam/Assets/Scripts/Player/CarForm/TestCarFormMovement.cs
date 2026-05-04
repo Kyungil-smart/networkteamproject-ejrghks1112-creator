@@ -44,7 +44,7 @@ public class TestCarFormMovement : NetworkBehaviour, IStunable
 
     void FixedUpdate()
     {
-        if (!IsOwner) return;
+        // if (!IsOwner) return;
         if (_isStunned) return;
         CarMove();
     }

@@ -141,14 +141,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mine
   ShowTopMostFoldoutHeaderGroup: 1
-  explosionForce: 8000
+  explosionForce: 1000
   explosionRadius: 4
-  isTriggered: 0
-  stunTime: 3
   depth: 1
+  stunTime: 3
+  isTriggered: 0
   renderer: {fileID: 8970319923303948843}
   isDestroyed: 1
-  _waitForSecondsTime: 1
+  waitForSecondsTime: 1
+  blinkCount: 3
+  changeColorTime: 0.1
 --- !u!1 &3712013550310440889
 GameObject:
   m_ObjectHideFlags: 0

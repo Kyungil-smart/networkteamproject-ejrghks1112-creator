@@ -47,12 +47,18 @@ public class Mine : NetworkBehaviour
     {
         if (!IsServer) return;   // 서버에서 처리
         if (isTriggered) return; // 한번 밟고 나서 다시 Enter했을 때 중복 발동 방지용
+        // Debug.Log($"Trigger: {other.name}");
         
-        if (other.transform.root.CompareTag("Player")) // tag가 Player인 오브젝트만 발동
+        // 트리거 안에 들어온 other가 PlayerVehicle를 가지고 있다면 가져옴
+        var netObj = other.GetComponentInParent<PlayerVehicle>(); 
+
+        //Player tag를 가지고 있는지 확인
+        if (netObj != null && netObj.CompareTag("Player")) 
         {
-            Debug.Log($"player 찾았다");
+            // Debug.Log("player 찾았다");
+
             isTriggered = true;
-            StartCoroutine(ExplosionDelay()); 
+            StartCoroutine(ExplosionDelay());
         }
     }
     private IEnumerator ExplosionDelay()
@@ -115,13 +121,20 @@ public class Mine : NetworkBehaviour
             return;
         
         // Rigidbody를 가지고 있는지 확인
-        Rigidbody rb = netObj.GetComponent<Rigidbody>();
+        Rigidbody rb = netObj.GetComponentInParent<Rigidbody>();
         if (rb == null) return;
         
         // IStunable를 구현하고 있으면 SetStun(스턴) 실행, stunTime만큼 움직일 수 없음
-        if (netObj.gameObject.TryGetComponent<IStunable>(out IStunable crusable))
+        
+        IStunable stun = netObj.GetComponentInParent<IStunable>();
+        
+        // if (netObj.gameObject.TryGetComponent<IStunable>(out IStunable crusable))
+        // {
+        //     crusable.SetStun(stunTime);
+        // }
+        if (stun != null)
         {
-            crusable.SetStun(stunTime);
+            stun.SetStun(stunTime);
         }
 
         // 실제 폭발이 일어나는 곳 

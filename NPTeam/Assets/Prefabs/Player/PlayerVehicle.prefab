@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 743696561927525670}
   - component: {fileID: 6065807456793869565}
   - component: {fileID: 9085945142113781212}
+  - component: {fileID: 5137585688078573009}
+  - component: {fileID: 393697990130382609}
   m_Layer: 7
   m_Name: PlayerVehicle
   m_TagString: Player
@@ -173,6 +175,32 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &5137585688078573009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570259725822164077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c82580714267334bb6e351b7c0f40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrushObstacle
+  rigidbody: {fileID: 0}
+  CrushPower: 100
+--- !u!114 &393697990130382609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570259725822164077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58bfa58dfd4dbc64988f1375dd2ae65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStun
 --- !u!1001 &3676452284564338876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 570259725822164077}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3093192261
+      value: 1148732070
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -281,7 +309,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 658051396
+      value: 3892769525
       objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
       propertyPath: m_Name
@@ -427,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 479249201
+      value: 3967895034
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: _playerVehicle
