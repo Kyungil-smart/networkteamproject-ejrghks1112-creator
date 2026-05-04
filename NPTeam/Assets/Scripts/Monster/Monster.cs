@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,7 @@ public class Monster : NetworkBehaviour, IDamagable
     private int _randomWayPoint;
     private float _detectTime = 0f;
     private bool _isCooldown = false;
-    public bool spawnMonster = false;
+    public NetworkVariable<bool> spawnMonster;
     
     [Header("몹 체력")]
     [SerializeField] private NetworkVariable<int> health;
@@ -54,7 +55,18 @@ public class Monster : NetworkBehaviour, IDamagable
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
+
+        MonsterPath[] paths = GetComponents<MonsterPath>();
+
+        patrolPoints = new Transform[paths.Length];
+        
+        for (int i = 0; i < paths.Length; i++)
+        {
+            patrolPoints[i] = paths[i].transform;
+        }
+        
         health = new NetworkVariable<int>(maxHealth);
+        spawnMonster = new NetworkVariable<bool>(false);
         
         SetWayPoint();
     }
@@ -69,7 +81,7 @@ public class Monster : NetworkBehaviour, IDamagable
         {
             _detectTime += Time.deltaTime;
 
-            if (_detectTime > 5f && !spawnMonster)
+            if (_detectTime > 5f && !spawnMonster.Value)
             {
                 SpawnMonster();
             }
@@ -82,6 +94,7 @@ public class Monster : NetworkBehaviour, IDamagable
         else
         {
             _detectTime = 0f;
+            _targetPlayer = null;
             Patrol();
         }
     }
@@ -90,7 +103,7 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         if (!IsServer) return;
         
-        spawnMonster = true;
+        spawnMonster.Value = true;
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -101,7 +114,6 @@ public class Monster : NetworkBehaviour, IDamagable
             var networkObject = monster.GetComponent<NetworkObject>();
             if (networkObject != null) networkObject.Spawn();
         }
-        
     }
 
     private void KnockbackPlayer()
@@ -139,6 +151,8 @@ public class Monster : NetworkBehaviour, IDamagable
 
     private void SetWayPoint()
     {
+        if (patrolPoints == null) return;
+        
         _randomWayPoint = Random.Range(0, patrolPoints.Length);
         _navmeshAgent.SetDestination(patrolPoints[_randomWayPoint].position);
     }
@@ -185,7 +199,9 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         _navmeshAgent.speed = patrolSpeed;
 
-        if (!_navmeshAgent.pathPending && _navmeshAgent.remainingDistance <= 0.2f)
+        if (_navmeshAgent.isStopped) _navmeshAgent.isStopped = false;
+        
+        if (!_navmeshAgent.pathPending && _navmeshAgent.remainingDistance <= 0.4f)
         {
             SetWayPoint();
         }
