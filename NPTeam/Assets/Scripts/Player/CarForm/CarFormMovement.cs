@@ -20,6 +20,9 @@ public class CarFormMovement : NetworkBehaviour, IStunable
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
 
+    
+    private PlayerStun _stun;
+    
     //public override void OnNetworkSpawn()
     //{
     //    if (!IsOwner) return;
@@ -29,6 +32,7 @@ public class CarFormMovement : NetworkBehaviour, IStunable
     void Awake()
     {
         _carFormInput = new NPTeamInputActions();
+        _stun = GetComponentInParent<PlayerStun>();
     }
 
     void OnEnable()
@@ -47,6 +51,7 @@ public class CarFormMovement : NetworkBehaviour, IStunable
 
     void FixedUpdate()
     {
+        if (_stun.IsStunned) return;
         //if (!IsOwner) return;
         if (_isStunned) return;
         CarMove();
