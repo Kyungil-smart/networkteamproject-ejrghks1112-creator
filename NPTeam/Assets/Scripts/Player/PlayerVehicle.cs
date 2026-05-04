@@ -17,6 +17,10 @@ public class PlayerVehicle : NetworkBehaviour
         set => _currentFormIndex = value;
     }
 
+    private MaterialPropertyBlock _mpb;
+    private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
+    private static readonly int ColorID = Shader.PropertyToID("_Color");
+
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
     [SerializeField] private CinemachineCamera _robotCamera;
@@ -26,6 +30,13 @@ public class PlayerVehicle : NetworkBehaviour
 
     // 조작키
     private NPTeamInputActions _playerInput;
+
+    // 폼 체인지시 컬러
+    private NetworkVariable<Color> _playerColor =
+    new NetworkVariable<Color>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
 
     private void Awake() => Init();
 
@@ -37,6 +48,11 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode1.started += OnCarChanged;
         _playerInput.Player.PlayerMode2.started += OnRobotChanged;
         _playerInput.Player.PlayerMode3.started += OnComponentChanged;
+    }
+
+    private void Update()
+    {
+        if (_rigidbody.isKinematic == true) _rigidbody.isKinematic = false;
     }
 
     private void OnDisable()
@@ -54,6 +70,7 @@ public class PlayerVehicle : NetworkBehaviour
     {
         _playerInput = new NPTeamInputActions();
         _rigidbody = GetComponent<Rigidbody>();
+        _mpb = new MaterialPropertyBlock();
     }
     #endregion
 
@@ -76,7 +93,7 @@ public class PlayerVehicle : NetworkBehaviour
 
         SetForm(2);
     }
-    private void SetForm(int index)
+    public void SetForm(int index)
     {
         ChangeFormServerRpc(index);
     }
@@ -96,7 +113,6 @@ public class PlayerVehicle : NetworkBehaviour
 
     private void ApplyForm(int index)
     {
-        if (_currentFormIndex == index) return;
         _currentFormIndex = index;
 
         _carForm.SetActive(index == 0);
@@ -105,9 +121,9 @@ public class PlayerVehicle : NetworkBehaviour
 
         _rigidbody.useGravity = (index != 2);
 
-        SetCamera(index);
+        ApplyCurrentFormColor();
 
-        PlayerState.Instance.CurrentFrom = GetCurrentFormObject(index);
+        SetCamera(index);
     }
     #endregion
 
@@ -150,6 +166,56 @@ public class PlayerVehicle : NetworkBehaviour
         {
             _rigidbody.AddForce(force, ForceMode.Impulse);
         }
+    }
+    #endregion
+
+    #region 폼 체인지 색상 변환
+    private void ApplyCurrentFormColor()
+    {
+        GameObject obj = GetCurrentFormObject(_currentFormIndex);
+        if (obj == null) return;
+
+        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            if (renderer.sharedMaterial == null) continue;
+
+            int id = renderer.sharedMaterial.HasProperty(BaseColorID) ? BaseColorID : ColorID;
+
+            renderer.GetPropertyBlock(_mpb);
+            _mpb.SetColor(id, _playerColor.Value);
+            renderer.SetPropertyBlock(_mpb);
+        }
+    }
+
+    // 색상 + 폼 동시 적용 (순서 보장)
+    public void SetColorAndForm(Color color, int formIndex)
+    {
+        SetColorAndFormServerRpc(color, formIndex);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetColorAndFormServerRpc(Color color, int formIndex)
+    {
+        _playerColor.Value = color;
+        ApplyForm(formIndex);
+        SetColorAndFormClientRpc(color, formIndex);
+    }
+
+    [ClientRpc]
+    private void SetColorAndFormClientRpc(Color color, int formIndex)
+    {
+        ApplyForm(formIndex);
+    }
+    #endregion
+
+    #region 빙의 해제시 빙의 대상 카메라 우선도 전부 낮추는 코드
+    public void DisableCurrentCamera()
+    {
+        _carCamera.Priority = 1;
+        _robotCamera.Priority = 1;
+        _componentCamera.Priority = 1;
     }
     #endregion
 }
