@@ -38,6 +38,8 @@ public class PlayerVehicle : NetworkBehaviour
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server);
 
+    private PlayerStun _stun;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -70,6 +72,7 @@ public class PlayerVehicle : NetworkBehaviour
     {
         _playerInput = new NPTeamInputActions();
         _rigidbody = GetComponent<Rigidbody>();
+        _stun = GetComponent<PlayerStun>();
         _mpb = new MaterialPropertyBlock();
     }
     #endregion
@@ -77,19 +80,19 @@ public class PlayerVehicle : NetworkBehaviour
     #region 플레이어 변신
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(0);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(1);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(2);
     }

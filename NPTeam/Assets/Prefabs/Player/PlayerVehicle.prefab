@@ -131,7 +131,7 @@ MonoBehaviour:
   RotationInterpolationType: 0
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.1
+  PositionMaxInterpolationTime: 0.05
   RotationLerpSmoothing: 1
   RotationMaxInterpolationTime: 0.1
   ScaleLerpSmoothing: 1
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bfa58dfd4dbc64988f1375dd2ae65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStun
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1001 &3676452284564338876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,6 +210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
+    - target: {fileID: 3165461748992073195, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: PositionMaxInterpolationTime
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4025236452788629640, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: m_Material
       value: 
@@ -367,6 +372,10 @@ PrefabInstance:
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 6798584669354051705, guid: 6eeac2f9aacebf140932ecbbd4f6c4cc, type: 3}
+      propertyPath: PositionMaxInterpolationTime
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -452,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 1682309855001488819, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
+      propertyPath: PositionMaxInterpolationTime
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: GlobalObjectIdHash

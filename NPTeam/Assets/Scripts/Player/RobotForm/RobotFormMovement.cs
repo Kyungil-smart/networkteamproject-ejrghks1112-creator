@@ -51,11 +51,13 @@ public class RobotFormMovement : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (_stun.IsStunned) return;
         FollowLeg();
     }
 
     private void FixedUpdate()
     {
+        if (_stun.IsStunned) return;
         RobotMove();
     }
 
@@ -97,13 +99,13 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 이동
     public void RobotOnMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
 
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = Vector2.zero;
     }
     #endregion
@@ -111,7 +113,7 @@ public class RobotFormMovement : NetworkBehaviour
     #region 이동 함수
     private void RobotMove()
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector3 forward = _robotPivot.forward;
         forward.y = 0f;
 
@@ -137,7 +139,7 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
+        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
 
         Vector3 jumpVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
         RobotJumpServerRpc(_jumpPower);

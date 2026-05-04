@@ -48,13 +48,13 @@ public class CarFormMovement : NetworkBehaviour
 
     void FixedUpdate()
     {
-        // if (_stun.IsStunned) return;
+        if (_stun.IsStunned) return;
         CarMove();
     }
 
     void CarForntAndBackMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle || _stun.IsStunned) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector2 input = ctx.ReadValue<Vector2>();
 
         MoveServerRpc(input);
