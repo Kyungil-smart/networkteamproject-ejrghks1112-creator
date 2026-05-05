@@ -23,6 +23,8 @@ public class RobotCameraLook : NetworkBehaviour
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
 
+    private Animator _animator;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -36,6 +38,9 @@ public class RobotCameraLook : NetworkBehaviour
     {
         if (!IsOwner) return;
         RobotCameraVectorBackup();
+
+        RobotViewAngleAni();
+
         // 카메라 시점 이동
         _robotPivot.rotation = Quaternion.Euler(0f, _cameraX, 0f);
         _cameraPivot.localRotation = Quaternion.Euler(_cameraY, 0f, 0f);
@@ -52,6 +57,7 @@ public class RobotCameraLook : NetworkBehaviour
     private void Init()
     {
         _playerCameraAction = InputSystem.actions["PlayerCameraLook"];
+        _animator = GetComponent<Animator>();
     }
     #endregion
 
@@ -75,6 +81,18 @@ public class RobotCameraLook : NetworkBehaviour
         _cameraY -= _cameraMoveInput.y * _cameraSpeed;
 
         _cameraY = Mathf.Clamp(_cameraY, -45f, 25f);
+    }
+    #endregion
+
+    #region 로봇 보는 각도 애니메이션
+    private void RobotViewAngleAni()
+    {
+        float rad = _cameraX * Mathf.Deg2Rad;
+        float x = Mathf.Sin(rad);
+        float y = Mathf.Cos(rad);
+
+        _animator.SetFloat("ViewX", x);
+        _animator.SetFloat("ViewY", y);
     }
     #endregion
 }
