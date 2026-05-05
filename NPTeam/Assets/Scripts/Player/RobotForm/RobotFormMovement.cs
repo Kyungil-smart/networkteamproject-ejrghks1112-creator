@@ -99,7 +99,6 @@ public class RobotFormMovement : NetworkBehaviour
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = Vector2.zero;
     }
     #endregion
@@ -133,7 +132,7 @@ public class RobotFormMovement : NetworkBehaviour
     public void RobotJumpCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        if (_rigidbody.linearVelocity.y <= 0f || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (_rigidbody.linearVelocity.y <= 0f) return;
 
         Vector3 velocity = _rigidbody.linearVelocity;
         velocity.y *= 0.4f;

@@ -55,13 +55,14 @@ public class CarCameraLook : NetworkBehaviour
     #region 카메라 시점 이동 조작
     public void DroneOnCameraMove(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 
     public void DroneCameraMoveCancle(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (!IsOwner) return;
         _cameraMoveInput = Vector2.zero;
     }
 

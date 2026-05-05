@@ -17,9 +17,9 @@ public class CarFormMovement : NetworkBehaviour
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
-    
+
     private PlayerStun _stun;
-    
+
     //public override void OnNetworkSpawn()
     //{
     //    if (!IsOwner) return;
@@ -36,13 +36,13 @@ public class CarFormMovement : NetworkBehaviour
     {
         _carFormInput.asset.Enable();
         _carFormInput.Player.PlayerMove.performed += CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled += CarForntAndBackMove;
+        _carFormInput.Player.PlayerMove.canceled += CarMoveCancel;
     }
 
     void OnDisable()
     {
         _carFormInput.Player.PlayerMove.performed -= CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  -= CarForntAndBackMove;
+        _carFormInput.Player.PlayerMove.canceled -= CarMoveCancel;
         _carFormInput.asset.Disable();
     }
 
@@ -58,13 +58,17 @@ public class CarFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector2 input = ctx.ReadValue<Vector2>();
-        // Debug.Log($"Input: {input}");
 
         _turn = new Vector3(input.x, 0, 0);
-        Debug.Log($"앞뒤 입력 : {_turn.x}");
 
         _move = new Vector3(0, 0, input.y).normalized;
-        Debug.Log($"왼쪽 오른쪽 : {_move.z}");
+    }
+
+    void CarMoveCancel(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner) return;
+        _move = Vector3.zero;
+        _turn = Vector3.zero;
     }
 
     void CarMove()

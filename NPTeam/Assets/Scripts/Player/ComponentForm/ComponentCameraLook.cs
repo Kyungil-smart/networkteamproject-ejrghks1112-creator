@@ -63,7 +63,6 @@ public class ComponentCameraLook : NetworkBehaviour
     public void DroneCameraMoveCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = Vector2.zero;
     }
 
