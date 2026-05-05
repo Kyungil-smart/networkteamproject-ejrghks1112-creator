@@ -47,6 +47,11 @@ public class PlayerVehicle : NetworkBehaviour
 
     private void Awake() => Init();
 
+    private void Start()
+    {
+        SetForm(0);
+    }
+
     private void OnEnable()
     {
         _playerInput.Enable();
