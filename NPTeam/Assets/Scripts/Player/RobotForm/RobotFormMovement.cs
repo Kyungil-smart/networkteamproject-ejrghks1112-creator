@@ -23,6 +23,8 @@ public class RobotFormMovement : NetworkBehaviour
     // 로봇 조작키
     private NPTeamInputActions _playerInput;
 
+    private Animator _animator;
+
     private PlayerStun _stun;
 
     [Header("점프를 위한 바닥 레이어 마스크를 선택")]
@@ -86,6 +88,7 @@ public class RobotFormMovement : NetworkBehaviour
     {
         _playerInput = new NPTeamInputActions();
         _stun = GetComponentInParent<PlayerStun>();
+        _animator = GetComponent<Animator>();
     }
     #endregion
 
@@ -117,6 +120,7 @@ public class RobotFormMovement : NetworkBehaviour
         velocity.x = move.x;
         velocity.z = move.z;
 
+        _animator.SetFloat("MoveSpeed", _moveInput.magnitude);
         _rigidbody.linearVelocity = velocity;
     }
     #endregion
