@@ -6,8 +6,10 @@ public class RobotCameraLook : NetworkBehaviour
 {
     [Header("카메라 이동 속도")]
     [SerializeField] private float _cameraSpeed;
-    [Header("카메라 이동을 위한 로봇 상체 피봇")]
+    [Header("카메라 좌우 이동을 위한 로봇 피봇")]
     [SerializeField] private Transform _robotPivot;
+    [Header("카메라 상하 이동을 위한 피봇")]
+    [SerializeField] private Transform _cameraPivot;
 
     // 카메라 축 백업
     private float _cameraX;
@@ -35,7 +37,8 @@ public class RobotCameraLook : NetworkBehaviour
         if (!IsOwner) return;
         RobotCameraVectorBackup();
         // 카메라 시점 이동
-        _robotPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
+        _robotPivot.rotation = Quaternion.Euler(0f, _cameraX, 0f);
+        _cameraPivot.localRotation = Quaternion.Euler(_cameraY, 0f, 0f);
     }
 
     private void OnDisable()
@@ -55,12 +58,14 @@ public class RobotCameraLook : NetworkBehaviour
     #region 카메라 시점 이동 조작
     public void RobotOnCameraMove(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 
     public void RobotCameraMoveCancle(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = Vector2.zero;
     }
