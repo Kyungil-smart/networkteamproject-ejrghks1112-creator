@@ -26,6 +26,11 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private CinemachineCamera _robotCamera;
     [SerializeField] private CinemachineCamera _componentCamera;
 
+    [Header("각 변신폼 네트워크 오브젝트 등록")]
+    [SerializeField] private NetworkObject _carNetworkObject;
+    [SerializeField] private NetworkObject _robotNetworkObject;
+    [SerializeField] private NetworkObject _componentNetworkObject;
+
     private Rigidbody _rigidbody;
 
     // 조작키
@@ -75,18 +80,21 @@ public class PlayerVehicle : NetworkBehaviour
     #region 플레이어 변신
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(0);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(1);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(2);
@@ -120,8 +128,9 @@ public class PlayerVehicle : NetworkBehaviour
         _rigidbody.useGravity = (index != 2);
 
         ApplyCurrentFormColor();
-
         SetCamera(index);
+
+        ChangeOwnershipServerRpc(index);
     }
     #endregion
 
@@ -148,6 +157,17 @@ public class PlayerVehicle : NetworkBehaviour
         };
     }
     #endregion
+
+    private NetworkObject GetFormNetworkObject(int index)
+    {
+        return index switch
+        {
+            0 => _carNetworkObject,
+            1 => _robotNetworkObject,
+            2 => _componentNetworkObject,
+            _ => null
+        };
+    }
 
     #region 빙의시 카메라 우선순위
     public void OnPossessedCameraSync()
@@ -193,7 +213,7 @@ public class PlayerVehicle : NetworkBehaviour
         SetColorAndFormServerRpc(color, formIndex);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void SetColorAndFormServerRpc(Color color, int formIndex)
     {
         _playerColor.Value = color;
@@ -216,4 +236,10 @@ public class PlayerVehicle : NetworkBehaviour
         _componentCamera.Priority = 1;
     }
     #endregion
+
+    [ServerRpc]
+    private void ChangeOwnershipServerRpc(int index)
+    {
+        GetFormNetworkObject(index).ChangeOwnership(OwnerClientId);
+    }
 }

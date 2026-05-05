@@ -32,6 +32,7 @@ public class CarCameraLook : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (!IsOwner) return;
         CameraVectorBackup();
         // 카메라 시점 이동
         _carPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);

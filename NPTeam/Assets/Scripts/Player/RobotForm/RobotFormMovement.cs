@@ -102,10 +102,8 @@ public class RobotFormMovement : NetworkBehaviour
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
-
     public void RobotMoveCancle(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _moveInput = Vector2.zero;
     }
     #endregion
@@ -113,7 +111,6 @@ public class RobotFormMovement : NetworkBehaviour
     #region 이동 함수
     private void RobotMove()
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector3 forward = _robotPivot.forward;
         forward.y = 0f;
 
@@ -121,35 +118,27 @@ public class RobotFormMovement : NetworkBehaviour
         right.y = 0f;
 
         Vector3 move = (right * _moveInput.x + forward * _moveInput.y).normalized * _playerSpeed;
-        
-        RobotMoveServerRpc(move.x, move.z);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void RobotMoveServerRpc(float x, float z)
-    {
         Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.x = x;
-        velocity.z = z;
+        velocity.x = move.x;
+        velocity.z = move.z;
+
         _rigidbody.linearVelocity = velocity;
     }
     #endregion
 
-
     #region 로봇폼 점프
     public void RobotOnJump(InputAction.CallbackContext ctx)
     {
-        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (!ctx.started || !IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
 
-        Vector3 jumpVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
-        RobotJumpServerRpc(_jumpPower);
+        _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void RobotJumpServerRpc(float jumpPower)
+    public void RobotJumpCancle(InputAction.CallbackContext ctx)
     {
+        if (_rigidbody.linearVelocity.y <= 0f) return;
+
         Vector3 velocity = _rigidbody.linearVelocity;
-        velocity.y = jumpPower;
+        velocity.y *= 0.4f;
         _rigidbody.linearVelocity = velocity;
     }
     // 바닥인지 판별

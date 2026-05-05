@@ -36,49 +36,35 @@ public class CarFormMovement : NetworkBehaviour
     {
         _carFormInput.asset.Enable();
         _carFormInput.Player.PlayerMove.performed += CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  += CarMoveCancel;
+        _carFormInput.Player.PlayerMove.canceled += CarForntAndBackMove;
     }
 
     void OnDisable()
     {
         _carFormInput.Player.PlayerMove.performed -= CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  -= CarMoveCancel;
+        _carFormInput.Player.PlayerMove.canceled  -= CarForntAndBackMove;
         _carFormInput.asset.Disable();
     }
 
     void FixedUpdate()
     {
+        if (!IsOwner) return;
         if (_stun.IsStunned) return;
         CarMove();
     }
 
     void CarForntAndBackMove(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector2 input = ctx.ReadValue<Vector2>();
+        // Debug.Log($"Input: {input}");
 
-        MoveServerRpc(input);
-    }
-    [Rpc(SendTo.Server)]
-    void MoveServerRpc(Vector2 input)
-    {
         _turn = new Vector3(input.x, 0, 0);
+        Debug.Log($"앞뒤 입력 : {_turn.x}");
+
         _move = new Vector3(0, 0, input.y).normalized;
-    }
-
-    void CarMoveCancel(InputAction.CallbackContext ctx)
-    {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        CancelServerRpc();
-    }
-    [Rpc(SendTo.Server)]
-    void CancelServerRpc()
-    {
-        _move = Vector3.zero;
-        _turn = Vector3.zero;
-
-        _carFormRigidBody.linearVelocity = Vector3.zero;
-        _carFormRigidBody.angularVelocity = Vector3.zero;
+        Debug.Log($"왼쪽 오른쪽 : {_move.z}");
     }
 
     void CarMove()
@@ -86,7 +72,7 @@ public class CarFormMovement : NetworkBehaviour
         // 전진, 후진 중일 때만 회전 할 수 있도록
         _isMove = _move.sqrMagnitude > 0;
         // 전진시 1f, 후진시 -1f
-        _direction = _move.z > 0 ?  1f : -1f; 
+        _direction = _move.z > 0 ? 1f : -1f;
 
         if (_isMove)
         {

@@ -339,6 +339,8 @@ public class DroneController : NetworkBehaviour
         transform.localRotation = Quaternion.identity;
 
         networkObject.TrySetParent(target, true);
+
+        target.ChangeOwnership(OwnerClientId);
     }
 
     [ServerRpc]

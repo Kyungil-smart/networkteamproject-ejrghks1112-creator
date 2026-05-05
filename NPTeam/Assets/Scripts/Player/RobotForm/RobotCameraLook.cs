@@ -32,6 +32,7 @@ public class RobotCameraLook : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (!IsOwner) return;
         RobotCameraVectorBackup();
         // 카메라 시점 이동
         _robotPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
