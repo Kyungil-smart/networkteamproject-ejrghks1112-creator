@@ -41,6 +41,7 @@ public class DroneCancelPossession : NetworkBehaviour
     #region 빙의 취소
     public void DroneOnPossessionCancle(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (!ctx.performed || PlayerState.Instance.IsPossession == false) return;
         _droneController.DroneControllerOn();
     }

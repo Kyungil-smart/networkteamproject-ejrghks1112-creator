@@ -156,11 +156,13 @@ public class DroneController : NetworkBehaviour
     #region 이동 조작
     public void DroneOnMove(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == true) return;
         _moveInput = ctx.ReadValue<Vector2>();
     }
     public void DroneMoveCancle(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == true) return;
         _moveInput = Vector2.zero;
     }
@@ -169,12 +171,14 @@ public class DroneController : NetworkBehaviour
     #region 상승/하강 조작
     public void DroneOnAscend(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == true) return;
         _ascend = ctx.ReadValue<float>();
         UpdateVertical();
     }
     public void DroneOnDescend(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == true) return;
         _descend = ctx.ReadValue<float>();
         UpdateVertical();
@@ -209,6 +213,7 @@ public class DroneController : NetworkBehaviour
     #region 빙의 조작
     public void DroneOnPossession(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
 
         TryPossession();
