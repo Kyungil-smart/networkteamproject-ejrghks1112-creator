@@ -176,6 +176,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   ShowTopMostFoldoutHeaderGroup: 1
+  spawnMonster:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
+  isDie:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
   health:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0
@@ -187,12 +197,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  detectRange: 10
+  detectRange: 15
   knockbackRange: 2
-  viewAngle: 90
+  viewAngle: 110
   chaseSpeed: 5
   patrolSpeed: 10
-  knockbackPower: 5
+  knockbackPower: 25
   knockbackCooltime: 2
   monsterPrefab: {fileID: 2035411846907976361}
   spawnCount: 2

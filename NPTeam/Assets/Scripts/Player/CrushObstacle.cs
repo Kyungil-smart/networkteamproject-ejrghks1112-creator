@@ -3,19 +3,20 @@ using UnityEngine;
 
 public class CrushObstacle : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody rigidbody;
     public int CrushPower; // 부딪혔을 때 힘
 
     void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
+        //rigidbody = GetComponentInParent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent<ICrushable>(out ICrushable crusable))
         {
-            Vector3 force = _rigidbody.linearVelocity * CrushPower;
+            Vector3 force = rigidbody.linearVelocity * CrushPower;
             crusable.OnCrush(force);
         }
     }

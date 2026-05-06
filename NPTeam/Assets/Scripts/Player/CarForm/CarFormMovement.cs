@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
@@ -13,64 +14,61 @@ public class CarFormMovement : NetworkBehaviour
     [SerializeField] private float carFormTurnSpeed = 5.0f;
     // [SerializeField] private float rotateInterpolate = 5.0f; // 회전 속도
     private bool _isMove; // 전진 중인지, 후진 중인지
-    
+
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
+
+    private PlayerStun _stun;
+
     //public override void OnNetworkSpawn()
     //{
     //    if (!IsOwner) return;
     //    // 소유자 전용 입력 바인딩 등 초기화
     //}
-    
+
     void Awake()
     {
         _carFormInput = new NPTeamInputActions();
+        _stun = GetComponentInParent<PlayerStun>();
     }
 
     void OnEnable()
     {
         _carFormInput.asset.Enable();
         _carFormInput.Player.PlayerMove.performed += CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  += CarMoveCancel;
+        _carFormInput.Player.PlayerMove.canceled += CarMoveCancel;
     }
 
     void OnDisable()
     {
         _carFormInput.Player.PlayerMove.performed -= CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  -= CarMoveCancel;
+        _carFormInput.Player.PlayerMove.canceled -= CarMoveCancel;
         _carFormInput.asset.Disable();
     }
 
     void FixedUpdate()
     {
-        //if (!IsOwner) return;
+        if (!IsOwner) return;
+        if (_stun.IsStunned) return;
         CarMove();
     }
 
     void CarForntAndBackMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (!IsOwner) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector2 input = ctx.ReadValue<Vector2>();
 
-        MoveServerRpc(input);
-    }
-    [Rpc(SendTo.Server)]
-    void MoveServerRpc(Vector2 input)
-    {
         _turn = new Vector3(input.x, 0, 0);
+
         _move = new Vector3(0, 0, input.y).normalized;
     }
 
     void CarMoveCancel(InputAction.CallbackContext ctx)
     {
-        CancelServerRpc();
-    }
-    [Rpc(SendTo.Server)]
-    void CancelServerRpc()
-    {
+        if (!IsOwner) return;
         _move = Vector3.zero;
         _turn = Vector3.zero;
-
-        _carFormRigidBody.linearVelocity = Vector3.zero;
-        _carFormRigidBody.angularVelocity = Vector3.zero;
     }
 
     void CarMove()
@@ -78,7 +76,7 @@ public class CarFormMovement : NetworkBehaviour
         // 전진, 후진 중일 때만 회전 할 수 있도록
         _isMove = _move.sqrMagnitude > 0;
         // 전진시 1f, 후진시 -1f
-        _direction = _move.z > 0 ?  1f : -1f; 
+        _direction = _move.z > 0 ? 1f : -1f;
 
         if (_isMove)
         {

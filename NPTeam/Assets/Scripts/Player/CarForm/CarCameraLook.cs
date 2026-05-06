@@ -18,6 +18,11 @@ public class CarCameraLook : NetworkBehaviour
     // 드론 시야 조작키
     private InputAction _playerCameraAction;
 
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
+
+    private PlayerStun _stun;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -29,6 +34,8 @@ public class CarCameraLook : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (!IsOwner) return;
+        if (_stun.IsStunned) return;
         CameraVectorBackup();
         // 카메라 시점 이동
         _carPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
@@ -45,18 +52,21 @@ public class CarCameraLook : NetworkBehaviour
     private void Init()
     {
         _playerCameraAction = InputSystem.actions["PlayerCameraLook"];
+        _stun = GetComponentInParent<PlayerStun>();
     }
     #endregion
 
     #region 카메라 시점 이동 조작
     public void DroneOnCameraMove(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentFrom != gameObject) return;
+        if (!IsOwner) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 
     public void DroneCameraMoveCancle(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         _cameraMoveInput = Vector2.zero;
     }
 

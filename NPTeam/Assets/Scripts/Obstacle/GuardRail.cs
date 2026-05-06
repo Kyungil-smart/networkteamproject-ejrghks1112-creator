@@ -3,8 +3,8 @@ using UnityEngine;
 public class GuardRail : MonoBehaviour, ICrushable
 {
     private Rigidbody _guardRailRigidBody;
-    private bool _isDestroyed = false;
-    [SerializeField]private int _destroyPoint; // 파괴 점수
+    [SerializeField] private bool _isDestroyed = false;
+    [SerializeField] private int _destroyPoint; // 파괴 점수
 
     void Awake()
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,13 @@ public class Monster : NetworkBehaviour, IDamagable
     private int _randomWayPoint;
     private float _detectTime = 0f;
     private bool _isCooldown = false;
-    public bool spawnMonster = false;
+    public NetworkVariable<bool> spawnMonster;
+    public NetworkVariable<bool> isDie;
+    private bool _canSpawnMonster = true;
+    private Vector3 _spawnPos;
+    private Collider _collider;
+    private Renderer _renderer;
+    private Rigidbody _rigidbody;
     
     [Header("몹 체력")]
     [SerializeField] private NetworkVariable<int> health;
@@ -49,14 +56,38 @@ public class Monster : NetworkBehaviour, IDamagable
     [Header("추가 스폰될 몬스터의 개채 수")]
     [SerializeField] private int spawnCount;
 
-    private void Awake() => _navmeshAgent = GetComponent<NavMeshAgent>();
+    private void Awake()
+    {
+        Init();
+    }
 
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
+
+        _spawnPos = transform.position;
+        
+        MonsterPath[] paths = FindObjectsByType<MonsterPath>(FindObjectsSortMode.None);
+
+        patrolPoints = new Transform[paths.Length];
+        
+        for (int i = 0; i < paths.Length; i++)
+        {
+            patrolPoints[i] = paths[i].transform;
+        }
+        
         health = new NetworkVariable<int>(maxHealth);
+        spawnMonster = new NetworkVariable<bool>(false);
+        isDie = new NetworkVariable<bool>(false);
+
+        health.OnValueChanged += OnHealthChanged;
         
         SetWayPoint();
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        health.OnValueChanged -= OnHealthChanged;
     }
 
     private void Update()
@@ -69,7 +100,7 @@ public class Monster : NetworkBehaviour, IDamagable
         {
             _detectTime += Time.deltaTime;
 
-            if (_detectTime > 5f && !spawnMonster)
+            if (_detectTime > 5f && !spawnMonster.Value && _canSpawnMonster)
             {
                 SpawnMonster();
             }
@@ -82,7 +113,24 @@ public class Monster : NetworkBehaviour, IDamagable
         else
         {
             _detectTime = 0f;
+            _targetPlayer = null;
             Patrol();
+        }
+    }
+
+    private void Init()
+    {
+        _navmeshAgent = GetComponent<NavMeshAgent>();
+        _collider = GetComponent<Collider>();
+        _renderer = GetComponent<Renderer>();
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void OnHealthChanged(int oldValue, int newValue)
+    {
+        if (newValue <= 0 && !isDie.Value)
+        {
+            StartCoroutine(RespawnRoution());
         }
     }
 
@@ -90,18 +138,23 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         if (!IsServer) return;
         
-        spawnMonster = true;
+        spawnMonster.Value = true;
 
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 spawnPos = transform.position + Random.insideUnitSphere * 2f;
+            Vector3 direction = (_targetPlayer.position - spawnPos).normalized;
+            direction.y = 0;
+            Quaternion spawnRot = Quaternion.LookRotation(direction);
         
-            GameObject monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
+            GameObject monster = Instantiate(monsterPrefab, spawnPos, spawnRot);
         
-            var networkObject = monster.GetComponent<NetworkObject>();
+            var plusMonster = monster.GetComponent<Monster>();
+            if (plusMonster != null) plusMonster._canSpawnMonster = false;
+            
+            var networkObject = plusMonster.GetComponent<NetworkObject>();
             if (networkObject != null) networkObject.Spawn();
         }
-        
     }
 
     private void KnockbackPlayer()
@@ -131,14 +184,48 @@ public class Monster : NetworkBehaviour, IDamagable
         }
         
         KnockbackPlayer();
-        yield return new WaitForSeconds(knockbackCooltime);
+        
+        CheckPlayerPos();
+
+        yield return YieldContainer.WaitForSeconds(knockbackCooltime);
         
         _navmeshAgent.isStopped = false;
+
+        if (_targetPlayer != null)
+        {
+            _navmeshAgent.SetDestination(_targetPlayer.position);
+        }
+        
         _isCooldown = false;
+    }
+    
+    private IEnumerator RespawnRoution()
+    {
+        isDie.Value = true;
+        
+        MonsterSetActiveClientRpc(false);
+        
+        yield return YieldContainer.WaitForSeconds(10f);
+
+        health.Value = maxHealth;
+        transform.position = _spawnPos;
+        isDie.Value = false;
+        
+        MonsterSetActiveClientRpc(true);
+    }
+
+    [ClientRpc]
+    private void MonsterSetActiveClientRpc(bool active)
+    {
+        _collider.enabled = active;
+        _renderer.enabled = active;
+        _rigidbody.linearVelocity = Vector3.zero;
     }
 
     private void SetWayPoint()
     {
+        if (patrolPoints == null || patrolPoints.Length == 0) return;
+        
         _randomWayPoint = Random.Range(0, patrolPoints.Length);
         _navmeshAgent.SetDestination(patrolPoints[_randomWayPoint].position);
     }
@@ -185,7 +272,9 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         _navmeshAgent.speed = patrolSpeed;
 
-        if (!_navmeshAgent.pathPending && _navmeshAgent.remainingDistance <= 0.2f)
+        if (_navmeshAgent.isStopped) _navmeshAgent.isStopped = false;
+        
+        if (!_navmeshAgent.pathPending && _navmeshAgent.remainingDistance <= 0.4f)
         {
             SetWayPoint();
         }
@@ -195,7 +284,12 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         _navmeshAgent.speed = chaseSpeed;
         _navmeshAgent.SetDestination(_targetPlayer.position);
-        
+
+        CheckPlayerPos();
+    }
+
+    private void CheckPlayerPos()
+    {
         Vector3 direction = (_targetPlayer.position - transform.position).normalized;
         direction.y = 0;
 

@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 2132264754550813139}
   - component: {fileID: 1052744009010035821}
   - component: {fileID: 2296022957615103542}
-  - component: {fileID: 9110986449895352208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBlade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,27 +90,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9110986449895352208
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240517747180208351}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &299337566469865682
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,8 +101,7 @@ GameObject:
   - component: {fileID: 4510907114976821819}
   - component: {fileID: 3841093910944170916}
   - component: {fileID: 8027234651498776751}
-  - component: {fileID: 7797861256625933374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBlade2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,27 +180,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7797861256625933374
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299337566469865682}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &373445288298744381
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +191,8 @@ GameObject:
   - component: {fileID: 8799307660560936879}
   - component: {fileID: 2391923365474951513}
   - component: {fileID: 5784524292962937154}
-  - component: {fileID: 8304373443690280241}
-  m_Layer: 0
+  - component: {fileID: 2222877762877185331}
+  m_Layer: 6
   m_Name: Lens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,14 +271,14 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8304373443690280241
+--- !u!135 &2222877762877185331
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373445288298744381}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 59d7f09b5bf6cb248ae6473a0c8903ee, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -352,8 +308,10 @@ GameObject:
   - component: {fileID: 2170373601760561241}
   - component: {fileID: 4139895794714707164}
   - component: {fileID: 8495530041224638626}
-  - component: {fileID: 3681753867244521728}
-  m_Layer: 0
+  - component: {fileID: -4609942877995516623}
+  - component: {fileID: 77540329699578228}
+  - component: {fileID: -729179309431272621}
+  m_Layer: 6
   m_Name: PlayerDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +327,7 @@ Transform:
   m_GameObject: {fileID: 971913610480199745}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.366, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -417,18 +375,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
   GlobalObjectIdHash: 729624989
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 729624989
   DeferredDespawnTick: 0
-  Ownership: 1
+  Ownership: 2
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
+  DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
+  AllowOwnerToParent: 1
 --- !u!114 &3679402617380995310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,7 +407,7 @@ MonoBehaviour:
   _possessionRayPivot: {fileID: 8799307660560936879}
   _targetLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 128
   _cinemachineCamera: {fileID: 3820322090921818748}
 --- !u!114 &9216172038396605342
 MonoBehaviour:
@@ -491,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd4f4e6ef000594998ed6e845475766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerColorChanger
-  _playerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!114 &8495530041224638626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,34 +469,34 @@ MonoBehaviour:
   RotationInterpolationType: 0
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.1
+  PositionMaxInterpolationTime: 0.05
   RotationLerpSmoothing: 1
   RotationMaxInterpolationTime: 0.1
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
-  TickSyncChildren: 0
-  UseUnreliableDeltas: 0
+  TickSyncChildren: 1
+  UseUnreliableDeltas: 1
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
-  InLocalSpace: 0
+  InLocalSpace: 1
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &3681753867244521728
+--- !u!114 &-4609942877995516623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -552,9 +510,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkRigidbody
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
-  UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
+  UseRigidBodyForMotion: 1
+  AutoUpdateKinematicState: 0
   AutoSetKinematicOnDespawn: 1
+--- !u!65 &77540329699578228
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971913610480199745}
+  m_Material: {fileID: 13400000, guid: 59d7f09b5bf6cb248ae6473a0c8903ee, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &-729179309431272621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971913610480199745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab001d5139b3e440a3da39573287aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VivoxInputController
 --- !u!1 &2550690608123586003
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,8 +557,7 @@ GameObject:
   - component: {fileID: 6924696792096322628}
   - component: {fileID: 4261729084107362703}
   - component: {fileID: 1198248657376550026}
-  - component: {fileID: 4151897620519770550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBlade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,27 +636,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4151897620519770550
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2550690608123586003}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2846868186420374052
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,8 +647,7 @@ GameObject:
   - component: {fileID: 930269767017312314}
   - component: {fileID: 1671717142191331946}
   - component: {fileID: 8234398410483712040}
-  - component: {fileID: 999321408515091421}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LShaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,29 +728,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &999321408515091421
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846868186420374052}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5089434660216437065
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,8 +739,7 @@ GameObject:
   - component: {fileID: 582900085649410903}
   - component: {fileID: 7831431050608013665}
   - component: {fileID: 97342604687053018}
-  - component: {fileID: 6304664404363064872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBlade2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,27 +818,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6304664404363064872
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5089434660216437065}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6663610166560752372
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,8 +829,7 @@ GameObject:
   - component: {fileID: 8315284916157741181}
   - component: {fileID: 2514539835038910626}
   - component: {fileID: 1492084939373386915}
-  - component: {fileID: 6586187324835021036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RShaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -988,29 +910,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6586187324835021036
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6663610166560752372}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &8064171748820530108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,7 +920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6627420838499226448}
   - component: {fileID: 3820322090921818748}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1037,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 8064171748820530108}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 1, z: -1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1097,8 +996,7 @@ GameObject:
   - component: {fileID: 742580638666499964}
   - component: {fileID: 2114216025662612038}
   - component: {fileID: 8057690161230645059}
-  - component: {fileID: 4468104417182100511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DroneBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1114,7 +1012,7 @@ Transform:
   m_GameObject: {fileID: 8407982068230389039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1180,24 +1078,3 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4468104417182100511
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8407982068230389039}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
