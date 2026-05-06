@@ -19,11 +19,15 @@ public class RobotCameraLook : NetworkBehaviour
     private Vector2 _cameraMoveInput;
     // 로봇 시야 조작키
     private InputAction _playerCameraAction;
+    private InputAction _playerGrab;
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
 
     private Animator _animator;
+
+    // 잡기 체크
+    private bool _isGrab = false;
 
     private void Awake() => Init();
 
@@ -32,6 +36,9 @@ public class RobotCameraLook : NetworkBehaviour
         // 카메라 시점 이동 구독
         _playerCameraAction.performed += RobotOnCameraMove;
         _playerCameraAction.canceled += RobotCameraMoveCancle;
+        // 잡기 구독
+        _playerGrab.started += RobotOnGrab;
+        _playerGrab.canceled += RobotGrabCancle;
     }
 
     private void LateUpdate()
@@ -51,12 +58,16 @@ public class RobotCameraLook : NetworkBehaviour
         // 카메라 시점 이동 구독 취소
         _playerCameraAction.performed -= RobotOnCameraMove;
         _playerCameraAction.canceled -= RobotCameraMoveCancle;
+        // 잡기 구독
+        _playerGrab.started -= RobotOnGrab;
+        _playerGrab.canceled -= RobotGrabCancle;
     }
 
     #region 초기화
     private void Init()
     {
         _playerCameraAction = InputSystem.actions["PlayerCameraLook"];
+        _playerGrab = InputSystem.actions["PlayerLeftMB"];
         _animator = GetComponent<Animator>();
     }
     #endregion
@@ -80,7 +91,7 @@ public class RobotCameraLook : NetworkBehaviour
         _cameraX += _cameraMoveInput.x * _cameraSpeed;
         _cameraY -= _cameraMoveInput.y * _cameraSpeed;
 
-        _cameraY = Mathf.Clamp(_cameraY, -45f, 25f);
+        _cameraY = Mathf.Clamp(_cameraY, -45f, 45f);
     }
     #endregion
 
@@ -93,6 +104,26 @@ public class RobotCameraLook : NetworkBehaviour
 
         _animator.SetFloat("ViewX", x);
         _animator.SetFloat("ViewY", y);
+
+        float grabPos = Mathf.InverseLerp(45f, -45f, _cameraY);
+        _animator.SetFloat("GrabPos", grabPos);
+    }
+    #endregion
+
+    #region 로봇폼 잡기
+    public void RobotOnGrab(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner) return;
+        if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        _isGrab = true;
+        _animator.SetBool("IsGrab", _isGrab);
+    }
+    public void RobotGrabCancle(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner) return;
+        if (!ctx.canceled || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        _isGrab = false;
+        _animator.SetBool("IsGrab", _isGrab);
     }
     #endregion
 }

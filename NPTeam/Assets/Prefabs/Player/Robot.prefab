@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3219256462
+  GlobalObjectIdHash: 1109704492
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 2
@@ -805,7 +805,27 @@ MonoBehaviour:
   m_Animator: {fileID: 5397510570797047842}
   TransitionStateInfoList: []
   AnimatorParameterEntries:
-    ParameterEntries: []
+    ParameterEntries:
+    - name: MoveSpeed
+      NameHash: 526065662
+      Synchronize: 1
+      ParameterType: 1
+    - name: ViewX
+      NameHash: 2089634499
+      Synchronize: 1
+      ParameterType: 1
+    - name: ViewY
+      NameHash: 193624661
+      Synchronize: 1
+      ParameterType: 1
+    - name: GrabPos
+      NameHash: 679616616
+      Synchronize: 1
+      ParameterType: 1
+    - name: IsGrab
+      NameHash: -1458837968
+      Synchronize: 1
+      ParameterType: 4
   AnimatorParametersExpanded: 0
 --- !u!1 &5420719577209341313
 GameObject:
