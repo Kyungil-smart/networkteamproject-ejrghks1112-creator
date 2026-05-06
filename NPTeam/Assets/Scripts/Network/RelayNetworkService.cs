@@ -16,7 +16,7 @@ public class RelayNetworkService : MonoBehaviour
 {
     // 싱글톤 처리
     public static RelayNetworkService Instance { get; private set; }
-    [SerializeField] private const int maxPlayers = 7;  // 최대 초대 가능 플레이어 수
+    [SerializeField] private const int maxPlayers = 4;  // 최대 초대 가능 플레이어 수
 
     private void Awake() => SetSingleton();
 

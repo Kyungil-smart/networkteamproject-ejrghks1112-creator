@@ -32,7 +32,7 @@ public class AuthService : MonoBehaviour
 
 
 
-    public async Task InitializeAsync()
+    public static async Task InitializeAsync()
     {
         try
         {
