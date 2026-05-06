@@ -681,6 +681,10 @@ PrefabInstance:
       value: TitleScene
       objectReference: {fileID: 0}
     - target: {fileID: 8479672184024116744, guid: d2a1b76cd50f69c4d937f8f0f82b7525, type: 3}
+      propertyPath: _isLoadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479672184024116744, guid: d2a1b76cd50f69c4d937f8f0f82b7525, type: 3}
       propertyPath: _loadSceneIndex
       value: 1
       objectReference: {fileID: 0}
