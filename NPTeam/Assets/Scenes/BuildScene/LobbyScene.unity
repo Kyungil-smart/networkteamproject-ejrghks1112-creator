@@ -1685,6 +1685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SessionLauncher
       objectReference: {fileID: 0}
+    - target: {fileID: 5975144994497767962, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
