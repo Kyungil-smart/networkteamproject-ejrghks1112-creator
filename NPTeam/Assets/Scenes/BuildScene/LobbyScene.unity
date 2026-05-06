@@ -918,10 +918,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackGroundCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5227342285764752238, guid: b9c0cfd309f312b4296f0a5ee0df6608, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8908810388938068581, guid: b9c0cfd309f312b4296f0a5ee0df6608, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1545,10 +1541,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SubCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5334885289515098546, guid: 6e4170b6a398fea4086903b029af5e9a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6079732008969578469, guid: 6e4170b6a398fea4086903b029af5e9a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1625,75 +1617,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3107590360244881798, guid: 4e5f93af4b4a710479b29cff276b198e, type: 3}
   m_PrefabInstance: {fileID: 326609311719746310}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8405903556731564152
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798376538373128968, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5050502209773946377, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: nextSceneName
-      value: Stage1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322128212295819954, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 1831058498
-      objectReference: {fileID: 0}
-    - target: {fileID: 5975144994497767962, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_Name
-      value: SessionLauncher
-      objectReference: {fileID: 0}
-    - target: {fileID: 5975144994497767962, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9d56f2a85ecc2814fb0f7f357af80ddd, type: 3}
 --- !u!224 &8536350624535228233 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2839290091054616496, guid: bee1051c553f14149bb132e865baa239, type: 3}
@@ -1712,7 +1635,6 @@ SceneRoots:
   - {fileID: 1271287580}
   - {fileID: 120737883}
   - {fileID: 348877458}
-  - {fileID: 8405903556731564152}
   - {fileID: 2402825085123076155}
   - {fileID: 5910029052228301507}
   - {fileID: 934770264687410640}
