@@ -21,6 +21,8 @@ public class ComponentCameraLook : NetworkBehaviour
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
 
+    private PlayerStun _stun;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -33,6 +35,7 @@ public class ComponentCameraLook : NetworkBehaviour
     private void LateUpdate()
     {
         if (!IsOwner) return;
+        if (_stun.IsStunned) return;
         CameraVectorBackup();
         // 카메라 시점 이동
         _componentPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
@@ -49,6 +52,7 @@ public class ComponentCameraLook : NetworkBehaviour
     private void Init()
     {
         _playerCameraAction = InputSystem.actions["PlayerCameraLook"];
+        _stun = GetComponentInParent<PlayerStun>();
     }
     #endregion
 
