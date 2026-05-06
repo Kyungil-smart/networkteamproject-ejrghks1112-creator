@@ -79,6 +79,9 @@ public class NetworkBootstrap : MonoBehaviour
         {
             string joinCode = await RelayNetworkService.Instance.StartHostWithRelayAsync();
             _joinCodeInputField.text = joinCode;
+            
+            // 연동준이 추가
+            VivoxController.Instance.joinCodeChannelName = joinCode;
         }
         catch (Exception e)
         {
@@ -94,6 +97,9 @@ public class NetworkBootstrap : MonoBehaviour
 
         try
         {
+            // 연동준이 추가
+            VivoxController.Instance.joinCodeChannelName = joinCode;
+            
             await RelayNetworkService.Instance.StartClientWithRelayAsync(joinCode);
         }
         catch (Exception e)
