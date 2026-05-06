@@ -15,7 +15,12 @@ public class Monster : NetworkBehaviour, IDamagable
     private float _detectTime = 0f;
     private bool _isCooldown = false;
     public NetworkVariable<bool> spawnMonster;
-    private bool canSpawnMonster = true;
+    public NetworkVariable<bool> isDie;
+    private bool _canSpawnMonster = true;
+    private Vector3 _spawnPos;
+    private Collider _collider;
+    private Renderer _renderer;
+    private Rigidbody _rigidbody;
     
     [Header("몹 체력")]
     [SerializeField] private NetworkVariable<int> health;
@@ -51,12 +56,17 @@ public class Monster : NetworkBehaviour, IDamagable
     [Header("추가 스폰될 몬스터의 개채 수")]
     [SerializeField] private int spawnCount;
 
-    private void Awake() => _navmeshAgent = GetComponent<NavMeshAgent>();
+    private void Awake()
+    {
+        Init();
+    }
 
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
 
+        _spawnPos = transform.position;
+        
         MonsterPath[] paths = FindObjectsByType<MonsterPath>(FindObjectsSortMode.None);
 
         patrolPoints = new Transform[paths.Length];
@@ -68,8 +78,16 @@ public class Monster : NetworkBehaviour, IDamagable
         
         health = new NetworkVariable<int>(maxHealth);
         spawnMonster = new NetworkVariable<bool>(false);
+        isDie = new NetworkVariable<bool>(false);
+
+        health.OnValueChanged += OnHealthChanged;
         
         SetWayPoint();
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        health.OnValueChanged -= OnHealthChanged;
     }
 
     private void Update()
@@ -82,7 +100,7 @@ public class Monster : NetworkBehaviour, IDamagable
         {
             _detectTime += Time.deltaTime;
 
-            if (_detectTime > 5f && !spawnMonster.Value && canSpawnMonster)
+            if (_detectTime > 5f && !spawnMonster.Value && _canSpawnMonster)
             {
                 SpawnMonster();
             }
@@ -97,6 +115,22 @@ public class Monster : NetworkBehaviour, IDamagable
             _detectTime = 0f;
             _targetPlayer = null;
             Patrol();
+        }
+    }
+
+    private void Init()
+    {
+        _navmeshAgent = GetComponent<NavMeshAgent>();
+        _collider = GetComponent<Collider>();
+        _renderer = GetComponent<Renderer>();
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void OnHealthChanged(int oldValue, int newValue)
+    {
+        if (newValue <= 0 && !isDie.Value)
+        {
+            StartCoroutine(RespawnRoution());
         }
     }
 
@@ -116,7 +150,7 @@ public class Monster : NetworkBehaviour, IDamagable
             GameObject monster = Instantiate(monsterPrefab, spawnPos, spawnRot);
         
             var plusMonster = monster.GetComponent<Monster>();
-            if (plusMonster != null) plusMonster.canSpawnMonster = false;
+            if (plusMonster != null) plusMonster._canSpawnMonster = false;
             
             var networkObject = plusMonster.GetComponent<NetworkObject>();
             if (networkObject != null) networkObject.Spawn();
@@ -152,8 +186,8 @@ public class Monster : NetworkBehaviour, IDamagable
         KnockbackPlayer();
         
         CheckPlayerPos();
-        
-        yield return new WaitForSeconds(knockbackCooltime);
+
+        yield return YieldContainer.WaitForSeconds(knockbackCooltime);
         
         _navmeshAgent.isStopped = false;
 
@@ -163,6 +197,29 @@ public class Monster : NetworkBehaviour, IDamagable
         }
         
         _isCooldown = false;
+    }
+    
+    private IEnumerator RespawnRoution()
+    {
+        isDie.Value = true;
+        
+        MonsterSetActiveClientRpc(false);
+        
+        yield return YieldContainer.WaitForSeconds(10f);
+
+        health.Value = maxHealth;
+        transform.position = _spawnPos;
+        isDie.Value = false;
+        
+        MonsterSetActiveClientRpc(true);
+    }
+
+    [ClientRpc]
+    private void MonsterSetActiveClientRpc(bool active)
+    {
+        _collider.enabled = active;
+        _renderer.enabled = active;
+        _rigidbody.linearVelocity = Vector3.zero;
     }
 
     private void SetWayPoint()
