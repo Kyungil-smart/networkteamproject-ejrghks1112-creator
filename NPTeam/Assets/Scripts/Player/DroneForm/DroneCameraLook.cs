@@ -69,11 +69,13 @@ public class DroneCameraLook : NetworkBehaviour
     #region 카메라 시점 이동 조작
     public void DroneOnCameraMove(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
 
     public void DroneCameraMoveCancle(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         _cameraMoveInput = Vector2.zero;
     }
 
