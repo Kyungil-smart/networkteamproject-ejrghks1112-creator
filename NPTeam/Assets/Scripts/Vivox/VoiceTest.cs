@@ -1,9 +1,9 @@
 using TMPro;
+using Unity.Services.Vivox;
 using UnityEngine;
 
 public class VoiceTest : MonoBehaviour
 {
-    [SerializeField] NetworkBootstrap networkBootstrap;
     private async void Start()
     {
         Debug.Log("보이스 채팅 시작");
@@ -15,5 +15,9 @@ public class VoiceTest : MonoBehaviour
         await VivoxController.Instance.JoinChannelAsync(VivoxController.Instance.joinCodeChannelName);
 
         Debug.Log("채널 참가 요청 완료");
+        
+        VivoxService.Instance.MuteInputDevice(); // 게임 들어오면 마이크 음소거로 시작
+        
+        Debug.Log("시작시 마이크 음소거");
     }
 }
