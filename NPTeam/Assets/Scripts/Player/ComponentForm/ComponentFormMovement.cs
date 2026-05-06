@@ -65,41 +65,45 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
         if (_stun.IsStunned) return;
         Move();
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _move = ctx.ReadValue<Vector2>();
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (!IsOwner) return;
         _move = Vector2.zero;
     }
 
     private void OnDescend(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _flyDown = ctx.ReadValue<float>();
     }
     private void OnDescendCancel(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (!IsOwner) return;
         _flyDown = 0f;
     }
 
 
     private void OnAscend(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _flyUp = ctx.ReadValue<float>();
     }
     private void OnAscendCancel(InputAction.CallbackContext ctx)
     {
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (!IsOwner) return;
         _flyUp = 0f;
     }
 
@@ -108,14 +112,9 @@ public class ComponentFormMovement : NetworkBehaviour
         Vector3 moveDir = transform.forward * _move.y + transform.right * _move.x;
         float flyDir = _flyUp - _flyDown;
         Vector3 flyVelocity = transform.up * flyDir;
+
         Vector3 componentMove = moveDir * _moveSpeed + flyVelocity * _flySpeed;
 
-        MoveServerRpc(componentMove);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void MoveServerRpc(Vector3 componentMove)
-    {
         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
     }
 }
