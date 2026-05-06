@@ -26,6 +26,8 @@ public class RobotCameraLook : NetworkBehaviour
 
     private Animator _animator;
 
+    private PlayerStun _stun;
+
     // 잡기 체크
     private bool _isGrab = false;
 
@@ -44,6 +46,7 @@ public class RobotCameraLook : NetworkBehaviour
     private void LateUpdate()
     {
         if (!IsOwner) return;
+        if (_stun.IsStunned) return;
         RobotCameraVectorBackup();
 
         RobotViewAngleAni();
@@ -69,6 +72,7 @@ public class RobotCameraLook : NetworkBehaviour
         _playerCameraAction = InputSystem.actions["PlayerCameraLook"];
         _playerGrab = InputSystem.actions["PlayerLeftMB"];
         _animator = GetComponent<Animator>();
+        _stun = GetComponentInParent<PlayerStun>();
     }
     #endregion
 
