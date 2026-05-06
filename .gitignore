@@ -102,5 +102,3 @@ InitTestScene*.unity*
 
 # Ignore imported assets
 Assets/Imports/**
-
-ProjectSettings\Packages\com.unity.services.vivox\Settings.json
