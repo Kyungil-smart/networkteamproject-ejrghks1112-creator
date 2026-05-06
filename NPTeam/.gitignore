@@ -107,3 +107,5 @@ Assets/PrivateAssets/
 Assets/PrivateAssets.meta
 
 UMotionData/
+
+ProjectSettings\Packages\com.unity.services.vivox\Settings.json
