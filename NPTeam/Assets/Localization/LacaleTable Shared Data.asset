@@ -24,6 +24,30 @@ MonoBehaviour:
     m_Key: UI_Title_Press
     m_Metadata:
       m_Items: []
+  - m_Id: 10101003
+    m_Key: UI_Title_NickName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10101004
+    m_Key: UI_Title_Info_01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10101005
+    m_Key: UI_Title_Info_02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10101006
+    m_Key: UI_Title_Info_03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10101007
+    m_Key: UI_Title_Info_04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10101008
+    m_Key: UI_Title_Info_05
+    m_Metadata:
+      m_Items: []
   - m_Id: 10102001
     m_Key: UI_Lobby_Name
     m_Metadata:
@@ -47,6 +71,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10102006
     m_Key: UI_Lobby_Client_Code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102007
+    m_Key: UI_Lobby_Name_02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102008
+    m_Key: UI_Lobby_Client_Quick
     m_Metadata:
       m_Items: []
   - m_Id: 10103001
