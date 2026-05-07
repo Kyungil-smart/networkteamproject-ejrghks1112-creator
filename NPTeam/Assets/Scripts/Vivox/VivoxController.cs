@@ -9,6 +9,7 @@ public class VivoxController : MonoBehaviour
     public static VivoxController Instance; // 싱글톤
 
     public string joinCodeChannelName; // joinCode를 기준으로 Vivox 채널 이름 결정
+    public string playerNickName;
 
     private async void Awake()
     {
