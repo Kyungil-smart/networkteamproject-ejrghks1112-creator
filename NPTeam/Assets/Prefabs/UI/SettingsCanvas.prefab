@@ -601,7 +601,6 @@ MonoBehaviour:
   languageDropdown: {fileID: 7162154653120174093}
   playerInfoName: {fileID: 2748406355785010457}
   playerName: 
-  creditWindow: {fileID: 606727345363203896}
 --- !u!1 &1126422826734662399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,7 +1676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 240, y: 0}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 180, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5705661479944833461

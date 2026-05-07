@@ -46,7 +46,7 @@ public class PopUpManager : MonoBehaviour
     // 크레딧 창
     public void ToggleCreditsPanel()
     {
-        _popupCreditsWindow.SetActive(_popupCreditsWindow.activeSelf);
+        _popupCreditsWindow.SetActive(!_popupCreditsWindow.activeSelf);
     }
 
 }
