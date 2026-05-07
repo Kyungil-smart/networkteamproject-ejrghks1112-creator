@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9085945142113781212}
   - component: {fileID: 5137585688078573009}
   - component: {fileID: 393697990130382609}
+  - component: {fileID: 1296903823103781883}
   m_Layer: 7
   m_Name: PlayerVehicle(LL)
   m_TagString: Player
@@ -205,6 +206,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStun
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &1296903823103781883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570259725822164077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba16a94bfb962f49b1d3c2e9a16fb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FormColorChanger
+  ShowTopMostFoldoutHeaderGroup: 1
+  CurrentColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1001 &1915274451592694218
 PrefabInstance:
   m_ObjectHideFlags: 0

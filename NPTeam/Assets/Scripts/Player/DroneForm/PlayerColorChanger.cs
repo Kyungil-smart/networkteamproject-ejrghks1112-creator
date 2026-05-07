@@ -78,7 +78,7 @@ public class PlayerColorChanger : NetworkBehaviour
     #region 빙의시 색상 변경
     public void ApplyPossessColor(Renderer[] targetRenderers)
     {
-        _originColors.Clear();
+        //_originColors.Clear();
 
         foreach (Renderer renderer in targetRenderers)
         {
@@ -87,7 +87,7 @@ public class PlayerColorChanger : NetworkBehaviour
             int id = renderer.sharedMaterial.HasProperty(BaseColorID) ? BaseColorID : ColorID;
 
             // 대상 원래 색 저장
-            _originColors[renderer] = renderer.sharedMaterial.GetColor(id);
+            //_originColors[renderer] = renderer.sharedMaterial.GetColor(id);
 
             renderer.GetPropertyBlock(_mpb);
             _mpb.SetColor(id, _playerColor.Value);
@@ -107,8 +107,9 @@ public class PlayerColorChanger : NetworkBehaviour
             _mpb.SetColor(id, _originColors[renderer]);
             renderer.SetPropertyBlock(_mpb);
         }
-
         _originColors.Clear();
+
+        ApplyColor();
     }
     #endregion
 }

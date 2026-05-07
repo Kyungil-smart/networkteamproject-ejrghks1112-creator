@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9085945142113781212}
   - component: {fileID: 5137585688078573009}
   - component: {fileID: 393697990130382609}
+  - component: {fileID: -8371693651353979178}
   m_Layer: 7
   m_Name: PlayerVehicle(RL)
   m_TagString: Player
@@ -80,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3130111748
+  GlobalObjectIdHash: 916260593
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -205,6 +206,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStun
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &-8371693651353979178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570259725822164077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba16a94bfb962f49b1d3c2e9a16fb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FormColorChanger
+  ShowTopMostFoldoutHeaderGroup: 1
+  CurrentColor: {r: 1, g: 0, b: 1, a: 1}
 --- !u!1001 &1547280360394203762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -255,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2968725808325582160, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2018744147
+      value: 603299969
       objectReference: {fileID: 0}
     - target: {fileID: 4919145760332672327, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: m_Name
@@ -376,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 570259725822164077}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3219256462
+      value: 923722747
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -477,7 +492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1488678732
+      value: 1219803596
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: _playerVehicle

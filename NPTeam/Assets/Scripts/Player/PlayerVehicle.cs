@@ -34,8 +34,13 @@ public class PlayerVehicle : NetworkBehaviour
 
     // 조작키
     private NPTeamInputActions _playerInput;
-  
+
+    // 폼 체인지 색상 적용을 위한 변수
+    public FormColorChanger _formColorChanger;
+
     private PlayerStun _stun;
+
+
 
     private void Awake() => Init();
 
@@ -69,6 +74,7 @@ public class PlayerVehicle : NetworkBehaviour
     {
         _playerInput = new NPTeamInputActions();
         _rigidbody = GetComponent<Rigidbody>();
+        _formColorChanger = GetComponent<FormColorChanger>();
         _stun = GetComponent<PlayerStun>();
     }
     #endregion
@@ -81,6 +87,7 @@ public class PlayerVehicle : NetworkBehaviour
 
         SetForm(0);
         ChangeOwnershipServerRpc(0);
+        FormColoerChange(0);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
@@ -89,6 +96,7 @@ public class PlayerVehicle : NetworkBehaviour
 
         SetForm(1);
         ChangeOwnershipServerRpc(1);
+        FormColoerChange(1);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
@@ -97,6 +105,7 @@ public class PlayerVehicle : NetworkBehaviour
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);
+        FormColoerChange(2);
     }
     public void SetForm(int index)
     {
@@ -134,19 +143,6 @@ public class PlayerVehicle : NetworkBehaviour
         _componentCamera.Priority = (index == 2) ? 2 : 1;
     }
     #endregion
-
-    //#region 폼 int로 반환 함수
-    //public GameObject GetCurrentFormObject(int index)
-    //{
-    //    return index switch
-    //    {
-    //        0 => _carForm,
-    //        1 => _robotForm,
-    //        2 => _componentForm,
-    //        _ => null
-    //    };
-    //}
-    //#endregion
 
     #region 빙의시 카메라 우선순위
     public void OnPossessedCameraSync()
@@ -188,16 +184,39 @@ public class PlayerVehicle : NetworkBehaviour
     {
         ChangeOwnershipServerRpc(_currentFormIndex);
     }
-
     #endregion
 
-    // 시작시 폼체인지를 위한 코루틴
+    #region 폼 체인지 색상 변경 네트워크 처리
+    private void FormColoerChange(int index)
+    {
+        SetPossessionColorServerRpc(GetFormNetworkObject(index).NetworkObjectId);
+    }
+
+    [ServerRpc]
+    private void SetPossessionColorServerRpc(ulong targetNetId)
+    {
+        SetPossessionColorClientRpc(targetNetId);
+    }
+
+    [ClientRpc]
+    private void SetPossessionColorClientRpc(ulong targetNetId)
+    {
+        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject networkObject))
+            return;
+
+        Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
+        _formColorChanger.FormChangeColor(renderers);
+    }
+    #endregion
+
+    #region 시작시 폼체인지를 위한 코루틴
     private IEnumerator ESetForm()
     {
         if (!IsOwner) yield break;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         SetForm(0);
     }
+    #endregion
 
     #region 적 AI 관련 함수 관리
     [ClientRpc]
