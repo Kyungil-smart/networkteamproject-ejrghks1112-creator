@@ -46,7 +46,7 @@ public class AssembleController : NetworkBehaviour
 
     
     [ServerRpc]
-    public void AddAssemblePart(string name, int num)
+    public void AddAssemblePartServerRpc(string name, int num)
     {
         AddAssemblePartClientRpc(name, num);
         if (_parts.Count >= 4)
