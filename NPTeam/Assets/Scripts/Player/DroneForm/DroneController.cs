@@ -267,8 +267,7 @@ public class DroneController : NetworkBehaviour
             if (vehicle != null)
             {
                 vehicle.OnPossessedCameraSync();
-                vehicle.SetColorAndForm(_playerColorChanger.CurrentColor, vehicle.CurrentFormIndex);
-                vehicle.SetForm(vehicle.CurrentFormIndex);
+                vehicle.DroneChangeOwnership();
                 _playerVehicle = vehicle;
             }
         }

@@ -1,7 +1,9 @@
+using System;
+using System.Collections;
 using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode;
 
 public class PlayerVehicle : NetworkBehaviour
 {
@@ -17,9 +19,6 @@ public class PlayerVehicle : NetworkBehaviour
         set => _currentFormIndex = value;
     }
 
-    private MaterialPropertyBlock _mpb;
-    private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
-    private static readonly int ColorID = Shader.PropertyToID("_Color");
 
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
@@ -35,22 +34,10 @@ public class PlayerVehicle : NetworkBehaviour
 
     // 조작키
     private NPTeamInputActions _playerInput;
-
-    // 폼 체인지시 컬러
-    private NetworkVariable<Color> _playerColor =
-    new NetworkVariable<Color>(
-        default,
-        NetworkVariableReadPermission.Everyone,
-        NetworkVariableWritePermission.Server);
-
+  
     private PlayerStun _stun;
 
     private void Awake() => Init();
-
-    private void Start()
-    {
-        SetForm(0);
-    }
 
     private void OnEnable()
     {
@@ -60,6 +47,11 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode1.started += OnCarChanged;
         _playerInput.Player.PlayerMode2.started += OnRobotChanged;
         _playerInput.Player.PlayerMode3.started += OnComponentChanged;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ESetForm());
     }
 
     private void OnDisable()
@@ -78,7 +70,6 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput = new NPTeamInputActions();
         _rigidbody = GetComponent<Rigidbody>();
         _stun = GetComponent<PlayerStun>();
-        _mpb = new MaterialPropertyBlock();
     }
     #endregion
 
@@ -89,6 +80,7 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(0);
+        ChangeOwnershipServerRpc(0);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
@@ -96,6 +88,7 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(1);
+        ChangeOwnershipServerRpc(1);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
@@ -103,26 +96,21 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(2);
+        ChangeOwnershipServerRpc(2);
     }
     public void SetForm(int index)
     {
         ChangeFormServerRpc(index);
     }
 
-    [Rpc(SendTo.Server, RequireOwnership = false)]
+    [ServerRpc]
     private void ChangeFormServerRpc(int index)
     {
-        ApplyForm(index);
         ChangeFormClientRpc(index);
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
+    [ClientRpc]
     private void ChangeFormClientRpc(int index)
-    {
-        ApplyForm(index);
-    }
-
-    private void ApplyForm(int index)
     {
         _currentFormIndex = index;
 
@@ -132,10 +120,7 @@ public class PlayerVehicle : NetworkBehaviour
 
         _rigidbody.useGravity = (index != 2);
 
-        ApplyCurrentFormColor();
         SetCamera(index);
-
-        ChangeOwnershipServerRpc(index);
     }
     #endregion
 
@@ -150,86 +135,23 @@ public class PlayerVehicle : NetworkBehaviour
     }
     #endregion
 
-    #region 현재 폼 반환 함수
-    public GameObject GetCurrentFormObject(int index)
-    {
-        return index switch
-        {
-            0 => _carForm,
-            1 => _robotForm,
-            2 => _componentForm,
-            _ => null
-        };
-    }
-    #endregion
-
-    private NetworkObject GetFormNetworkObject(int index)
-    {
-        return index switch
-        {
-            0 => _carNetworkObject,
-            1 => _robotNetworkObject,
-            2 => _componentNetworkObject,
-            _ => null
-        };
-    }
+    //#region 폼 int로 반환 함수
+    //public GameObject GetCurrentFormObject(int index)
+    //{
+    //    return index switch
+    //    {
+    //        0 => _carForm,
+    //        1 => _robotForm,
+    //        2 => _componentForm,
+    //        _ => null
+    //    };
+    //}
+    //#endregion
 
     #region 빙의시 카메라 우선순위
     public void OnPossessedCameraSync()
     {
         SetCamera(_currentFormIndex);
-    }
-    #endregion
-
-    #region 적 AI 관련 함수 관리
-    [ClientRpc]
-    public void KnockbackClientRpc(Vector3 force)
-    {
-        if (IsOwner)
-        {
-            _rigidbody.AddForce(force, ForceMode.Impulse);
-        }
-    }
-    #endregion
-
-    #region 폼 체인지 색상 변환
-    private void ApplyCurrentFormColor()
-    {
-        GameObject obj = GetCurrentFormObject(_currentFormIndex);
-        if (obj == null) return;
-
-        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
-
-        foreach (Renderer renderer in renderers)
-        {
-            if (renderer.sharedMaterial == null) continue;
-
-            int id = renderer.sharedMaterial.HasProperty(BaseColorID) ? BaseColorID : ColorID;
-
-            renderer.GetPropertyBlock(_mpb);
-            _mpb.SetColor(id, _playerColor.Value);
-            renderer.SetPropertyBlock(_mpb);
-        }
-    }
-
-    // 색상 + 폼 동시 적용 (순서 보장)
-    public void SetColorAndForm(Color color, int formIndex)
-    {
-        SetColorAndFormServerRpc(color, formIndex);
-    }
-
-    [ServerRpc]
-    private void SetColorAndFormServerRpc(Color color, int formIndex)
-    {
-        _playerColor.Value = color;
-        ApplyForm(formIndex);
-        SetColorAndFormClientRpc(color, formIndex);
-    }
-
-    [ClientRpc]
-    private void SetColorAndFormClientRpc(Color color, int formIndex)
-    {
-        ApplyForm(formIndex);
     }
     #endregion
 
@@ -242,9 +164,49 @@ public class PlayerVehicle : NetworkBehaviour
     }
     #endregion
 
-    [ServerRpc]
+    #region 오너쉽 변경 및 네트워크 오브젝트 int로 반환 함수
+
+    [ServerRpc(RequireOwnership = false)]
     private void ChangeOwnershipServerRpc(int index)
     {
         GetFormNetworkObject(index).ChangeOwnership(OwnerClientId);
     }
+
+    private NetworkObject GetFormNetworkObject(int index)
+    {
+        return index switch
+        {
+            0 => _carNetworkObject,
+            1 => _robotNetworkObject,
+            2 => _componentNetworkObject,
+            _ => null
+        };
+    }
+
+    // 드론에서 사용 오너쉽 변경시 사용할 함수
+    public void DroneChangeOwnership()
+    {
+        ChangeOwnershipServerRpc(_currentFormIndex);
+    }
+
+    #endregion
+
+    // 시작시 폼체인지를 위한 코루틴
+    private IEnumerator ESetForm()
+    {
+        if (!IsOwner) yield break;
+        yield return new WaitForSeconds(0.5f);
+        SetForm(0);
+    }
+
+    #region 적 AI 관련 함수 관리
+    [ClientRpc]
+    public void KnockbackClientRpc(Vector3 force)
+    {
+        if (IsOwner)
+        {
+            _rigidbody.AddForce(force, ForceMode.Impulse);
+        }
+    }
+    #endregion
 }

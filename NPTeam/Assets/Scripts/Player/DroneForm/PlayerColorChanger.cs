@@ -30,10 +30,9 @@ public class PlayerColorChanger : NetworkBehaviour
     {
         if (IsServer)
         {
-            _playerColor.Value = Random.ColorHSV();
+            _playerColor.Value = Random.ColorHSV(0f, 1f, 0.8f, 1f, 0.9f, 1f);
         }
 
-        _playerColor.OnValueChanged -= OnColorChanged; 
         _playerColor.OnValueChanged += OnColorChanged;
 
         ApplyColor();
