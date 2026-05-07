@@ -114,6 +114,18 @@ MonoBehaviour:
     m_Localized: Quick Join
     m_Metadata:
       m_Items: []
+  - m_Id: 10103009
+    m_Localized: User Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103010
+    m_Localized: 'Name : {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103011
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
