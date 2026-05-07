@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9085945142113781212}
   - component: {fileID: 5137585688078573009}
   - component: {fileID: 393697990130382609}
+  - component: {fileID: -5638662699442591861}
   m_Layer: 7
   m_Name: PlayerVehicle(LA)
   m_TagString: Player
@@ -115,6 +116,7 @@ MonoBehaviour:
   _carNetworkObject: {fileID: 3046856563498747721}
   _robotNetworkObject: {fileID: 6250202584401377799}
   _componentNetworkObject: {fileID: 2493680941598042870}
+  _formColorChanger: {fileID: 0}
 --- !u!114 &6065807456793869565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +147,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -204,6 +206,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bfa58dfd4dbc64988f1375dd2ae65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStun
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &-5638662699442591861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570259725822164077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba16a94bfb962f49b1d3c2e9a16fb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FormColorChanger
   ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1001 &1915274451592694218
 PrefabInstance:
@@ -271,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 570259725822164077}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 923722747
+      value: 1501050693
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -477,7 +492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1219803596
+      value: 3048143422
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 363bbf671e8c9b2449afc9888cd0c95e, type: 3}
       propertyPath: _playerVehicle
