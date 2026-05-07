@@ -205,6 +205,9 @@ public class PlayerVehicle : NetworkBehaviour
     {
         if (IsOwner)
         {
+            // 새로 추가된 기존에 적용되던 velocity를 없에주는 역할 
+            _rigidbody.linearVelocity = Vector3.zero;
+
             _rigidbody.AddForce(force, ForceMode.Impulse);
         }
     }
