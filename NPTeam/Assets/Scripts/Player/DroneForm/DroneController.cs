@@ -44,23 +44,6 @@ public class DroneController : NetworkBehaviour
 
     private void Awake() => Init();
 
-    //private void OnEnable()
-    //{
-    //    _playerInput.Enable();
-
-    //    // 이동 구독
-    //    _playerInput.Player.PlayerMove.performed += DroneOnMove;
-    //    _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
-    //    // 상승 구독
-    //    _playerInput.Player.PlayerAscend.started += DroneOnAscend;
-    //    _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
-    //    // 하강 구독
-    //    _playerInput.Player.PlayerDescend.started += DroneOnDescend;
-    //    _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
-    //    // 빙의 구독
-    //    _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
-    //}
-
     public override void OnNetworkSpawn()
     {
         if (!IsOwner)
@@ -114,23 +97,6 @@ public class DroneController : NetworkBehaviour
 
         _playerInput.Disable();
     }
-
-    //private void OnDisable()
-    //{
-    //    // 이동 구독 취소
-    //    _playerInput.Player.PlayerMove.performed -= DroneOnMove;
-    //    _playerInput.Player.PlayerMove.canceled -= DroneMoveCancle;
-    //    // 상승 구독 취소
-    //    _playerInput.Player.PlayerAscend.started -= DroneOnAscend;
-    //    _playerInput.Player.PlayerAscend.canceled -= DroneOnAscend;
-    //    // 하강 구독 취소
-    //    _playerInput.Player.PlayerDescend.started -= DroneOnDescend;
-    //    _playerInput.Player.PlayerDescend.canceled -= DroneOnDescend;
-    //    // 빙의 구독 취소
-    //    _playerInput.Player.PlayerInteraction.started -= DroneOnPossession;
-
-    //    _playerInput.Disable();
-    //}
 
     private void OnDrawGizmos()
     {
@@ -262,13 +228,13 @@ public class DroneController : NetworkBehaviour
 
             // 카메라 우선순위 조작
             _cinemachineCamera.Priority = 0;
-            
+
             PlayerVehicle vehicle = hit.transform.GetComponent<PlayerVehicle>();
             if (vehicle != null)
             {
                 vehicle.OnPossessedCameraSync();
-                vehicle.SetColorAndForm(_playerColorChanger.CurrentColor, vehicle.CurrentFormIndex);
-                vehicle.SetForm(vehicle.CurrentFormIndex);
+                vehicle.DroneChangeOwnership();
+                vehicle._formColorChanger.SetColorServerRpc(_playerColorChanger.CurrentColor);
                 _playerVehicle = vehicle;
             }
         }
@@ -283,11 +249,10 @@ public class DroneController : NetworkBehaviour
         NetworkObject networkObject = PlayerState.Instance.CurrentPossessed.GetComponent<NetworkObject>();
 
         // 빙의 취소후 원래 색상으로 복귀
-        _playerColorChanger.Release(_currentPossessionRenderers);
+        ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
         // 플레이어 색상 복구
         _currentPossessionRenderers = null;
-        _playerColorChanger.ApplyColor();
-        ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
+        // 빙의 취소후 원래 색상으로 복귀
         ReleaseParentServerRpc();
         _playerVehicle.DisableCurrentCamera();
         _playerVehicle = null;
@@ -323,11 +288,12 @@ public class DroneController : NetworkBehaviour
     [ClientRpc]
     private void ReleasePossessionColorClientRpc(ulong targetNetId)
     {
-        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject networkObject))
-            return;
+        //if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject networkObject))
+        //    return;
 
-        Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
-        _playerColorChanger.Release(renderers);
+        //Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
+        //_playerColorChanger.Release(renderers);
+        _playerColorChanger.ApplyColor();
     }
     #endregion
 
