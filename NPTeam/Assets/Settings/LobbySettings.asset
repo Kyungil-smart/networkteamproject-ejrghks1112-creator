@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LobbySettings
   m_EditorClassIdentifier: Assembly-CSharp::LobbySettings
   MaxPlayers: 4
-  MinPlayersToStart: 4
+  MinPlayersToStart: 2
   GameRestartCooldownSec: 5
   RelayRegion: asia-northeast3

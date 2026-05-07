@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PopUpManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _popupObj;
+    [SerializeField] private GameObject _popupSettingsWindow;
+    [SerializeField] private GameObject _popupCreditsWindow;
 
     // 싱글톤 처리
     public static PopUpManager Instance { get; private set; }
@@ -29,20 +30,23 @@ public class PopUpManager : MonoBehaviour
     private void Init()
     {
         // 시작은 팝업 끄기
-        _popupObj.SetActive(false);
+        _popupSettingsWindow.SetActive(false);
+        _popupCreditsWindow.SetActive(false);
     }
 
-
-    public void OpenPanel()
+    
+    // 설정 창
+    public void ToggleSettingsPanel()
     {
-        _popupObj.SetActive(true);
+        _popupSettingsWindow.SetActive(!_popupSettingsWindow.activeSelf);
     }
 
-    public void ClosePanel()
+
+
+    // 크레딧 창
+    public void ToggleCreditsPanel()
     {
-        _popupObj.SetActive(false);
+        _popupCreditsWindow.SetActive(_popupCreditsWindow.activeSelf);
     }
-
-
 
 }
