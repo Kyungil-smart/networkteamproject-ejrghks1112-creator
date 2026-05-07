@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4564154767430899387}
   - component: {fileID: -3704192151098453199}
   - component: {fileID: 6379559533524085484}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AssemblePoint
-  m_TagString: Untagged
+  m_TagString: Connector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1982995727
+  GlobalObjectIdHash: 1338246745
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -153,6 +153,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   controller: {fileID: 0}
   type: 0
-  mat: {fileID: 0}
   beforeColor: {r: 16, g: 0, b: 0, a: 1}
   afterColor: {r: 0, g: 0.21864316, b: 15.999998, a: 1}
