@@ -7,4 +7,8 @@ public class CutsceneFormState : BaseAssembleState
         
     }
 
+    public override void Enter()
+    {
+        _controller.GetMovement.PlayTransformAnim();
+    }
 }
