@@ -14,6 +14,8 @@ public class LobbyListUI : MonoBehaviour
     [SerializeField] private GameObject _roomPanel;
     [SerializeField] private Transform _entryContainer;
     [SerializeField] private LobbyEntryUI _entryPrefab;
+
+    [Header("Buttons")]
     [SerializeField] private Button _createRoomButton;
     [SerializeField] private Button _quickJoinButton;
     [SerializeField] private Button _joinByCodeButton;
@@ -90,18 +92,18 @@ public class LobbyListUI : MonoBehaviour
         if (_isBusy) return;
         if (!AuthenticationService.Instance.IsSignedIn)
         {
-            SetStatus("로그인 상태가 아닙니다.");
+            SetStatusMessege("로그인 상태가 아닙니다.");
             return;
         }
 
         SetBusy(true);
-        SetStatus("방 목록 조회 중...");
+        SetStatusMessege("방 목록 조회 중...");
         try
         {
             IList<ISessionInfo> sessions = await LobbyManager.Instance.QuerySessionsAsync();
             PopulateEntries(sessions);
             RefreshEmptyLabel(sessions.Count);
-            SetStatus($"방 {sessions.Count}개 조회됨");
+            SetStatusMessege($"방 {sessions.Count}개 조회됨");
         }
         finally
         {
@@ -150,11 +152,11 @@ public class LobbyListUI : MonoBehaviour
     {
         if (_isBusy) return;
         SetBusy(true);
-        SetStatus("빠른 참여 중...");
+        SetStatusMessege("빠른 참여 중...");
         try
         {
             bool success = await LobbyManager.Instance.QuickJoinAsync();
-            if (!success) SetStatus("참여할 방을 찾지 못했습니다.");
+            if (!success) SetStatusMessege("참여할 방을 찾지 못했습니다.");
         }
         finally
         {
@@ -166,11 +168,11 @@ public class LobbyListUI : MonoBehaviour
     {
         if (_isBusy) return;
         SetBusy(true);
-        SetStatus($"'{sessionInfo.Name}' 참여 중...");
+        SetStatusMessege($"'{sessionInfo.Name}' 참여 중...");
         try
         {
             bool success = await LobbyManager.Instance.JoinSessionByIdAsync(sessionInfo.Id);
-            if (!success) SetStatus("방 참여 실패");
+            if (!success) SetStatusMessege("방 참여 실패");
         }
         finally
         {
@@ -208,7 +210,7 @@ public class LobbyListUI : MonoBehaviour
         _roomPanel.SetActive(!show);
     }
 
-    private void SetStatus(string message)
+    private void SetStatusMessege(string message)
     {
         _statusText.text = message;
     }
