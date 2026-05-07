@@ -4,15 +4,17 @@ using UnityEngine;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     //각 PC마다 들고 있을 차량.
-    [SerializeField] private AssembleController _LeaderVehicle;
+    // [SerializeField] private AssembleController _LeaderVehicle;
+    //
+    // public AssembleController LeaderVehicle
+    // {
+    //     get => _LeaderVehicle;
+    //     set => _LeaderVehicle = value;
+    // }
 
-    public AssembleController LeaderVehicle
-    {
-        get => _LeaderVehicle;
-        set => _LeaderVehicle = value;
-    }
-
+    
     private Dictionary<int, PlayerVehicle> PlayerVehicles = new();
+    private int GetVehiclesNum => PlayerVehicles.Count;
 
     public PlayerVehicle GetVehicle(int num)
     {
