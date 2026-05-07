@@ -114,6 +114,18 @@ MonoBehaviour:
     m_Key: UI_Settings_Language_Korean
     m_Metadata:
       m_Items: []
+  - m_Id: 10103009
+    m_Key: UI_Settings_PlayerInfo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103010
+    m_Key: UI_Settings_PlayerInfo_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103011
+    m_Key: UI_Settings_Credit
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
