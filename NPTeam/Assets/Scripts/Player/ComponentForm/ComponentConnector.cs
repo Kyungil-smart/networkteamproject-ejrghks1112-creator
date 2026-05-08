@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class ComponentConnector : MonoBehaviour
+public class ComponentConnector : NetworkBehaviour
 {
     [Header("Connector 등록")]
     [SerializeField] private LayerMask _componentLayerMask;
@@ -13,6 +13,8 @@ public class ComponentConnector : MonoBehaviour
     [SerializeField] private GameObject _playerVehicle;
     [SerializeField] private GameObject _componentFrom;
     [SerializeField] private ComponentFormMovement _componentFormMovement;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
+
     private AssemblePoint _targetAssemblePoint;
 
     private void Update()
@@ -23,6 +25,7 @@ public class ComponentConnector : MonoBehaviour
             {
                 Debug.Log($"씨발 작동{_targetAssemblePoint}");
                 _targetAssemblePoint.Interact(_playerVehicle);
+                _playerVehicleCS.LockTransform();
                 gameObject.SetActive(false);
             }
         }    
@@ -36,7 +39,7 @@ public class ComponentConnector : MonoBehaviour
             {
                 Debug.Log($"들어감{ _targetAssemblePoint}");
                 _targetAssemblePoint = other.GetComponent<AssemblePoint>();
-                _targetAssemblePoint.EnterTrigger();
+                if (IsOwner) _targetAssemblePoint.EnterTrigger();
                 Debug.Log($"들어감{_targetAssemblePoint}");
             }
         }
@@ -49,7 +52,7 @@ public class ComponentConnector : MonoBehaviour
             if (other.gameObject.layer == LayerMask.NameToLayer("Connector"))
             {
                 Debug.Log($"나감{_targetAssemblePoint}");
-                _targetAssemblePoint.ExitTrigger();
+                if (IsOwner) _targetAssemblePoint.ExitTrigger();
                 _targetAssemblePoint = null;
                 Debug.Log($"나감{_targetAssemblePoint}");
             }
