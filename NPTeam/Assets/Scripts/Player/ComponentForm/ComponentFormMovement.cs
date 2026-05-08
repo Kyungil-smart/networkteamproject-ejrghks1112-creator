@@ -57,7 +57,9 @@ public class ComponentFormMovement : NetworkBehaviour
         _input.Player.PlayerDescend.canceled += OnDescendCancel;
         _input.Player.PlayerAscend.performed += OnAscend;
         _input.Player.PlayerAscend.canceled += OnAscendCancel;
-        //_input.Player.PlayerRightMB.started
+        _input.Player.PlayerRightMB.performed += OnConnect;
+        _input.Player.PlayerRightMB.canceled += ConnectButtonCancel;
+
     }
 
     private void OnDisable()
@@ -68,7 +70,8 @@ public class ComponentFormMovement : NetworkBehaviour
         _input.Player.PlayerDescend.canceled -= OnDescendCancel;
         _input.Player.PlayerAscend.performed -= OnAscend;
         _input.Player.PlayerAscend.canceled -= OnAscendCancel;
-        //_input.Player.PlayerRightMB.started
+        _input.Player.PlayerRightMB.performed -= OnConnect;
+        _input.Player.PlayerRightMB.canceled -= ConnectButtonCancel;
         _input.Disable();
     }
 
@@ -131,14 +134,15 @@ public class ComponentFormMovement : NetworkBehaviour
     public void OnConnect(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle)
-            isPressRightMB = true;
+        if (!ctx.performed || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        isPressRightMB = true;
     }
 
     public void ConnectButtonCancel(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        isPressRightMB = false;
+        if (!ctx.canceled) return;
+            isPressRightMB = false;
     }
 
     #endregion
