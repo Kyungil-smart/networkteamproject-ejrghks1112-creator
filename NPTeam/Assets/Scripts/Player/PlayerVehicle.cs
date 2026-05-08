@@ -28,6 +28,7 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private NetworkObject _carNetworkObject;
     [SerializeField] private NetworkObject _robotNetworkObject;
     [SerializeField] private NetworkObject _componentNetworkObject;
+    [SerializeField] private NetworkObject _componentConnector;
 
     private Rigidbody _rigidbody;
 
@@ -35,6 +36,7 @@ public class PlayerVehicle : NetworkBehaviour
     private NPTeamInputActions _playerInput;
 
     // 폼 체인지 색상 적용을 위한 변수
+    [Header("알아서 등록되니깐 신경쓰지 마시오")]
     public FormColorChanger _formColorChanger;
 
     private PlayerStun _stun;
@@ -44,8 +46,15 @@ public class PlayerVehicle : NetworkBehaviour
     int _vehicleNum = -1;
     public int GetVehicleNum => _vehicleNum;
 
+    public bool isLockTransform = false;
+
     [Header("현재 차량의 ComponentFormMovement 등록")]
     [SerializeField] private ComponentFormMovement _componentFormMovement;
+    public ComponentFormMovement GetComponentFormMovement
+    {
+        get => _componentFormMovement;
+    }
+         
     #endregion
 
     private void Awake() => Init();
@@ -98,6 +107,7 @@ public class PlayerVehicle : NetworkBehaviour
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(0);
@@ -107,6 +117,7 @@ public class PlayerVehicle : NetworkBehaviour
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(1);
@@ -116,10 +127,12 @@ public class PlayerVehicle : NetworkBehaviour
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);
+
         FormColoerChange(2);
     }
     public void SetForm(int index)
@@ -181,6 +194,11 @@ public class PlayerVehicle : NetworkBehaviour
     private void ChangeOwnershipServerRpc(int index)
     {
         GetFormNetworkObject(index).ChangeOwnership(OwnerClientId);
+        // ComponentConnector 전용
+        if (index == 2)
+        {
+            _componentConnector.ChangeOwnership(OwnerClientId);
+        }
     }
 
     private NetworkObject GetFormNetworkObject(int index)
@@ -256,15 +274,12 @@ public class PlayerVehicle : NetworkBehaviour
         _vehicleNum = num;
         GameManager.Instance.SetVehicle(num, this);
     }
-    // 차량이 가지고있는 합체폼 반환
-    public ComponentFormMovement GetComponentFormMovement()
-    {
-        return _componentFormMovement;
-    }
     // 합체상태가 되면 변신 제한
     public void LockTransform()
     {
-
+        isLockTransform = true;
+        _rigidbody.linearVelocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
     }
     #endregion
 }
