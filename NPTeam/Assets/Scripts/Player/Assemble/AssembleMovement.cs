@@ -16,7 +16,7 @@ public class AssembleMovement : MonoBehaviour
         _anim?.CrossFade("Robot_Transform",0.0f);
         foreach (ComponentFormMovement movement in _controller.GetPartsData.Values)
         {
-            //movement.GetAnim?.CrossFade("Robot_Transform",0.0f);
+            movement.GetAnim?.CrossFade("Robot_Transform",0.0f);
         }
     }
 

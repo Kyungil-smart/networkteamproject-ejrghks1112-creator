@@ -51,18 +51,18 @@ public class AssembleController : NetworkBehaviour
         AddAssemblePartClientRpc(name, num);
         if (_parts.Count >= 4)
         {
-            ChageCutsceneStateClientRpc();
+            ChangeCutsceneStateClientRpc();
         }
     }
 
     [ClientRpc]
     private void AddAssemblePartClientRpc(string name, int num)
     {
-        //_parts.Add(name, GameManager.Instance.GetVehicle(num).GetComponentForm());
+        _parts.Add(name, GameManager.Instance.GetVehicle(num).GetComponentFormMovement);
     }
 
     [ClientRpc]
-    private void ChageCutsceneStateClientRpc()
+    private void ChangeCutsceneStateClientRpc()
     {
         _robotStateMachine.ChangeState(_cutsceneFormState);
     }
