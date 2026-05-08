@@ -15,7 +15,7 @@ public class AssemblePoint : MonoBehaviour, IInteractable
     public void Awake()
     {
         mat = GetComponent<MeshRenderer>().material;
-        beforeColor = mat.GetColor("_EmissionMap");
+        beforeColor = mat.GetColor("_EmissionColor");
     }
 
     public void Interact(GameObject go)
@@ -33,12 +33,12 @@ public class AssemblePoint : MonoBehaviour, IInteractable
 
     public void EnterTrigger()
     {
-        mat.SetColor("_EmissionMap", afterColor);
+        mat.SetColor("_EmissionColor", afterColor);
     }
 
     public void ExitTrigger()
     {
-        mat.SetColor("_EmissionMap", beforeColor);
+        mat.SetColor("_EmissionColor", beforeColor);
     }
 
     

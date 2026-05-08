@@ -11,7 +11,7 @@ public class AssembleController : NetworkBehaviour
     // fight상태
 
     //[SerializeField]
-    private StateMachine _robotStateMachine;
+    private StateMachine _robotStateMachine = new();
 
     private RobotFormState _robotFormState;
     private CombineFormState _combineFormState;

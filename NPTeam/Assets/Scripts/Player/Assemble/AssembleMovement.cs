@@ -8,7 +8,7 @@ public class AssembleMovement : MonoBehaviour
 
     private void Awake()
     {
-        _controller.GetComponent<AssembleController>();
+        _controller = GetComponent<AssembleController>();
     }
 
     public void PlayTransformAnim()
