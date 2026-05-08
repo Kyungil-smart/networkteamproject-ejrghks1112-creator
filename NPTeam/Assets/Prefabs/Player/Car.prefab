@@ -81,6 +81,7 @@ MonoBehaviour:
   carFormSpeed: 9
   carFormTurnSpeed: 100
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
 --- !u!114 &2233208743250253248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   _cameraSpeed: 0.2
   _carPivot: {fileID: 4585214985279756729}
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
 --- !u!114 &1854654448606354842
 MonoBehaviour:
   m_ObjectHideFlags: 0

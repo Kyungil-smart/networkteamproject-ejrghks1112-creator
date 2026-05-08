@@ -18,13 +18,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public PlayerVehicle GetVehicle(int num)
     {
-        PlayerVehicle vehicle = null;
-        if (PlayerVehicles.TryGetValue(num, out vehicle))
+        if (PlayerVehicles.ContainsKey(num))
         {
-            return vehicle;
+            return PlayerVehicles[num];
         }
 
-        return vehicle;
+        return null;
     }
 
     public void SetVehicle(int num, PlayerVehicle vehicle)

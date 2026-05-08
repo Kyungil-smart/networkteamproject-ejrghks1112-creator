@@ -19,7 +19,6 @@ public class PlayerVehicle : NetworkBehaviour
         set => _currentFormIndex = value;
     }
 
-
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
     [SerializeField] private CinemachineCamera _robotCamera;
@@ -29,6 +28,7 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private NetworkObject _carNetworkObject;
     [SerializeField] private NetworkObject _robotNetworkObject;
     [SerializeField] private NetworkObject _componentNetworkObject;
+    [SerializeField] private NetworkObject _componentConnector;
 
     private Rigidbody _rigidbody;
 
@@ -36,11 +36,29 @@ public class PlayerVehicle : NetworkBehaviour
     private NPTeamInputActions _playerInput;
 
     // 폼 체인지 색상 적용을 위한 변수
+    [Header("알아서 등록되니깐 신경쓰지 마시오")]
     public FormColorChanger _formColorChanger;
 
     private PlayerStun _stun;
+    // 폼 변신할때 시작시 가속도 끄기 체크할 변수
+    public bool checkSpeedOff = false;
+    public bool checkSpeedOffForCam = false;
 
+    #region 합체 관련 필드들
+    // 차량 번호. -1은 미등록
+    int _vehicleNum = -1;
+    public int GetVehicleNum => _vehicleNum;
 
+    public bool isLockTransform = false;
+
+    [Header("현재 차량의 ComponentFormMovement 등록")]
+    [SerializeField] private ComponentFormMovement _componentFormMovement;
+    public ComponentFormMovement GetComponentFormMovement
+    {
+        get => _componentFormMovement;
+    }
+         
+    #endregion
 
     private void Awake() => Init();
 
@@ -52,6 +70,15 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode1.started += OnCarChanged;
         _playerInput.Player.PlayerMode2.started += OnRobotChanged;
         _playerInput.Player.PlayerMode3.started += OnComponentChanged;
+    }
+
+    // 네트워크 시작 시 차량 번호를 서버가 설정.
+    public override void OnNetworkSpawn()
+    {
+        if (!IsServer) return;
+        _vehicleNum = GameManager.Instance.GetVehiclesNum;
+        GameManager.Instance.SetVehicle(_vehicleNum, this);
+        SetVehicleNumClientRpc(_vehicleNum);
     }
 
     private void Start()
@@ -83,29 +110,38 @@ public class PlayerVehicle : NetworkBehaviour
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(0);
         ChangeOwnershipServerRpc(0);
         FormColoerChange(0);
+        checkSpeedOff = true;
+        checkSpeedOffForCam = true;
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(1);
         ChangeOwnershipServerRpc(1);
         FormColoerChange(1);
+        checkSpeedOff = true;
+        checkSpeedOffForCam = true;
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);
         FormColoerChange(2);
+        checkSpeedOff = true;
+        checkSpeedOffForCam = true;
     }
     public void SetForm(int index)
     {
@@ -166,6 +202,11 @@ public class PlayerVehicle : NetworkBehaviour
     private void ChangeOwnershipServerRpc(int index)
     {
         GetFormNetworkObject(index).ChangeOwnership(OwnerClientId);
+        // ComponentConnector 전용
+        if (index == 2)
+        {
+            _componentConnector.ChangeOwnership(OwnerClientId);
+        }
     }
 
     private NetworkObject GetFormNetworkObject(int index)
@@ -229,6 +270,29 @@ public class PlayerVehicle : NetworkBehaviour
 
             _rigidbody.AddForce(force, ForceMode.Impulse);
         }
+    }
+    #endregion
+
+    #region 합체 관련 메서드들
+    [ClientRpc]
+    // 네트워크 시작 시 차량 번호를 서버가 설정.
+    public void SetVehicleNumClientRpc(int num)
+    {
+        if (IsServer) return;
+        _vehicleNum = num;
+        GameManager.Instance.SetVehicle(num, this);
+    }
+    // 합체상태가 되면 변신 제한
+    public void LockTransform()
+    {
+        isLockTransform = true;
+        _rigidbody.linearVelocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
+    }
+    public void LockTransformAgain()
+    {
+        _rigidbody.linearVelocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
     }
     #endregion
 }
