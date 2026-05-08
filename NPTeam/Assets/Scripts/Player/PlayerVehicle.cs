@@ -40,6 +40,9 @@ public class PlayerVehicle : NetworkBehaviour
     public FormColorChanger _formColorChanger;
 
     private PlayerStun _stun;
+    // 폼 변신할때 시작시 가속도 끄기 체크할 변수
+    public bool checkSpeedOff = false;
+    public bool checkSpeedOffForCam = false;
 
     #region 합체 관련 필드들
     // 차량 번호. -1은 미등록
@@ -73,9 +76,9 @@ public class PlayerVehicle : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
-        int num = GameManager.Instance.GetVehiclesNum;
-        GameManager.Instance.SetVehicle(num, this);
-        SetVehicleNumClientRpc(num);
+        int _vehicleNum = GameManager.Instance.GetVehiclesNum;
+        GameManager.Instance.SetVehicle(_vehicleNum, this);
+        SetVehicleNumClientRpc(_vehicleNum);
     }
 
     private void Start()
@@ -113,6 +116,8 @@ public class PlayerVehicle : NetworkBehaviour
         SetForm(0);
         ChangeOwnershipServerRpc(0);
         FormColoerChange(0);
+        checkSpeedOff = true;
+        checkSpeedOffForCam = true;
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
@@ -123,6 +128,8 @@ public class PlayerVehicle : NetworkBehaviour
         SetForm(1);
         ChangeOwnershipServerRpc(1);
         FormColoerChange(1);
+        checkSpeedOff = true;
+        checkSpeedOffForCam = true;
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
@@ -132,8 +139,9 @@ public class PlayerVehicle : NetworkBehaviour
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);
-
         FormColoerChange(2);
+        checkSpeedOff = true;
+        checkSpeedOffForCam = true;
     }
     public void SetForm(int index)
     {

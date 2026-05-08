@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3219256462
+  GlobalObjectIdHash: 225917822
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 2
@@ -1103,6 +1103,7 @@ MonoBehaviour:
   _robotPivot: {fileID: 4700365608077339858}
   _cameraPivot: {fileID: 7724563131714347142}
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
 --- !u!114 &4389730102333417263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,6 +1121,7 @@ MonoBehaviour:
   _jumpPower: 10
   _robotPivot: {fileID: 4700365608077339858}
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
   _rigidbody: {fileID: 0}
   _jumpCheckLayer:
     serializedVersion: 2

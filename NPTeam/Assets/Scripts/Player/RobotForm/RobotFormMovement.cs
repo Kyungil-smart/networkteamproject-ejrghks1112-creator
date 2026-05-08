@@ -15,6 +15,7 @@ public class RobotFormMovement : NetworkBehaviour
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
     [Header("부모의 Rigidbody 등록")]
     [SerializeField] private Rigidbody _rigidbody;
     // 로봇 이동 조작키 입력값 저장
@@ -50,6 +51,14 @@ public class RobotFormMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOff == true)
+        {
+            _moveInput = Vector2.zero;
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+            _animator.SetFloat("MoveSpeed", 0f);
+            _playerVehicleCS.checkSpeedOff = false;
+        }
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         RobotMove();

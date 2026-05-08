@@ -17,6 +17,7 @@ public class CarFormMovement : NetworkBehaviour
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
 
     private PlayerStun _stun;
 
@@ -48,6 +49,14 @@ public class CarFormMovement : NetworkBehaviour
 
     void FixedUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOff == true)
+        {
+            _move = Vector3.zero;
+            _turn = Vector3.zero;
+            _carFormRigidBody.linearVelocity = Vector3.zero;
+            _carFormRigidBody.angularVelocity = Vector3.zero;
+            _playerVehicleCS.checkSpeedOff = false;
+        }
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         CarMove();
