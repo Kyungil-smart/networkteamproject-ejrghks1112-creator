@@ -117,6 +117,7 @@ MonoBehaviour:
   _robotNetworkObject: {fileID: 6250202584401377799}
   _componentNetworkObject: {fileID: 2493680941598042870}
   _formColorChanger: {fileID: 0}
+  _componentFormMovement: {fileID: 7108665887497402621}
 --- !u!114 &6065807456793869565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +394,10 @@ PrefabInstance:
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 8129249138045495167, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -425,6 +430,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &7108665887497402621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6725237004958442595, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+  m_PrefabInstance: {fileID: 4608267201070505118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848017716766549250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002b69c17a4282544a340b3d447928c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentFormMovement
 --- !u!4 &8067534252087924608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}

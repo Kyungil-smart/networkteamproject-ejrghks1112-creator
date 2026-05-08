@@ -157,6 +157,7 @@ MonoBehaviour:
   _flySpeed: 10
   _playerVehicle: {fileID: 0}
   _rigidbody: {fileID: 0}
+  _componentAnimator: {fileID: 0}
 --- !u!114 &5598839670629456365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +276,7 @@ GameObject:
   - component: {fileID: 3509938539881290470}
   - component: {fileID: 3247127158331288435}
   - component: {fileID: 5945637367174140403}
+  - component: {fileID: 2744812768181547937}
   m_Layer: 0
   m_Name: Connector
   m_TagString: Untagged
@@ -375,6 +377,25 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2744812768181547937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170198593055959448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f50db5b8ad69342878eedd58f68c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentConnector
+  _componentLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  beforeColor: {r: 15.999729, g: 0, b: 0, a: 1}
+  afterColor: {r: 0, g: 0.25130466, b: 15.999729, a: 1}
+  _playerVehicle: {fileID: 0}
+  _componentFrom: {fileID: 3762503520255719836}
 --- !u!1001 &2182208936188164367
 PrefabInstance:
   m_ObjectHideFlags: 0

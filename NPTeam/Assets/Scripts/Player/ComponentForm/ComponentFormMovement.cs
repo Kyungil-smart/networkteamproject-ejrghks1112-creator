@@ -21,6 +21,11 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private PlayerStun _stun;
 
+    #region 합체 관련 필드들
+    [Header("합체 폼의 고유 애니메이션 등록")]
+    [SerializeField] private Animator _componentAnimator;
+    #endregion
+
     private void Awake() => Init();
 
     private void Init()
@@ -117,4 +122,12 @@ public class ComponentFormMovement : NetworkBehaviour
 
         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
     }
+
+    #region 합체 관련 메서드들
+    // 합체폼의 각 부위마다 설정된 애니메이터를 프로퍼티화 하거나 호출할 수 있는 함수.
+    public Animator GetAnim()
+    {
+        return _componentAnimator;
+    }
+    #endregion
 }
