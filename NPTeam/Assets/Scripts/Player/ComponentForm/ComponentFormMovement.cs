@@ -92,12 +92,19 @@ public class ComponentFormMovement : NetworkBehaviour
             _playerVehicleCS.checkSpeedOff = false;
         }
         if (!IsOwner) return;
-        if (_stun.IsStunned) return;
-        Move();
         if (_playerVehicleCS.isLockTransform == true)
         {
+            _move = Vector3.zero;
+            _flyUp = 0;
+            _flyDown = 0;
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
             _playerVehicleCS.LockTransformAgain();
+            return;
         }
+        if (_stun.IsStunned) return;
+        Move();
+      
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
