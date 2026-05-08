@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 628197821
+  GlobalObjectIdHash: 1341663081
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -84,7 +84,7 @@ MonoBehaviour:
   _playerVehicleCS: {fileID: 0}
   _rigidbody: {fileID: 0}
   isPressRightMB: 0
-  _componentAnimator: {fileID: 0}
+  _componentAnimator: {fileID: 3582988479214548225}
 --- !u!114 &740343134173628274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3403701246
+  GlobalObjectIdHash: 1760851705
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 2
@@ -505,6 +505,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}
+--- !u!95 &3582988479214548225 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}
+  m_PrefabInstance: {fileID: 6977132041861515408}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7447117450348048251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}
