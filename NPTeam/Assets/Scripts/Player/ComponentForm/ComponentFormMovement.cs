@@ -85,6 +85,10 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         Move();
+        if (_playerVehicleCS.isLockTransform == true)
+        {
+            _playerVehicleCS.LockTransformAgain();
+        }
     }
 
     private void OnMove(InputAction.CallbackContext ctx)

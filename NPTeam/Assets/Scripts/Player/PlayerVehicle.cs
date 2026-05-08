@@ -281,5 +281,10 @@ public class PlayerVehicle : NetworkBehaviour
         _rigidbody.linearVelocity = Vector3.zero;
         _rigidbody.angularVelocity = Vector3.zero;
     }
+    public void LockTransformAgain()
+    {
+        _rigidbody.linearVelocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
+    }
     #endregion
 }
