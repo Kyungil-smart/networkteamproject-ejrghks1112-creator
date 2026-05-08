@@ -82,6 +82,15 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOff == true)
+        {
+            _move = Vector3.zero;
+            _flyUp = 0;
+            _flyDown = 0;
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+            _playerVehicleCS.checkSpeedOff = false;
+        }
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         Move();

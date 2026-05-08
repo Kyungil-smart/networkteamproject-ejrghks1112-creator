@@ -23,6 +23,7 @@ public class RobotCameraLook : NetworkBehaviour
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
 
     private Animator _animator;
 
@@ -45,6 +46,11 @@ public class RobotCameraLook : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOffForCam == true)
+        {
+            _cameraMoveInput = Vector2.zero;
+            _playerVehicleCS.checkSpeedOffForCam = false;
+        }
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         RobotCameraVectorBackup();

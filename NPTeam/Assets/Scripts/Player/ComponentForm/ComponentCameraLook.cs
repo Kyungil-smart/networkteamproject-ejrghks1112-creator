@@ -35,6 +35,11 @@ public class ComponentCameraLook : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOffForCam == true)
+        {
+            _cameraMoveInput = Vector2.zero;
+            _playerVehicleCS.checkSpeedOffForCam = false;
+        }
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         CameraVectorBackup();
