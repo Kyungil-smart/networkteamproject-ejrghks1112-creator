@@ -21,6 +21,8 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private PlayerStun _stun;
 
+    public bool isPressRightMB = false;
+
     #region 합체 관련 필드들
     [Header("합체 폼의 고유 애니메이션 등록")]
     [SerializeField] private Animator _componentAnimator;
@@ -55,6 +57,7 @@ public class ComponentFormMovement : NetworkBehaviour
         _input.Player.PlayerDescend.canceled += OnDescendCancel;
         _input.Player.PlayerAscend.performed += OnAscend;
         _input.Player.PlayerAscend.canceled += OnAscendCancel;
+        //_input.Player.PlayerRightMB.started
     }
 
     private void OnDisable()
@@ -65,6 +68,7 @@ public class ComponentFormMovement : NetworkBehaviour
         _input.Player.PlayerDescend.canceled -= OnDescendCancel;
         _input.Player.PlayerAscend.performed -= OnAscend;
         _input.Player.PlayerAscend.canceled -= OnAscendCancel;
+        //_input.Player.PlayerRightMB.started
         _input.Disable();
     }
 
@@ -122,6 +126,22 @@ public class ComponentFormMovement : NetworkBehaviour
 
         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
     }
+
+    #region 합체 버튼
+    public void OnConnect(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle)
+            isPressRightMB = true;
+    }
+
+    public void ConnectButtonCancel(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner) return;
+        isPressRightMB = false;
+    }
+
+    #endregion
 
     #region 합체 관련 메서드들
     // 합체폼의 각 부위마다 설정된 애니메이터를 프로퍼티화 하거나 호출할 수 있는 함수.

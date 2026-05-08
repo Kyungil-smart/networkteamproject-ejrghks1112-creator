@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 628197821
+  GlobalObjectIdHash: 1564308897
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -82,6 +82,7 @@ MonoBehaviour:
   _flySpeed: 10
   _playerVehicle: {fileID: 0}
   _rigidbody: {fileID: 0}
+  isPressRightMB: 0
   _componentAnimator: {fileID: 0}
 --- !u!114 &740343134173628274
 MonoBehaviour:
@@ -396,6 +397,7 @@ MonoBehaviour:
   afterColor: {r: 0, g: 0.25130466, b: 15.999729, a: 1}
   _playerVehicle: {fileID: 0}
   _componentFrom: {fileID: 4736726528890599456}
+  _componentFormMovement: {fileID: 2565901363158014059}
 --- !u!1001 &6977132041861515408
 PrefabInstance:
   m_ObjectHideFlags: 0
