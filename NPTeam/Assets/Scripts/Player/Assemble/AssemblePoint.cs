@@ -1,9 +1,10 @@
 using System;
+using System.ComponentModel.Design;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class AssemblePoint : MonoBehaviour, IInteractable
+public class AssemblePoint : NetworkBehaviour, IInteractable
 {
     [SerializeField] private AssembleController controller;
     [SerializeField] private AssemblePartType type;
@@ -40,6 +41,8 @@ public class AssemblePoint : MonoBehaviour, IInteractable
     {
         mat.SetColor("_EmissionColor", beforeColor);
     }
+    
+    
 
     
     //합체 완료 후
