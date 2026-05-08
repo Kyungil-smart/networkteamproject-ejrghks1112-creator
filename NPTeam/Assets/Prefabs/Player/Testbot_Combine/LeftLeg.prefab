@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 628197821
+  GlobalObjectIdHash: 1341663081
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -81,7 +81,10 @@ MonoBehaviour:
   _moveSpeed: 10
   _flySpeed: 10
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
   _rigidbody: {fileID: 0}
+  isPressRightMB: 0
+  _componentAnimator: {fileID: 3582988479214548225}
 --- !u!114 &740343134173628274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +101,7 @@ MonoBehaviour:
   _cameraSpeed: 0.2
   _componentPivot: {fileID: 1796745094719986530}
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
 --- !u!114 &1587709887026745886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +279,8 @@ GameObject:
   - component: {fileID: 2128314112674890278}
   - component: {fileID: 8917386307804828596}
   - component: {fileID: 1598315947575155251}
+  - component: {fileID: 917820346042094859}
+  - component: {fileID: 8569910571265416763}
   m_Layer: 0
   m_Name: Connector
   m_TagString: Untagged
@@ -375,6 +381,53 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &917820346042094859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008374958044016528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f50db5b8ad69342878eedd58f68c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentConnector
+  ShowTopMostFoldoutHeaderGroup: 1
+  _componentLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  beforeColor: {r: 15.999729, g: 0, b: 0, a: 1}
+  afterColor: {r: 0, g: 0.25130466, b: 15.999729, a: 1}
+  _playerVehicle: {fileID: 0}
+  _componentFrom: {fileID: 4736726528890599456}
+  _componentFormMovement: {fileID: 2565901363158014059}
+  _playerVehicleCS: {fileID: 0}
+--- !u!114 &8569910571265416763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008374958044016528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 1760851705
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 2
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 1
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 1
 --- !u!1001 &6977132041861515408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -452,6 +505,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}
+--- !u!95 &3582988479214548225 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}
+  m_PrefabInstance: {fileID: 6977132041861515408}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7447117450348048251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}

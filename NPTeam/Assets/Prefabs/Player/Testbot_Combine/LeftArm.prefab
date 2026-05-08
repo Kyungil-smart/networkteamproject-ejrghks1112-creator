@@ -87,6 +87,8 @@ GameObject:
   - component: {fileID: 534011201724487793}
   - component: {fileID: 5594541466440443588}
   - component: {fileID: 6540695589212430658}
+  - component: {fileID: 8129249138045495167}
+  - component: {fileID: 8345340744786642672}
   m_Layer: 0
   m_Name: Connector
   m_TagString: Untagged
@@ -187,6 +189,53 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8129249138045495167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2398111001206861967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f50db5b8ad69342878eedd58f68c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentConnector
+  ShowTopMostFoldoutHeaderGroup: 1
+  _componentLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  beforeColor: {r: 15.999729, g: 0, b: 0, a: 1}
+  afterColor: {r: 0, g: 0.25130466, b: 15.999729, a: 1}
+  _playerVehicle: {fileID: 0}
+  _componentFrom: {fileID: 3762503520255719836}
+  _componentFormMovement: {fileID: 6725237004958442595}
+  _playerVehicleCS: {fileID: 0}
+--- !u!114 &8345340744786642672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2398111001206861967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2329149738
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 2
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 1
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 1
 --- !u!1 &3762503520255719836
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 138991262
+  GlobalObjectIdHash: 1278881136
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -268,7 +317,10 @@ MonoBehaviour:
   _moveSpeed: 10
   _flySpeed: 10
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
   _rigidbody: {fileID: 0}
+  isPressRightMB: 0
+  _componentAnimator: {fileID: 6654653304857942940}
 --- !u!114 &5598839670629456365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +337,7 @@ MonoBehaviour:
   _cameraSpeed: 0.2
   _componentPivot: {fileID: 5766429628836825886}
   _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
 --- !u!114 &6798584669354051705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,5 +508,10 @@ PrefabInstance:
 --- !u!4 &772999799121248742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}
+  m_PrefabInstance: {fileID: 950407155384542733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6654653304857942940 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 3231fc70c617e6b44906c0783887b1e2, type: 3}
   m_PrefabInstance: {fileID: 950407155384542733}
   m_PrefabAsset: {fileID: 0}
