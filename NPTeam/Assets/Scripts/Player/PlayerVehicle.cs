@@ -76,7 +76,7 @@ public class PlayerVehicle : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
-        int _vehicleNum = GameManager.Instance.GetVehiclesNum;
+        _vehicleNum = GameManager.Instance.GetVehiclesNum;
         GameManager.Instance.SetVehicle(_vehicleNum, this);
         SetVehicleNumClientRpc(_vehicleNum);
     }
