@@ -39,6 +39,12 @@ public class PopUpManager : MonoBehaviour
     public void ToggleSettingsPanel()
     {
         _popupSettingsWindow.SetActive(!_popupSettingsWindow.activeSelf);
+
+        // 설정 창이 켜질 때 크레딧 창이 켜져있다면 끄기
+        if (_popupSettingsWindow.activeSelf == true)
+        {
+            _popupCreditsWindow.SetActive(false);
+        }
     }
 
 
