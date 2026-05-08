@@ -23,10 +23,10 @@ public class AssemblePoint : NetworkBehaviour, IInteractable
     {
         PlayerVehicle vehicle = go.GetComponent<PlayerVehicle>();
         //개방 필요
-        //cfm._playerVehicle.transform.SetParent(controller.transform);
-        //cfm.LockMovement();
+        vehicle.transform.SetParent(controller.transform);
+        vehicle.LockTransform();
         
-        //controller?.AddAssemblePart(type.ToString(), vehicle.GetNumber);
+        controller?.AddAssemblePartServerRpc(type.ToString(), vehicle.GetVehicleNum);
         
         DoneAssembleServerRpc();
     }
