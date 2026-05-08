@@ -23,7 +23,6 @@ public class ComponentConnector : NetworkBehaviour
         {
             if (_componentFormMovement.isPressRightMB == true)
             {
-                Debug.Log($"씨발 작동{_targetAssemblePoint}");
                 _targetAssemblePoint.Interact(_playerVehicle);
                 _playerVehicleCS.LockTransform();
                 gameObject.SetActive(false);
@@ -37,10 +36,8 @@ public class ComponentConnector : NetworkBehaviour
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Connector"))
             {
-                Debug.Log($"들어감{ _targetAssemblePoint}");
                 _targetAssemblePoint = other.GetComponent<AssemblePoint>();
                 if (IsOwner) _targetAssemblePoint.EnterTrigger();
-                Debug.Log($"들어감{_targetAssemblePoint}");
             }
         }
     }
@@ -51,10 +48,8 @@ public class ComponentConnector : NetworkBehaviour
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Connector"))
             {
-                Debug.Log($"나감{_targetAssemblePoint}");
                 if (IsOwner) _targetAssemblePoint.ExitTrigger();
                 _targetAssemblePoint = null;
-                Debug.Log($"나감{_targetAssemblePoint}");
             }
         }
     }
