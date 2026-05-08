@@ -117,6 +117,7 @@ MonoBehaviour:
   _robotNetworkObject: {fileID: 6250202584401377799}
   _componentNetworkObject: {fileID: 9092890119206957670}
   _formColorChanger: {fileID: 0}
+  _componentFormMovement: {fileID: 4471009069932060781}
 --- !u!114 &6065807456793869565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +338,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1703564741
       objectReference: {fileID: 0}
+    - target: {fileID: 2744812768181547937, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
     - target: {fileID: 3762503520255719836, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: m_Name
       value: RightArm
@@ -414,6 +419,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5766429628836825886, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
   m_PrefabInstance: {fileID: 7158718324015465486}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4471009069932060781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6725237004958442595, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 7158718324015465486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300528625581702546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002b69c17a4282544a340b3d447928c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentFormMovement
 --- !u!1 &6300528625581702546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3762503520255719836, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}

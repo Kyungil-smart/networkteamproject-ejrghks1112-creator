@@ -19,7 +19,6 @@ public class PlayerVehicle : NetworkBehaviour
         set => _currentFormIndex = value;
     }
 
-
     [Header("각 변신폼 시네머신 등록")]
     [SerializeField] private CinemachineCamera _carCamera;
     [SerializeField] private CinemachineCamera _robotCamera;
@@ -40,7 +39,14 @@ public class PlayerVehicle : NetworkBehaviour
 
     private PlayerStun _stun;
 
+    #region 합체 관련 필드들
+    // 차량 번호. -1은 미등록
+    int _vehicleNum = -1;
+    public int GetVehicleNum => _vehicleNum;
 
+    [Header("현재 차량의 ComponentFormMovement 등록")]
+    [SerializeField] private ComponentFormMovement _componentFormMovement;
+    #endregion
 
     private void Awake() => Init();
 
@@ -52,6 +58,15 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode1.started += OnCarChanged;
         _playerInput.Player.PlayerMode2.started += OnRobotChanged;
         _playerInput.Player.PlayerMode3.started += OnComponentChanged;
+    }
+
+    // 네트워크 시작 시 차량 번호를 서버가 설정.
+    public override void OnNetworkSpawn()
+    {
+        if (!IsServer) return;
+        int num = GameManager.Instance.GetVehiclesNum;
+        GameManager.Instance.SetVehicle(num, this);
+        SetVehicleNumClientRpc(num);
     }
 
     private void Start()
@@ -229,6 +244,27 @@ public class PlayerVehicle : NetworkBehaviour
 
             _rigidbody.AddForce(force, ForceMode.Impulse);
         }
+    }
+    #endregion
+
+    #region 합체 관련 메서드들
+    [ClientRpc]
+    // 네트워크 시작 시 차량 번호를 서버가 설정.
+    public void SetVehicleNumClientRpc(int num)
+    {
+        if (IsServer) return;
+        _vehicleNum = num;
+        GameManager.Instance.SetVehicle(num, this);
+    }
+    // 차량이 가지고있는 합체폼 반환
+    public ComponentFormMovement GetComponentFormMovement()
+    {
+        return _componentFormMovement;
+    }
+    // 합체상태가 되면 변신 제한
+    public void LockTransform()
+    {
+
     }
     #endregion
 }
