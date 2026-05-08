@@ -8,15 +8,21 @@ public class AssemblePoint : NetworkBehaviour, IInteractable
 {
     [SerializeField] private AssembleController controller;
     [SerializeField] private AssemblePartType type;
-    private Material mat;
+    private Material _mat;
     [SerializeField] [ColorUsage(true, true)] private Color beforeColor;
     [SerializeField] [ColorUsage(true, true)] private Color afterColor;
+
+    private MeshRenderer _renderer;
+    private SphereCollider _col;
     
 
     public void Awake()
     {
-        mat = GetComponent<MeshRenderer>().material;
-        beforeColor = mat.GetColor("_EmissionColor");
+        _renderer = GetComponent<MeshRenderer>();
+        _mat = _renderer?.material;
+        if (_mat != null) 
+            beforeColor = _mat.GetColor("_EmissionColor");
+        _col = GetComponent<SphereCollider>();
     }
 
     public void Interact(GameObject go)
@@ -24,38 +30,39 @@ public class AssemblePoint : NetworkBehaviour, IInteractable
         PlayerVehicle vehicle = go.GetComponent<PlayerVehicle>();
         //개방 필요
         vehicle.transform.SetParent(controller.transform);
+        vehicle.GetComponentFormMovement.transform.SetParent(transform);
         vehicle.LockTransform();
         
-        controller?.AddAssemblePartServerRpc(type.ToString(), vehicle.GetVehicleNum);
-        
-        DoneAssembleServerRpc();
+        DoneAssembleServerRpc(type.ToString(), vehicle.GetVehicleNum); //소유권 없는 곳에서 발생한 함수.
     }
 
 
     public void EnterTrigger()
     {
-        mat.SetColor("_EmissionColor", afterColor);
+        _mat.SetColor("_EmissionColor", afterColor);
     }
 
     public void ExitTrigger()
     {
-        mat.SetColor("_EmissionColor", beforeColor);
+        _mat.SetColor("_EmissionColor", beforeColor);
     }
     
     
 
     
     //합체 완료 후
-    [ServerRpc]
-    private void DoneAssembleServerRpc()
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void DoneAssembleServerRpc(string type, int num)
     {
+        controller?.AddAssemblePartServerRpc(type, num);
         DoneAssembleClientRpc();
     }
 
     [ClientRpc]
     private void DoneAssembleClientRpc()
     {
-        gameObject.SetActive(false);
+        _renderer.enabled = false;
+        _col.enabled = false;
     }
 }
 
