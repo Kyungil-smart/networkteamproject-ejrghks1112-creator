@@ -15,6 +15,7 @@ public class RobotGrab : NetworkBehaviour
     [SerializeField] private SphereCollider _grabCollider;
     [Header("부모인 _playerVehicle를 등록")]
     [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
     private InputAction _playerGrab;
     // 잡기 대상의 네트워크 오브젝트를 백업
     private NetworkObjectReference targetRef;
@@ -96,7 +97,9 @@ public class RobotGrab : NetworkBehaviour
             {
                 targetRef = targetNetworkObject;
 
+                if (_playerVehicleCS.Stamina < 15) return;
                 isGrabGet = true;
+                _playerVehicleCS.ChangeStamina(-15);
 
                 GrabServerRpc(targetRef);
 

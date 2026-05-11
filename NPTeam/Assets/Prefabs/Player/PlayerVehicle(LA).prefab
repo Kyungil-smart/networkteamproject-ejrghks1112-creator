@@ -498,6 +498,10 @@ PrefabInstance:
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 2149688630851955022, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
     - target: {fileID: 4389730102333417263, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: _rigidbody
       value: 

@@ -7,6 +7,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerVehicle : NetworkBehaviour
 {
+    
+   private NetworkVariable<int> _stamina = new NetworkVariable<int>(
+        100,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
+
+    public int Stamina => _stamina.Value;
+
     [Header("각 변신폼 등록")]
     [SerializeField] private GameObject _carForm;
     [SerializeField] private GameObject _robotForm;
@@ -71,6 +79,7 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode1.started += OnCarChanged;
         _playerInput.Player.PlayerMode2.started += OnRobotChanged;
         _playerInput.Player.PlayerMode3.started += OnComponentChanged;
+        _stamina.OnValueChanged += OnStaminaChanged;
     }
 
     // 네트워크 시작 시 차량 번호를 서버가 설정.
@@ -80,11 +89,17 @@ public class PlayerVehicle : NetworkBehaviour
         _vehicleNum = GameManager.Instance.GetVehiclesNum;
         GameManager.Instance.SetVehicle(_vehicleNum, this);
         SetVehicleNumClientRpc(_vehicleNum);
+        //_stamina.OnValueChanged += OnStaminaChanged;
     }
 
     private void Start()
     {
         StartCoroutine(ESetForm());
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        //_stamina.OnValueChanged -= OnStaminaChanged;
     }
 
     private void OnDisable()
@@ -93,6 +108,7 @@ public class PlayerVehicle : NetworkBehaviour
         _playerInput.Player.PlayerMode1.started -= OnCarChanged;
         _playerInput.Player.PlayerMode2.started -= OnRobotChanged;
         _playerInput.Player.PlayerMode3.started -= OnComponentChanged;
+        _stamina.OnValueChanged -= OnStaminaChanged;
 
         _playerInput.Disable();
     }
@@ -107,42 +123,70 @@ public class PlayerVehicle : NetworkBehaviour
     }
     #endregion
 
+    #region 스테미나
+    private void OnStaminaChanged(int previous, int current)
+    {
+        Debug.Log(current);
+    }
+
+    [ServerRpc]
+    private void ChangeStaminaServerRpc(int delta)
+    {
+        int value = _stamina.Value + delta;
+        _stamina.Value = Mathf.Clamp(value, 0, 100);
+    }
+
+    public void ChangeStamina(int value)
+    {
+        ChangeStaminaServerRpc(value);
+    }
+    #endregion
+
     #region 플레이어 변신
     public void OnCarChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
+        if (_stamina.Value < 30) return ;
 
         SetForm(0);
         ChangeOwnershipServerRpc(0);
         FormColoerChange(0);
         checkSpeedOff = true;
         checkSpeedOffForCam = true;
+        if (_currentFormIndex == 0) return;
+        ChangeStaminaServerRpc(-30);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
+        if (_stamina.Value < 30) return;
 
         SetForm(1);
         ChangeOwnershipServerRpc(1);
         FormColoerChange(1);
         checkSpeedOff = true;
         checkSpeedOffForCam = true;
+        if (_currentFormIndex == 1) return;
+        ChangeStaminaServerRpc(-30);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
+        if (_stamina.Value < 30) return;
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);
         FormColoerChange(2);
         checkSpeedOff = true;
         checkSpeedOffForCam = true;
+        if (_currentFormIndex == 2) return;
+        ChangeStaminaServerRpc(-30);
     }
     public void SetForm(int index)
     {

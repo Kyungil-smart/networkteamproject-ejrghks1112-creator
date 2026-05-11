@@ -24,6 +24,9 @@ public class ComponentFormMovement : NetworkBehaviour
 
     public bool isPressRightMB = false;
 
+    // 스테미너 초당 소모하게 하기위해
+    private float _timer;
+
     #region 합체 관련 필드들
     [Header("합체 폼의 고유 애니메이션 등록")]
     [SerializeField] private Animator _componentAnimator;
@@ -80,6 +83,19 @@ public class ComponentFormMovement : NetworkBehaviour
         _input.Disable();
     }
 
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer >= 1f)
+        {
+            _timer = 0f;
+            _playerVehicleCS.ChangeStamina(-4);
+        }
+
+        if (_playerVehicleCS.Stamina <= 0) _playerVehicleCS.SetForm(0);
+    }
+
     private void FixedUpdate()
     {
         if (_playerVehicleCS.checkSpeedOff == true)
@@ -112,6 +128,7 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (_playerVehicleCS.Stamina <= 0) return;
         _move = ctx.ReadValue<Vector2>();
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
@@ -126,6 +143,7 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (_playerVehicleCS.Stamina <= 0) return;
         _flyDown = ctx.ReadValue<float>();
     }
     private void OnDescendCancel(InputAction.CallbackContext ctx)
@@ -141,6 +159,7 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (_playerVehicleCS.Stamina <= 0) return;
         _flyUp = ctx.ReadValue<float>();
     }
     private void OnAscendCancel(InputAction.CallbackContext ctx)

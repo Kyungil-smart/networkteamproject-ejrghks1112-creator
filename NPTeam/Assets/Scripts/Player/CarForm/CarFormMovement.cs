@@ -21,6 +21,9 @@ public class CarFormMovement : NetworkBehaviour
 
     private PlayerStun _stun;
 
+    // 스테미너 초당 회복하게 하기위해
+    private float _timer;
+
     //public override void OnNetworkSpawn()
     //{
     //    if (!IsOwner) return;
@@ -45,6 +48,18 @@ public class CarFormMovement : NetworkBehaviour
         _carFormInput.Player.PlayerMove.performed -= CarForntAndBackMove;
         _carFormInput.Player.PlayerMove.canceled -= CarMoveCancel;
         _carFormInput.asset.Disable();
+    }
+
+    private void Update()
+    {
+        if (_playerVehicleCS.Stamina >= 100) return;
+        _timer += Time.deltaTime;
+
+        if (_timer >= 1f)
+        {
+            _timer = 0f;
+            _playerVehicleCS.ChangeStamina(2);
+        }
     }
 
     void FixedUpdate()

@@ -28,6 +28,9 @@ public class RobotFormMovement : NetworkBehaviour
 
     private PlayerStun _stun;
 
+    // 스테미너 초당 회복하게 하기위해
+    private float _timer;
+
     [Header("점프를 위한 바닥 레이어 마스크를 선택")]
     [SerializeField] private LayerMask _jumpCheckLayer;
     [Header("점프를 위한 레이캐스트 피봇(콜라이더)")]
@@ -47,6 +50,18 @@ public class RobotFormMovement : NetworkBehaviour
         // 점프 구독
         _playerInput.Player.PlayerAscend.started += RobotOnJump;
         _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
+    }
+
+    private void Update()
+    {
+        if (_playerVehicleCS.Stamina >= 100) return;
+        _timer += Time.deltaTime;
+
+        if (_timer >= 1f)
+        {
+            _timer = 0f;
+            _playerVehicleCS.ChangeStamina(1);
+        }
     }
 
     private void FixedUpdate()
@@ -139,8 +154,10 @@ public class RobotFormMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         if (!ctx.started || !IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (_playerVehicleCS.Stamina <= 5) return;
 
         _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
+        _playerVehicleCS.ChangeStamina(-5);
     }
     public void RobotJumpCancle(InputAction.CallbackContext ctx)
     {
