@@ -10,7 +10,7 @@ using UnityEngine;
 public class StartVoiceChat : MonoBehaviour
 {
     [SerializeField] private VivoxUI vivoxUI;
-    private ReadOnlyCollection<VivoxParticipant> _participants;
+    private ReadOnlyCollection<VivoxParticipant> _participants; // 특정 Vivox채널에 참가하고 있는 참가자들의 목록을 담을용도
     
     private async void Start()
     {
