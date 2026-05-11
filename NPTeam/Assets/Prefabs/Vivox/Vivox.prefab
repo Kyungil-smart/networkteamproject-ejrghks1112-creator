@@ -29,7 +29,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6124907567391937000}
+  - {fileID: 2188561012710456518}
+  - {fileID: 4756338491783567575}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &111367006213791025
@@ -44,5 +47,257 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e18840846512af4eb77d5ac0c1ba17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VivoxUIPrasenter
-  vivoxUI: {fileID: 0}
-  vivoxInputController: {fileID: 0}
+  vivoxUI: {fileID: 487938245721115933}
+  vivoxInputController: {fileID: 7052164877653511230}
+--- !u!1001 &234158724173640357
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 512865920706425975}
+    m_Modifications:
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.89617
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.59432
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 146.1129
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6689831663561816403, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: m_Name
+      value: VoiceTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 7042577261469301977, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+      propertyPath: vivoxUI
+      value: 
+      objectReference: {fileID: 487938245721115933}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+--- !u!4 &4756338491783567575 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4701211236089162354, guid: 4e0002176e2452644ae1e35a13d54e18, type: 3}
+  m_PrefabInstance: {fileID: 234158724173640357}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4124772309359964170
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 512865920706425975}
+    m_Modifications:
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147483123257992649, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+      propertyPath: m_Name
+      value: VivoxUI
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+--- !u!114 &487938245721115933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4610458621569694999, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+  m_PrefabInstance: {fileID: 4124772309359964170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8806835db14104382058cc977467f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VivoxUI
+--- !u!224 &6124907567391937000 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7799716085661114850, guid: 4bb936ff3502829419666f847aa5dee9, type: 3}
+  m_PrefabInstance: {fileID: 4124772309359964170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8288773152473346114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 512865920706425975}
+    m_Modifications:
+    - target: {fileID: 6027660430092949572, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_Name
+      value: VivoxInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+--- !u!4 &2188561012710456518 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7879320095755324548, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+  m_PrefabInstance: {fileID: 8288773152473346114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7052164877653511230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1358382654104403068, guid: d6b40c55d1be1f843bbc61be5ca3f5e0, type: 3}
+  m_PrefabInstance: {fileID: 8288773152473346114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab001d5139b3e440a3da39573287aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VivoxInputController
