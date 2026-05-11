@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
+    
     [Header("남은 게임 시간")] 
     [SerializeField] private float endTime = 300f;
 
@@ -30,27 +31,27 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     
     //각 PC마다 들고 있을 차량.
-     [SerializeField] private AssembleController _LeaderVehicle;
+    [SerializeField] private AssembleController _LeaderVehicle;
     
-     public AssembleController LeaderVehicle
-     {
-         get => _LeaderVehicle;
-         set => _LeaderVehicle = value;
-     }
+    public AssembleController LeaderVehicle
+    {
+        get => _LeaderVehicle;
+        set => _LeaderVehicle = value;
+    }
      
-     public event Action<float>  OnTimeChange;
-     public event Action<int>  OnScoreChange;
+    public event Action<float>  OnTimeChange;
+    public event Action<int>  OnScoreChange;
 
-
+    
     
     private Dictionary<int, PlayerVehicle> PlayerVehicles = new();
     public int GetVehiclesNum => PlayerVehicles.Count;
     
     private void Update()
     {
-        if (endTime > 0)
+        if (EndTime > 0)
         {
-            endTime -= Time.deltaTime;
+            EndTime -= Time.deltaTime;
         }
     }
 

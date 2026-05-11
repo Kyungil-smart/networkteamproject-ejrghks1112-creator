@@ -10,21 +10,38 @@ public class InGameUI : NetworkBehaviour
     [field: SerializeField] public float EndTimer { get; set; } // 외부에서 받아야 하는 최종 시간
     [SerializeField] private float _currentTimer;   // 현재 시간
     [SerializeField] private TextMeshProUGUI timerText; // 시간을 표시할 텍스트
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI playerNameText;
-    
-    [Header("다른 플레이어 이름")]
-    [SerializeField] private List<GameObject> otherPlayers;
-    
-    private int index = 0;
-    public NetworkList<FixedString32Bytes> playerName;
-    
+    [SerializeField] private TextMeshProUGUI scoreText; // 점수 표시용 텍스트
+    [SerializeField] private TextMeshProUGUI playerNameText; // 본인 이름 텍스트
+
+    [Header("다른 플레이어 이름")] 
+    [SerializeField] private List<GameObject> otherPlayers; // 다른 플레이어 이름을 넣을 오브젝트
+
+    [Header("거리 표시 용")] 
+    [field: SerializeField] public List<Transform> PlayersPosition { get; set; }  // 외부에서 받아올 플레이어들의 위치
     [field: SerializeField] public Transform GoalPosition { get; set; }   // 외부에서 받아올 골 위치
-    [field: SerializeField] public List<Transform> PlayersPosition { get; set; } = new List<Transform> { };   // 외부에서 받아올 플레이어들의 위치
+    [field: SerializeField] public Transform StartPosition { get; set; }   // 외부에서 받아올 시작 위치
+    [SerializeField] private PlayerVehicle[] vehicles; // 차량
+    [SerializeField] private UiDistanceStartPos startPos; // 시작 지점
+    [SerializeField] private RectTransform distanceToGoal; // ui상 골 지점 거리
+    [SerializeField] private RectTransform goalPosition; // ui상 골 지점 
+    [SerializeField] private List<RectTransform> gps; // ui상 플레이어의 위치
+    
+    public NetworkList<FixedString32Bytes> playerName;
+    private int index = 0;
+    private float _totalDistance;
     
     private void Awake()
     {
         playerName = new NetworkList<FixedString32Bytes>();
+        vehicles = FindObjectsByType<PlayerVehicle>(FindObjectsSortMode.None);
+        startPos = FindAnyObjectByType<UiDistanceStartPos>();
+        PlayersPosition = new List<Transform>();
+        StartPosition = startPos.transform;
+        
+        foreach (var vehicle in vehicles)
+        {
+            PlayersPosition.Add(vehicle.transform);
+        }
     }
 
     public override void OnNetworkSpawn()
@@ -46,6 +63,19 @@ public class InGameUI : NetworkBehaviour
         }
         
         UpdatePlayerList();
+
+        if (GoalPosition != null && PlayersPosition != null)
+        {
+            _totalDistance = Vector3.Distance(StartPosition.position, GoalPosition.position);
+        }
+    }
+
+    private void Update()
+    {
+        if (GoalPosition != null && PlayersPosition != null)
+        {
+            UpdateDistance();
+        }
     }
 
     public override void OnNetworkDespawn()
@@ -104,6 +134,18 @@ public class InGameUI : NetworkBehaviour
     private void UpdateScore(int score)
     {
         scoreText.text = $"Score: {score}";
+    }
+
+    private void UpdateDistance()
+    {
+        for (int i = 0; i < PlayersPosition.Count; i++)
+        {
+            float currentDistance = Vector3.Distance(PlayersPosition[i].position, GoalPosition.position);
+            float progress = 1f - Mathf.Clamp01(currentDistance / _totalDistance);
+            float newPos = Mathf.Lerp(distanceToGoal.anchoredPosition.x, goalPosition.anchoredPosition.x, progress);
+            
+            gps[i].anchoredPosition = new Vector2(newPos, gps[i].anchoredPosition.y);
+        }
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
