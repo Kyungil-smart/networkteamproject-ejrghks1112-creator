@@ -15,10 +15,11 @@ public class RobotGrab : NetworkBehaviour
     [SerializeField] private SphereCollider _grabCollider;
     [Header("부모인 _playerVehicle를 등록")]
     [SerializeField] private GameObject _playerVehicle;
-    private NetworkObject _targetNetworkObject;
     private InputAction _playerGrab;
+    // 잡기 대상의 네트워크 오브젝트를 백업
     private NetworkObjectReference targetRef;
-    private NavMeshAgent targetNav;
+    // 잡기 대상의 Y 값을 백업(몬스터의 경우 네브매쉬 문제로인해서)
+    private float _originY;
 
     private bool isGrab = false;
     private bool isGrabGet = false;
@@ -28,7 +29,7 @@ public class RobotGrab : NetworkBehaviour
     private void OnEnable()
     {
         _playerGrab.performed += OnGrap;
-        _playerGrab.canceled += GrapCancle;
+        _playerGrab.canceled += GrapCancel;
     }
 
     private void Update()
@@ -42,7 +43,7 @@ public class RobotGrab : NetworkBehaviour
     private void OnDisable()
     {
         _playerGrab.performed -= OnGrap;
-        _playerGrab.canceled -= GrapCancle;
+        _playerGrab.canceled -= GrapCancel;
     }
 
     #region 초기화
@@ -59,7 +60,7 @@ public class RobotGrab : NetworkBehaviour
         isGrab = true;
     }
 
-    public void GrapCancle(InputAction.CallbackContext ctx)
+    public void GrapCancel(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (!ctx.canceled) return;
@@ -89,13 +90,15 @@ public class RobotGrab : NetworkBehaviour
                 continue;
             }
 
-            if (hit.TryGetComponent(out NetworkObject targetNetworkObject))
+            NetworkObject targetNetworkObject =  hit.GetComponentInParent<NetworkObject>();
+
+            if (targetNetworkObject != null)
             {
                 targetRef = targetNetworkObject;
 
-                GrabServerRpc(targetRef);
-
                 isGrabGet = true;
+
+                GrabServerRpc(targetRef);
 
                 break;
             }
@@ -105,38 +108,46 @@ public class RobotGrab : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void GrabServerRpc(NetworkObjectReference targetRef)
     {
-        if (!targetRef.TryGet(out NetworkObject target))
-            return;
+        if (!targetRef.TryGet(out NetworkObject target)) return;
 
         target.ChangeOwnership(OwnerClientId);
+
+        _originY = target.transform.position.y;
 
         target.TrySetParent(_myNetworkObject, true);
 
         target.transform.position = _grabCollider.bounds.center;
         target.transform.rotation = _grabCollider.transform.rotation;
-        targetNav = target.GetComponent<NavMeshAgent>();
 
-        if (targetNav != null)
+        NavMeshAgent nav = target.GetComponent<NavMeshAgent>();
+
+        if (nav != null)
         {
-            targetNav.enabled = false;
+            nav.enabled = false;
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void ReleaseServerRpc(NetworkObjectReference targetRef)
     {
         if (!targetRef.TryGet(out NetworkObject target))
             return;
 
-
         target.TryRemoveParent(true);
 
-        if (targetNav != null)
-        {
-            targetNav.enabled = true;
-        }
-    }
+        Vector3 pos = target.transform.position;
+        pos.y = _originY;
+        target.transform.position = pos;
 
+        NavMeshAgent nav = target.GetComponent<NavMeshAgent>();
+
+        if (nav != null)
+        {
+            nav.enabled = true;
+        }
+
+        targetRef = default;
+    }
 
     private void OnDrawGizmos()
     {
