@@ -29,6 +29,7 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private NetworkObject _robotNetworkObject;
     [SerializeField] private NetworkObject _componentNetworkObject;
     [SerializeField] private NetworkObject _componentConnector;
+    [SerializeField] private NetworkObject _upperArm_Root_R_end;
 
     private Rigidbody _rigidbody;
 
@@ -206,6 +207,11 @@ public class PlayerVehicle : NetworkBehaviour
         if (index == 2)
         {
             _componentConnector.ChangeOwnership(OwnerClientId);
+        }
+        // 잡기 전용(로봇)
+        if (index == 1)
+        {
+            _upperArm_Root_R_end.ChangeOwnership(OwnerClientId);
         }
     }
 

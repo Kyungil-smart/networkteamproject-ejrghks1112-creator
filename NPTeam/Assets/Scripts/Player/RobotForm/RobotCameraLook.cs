@@ -30,7 +30,7 @@ public class RobotCameraLook : NetworkBehaviour
     private PlayerStun _stun;
 
     // 잡기 체크
-    private bool _isGrab = false;
+    public bool isGrab = false;
 
     private void Awake() => Init();
 
@@ -125,15 +125,15 @@ public class RobotCameraLook : NetworkBehaviour
     {
         if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        _isGrab = true;
-        _animator.SetBool("IsGrab", _isGrab);
+        isGrab = true;
+        _animator.SetBool("IsGrab", isGrab);
     }
     public void RobotGrabCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (!ctx.canceled || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        _isGrab = false;
-        _animator.SetBool("IsGrab", _isGrab);
+        isGrab = false;
+        _animator.SetBool("IsGrab", isGrab);
     }
     #endregion
 }

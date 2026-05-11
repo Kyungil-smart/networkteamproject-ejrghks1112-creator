@@ -41,6 +41,11 @@ public class ComponentCameraLook : NetworkBehaviour
             _playerVehicleCS.checkSpeedOffForCam = false;
         }
         if (!IsOwner) return;
+        if (_playerVehicleCS.isLockTransform == true)
+        {
+            _cameraMoveInput = Vector2.zero;
+            return;
+        }
         if (_stun.IsStunned) return;
         CameraVectorBackup();
         // 카메라 시점 이동
