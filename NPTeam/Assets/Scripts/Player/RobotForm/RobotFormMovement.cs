@@ -54,6 +54,8 @@ public class RobotFormMovement : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsOwner) return;
+
         if (_playerVehicleCS.Stamina >= 100) return;
         _timer += Time.deltaTime;
 

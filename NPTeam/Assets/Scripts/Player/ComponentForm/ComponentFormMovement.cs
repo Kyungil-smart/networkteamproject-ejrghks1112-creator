@@ -85,6 +85,8 @@ public class ComponentFormMovement : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsOwner) return;
+
         _timer += Time.deltaTime;
 
         if (_timer >= 1f)
