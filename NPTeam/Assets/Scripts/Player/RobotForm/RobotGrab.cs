@@ -120,9 +120,11 @@ public class RobotGrab : NetworkBehaviour
         target.transform.rotation = _grabCollider.transform.rotation;
 
         NavMeshAgent nav = target.GetComponent<NavMeshAgent>();
+        Monster monster = target.GetComponent<Monster>();
 
         if (nav != null)
         {
+            monster.enabled = false;
             nav.enabled = false;
         }
     }
@@ -140,10 +142,12 @@ public class RobotGrab : NetworkBehaviour
         target.transform.position = pos;
 
         NavMeshAgent nav = target.GetComponent<NavMeshAgent>();
+        Monster monster = target.GetComponent<Monster>();
 
         if (nav != null)
         {
             nav.enabled = true;
+            monster.enabled = true;
         }
 
         targetRef = default;
