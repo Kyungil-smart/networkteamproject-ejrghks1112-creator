@@ -148,7 +148,7 @@ public class PlayerVehicle : NetworkBehaviour
         if (!IsOwner) return;
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
-        if (_stamina.Value < 30) return ;
+        //if (_stamina.Value < 30) return ;
 
         SetForm(0);
         ChangeOwnershipServerRpc(0);
@@ -156,14 +156,14 @@ public class PlayerVehicle : NetworkBehaviour
         checkSpeedOff = true;
         checkSpeedOffForCam = true;
         if (_currentFormIndex == 0) return;
-        ChangeStaminaServerRpc(-30);
+        //ChangeStaminaServerRpc(-30);
     }
     public void OnRobotChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
-        if (_stamina.Value < 30) return;
+        //if (_stamina.Value < 30) return;
 
         SetForm(1);
         ChangeOwnershipServerRpc(1);
@@ -171,14 +171,14 @@ public class PlayerVehicle : NetworkBehaviour
         checkSpeedOff = true;
         checkSpeedOffForCam = true;
         if (_currentFormIndex == 1) return;
-        ChangeStaminaServerRpc(-30);
+        //ChangeStaminaServerRpc(-30);
     }
     public void OnComponentChanged(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
-        if (_stamina.Value < 30) return;
+        //if (_stamina.Value < 30) return;
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);
@@ -186,7 +186,7 @@ public class PlayerVehicle : NetworkBehaviour
         checkSpeedOff = true;
         checkSpeedOffForCam = true;
         if (_currentFormIndex == 2) return;
-        ChangeStaminaServerRpc(-30);
+        //ChangeStaminaServerRpc(-30);
     }
     public void SetForm(int index)
     {
