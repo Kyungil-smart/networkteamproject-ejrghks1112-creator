@@ -9,7 +9,7 @@ public class VivoxController : MonoBehaviour
     public static VivoxController Instance; // 싱글톤
 
     public string joinCodeChannelName; // joinCode를 기준으로 Vivox 채널 이름 결정
-    public string playerNickName;
+    public static string PlayerNickName; // LobbyManager에서 닉네임 받아옴
 
     private async void Awake()
     {
@@ -43,7 +43,7 @@ public class VivoxController : MonoBehaviour
     }
 
     // Vivox 서버 로그인 진행 메서드
-    public async Task LoginAsync() 
+    public async Task LoginVivox() 
     {
         try
         {
@@ -52,11 +52,11 @@ public class VivoxController : MonoBehaviour
 
             LoginOptions options = new LoginOptions(); // Vivox 로그인할 때 필요한 옵션
 
-            options.DisplayName = Guid.NewGuid().ToString(); // 로그인 할 때 표시될 이름 설정, Guid.NewGuid()로 고유 값 생성
+            options.DisplayName = PlayerNickName; // 로그인 할 때 표시될 이름 설정, TitleScene에서 사용할 ID와 동일하게
 
             await VivoxService.Instance.LoginAsync(options); // 해당 옵션을 가지고 로그인 진행
-
-            Debug.Log("Vivox 로그인 완료");
+            
+            Debug.Log($"Vivox 로그인 완료 / 닉네임 : {options.DisplayName}");
         }
         catch (Exception e)
         {
@@ -73,7 +73,7 @@ public class VivoxController : MonoBehaviour
         }
     }
     
-    public async Task JoinChannelAsync(string channelName) // Vivox 채널 참가 메서드
+    public async Task JoinVivoxChannel(string channelName) // Vivox 채널 참가 메서드
     {
         try
         {

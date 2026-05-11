@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Unity.Services.Vivox;
 using UnityEngine;
@@ -5,8 +6,11 @@ using UnityEngine.InputSystem;
 
 public class VivoxInputController : MonoBehaviour
 {
-    private NPTeamInputActions _vivoxInput;
-    private bool _isMuted = true;
+    private NPTeamInputActions _vivoxInput;         // 근형님께서 만드신 InputSystem
+    private bool _isMuted = true;                   // 음소거 on/off용 bool 타입
+    private bool _isVoiceChatOptionOpen = false;    // 음성채팅 옵션창 on/off용 bool 타입
+    
+    public event Action<bool> VoiceChatOptionCallback; // 음성채팅 옵션창을 열기위해 사용할 이벤트
 
     void Awake()
     {
@@ -17,14 +21,17 @@ public class VivoxInputController : MonoBehaviour
     {
         _vivoxInput.asset.Enable();
         _vivoxInput.Player.PlayerSelfMute.performed += OnSelfMute;
+        _vivoxInput.Player.PlayerVoiceChatOption.performed += OnVoiceChatOption;
     }
 
     void OnDisable()
     {
         _vivoxInput.Player.PlayerSelfMute.performed -= OnSelfMute;
+        _vivoxInput.Player.PlayerVoiceChatOption.performed -= OnVoiceChatOption;
         _vivoxInput.asset.Disable();
     }
 
+    // 자신의 마이크 음소거 on/off 메서드
     void OnSelfMute(InputAction.CallbackContext ctx)
     {
         _isMuted = !_isMuted;
@@ -39,5 +46,13 @@ public class VivoxInputController : MonoBehaviour
             VivoxService.Instance.UnmuteInputDevice();
             Debug.Log("마이크 활성화");
         }
+    }
+
+    //음성채팅 옵션창이 on/off 되는 메서드
+    void OnVoiceChatOption(InputAction.CallbackContext ctx)
+    {
+        _isVoiceChatOptionOpen = !_isVoiceChatOptionOpen;
+        
+        VoiceChatOptionCallback?.Invoke(_isVoiceChatOptionOpen);
     }
 }

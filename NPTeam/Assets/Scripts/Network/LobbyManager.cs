@@ -118,6 +118,9 @@ public class LobbyManager : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(playerName)) return;
         _playerName = playerName;
+        
+        // 연동준 추가. VivoxController에서 아이디 받아 오려고
+        VivoxController.PlayerNickName = _playerName;
     }
 
     /// <summary>
