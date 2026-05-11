@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 1125800891106829793}
   - component: {fileID: 5796915854070402358}
   - component: {fileID: 8138242740695951861}
+  - component: {fileID: 669374133477344274}
   - component: {fileID: 3351983773018944923}
   m_Layer: 5
   m_Name: InGameUICanvas
@@ -707,6 +708,31 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &669374133477344274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422173028551558742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 36516589
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &3351983773018944923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,9 +745,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c579a560d2cb39846bf5e91af54b00a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGameUI
+  ShowTopMostFoldoutHeaderGroup: 1
   <EndTimer>k__BackingField: 0
   _currentTimer: 0
   timerText: {fileID: 7646309429865996297}
+  scoreText: {fileID: 0}
+  playerNameText: {fileID: 1287329013163605276}
+  otherPlayers:
+  - {fileID: 2384612194691948221}
+  - {fileID: 4215670209502154184}
+  - {fileID: 5643223434917529346}
+  playerName:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
   <GoalPosition>k__BackingField: {fileID: 0}
   <PlayersPosition>k__BackingField: []
 --- !u!1 &5569278108146214494
@@ -1299,6 +1336,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+--- !u!1 &4215670209502154184 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 305845115428703049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8323978721124684253 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8627245455881181844, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
@@ -1401,6 +1443,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8096e61829f252b42aad44c1a64b4554, type: 3}
+--- !u!114 &1287329013163605276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 553450867402663570, guid: 8096e61829f252b42aad44c1a64b4554, type: 3}
+  m_PrefabInstance: {fileID: 1617850318710725518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &1615030071124400032 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7457995700096046, guid: 8096e61829f252b42aad44c1a64b4554, type: 3}
@@ -1503,6 +1556,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+--- !u!1 &2384612194691948221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 2281175549551679548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7499196083712754344 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8627245455881181844, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
@@ -1812,6 +1870,11 @@ PrefabInstance:
 --- !u!224 &528441658769267479 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8627245455881181844, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 8137798831960179075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5643223434917529346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
   m_PrefabInstance: {fileID: 8137798831960179075}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9196457423122512145
