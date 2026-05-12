@@ -126,6 +126,18 @@ MonoBehaviour:
     m_Key: UI_Settings_Credit
     m_Metadata:
       m_Items: []
+  - m_Id: 5302669458661376
+    m_Key: UI_Settings_MasterVolume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5303159525335040
+    m_Key: UI_Settings_SEVolume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5303571364044800
+    m_Key: UI_Settings_BGMVolume
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
