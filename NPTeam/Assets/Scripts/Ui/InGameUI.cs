@@ -3,9 +3,12 @@ using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameUI : NetworkBehaviour
 {
+    public static InGameUI Instance;
+    
     [Header("시간 설정 용")]
     [field: SerializeField] public float EndTimer { get; set; } // 외부에서 받아야 하는 최종 시간
     [SerializeField] private float _currentTimer;   // 현재 시간
@@ -25,6 +28,9 @@ public class InGameUI : NetworkBehaviour
     [SerializeField] private RectTransform distanceToGoal; // ui상 골 지점 거리
     [SerializeField] private RectTransform goalPosition; // ui상 골 지점 
     [SerializeField] private List<RectTransform> gps; // ui상 플레이어의 위치
+
+    [Header("스테미나 표시 용")] 
+    [SerializeField] private Image stamina;
     
     public NetworkList<FixedString32Bytes> playerName;
     private int index = 0;
@@ -32,6 +38,7 @@ public class InGameUI : NetworkBehaviour
     
     private void Awake()
     {
+        Instance = this;
         playerName = new NetworkList<FixedString32Bytes>();
         vehicles = FindObjectsByType<PlayerVehicle>(FindObjectsSortMode.None);
         startPos = FindAnyObjectByType<UiDistanceStartPos>();
@@ -87,6 +94,11 @@ public class InGameUI : NetworkBehaviour
         }
         
         playerName.OnListChanged -= CheckPlayerList;
+    }
+
+    public void UpdateStamina(int currentStamina)
+    {
+        if (stamina != null) stamina.fillAmount = currentStamina / 100f;
     }
 
     private void CheckPlayerList(NetworkListEvent<FixedString32Bytes> changeEvent)
