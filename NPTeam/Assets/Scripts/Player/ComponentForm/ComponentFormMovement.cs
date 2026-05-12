@@ -26,6 +26,9 @@ public class ComponentFormMovement : NetworkBehaviour
 
     // 스테미너 초당 소모하게 하기위해
     private float _timer;
+    private bool isMove = false;
+    private bool isUp = false;
+    private bool isDown = false;
 
     #region 합체 관련 필드들
     [Header("합체 폼의 고유 애니메이션 등록")]
@@ -86,16 +89,27 @@ public class ComponentFormMovement : NetworkBehaviour
     private void Update()
     {
         if (!IsOwner) return;
-
-        _timer += Time.deltaTime;
-
-        if (_timer >= 1f)
+        if (isMove == true || isUp == true || isDown == true)
         {
-            _timer = 0f;
-            _playerVehicleCS.ChangeStamina(-4);
-        }
+            _timer += Time.deltaTime;
 
-        if (_playerVehicleCS.Stamina <= 0) _playerVehicleCS.SetForm(0);
+            if (_timer >= 1f)
+            {
+                _timer = 0f;
+                _playerVehicleCS.ChangeStamina(-5);
+            }
+        }
+        else if (isMove == false && isUp == false && isDown == false)
+        {
+            if (_playerVehicleCS.Stamina >= 100) return;
+            _timer += Time.deltaTime;
+
+            if (_timer >= 1f)
+            {
+                _timer = 0f;
+                _playerVehicleCS.ChangeStamina(1);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -132,12 +146,15 @@ public class ComponentFormMovement : NetworkBehaviour
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         if (_playerVehicleCS.Stamina <= 0) return;
         _move = ctx.ReadValue<Vector2>();
+        isMove = true;
+        _playerVehicleCS.ChangeStamina(-1);
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         _move = Vector2.zero;
+        isMove = false;
     }
 
     private void OnDescend(InputAction.CallbackContext ctx)
@@ -147,12 +164,15 @@ public class ComponentFormMovement : NetworkBehaviour
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         if (_playerVehicleCS.Stamina <= 0) return;
         _flyDown = ctx.ReadValue<float>();
+        isDown = true;
+        _playerVehicleCS.ChangeStamina(-1);
     }
     private void OnDescendCancel(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         _flyDown = 0f;
+        isDown = false;
     }
 
 
@@ -163,12 +183,15 @@ public class ComponentFormMovement : NetworkBehaviour
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         if (_playerVehicleCS.Stamina <= 0) return;
         _flyUp = ctx.ReadValue<float>();
+        isUp = true;
+        _playerVehicleCS.ChangeStamina(-1);
     }
     private void OnAscendCancel(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         _flyUp = 0f;
+        isUp = false;
     }
 
     private void Move()

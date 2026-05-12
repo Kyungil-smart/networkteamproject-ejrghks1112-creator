@@ -126,6 +126,18 @@ MonoBehaviour:
     m_Localized: Credits
     m_Metadata:
       m_Items: []
+  - m_Id: 5302669458661376
+    m_Localized: Master Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5303159525335040
+    m_Localized: SE Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5303571364044800
+    m_Localized: BGM Volume
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
