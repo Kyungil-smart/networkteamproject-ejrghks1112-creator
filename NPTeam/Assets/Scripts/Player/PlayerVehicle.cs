@@ -38,6 +38,7 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private NetworkObject _componentNetworkObject;
     [SerializeField] private NetworkObject _componentConnector;
     [SerializeField] private NetworkObject _upperArm_Root_R_end;
+    [SerializeField] private NetworkObject _hand_L_end;
 
     [Header("스테이지상의 스폰포인트를 등록(리스폰 용도)")]
     [SerializeField] private Transform _spawnTransform;
@@ -274,6 +275,7 @@ public class PlayerVehicle : NetworkBehaviour
         if (index == 1)
         {
             _upperArm_Root_R_end.ChangeOwnership(OwnerClientId);
+            _hand_L_end.ChangeOwnership(OwnerClientId);
         }
     }
 
