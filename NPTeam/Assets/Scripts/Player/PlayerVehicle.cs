@@ -39,6 +39,9 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private NetworkObject _componentConnector;
     [SerializeField] private NetworkObject _upperArm_Root_R_end;
 
+    [Header("스테이지상의 스폰포인트를 등록(리스폰 용도)")]
+    [SerializeField] private Transform _spawnTransform;
+
     private Rigidbody _rigidbody;
 
     // 조작키
@@ -95,6 +98,15 @@ public class PlayerVehicle : NetworkBehaviour
     private void Start()
     {
         StartCoroutine(ESetForm());
+    }
+
+    private void Update()
+    {
+        if (transform.position.y <= -25f)
+        {
+            transform.position = _spawnTransform.position;
+            transform.rotation = _spawnTransform.rotation;
+        }
     }
 
     public override void OnNetworkDespawn()
