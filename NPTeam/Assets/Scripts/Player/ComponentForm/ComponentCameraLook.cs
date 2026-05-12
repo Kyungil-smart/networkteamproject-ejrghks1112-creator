@@ -49,7 +49,7 @@ public class ComponentCameraLook : NetworkBehaviour
         if (_stun.IsStunned) return;
         CameraVectorBackup();
         // 카메라 시점 이동
-        _componentPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
+        _componentPivot.localRotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
     }
 
     private void OnDisable()
