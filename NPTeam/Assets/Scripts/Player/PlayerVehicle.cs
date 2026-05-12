@@ -138,7 +138,13 @@ public class PlayerVehicle : NetworkBehaviour
     #region 스테미나
     private void OnStaminaChanged(int previous, int current)
     {
-        Debug.Log(current);
+        if (!IsOwner) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
+
+        if (InGameUI.Instance != null)
+        {
+            InGameUI.Instance.UpdateStamina(current);
+        }
     }
 
     [ServerRpc]
