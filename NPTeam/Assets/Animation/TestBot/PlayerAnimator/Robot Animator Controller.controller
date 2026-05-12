@@ -344,7 +344,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TestBot_Grab_Forward
+  m_Name: TestBot_Zab_Forward
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -358,7 +358,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bd4330d9e2ae1d040b783d9f97cc9cf2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2b00d768532a8914185a91b084fd0c41, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
