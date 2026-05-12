@@ -138,6 +138,7 @@ public class Mine : NetworkBehaviour
         }
 
         // 실제 폭발이 일어나는 곳 
+        
         rb.AddExplosionForce(explosionForce, explosionPosition, explosionRadius);
     }
     
