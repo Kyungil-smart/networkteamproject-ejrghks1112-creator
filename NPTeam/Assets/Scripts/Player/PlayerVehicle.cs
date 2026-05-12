@@ -38,6 +38,10 @@ public class PlayerVehicle : NetworkBehaviour
     [SerializeField] private NetworkObject _componentNetworkObject;
     [SerializeField] private NetworkObject _componentConnector;
     [SerializeField] private NetworkObject _upperArm_Root_R_end;
+    [SerializeField] private NetworkObject _hand_L_end;
+
+    [Header("스테이지상의 스폰포인트를 등록(리스폰 용도)")]
+    [SerializeField] private Transform _spawnTransform;
 
     private Rigidbody _rigidbody;
 
@@ -97,6 +101,15 @@ public class PlayerVehicle : NetworkBehaviour
         StartCoroutine(ESetForm());
     }
 
+    private void Update()
+    {
+        if (transform.position.y <= -25f)
+        {
+            transform.position = _spawnTransform.position;
+            transform.rotation = _spawnTransform.rotation;
+        }
+    }
+
     public override void OnNetworkDespawn()
     {
         //_stamina.OnValueChanged -= OnStaminaChanged;
@@ -126,7 +139,13 @@ public class PlayerVehicle : NetworkBehaviour
     #region 스테미나
     private void OnStaminaChanged(int previous, int current)
     {
-        Debug.Log(current);
+        if (!IsOwner) return;
+        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject) return;
+
+        if (InGameUI.Instance != null)
+        {
+            InGameUI.Instance.UpdateStamina(current);
+        }
     }
 
     [ServerRpc]
@@ -256,6 +275,7 @@ public class PlayerVehicle : NetworkBehaviour
         if (index == 1)
         {
             _upperArm_Root_R_end.ChangeOwnership(OwnerClientId);
+            _hand_L_end.ChangeOwnership(OwnerClientId);
         }
     }
 

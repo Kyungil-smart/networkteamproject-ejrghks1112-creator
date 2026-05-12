@@ -25,12 +25,19 @@ public class RobotCameraLook : NetworkBehaviour
     [SerializeField] private GameObject _playerVehicle;
     [SerializeField] private PlayerVehicle _playerVehicleCS;
 
+    [Header("잽 모션에 함수 호출을 위해 왼손 끝 등록")]
+    [SerializeField] private RobotZab _robotZab;
+    
     private Animator _animator;
 
     private PlayerStun _stun;
 
     // 잡기 체크
     public bool isGrab = false;
+
+
+  
+
 
     private void Awake() => Init();
 
@@ -134,6 +141,13 @@ public class RobotCameraLook : NetworkBehaviour
         if (!ctx.canceled || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         isGrab = false;
         _animator.SetBool("IsGrab", isGrab);
+    }
+    #endregion
+
+    #region 로봇폼 잽 애니메이션 동기화를 위해 등록
+    public void ZabAttack()
+    {
+        _robotZab.ZabAttack();
     }
     #endregion
 }
