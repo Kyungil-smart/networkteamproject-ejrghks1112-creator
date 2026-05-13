@@ -12,6 +12,8 @@ public class FallingRock : NetworkBehaviour
     private Collider _col;
     private bool _isDestroyed; // 부딛혔는지 확인용
     
+    [SerializeField] private FallingRockSound fallingRockSound;
+    
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -51,7 +53,7 @@ public class FallingRock : NetworkBehaviour
             //Destroy(_warningDecal);
             // var netObj = GetComponent<NetworkObject>();
             // netObj.Despawn();
-            DestroyFallingRock(); // 발동 후 운석 삭제
+            DestroyFallingRockClientRpc(); // 발동 후 운석 삭제
         }
        
     }
@@ -65,15 +67,21 @@ public class FallingRock : NetworkBehaviour
         //Destroy(_warningDecal);
         // var netObj = GetComponent<NetworkObject>();
         // netObj.Despawn();
-        DestroyFallingRock();
+        DestroyFallingRockClientRpc();
     }
     
     // Despawn를 바로 사용시 Spawn되지 않은 상태에서 Despawn을 호출 했다는 에러 발생
     // 이를 방지하기 위해 따로 메서드로 만들어 운석 삭제
-    void DestroyFallingRock() 
+    [ClientRpc]
+    void DestroyFallingRockClientRpc() 
     {
         if (_isDestroyed) return;
         _isDestroyed = true;
+        
+        EffectManager.Instance.PlayEffect(
+            EffectEnum.ExplosionRed, transform.position, Quaternion.identity);
+        
+        fallingRockSound.PlayFallingRockSfx(fallingRockSound.FallingRockExplosionSfx);
         
         // 서버에서 실행중인지 && NetworkObject를 가지고 있는지 && Spawn된 상태인지 체크
         if (IsServer && _netObj != null && _netObj.IsSpawned)
