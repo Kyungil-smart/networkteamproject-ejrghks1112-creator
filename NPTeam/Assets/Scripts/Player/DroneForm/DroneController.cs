@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using Unity.Netcode;
@@ -42,7 +43,7 @@ public class DroneController : NetworkBehaviour
     private Renderer[] _currentPossessionRenderers;
     // PlayerVehicle 백업
     private PlayerVehicle _playerVehicle;
-
+    [Header("빙의시 렌더러 Off를 위한 파츠 등록")]
     [SerializeField] private Renderer[] _dronRenderers;
 
     private void Awake() => Init();
@@ -185,8 +186,8 @@ public class DroneController : NetworkBehaviour
         if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
 
+        
         TryPossession();
-
     }
     // 빙의 함수
     private void TryPossession()
@@ -245,10 +246,31 @@ public class DroneController : NetworkBehaviour
     }
     #endregion
 
-    #region 빙의 시 드론 그래픽을 끄는 함수
-    private void DronrenderersOff()
+    #region 빙의 시 드론 그래픽을 켜고/끄는 함수
+    // 빙의 해제시 드론 렌더러 켬
+    [ServerRpc]
+    private void DronrenderersOnServerRpc()
     {
-
+        DronrenderersOnClientRpc();
+    }
+    [ClientRpc]
+    private void DronrenderersOnClientRpc()
+    {
+        for (int i = 0; i < _dronRenderers.Length; i++)
+        {
+            Debug.Log(_dronRenderers[i].name);
+            _dronRenderers[i].enabled = true;
+        }
+    }
+    // 빙의시 드론 렌더러 끔
+    // SetParentServerRpc() 에서 호출
+    [ClientRpc]
+    private void DronrenderersOffClientRpc()
+    {
+        for (int i = 0; i < _dronRenderers.Length; i++)
+        {
+            _dronRenderers[i].enabled = false;
+        }
     }
     #endregion
 
@@ -259,6 +281,7 @@ public class DroneController : NetworkBehaviour
 
         NetworkObject networkObject = PlayerState.Instance.CurrentPossessed.GetComponent<NetworkObject>();
 
+        DronrenderersOnServerRpc();
         // 빙의 취소후 원래 색상으로 복귀
         ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
         // 플레이어 색상 복구
@@ -323,6 +346,9 @@ public class DroneController : NetworkBehaviour
         networkObject.TrySetParent(target, true);
 
         target.ChangeOwnership(OwnerClientId);
+
+        // 드론 렌더러 끔
+        DronrenderersOffClientRpc();
     }
 
     [ServerRpc]
