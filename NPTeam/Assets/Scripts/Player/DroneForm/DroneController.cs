@@ -241,6 +241,7 @@ public class DroneController : NetworkBehaviour
                 vehicle.DroneChangeOwnership();
                 vehicle._formColorChanger.SetColorServerRpc(_playerColorChanger.CurrentColor);
                 _playerVehicle = vehicle;
+                if (IsOwner) InGameUI.Instance.ChangeForm(vehicle.CurrentFormIndex + 1);
             }
         }
     }
@@ -289,6 +290,7 @@ public class DroneController : NetworkBehaviour
         // 빙의 취소후 원래 색상으로 복귀
         ReleaseParentServerRpc();
         _playerVehicle.DisableCurrentCamera();
+        if (IsOwner) InGameUI.Instance.ChangeForm(0);
         _playerVehicle = null;
         PlayerState.Instance.CurrentPossessed = null;
         _rigidbody.isKinematic = false;
