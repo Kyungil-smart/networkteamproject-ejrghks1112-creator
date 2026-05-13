@@ -745,8 +745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGameUI
   ShowTopMostFoldoutHeaderGroup: 1
-  <EndTimer>k__BackingField: 0
-  _currentTimer: 0
   timerText: {fileID: 7646309429865996297}
   scoreText: {fileID: 0}
   playerNameText: {fileID: 1287329013163605276}
@@ -771,6 +769,16 @@ MonoBehaviour:
   - {fileID: 6403632605412606779}
   - {fileID: 1473897318394318354}
   stamina: {fileID: 7173064381520466506}
+  playerForm: {fileID: 7805086684095718862}
+  forms:
+  - {fileID: -2039293477, guid: aff37fef9eeac6c49ab234b9fa96d77e, type: 3}
+  - {fileID: -1925169473, guid: 8dcb283fd8bd88e479281c94b76765a5, type: 3}
+  - {fileID: 2046079128, guid: be2a1e420488b024e84660058094317e, type: 3}
+  - {fileID: -108126262, guid: be2a1e420488b024e84660058094317e, type: 3}
+  otherForms:
+  - {fileID: 5051155620598525271}
+  - {fileID: 6741755421930896930}
+  - {fileID: 2980915380953347304}
   playerName:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0
@@ -1461,6 +1469,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
   m_PrefabInstance: {fileID: 305845115428703049}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6741755421930896930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6462967097267565931, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 305845115428703049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &8323978721124684253 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8627245455881181844, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
@@ -1708,6 +1727,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &7805086684095718862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8800876685448281664, guid: 8096e61829f252b42aad44c1a64b4554, type: 3}
+  m_PrefabInstance: {fileID: 1617850318710725518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &2281175549551679548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1810,6 +1840,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
   m_PrefabInstance: {fileID: 2281175549551679548}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5051155620598525271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6462967097267565931, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 2281175549551679548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &7499196083712754344 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8627245455881181844, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
@@ -2223,6 +2264,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8627245455881181844, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
   m_PrefabInstance: {fileID: 8137798831960179075}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2980915380953347304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6462967097267565931, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 8137798831960179075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &5643223434917529346 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
