@@ -230,6 +230,8 @@ public class PlayerVehicle : NetworkBehaviour
         _rigidbody.useGravity = (index != 2);
 
         SetCamera(index);
+
+        if (IsOwner) InGameUI.Instance.ChangeForm(index + 1);
     }
     #endregion
 

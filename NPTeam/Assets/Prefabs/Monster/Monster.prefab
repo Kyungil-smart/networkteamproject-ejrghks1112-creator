@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 120845250
+  GlobalObjectIdHash: 2113965588
   InScenePlacedSourceGlobalObjectIdHash: 120845250
   DeferredDespawnTick: 0
   Ownership: 1
@@ -713,10 +713,6 @@ MonoBehaviour:
       NameHash: 1080829965
       Synchronize: 1
       ParameterType: 9
-    - name: IsAttack
-      NameHash: 2145273271
-      Synchronize: 1
-      ParameterType: 4
   AnimatorParametersExpanded: 0
 --- !u!1 &2262584143501958129
 GameObject:
