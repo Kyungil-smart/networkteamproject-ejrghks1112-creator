@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3130111748
+  GlobalObjectIdHash: 916260593
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -406,6 +406,10 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 8056897230554003959, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: _componentSoundAudioSource
+      value: 
+      objectReference: {fileID: 7496129784065724302}
     - target: {fileID: 8960336304109972963, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: _playerVehicle
       value: 

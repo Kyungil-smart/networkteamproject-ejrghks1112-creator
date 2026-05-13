@@ -30,6 +30,12 @@ public class ComponentFormMovement : NetworkBehaviour
     private bool isUp = false;
     private bool isDown = false;
 
+    // SFX 호출 판정
+    public NetworkVariable<bool> isComponentMoveSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
     #region 합체 관련 필드들
     [Header("합체 폼의 고유 애니메이션 등록")]
     [SerializeField] private Animator _componentAnimator;
@@ -103,7 +109,7 @@ public class ComponentFormMovement : NetworkBehaviour
             {
                 _timer = 0f;
                 _playerVehicleCS.ChangeStamina(-3);
-                SoundManager.Instance.PlayFireSfx1();
+                if (isComponentMoveSFX.Value != true) isComponentMoveSFX.Value = true;
             }
         }
         else if (isMove == false && isUp == false && isDown == false)
@@ -115,6 +121,7 @@ public class ComponentFormMovement : NetworkBehaviour
             {
                 _timer = 0f;
                 _playerVehicleCS.ChangeStamina(1);
+                if (isComponentMoveSFX.Value != false) isComponentMoveSFX.Value = false;
             }
         }
     }

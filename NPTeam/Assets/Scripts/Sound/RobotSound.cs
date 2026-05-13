@@ -30,6 +30,7 @@ public class RobotSound : MonoBehaviour
         {
             _robotWalkSoundAudioSource.PlayOneShot(SoundManager.Instance.RobotFormWalkSfx2);
         }
+    
     }
 
     void RobotSoundChanged(float volume)

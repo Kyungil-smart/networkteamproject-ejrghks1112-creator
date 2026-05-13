@@ -135,7 +135,6 @@ public class RobotFormMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         _moveInput = Vector2.zero;
-        RobotMoveOffSFX();
     }
     #endregion
 
@@ -189,12 +188,15 @@ public class RobotFormMovement : NetworkBehaviour
     #endregion
 
     #region 로봇폼 사운드
-    public bool RobotMoveOnSFX()
+    public void RobotMoveOnSFX()
     {
-        if (!IsGrounded()) return isRobotMoveSFX.Value = false;
-        return isRobotMoveSFX.Value = true;
+        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        isRobotMoveSFX.Value = true;
     }
-  
-    public bool RobotMoveOffSFX() => isRobotMoveSFX.Value = false;
+
+    public void RobotMoveOffSFX()
+    {
+        isRobotMoveSFX.Value = false;
+    }
     #endregion
 }

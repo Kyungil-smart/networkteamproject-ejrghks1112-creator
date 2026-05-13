@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3184168099
+  GlobalObjectIdHash: 1416044839
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -507,6 +507,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6057068607405701512, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: _componentSoundAudioSource
+      value: 
+      objectReference: {fileID: 1751779735230325859}
     - target: {fileID: 6725237004958442595, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: _rigidbody
       value: 
