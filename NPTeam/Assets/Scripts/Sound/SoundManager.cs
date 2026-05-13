@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     // 싱글톤 처리
     public static SoundManager Instance { get; private set; }
+    public event Action<float> OnSfxVolumeChanged;
     
     [Header("BGM")]
     [SerializeField] private AudioSource bgmSource;
@@ -123,6 +124,8 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVolume", _sfxVolume);
         PlayerPrefs.Save();
         ApplyVolume();
+        
+        OnSfxVolumeChanged?.Invoke(_sfxVolume);
     }
     
     // BGM 출력 메서드
@@ -179,6 +182,25 @@ public class SoundManager : MonoBehaviour
     public void PlayFireSfx4() => PlaySfx(fireSfx4);
     public void PlayStrikeSfx() => PlaySfx(strikeSfx);
     public void PlayGrabSfx() => PlaySfx(grabSfx);
+    
+    // AudioClip 프로퍼티 모음
+    
+    // BGM 프로퍼티
+    public AudioClip TitleLobbyBGM => titleLobbyBGM;
+    public AudioClip Stage1BGM => stage1BGM;
+    public AudioClip CombineBGM => combineBGM;
+    
+    // SFX 프로퍼티
+    public AudioClip ExplosionSfx => explosionSfx;
+    public AudioClip RobotFormWalkSfx => robotFormWalkSfx;
+    public AudioClip CarFormDriveSfx1 => carFormDriveSfx1;
+    public AudioClip CarFormDriveSfx2 => carFormDriveSfx2;
+    public AudioClip FireSfx1 => fireSfx1;
+    public AudioClip FireSfx2 => fireSfx2;
+    public AudioClip FireSfx3 => fireSfx3;
+    public AudioClip FireSfx4 => fireSfx4;
+    public AudioClip StrikeSfx => strikeSfx;
+    public AudioClip GrabSfx1 => grabSfx;
 }
 
 // 씬 이름을 Enum으로 관리
