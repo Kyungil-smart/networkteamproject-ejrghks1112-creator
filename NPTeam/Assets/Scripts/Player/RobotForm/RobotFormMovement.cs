@@ -43,6 +43,10 @@ public class RobotFormMovement : NetworkBehaviour
         default,
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isRobotJumpSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
 
     private void Awake() => Init();
 
@@ -166,10 +170,12 @@ public class RobotFormMovement : NetworkBehaviour
 
         _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
         _playerVehicleCS.ChangeStamina(-5);
+        isRobotJumpSFX.Value = true;
     }
     public void RobotJumpCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        isRobotJumpSFX.Value = false;
         if (_rigidbody.linearVelocity.y <= 0f) return;
 
         Vector3 velocity = _rigidbody.linearVelocity;

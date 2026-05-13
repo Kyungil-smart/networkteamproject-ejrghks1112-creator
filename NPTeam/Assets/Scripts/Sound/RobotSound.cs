@@ -4,6 +4,7 @@ public class RobotSound : MonoBehaviour
 {
     [SerializeField] private AudioSource _robotWalkSoundAudioSource;
     [SerializeField] private RobotFormMovement _robotFormMovement;
+    [SerializeField] private RobotGrab _robotGrab;
 
     void Start()
     {
@@ -15,12 +16,16 @@ public class RobotSound : MonoBehaviour
     {
         _robotWalkSoundAudioSource.Stop();
         _robotFormMovement.isRobotMoveSFX.OnValueChanged += PlayRobotWalkSound;
+        _robotFormMovement.isRobotJumpSFX.OnValueChanged += PlayRobotJumpSound;
+        _robotGrab.isGrabSFX.OnValueChanged += PlayRobotGrabSound;
         SoundManager.Instance.OnSfxVolumeChanged += RobotSoundChanged;
     }
 
     void OnDisable()
     {
         _robotFormMovement.isRobotMoveSFX.OnValueChanged -= PlayRobotWalkSound;
+        _robotFormMovement.isRobotJumpSFX.OnValueChanged += PlayRobotJumpSound;
+        _robotGrab.isGrabSFX.OnValueChanged += PlayRobotGrabSound;
         SoundManager.Instance.OnSfxVolumeChanged -= RobotSoundChanged;
     }
 
@@ -32,6 +37,24 @@ public class RobotSound : MonoBehaviour
         }
     
     }
+    void PlayRobotJumpSound(bool previous, bool current)
+    {
+        if (current)
+        {
+            _robotWalkSoundAudioSource.PlayOneShot(SoundManager.Instance.CombineSfx);
+        }
+    
+    }
+
+    void PlayRobotGrabSound(bool previous, bool current)
+    {
+        if (current)
+        {
+            _robotWalkSoundAudioSource.PlayOneShot(SoundManager.Instance.GrabSfx2);
+        }
+    
+    }
+
 
     void RobotSoundChanged(float volume)
     {
