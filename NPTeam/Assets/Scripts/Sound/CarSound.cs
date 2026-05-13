@@ -15,6 +15,7 @@ public class CarSound : MonoBehaviour
     
     void OnEnable()
     {
+        carDriveSoundAudioSource.Stop();
         carFormMovement.isMove.OnValueChanged += PlayCarDriveSound;
         SoundManager.Instance.OnSfxVolumeChanged += CarSoundChanged;
     }
