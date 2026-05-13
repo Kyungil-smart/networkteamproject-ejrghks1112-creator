@@ -38,6 +38,12 @@ public class RobotFormMovement : NetworkBehaviour
     // 점프를 위한 레이캐스트 사거리
     private float _jumpRayDistance = 0.2f;
 
+    // SFX 호출 판정
+    public NetworkVariable<bool> isRobotMoveSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -129,6 +135,7 @@ public class RobotFormMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         _moveInput = Vector2.zero;
+        RobotMoveOffSFX();
     }
     #endregion
 
@@ -179,5 +186,15 @@ public class RobotFormMovement : NetworkBehaviour
 
         return Physics.Raycast(origin, Vector3.down, _jumpRayDistance, _jumpCheckLayer);
     }
+    #endregion
+
+    #region 로봇폼 사운드
+    public bool RobotMoveOnSFX()
+    {
+        if (!IsGrounded()) return isRobotMoveSFX.Value = false;
+        return isRobotMoveSFX.Value = true;
+    }
+  
+    public bool RobotMoveOffSFX() => isRobotMoveSFX.Value = false;
     #endregion
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8523679854449922528}
   - component: {fileID: 1854654448606354842}
   - component: {fileID: 9111658600421869094}
+  - component: {fileID: 837701473247194905}
   m_Layer: 7
   m_Name: IceCreamCar(LA)
   m_TagString: Player
@@ -80,6 +81,11 @@ MonoBehaviour:
   _carFormRigidBody: {fileID: 0}
   carFormSpeed: 9
   carFormTurnSpeed: 100
+  isMove:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
   _playerVehicle: {fileID: 0}
   _playerVehicleCS: {fileID: 0}
 --- !u!114 &2233208743250253248
@@ -180,6 +186,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 2.8}
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &837701473247194905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664890472010085759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c4219f27af4484ba70b33abee3784e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarSound
+  carDriveSoundAudioSource: {fileID: 0}
+  carFormMovement: {fileID: 639925063970013624}
 --- !u!1 &2567815999729571669
 GameObject:
   m_ObjectHideFlags: 0

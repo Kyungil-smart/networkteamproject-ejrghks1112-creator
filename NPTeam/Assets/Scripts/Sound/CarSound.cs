@@ -30,6 +30,7 @@ public class CarSound : MonoBehaviour
     {
         if (current)
         {
+            carDriveSoundAudioSource.clip = SoundManager.Instance.CarFormDriveSfx2;
             carDriveSoundAudioSource.Play();
         }
         else
