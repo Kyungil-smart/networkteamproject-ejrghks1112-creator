@@ -13,7 +13,15 @@ public class CarFormMovement : NetworkBehaviour
     [SerializeField] private float carFormSpeed = 5.0f;
     [SerializeField] private float carFormTurnSpeed = 5.0f;
     // [SerializeField] private float rotateInterpolate = 5.0f; // 회전 속도
-    private bool _isMove; // 전진 중인지, 후진 중인지
+    // private bool _isMove; // 전진 중인지, 후진 중인지
+    public NetworkVariable<bool> isMove = new NetworkVariable<bool>(
+            default,
+            NetworkVariableReadPermission.Everyone,
+            NetworkVariableWritePermission.Owner);
+    
+    
+    //연동준이 추가
+    // public bool IsMove => _isMove.Value;
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
@@ -88,6 +96,8 @@ public class CarFormMovement : NetworkBehaviour
         _turn = new Vector3(input.x, 0, 0);
 
         _move = new Vector3(0, 0, input.y).normalized;
+
+        isMove.Value = Mathf.Abs(input.y) > 0.01f && !_stun.IsStunned;
     }
 
     void CarMoveCancel(InputAction.CallbackContext ctx)
@@ -95,16 +105,17 @@ public class CarFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         _move = Vector3.zero;
         _turn = Vector3.zero;
+        isMove.Value = false;
     }
 
     void CarMove()
     {
         // 전진, 후진 중일 때만 회전 할 수 있도록
-        _isMove = _move.sqrMagnitude > 0;
+        // isMove.Value = _move.sqrMagnitude > 0;
         // 전진시 1f, 후진시 -1f
         _direction = _move.z > 0 ? 1f : -1f;
 
-        if (_isMove)
+        if (isMove.Value)
         {
             transform.Rotate(_direction * _turn.x * carFormTurnSpeed * Time.deltaTime * Vector3.up);
         }
