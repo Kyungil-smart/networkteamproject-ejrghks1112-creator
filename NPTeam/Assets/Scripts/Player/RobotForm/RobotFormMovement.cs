@@ -190,12 +190,14 @@ public class RobotFormMovement : NetworkBehaviour
     #region 로봇폼 사운드
     public void RobotMoveOnSFX()
     {
+        if (!IsOwner) return;
         if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         isRobotMoveSFX.Value = true;
     }
 
     public void RobotMoveOffSFX()
     {
+        if (!IsOwner) return;
         isRobotMoveSFX.Value = false;
     }
     #endregion
