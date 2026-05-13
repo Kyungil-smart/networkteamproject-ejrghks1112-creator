@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode;
 
 public class DroneController : NetworkBehaviour
 {
@@ -41,6 +42,8 @@ public class DroneController : NetworkBehaviour
     private Renderer[] _currentPossessionRenderers;
     // PlayerVehicle 백업
     private PlayerVehicle _playerVehicle;
+
+    [SerializeField] private Renderer[] _dronRenderers;
 
     private void Awake() => Init();
 
@@ -183,6 +186,7 @@ public class DroneController : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
 
         TryPossession();
+
     }
     // 빙의 함수
     private void TryPossession()
@@ -238,6 +242,13 @@ public class DroneController : NetworkBehaviour
                 _playerVehicle = vehicle;
             }
         }
+    }
+    #endregion
+
+    #region 빙의 시 드론 그래픽을 끄는 함수
+    private void DronrenderersOff()
+    {
+
     }
     #endregion
 

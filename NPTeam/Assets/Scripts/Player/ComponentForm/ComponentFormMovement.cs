@@ -103,6 +103,7 @@ public class ComponentFormMovement : NetworkBehaviour
             {
                 _timer = 0f;
                 _playerVehicleCS.ChangeStamina(-3);
+                SoundManager.Instance.PlayFireSfx1();
             }
         }
         else if (isMove == false && isUp == false && isDown == false)

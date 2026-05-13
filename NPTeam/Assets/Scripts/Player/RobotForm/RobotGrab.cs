@@ -100,6 +100,7 @@ public class RobotGrab : NetworkBehaviour
                 if (_playerVehicleCS.Stamina < 15) return;
                 isGrabGet = true;
                 _playerVehicleCS.ChangeStamina(-15);
+                SoundManager.Instance.PlayGrabSfx();
 
                 GrabServerRpc(targetRef);
 
