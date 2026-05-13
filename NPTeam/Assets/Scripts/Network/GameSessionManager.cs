@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,7 +20,14 @@ public class GameSessionManager : NetworkBehaviour
     private readonly NetworkVariable<int> _currentJoinedCountNet = new NetworkVariable<int>();
     private readonly NetworkVariable<int> _expectedPlayerCountNet = new NetworkVariable<int>();
 
+    public event Action<GameResultType> OnGameEnded;    // 게임 종료 시 결과 타입과 함께 알림 (승/패)
+
     private bool _gameEnded;
+
+    
+    [Header("게임 종료 설정")]
+    [SerializeField] private float _returnToLobbyDelay = 6.0f;  // 로비로 되돌아가기 대기 시간
+    
 
     /// <summary>
     /// 현재 게임 씬 로드까지 완료한 플레이어 수 (호스트 포함)
@@ -65,6 +73,12 @@ public class GameSessionManager : NetworkBehaviour
             InitServerSide();
             BindSceneManagerEvents();
             _endGameAction.action.Enable();
+
+            // 서버에서만 GameManager의 시간 종료 이벤트 구독 (_returnToLobbyDelay클라이언트는 서버에서 종료 RPC 받는 것으로)
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+            }
         }
     }
 
@@ -75,6 +89,11 @@ public class GameSessionManager : NetworkBehaviour
         {
             UnbindSceneManagerEvents();
             _endGameAction.action.Disable();
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
+            }
         }
     }
 
@@ -106,6 +125,22 @@ public class GameSessionManager : NetworkBehaviour
         NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnAllClientsSceneLoaded;
     }
 
+
+    // GameManager에서 발생한 타임오버 이벤트를 수신하여 처리
+    private void HandleTimeOverOnServer()
+    {
+        // 예외 처리, 이미 게임이 종료되었다면 무시
+        if (_gameEnded) return;
+        _gameEnded = true;
+
+        Debug.Log("[GameSessionManager] : 서버가 클라이언트들에게 게임 종료를 알림");
+
+        // 패배 정보 전달
+        EndGameClientRpc(GameResultType.Defeat);
+    }
+
+
+
     // TODO: EndGame 입력 트리거는 임시. 실제 종료 조건(승패/시간 등) 확정 시 교체
     private void Update()
     {
@@ -113,7 +148,7 @@ public class GameSessionManager : NetworkBehaviour
         if (_endGameAction.action.WasPressedThisFrame())
         {
             _gameEnded = true;
-            EndGameClientRpc();
+            EndGameClientRpc(GameResultType.Defeat);
         }
     }
 
@@ -136,7 +171,7 @@ public class GameSessionManager : NetworkBehaviour
         {
             Debug.LogWarning($"GameSessionManager: {clientsTimedOut.Count}명 씬 로드 timeout - 룸으로 복귀");
             _gameEnded = true;
-            EndGameClientRpc();
+            EndGameClientRpc(GameResultType.Defeat);
             return;
         }
         _isGameStartedNet.Value = true;
@@ -157,9 +192,12 @@ public class GameSessionManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void EndGameClientRpc()
+    private void EndGameClientRpc(GameResultType result)
     {
-        _ = LobbyManager.Instance.ReturnToRoomAsync();
+        OnGameEnded?.Invoke(result);
+        //_ = LobbyManager.Instance.ReturnToRoomAsync();
+
+        StartCoroutine(ReturnToLobbyRoutine());
     }
 
     private void SetSingleton()
@@ -170,5 +208,15 @@ public class GameSessionManager : NetworkBehaviour
             return;
         }
         Instance = this;
+    }
+
+
+    private IEnumerator ReturnToLobbyRoutine()
+    {
+        
+        yield return new WaitForSeconds(_returnToLobbyDelay);
+
+        // 대기가 끝나면 비로소 로비 매니저를 통해 대기방으로
+        _ = LobbyManager.Instance.ReturnToRoomAsync();
     }
 }
