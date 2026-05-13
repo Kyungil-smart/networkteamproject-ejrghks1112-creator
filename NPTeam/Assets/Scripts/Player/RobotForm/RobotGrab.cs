@@ -24,6 +24,10 @@ public class RobotGrab : NetworkBehaviour
 
     private bool isGrab = false;
     private bool isGrabGet = false;
+    public NetworkVariable<bool> isGrabSFX = new NetworkVariable<bool>(
+      default,
+      NetworkVariableReadPermission.Everyone,
+      NetworkVariableWritePermission.Owner);
 
     private void Awake() => Init();
 
@@ -67,6 +71,7 @@ public class RobotGrab : NetworkBehaviour
         if (!ctx.canceled) return;
         isGrab = false;
         isGrabGet = false;
+        isGrabSFX.Value = false;
         ReleaseServerRpc(targetRef);
     }
 
@@ -81,8 +86,6 @@ public class RobotGrab : NetworkBehaviour
                            _grabCollider.transform.lossyScale.z);
 
         Collider[] hits = Physics.OverlapSphere(center, radius, _canGrabLayer);
-
-        Debug.Log($"감지된 콜라이더 수 : {hits.Length}");
 
         foreach (Collider hit in hits)
         {
@@ -100,6 +103,7 @@ public class RobotGrab : NetworkBehaviour
                 if (_playerVehicleCS.Stamina < 15) return;
                 isGrabGet = true;
                 _playerVehicleCS.ChangeStamina(-15);
+                isGrabSFX.Value = true;
 
                 GrabServerRpc(targetRef);
 

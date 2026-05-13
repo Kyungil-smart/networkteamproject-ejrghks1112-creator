@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     // 싱글톤 처리
     public static SoundManager Instance { get; private set; }
+    public event Action<float> OnSfxVolumeChanged;
     
     [Header("BGM")]
     [SerializeField] private AudioSource bgmSource;
@@ -17,14 +18,31 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip explosionSfx;
     [SerializeField] private AudioClip robotFormWalkSfx;
+    [SerializeField] private AudioClip robotFormWalkSfx2;
     [SerializeField] private AudioClip carFormDriveSfx1;
     [SerializeField] private AudioClip carFormDriveSfx2;
+    [SerializeField] private AudioClip combineFormSfx;
     [SerializeField] private AudioClip fireSfx1;
     [SerializeField] private AudioClip fireSfx2;
     [SerializeField] private AudioClip fireSfx3;
     [SerializeField] private AudioClip fireSfx4;
     [SerializeField] private AudioClip strikeSfx;
     [SerializeField] private AudioClip grabSfx;
+    [SerializeField] private AudioClip grabSfx2;
+    [SerializeField] private AudioClip possessionSfx;
+    [SerializeField] private AudioClip releaseSfx;
+    [SerializeField] private AudioClip shootSfx;
+    [SerializeField] private AudioClip drillAttackSfx;
+    [SerializeField] private AudioClip punchAttackSfx;
+    [SerializeField] private AudioClip jumpSfx;
+    [SerializeField] private AudioClip droneSoundSfx;
+    [SerializeField] private AudioClip cancelSfx;
+    [SerializeField] private AudioClip warningSfx;
+    [SerializeField] private AudioClip hitSoundSfx;
+    [SerializeField] private AudioClip combineSfx;
+    
+    
+    
     
     // 음량 Default 값들 처음엔 0.5f로 설정
     private const float DefaultMaster = 0.5f;
@@ -123,6 +141,8 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVolume", _sfxVolume);
         PlayerPrefs.Save();
         ApplyVolume();
+        
+        OnSfxVolumeChanged?.Invoke(_sfxVolume);
     }
     
     // BGM 출력 메서드
@@ -179,6 +199,39 @@ public class SoundManager : MonoBehaviour
     public void PlayFireSfx4() => PlaySfx(fireSfx4);
     public void PlayStrikeSfx() => PlaySfx(strikeSfx);
     public void PlayGrabSfx() => PlaySfx(grabSfx);
+    
+    // AudioClip 프로퍼티 모음
+    
+    // BGM 프로퍼티
+    public AudioClip TitleLobbyBGM => titleLobbyBGM;
+    public AudioClip Stage1BGM => stage1BGM;
+    public AudioClip CombineBGM => combineBGM;
+    
+    // SFX 프로퍼티
+    public AudioClip ExplosionSfx => explosionSfx;
+    public AudioClip RobotFormWalkSfx => robotFormWalkSfx;
+    public AudioClip RobotFormWalkSfx2 => robotFormWalkSfx2;
+    public AudioClip CarFormDriveSfx1 => carFormDriveSfx1;
+    public AudioClip CarFormDriveSfx2 => carFormDriveSfx2;
+    public AudioClip CombineFormSfx1 => combineFormSfx;
+    public AudioClip FireSfx1 => fireSfx1;
+    public AudioClip FireSfx2 => fireSfx2;
+    public AudioClip FireSfx3 => fireSfx3;
+    public AudioClip FireSfx4 => fireSfx4;
+    public AudioClip StrikeSfx => strikeSfx;
+    public AudioClip GrabSfx => grabSfx;
+    public AudioClip GrabSfx2 => grabSfx2;
+    public AudioClip PossessionSfx => possessionSfx;
+    public AudioClip ReleaseSfx => releaseSfx;
+    public AudioClip ShootSfx => shootSfx;
+    public AudioClip DrillAttackSfx => drillAttackSfx;
+    public AudioClip PunchAttackSfx => punchAttackSfx;
+    public AudioClip JumpSfx => jumpSfx;
+    public AudioClip DroneSoundSfx => droneSoundSfx;
+    public AudioClip CancelSfx => cancelSfx;
+    public AudioClip WarningSfx => warningSfx;
+    public AudioClip HitSoundSfx => hitSoundSfx;
+    public AudioClip CombineSfx => combineSfx;
 }
 
 // 씬 이름을 Enum으로 관리

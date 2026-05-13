@@ -3,7 +3,6 @@ using System.Collections;
 using Unity.Netcode;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Mine : NetworkBehaviour
 {

@@ -30,6 +30,12 @@ public class ComponentFormMovement : NetworkBehaviour
     private bool isUp = false;
     private bool isDown = false;
 
+    // SFX 호출 판정
+    public NetworkVariable<bool> isComponentMoveSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
     #region 합체 관련 필드들
     [Header("합체 폼의 고유 애니메이션 등록")]
     [SerializeField] private Animator _componentAnimator;
@@ -89,6 +95,12 @@ public class ComponentFormMovement : NetworkBehaviour
     private void Update()
     {
         if (!IsOwner) return;
+
+        if (_playerVehicleCS.Stamina < 3)
+        {
+            StopMovement();
+        }
+
         if (isMove == true || isUp == true || isDown == true)
         {
             _timer += Time.deltaTime;
@@ -96,7 +108,8 @@ public class ComponentFormMovement : NetworkBehaviour
             if (_timer >= 1f)
             {
                 _timer = 0f;
-                _playerVehicleCS.ChangeStamina(-5);
+                _playerVehicleCS.ChangeStamina(-3);
+                if (isComponentMoveSFX.Value != true) isComponentMoveSFX.Value = true;
             }
         }
         else if (isMove == false && isUp == false && isDown == false)
@@ -108,6 +121,7 @@ public class ComponentFormMovement : NetworkBehaviour
             {
                 _timer = 0f;
                 _playerVehicleCS.ChangeStamina(1);
+                if (isComponentMoveSFX.Value != false) isComponentMoveSFX.Value = false;
             }
         }
     }
@@ -144,7 +158,7 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        if (_playerVehicleCS.Stamina <= 0) return;
+        if (_playerVehicleCS.Stamina < 3) return;
         _move = ctx.ReadValue<Vector2>();
         isMove = true;
         _playerVehicleCS.ChangeStamina(-1);
@@ -162,7 +176,7 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        if (_playerVehicleCS.Stamina <= 0) return;
+        if (_playerVehicleCS.Stamina < 3) return;
         _flyDown = ctx.ReadValue<float>();
         isDown = true;
         _playerVehicleCS.ChangeStamina(-1);
@@ -181,7 +195,7 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        if (_playerVehicleCS.Stamina <= 0) return;
+        if (_playerVehicleCS.Stamina < 3) return;
         _flyUp = ctx.ReadValue<float>();
         isUp = true;
         _playerVehicleCS.ChangeStamina(-1);
@@ -203,6 +217,19 @@ public class ComponentFormMovement : NetworkBehaviour
         Vector3 componentMove = moveDir * _moveSpeed + flyVelocity * _flySpeed;
 
         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, componentMove, Time.deltaTime);
+    }
+
+    private void StopMovement()
+    {
+        _move = Vector2.zero;
+        _flyUp = 0f;
+        _flyDown = 0f;
+
+        isMove = false;
+        isUp = false;
+        isDown = false;
+
+        _rigidbody.linearVelocity = Vector3.zero;
     }
 
     #region 합체 버튼

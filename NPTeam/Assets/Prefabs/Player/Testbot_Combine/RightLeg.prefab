@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6877700353912116208}
   - component: {fileID: -404099562922653377}
   - component: {fileID: 2503658967928783645}
+  - component: {fileID: 8056897230554003959}
   m_Layer: 7
   m_Name: RightLeg
   m_TagString: Player
@@ -84,6 +85,11 @@ MonoBehaviour:
   _playerVehicleCS: {fileID: 0}
   _rigidbody: {fileID: 0}
   isPressRightMB: 0
+  isComponentMoveSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
   _componentAnimator: {fileID: 1604021493899821735}
 --- !u!114 &8960336304109972963
 MonoBehaviour:
@@ -192,6 +198,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8056897230554003959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919145760332672327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cf8cb443d81c2409ddc21cd74468b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentSound
+  _componentSoundAudioSource: {fileID: 0}
+  _componentFormMovement: {fileID: 5630654011978335114}
 --- !u!1 &6554882563928273304
 GameObject:
   m_ObjectHideFlags: 0

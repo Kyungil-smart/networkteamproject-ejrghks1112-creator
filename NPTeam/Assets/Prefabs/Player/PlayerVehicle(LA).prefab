@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5137585688078573009}
   - component: {fileID: 393697990130382609}
   - component: {fileID: -5638662699442591861}
+  - component: {fileID: 1751779735230325859}
   m_Layer: 7
   m_Name: PlayerVehicle(LA)
   m_TagString: Player
@@ -118,6 +119,8 @@ MonoBehaviour:
   _componentNetworkObject: {fileID: 2493680941598042870}
   _componentConnector: {fileID: 5486300976237124206}
   _upperArm_Root_R_end: {fileID: 3009952111850489936}
+  _hand_L_end: {fileID: 3892780085457835258}
+  _spawnTransform: {fileID: 0}
   _formColorChanger: {fileID: 0}
   checkSpeedOff: 0
   checkSpeedOffForCam: 0
@@ -226,6 +229,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FormColorChanger
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!82 &1751779735230325859
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570259725822164077}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 10
+  MaxDistance: 40
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &239826588139506924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,6 +346,10 @@ PrefabInstance:
       propertyPath: _carFormRigidBody
       value: 
       objectReference: {fileID: 3285019482104072620}
+    - target: {fileID: 837701473247194905, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: carDriveSoundAudioSource
+      value: 
+      objectReference: {fileID: 1751779735230325859}
     - target: {fileID: 1664890472010085759, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: m_Name
       value: IceCreamCar(LA)
@@ -403,6 +507,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6057068607405701512, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: _componentSoundAudioSource
+      value: 
+      objectReference: {fileID: 1751779735230325859}
     - target: {fileID: 6725237004958442595, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: _rigidbody
       value: 
@@ -570,14 +678,29 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 350951283
       objectReference: {fileID: 0}
+    - target: {fileID: 5871695677437734310, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 5871695677437734310, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
     - target: {fileID: 6998640827465897096, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4189256722
       objectReference: {fileID: 0}
+    - target: {fileID: 9142513281599162402, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3808752646
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4980449553488956649, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5669019966208076846}
   m_SourcePrefab: {fileID: 100100000, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
 --- !u!114 &345669323039649557 stripped
 MonoBehaviour:
@@ -600,6 +723,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4980449553488956649, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
   m_PrefabInstance: {fileID: 5252698819735297240}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5669019966208076846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007480048465858609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524951190e5e5984195570bf18e56a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotSound
+  _robotWalkSoundAudioSource: {fileID: 1751779735230325859}
+  _robotFormMovement: {fileID: 8362658916487904247}
+  _robotGrab: {fileID: 6138529250808952214}
 --- !u!114 &3009952111850489936 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6998640827465897096, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
@@ -622,3 +760,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &3892780085457835258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9142513281599162402, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+  m_PrefabInstance: {fileID: 5252698819735297240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!114 &6138529250808952214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2149688630851955022, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+  m_PrefabInstance: {fileID: 5252698819735297240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c31ac3662be16e4f8bb111bb2459654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotGrab
+--- !u!114 &8362658916487904247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4389730102333417263, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+  m_PrefabInstance: {fileID: 5252698819735297240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007480048465858609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195e92b2b3c76ef4ba0df87dc85d256f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotFormMovement
