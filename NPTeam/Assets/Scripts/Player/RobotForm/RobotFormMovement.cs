@@ -38,6 +38,16 @@ public class RobotFormMovement : NetworkBehaviour
     // 점프를 위한 레이캐스트 사거리
     private float _jumpRayDistance = 0.2f;
 
+    // SFX 호출 판정
+    public NetworkVariable<bool> isRobotMoveSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isRobotJumpSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -160,10 +170,12 @@ public class RobotFormMovement : NetworkBehaviour
 
         _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
         _playerVehicleCS.ChangeStamina(-5);
+        isRobotJumpSFX.Value = true;
     }
     public void RobotJumpCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        isRobotJumpSFX.Value = false;
         if (_rigidbody.linearVelocity.y <= 0f) return;
 
         Vector3 velocity = _rigidbody.linearVelocity;
@@ -178,6 +190,21 @@ public class RobotFormMovement : NetworkBehaviour
         Vector3 origin = new Vector3(_jumpRayPivot.bounds.center.x, _jumpRayPivot.bounds.min.y + offset, _jumpRayPivot.bounds.center.z);
 
         return Physics.Raycast(origin, Vector3.down, _jumpRayDistance, _jumpCheckLayer);
+    }
+    #endregion
+
+    #region 로봇폼 사운드
+    public void RobotMoveOnSFX()
+    {
+        if (!IsOwner) return;
+        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        isRobotMoveSFX.Value = true;
+    }
+
+    public void RobotMoveOffSFX()
+    {
+        if (!IsOwner) return;
+        isRobotMoveSFX.Value = false;
     }
     #endregion
 }
