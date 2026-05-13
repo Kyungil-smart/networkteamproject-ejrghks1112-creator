@@ -3,7 +3,6 @@ using System.Collections;
 using Unity.Netcode;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Mine : NetworkBehaviour
 {
@@ -28,9 +27,8 @@ public class Mine : NetworkBehaviour
     private WaitForSeconds _waitForSecondsExplosion;        // ExplosionDelay 코루틴 함수에서 사용
     private WaitForSeconds _waitForSecondsChangeColor;      // BlinkRed 코루틴 함수에서 사용
     private float _blinkTime; // waitForSecondsTime을 blinkCount로 나눈 값 _waitForSecondsExplosion에 사용됨
+    [SerializeField] MineSound mineSound;
     
-    
-
     void Awake()
     {
         _hashSetNetworkObjects = new HashSet<NetworkObject>();
@@ -138,6 +136,9 @@ public class Mine : NetworkBehaviour
         }
 
         // 실제 폭발이 일어나는 곳 
+        EffectManager.Instance.PlayEffect(
+            EffectEnum.ExplosionYellow, transform.position, Quaternion.identity);
+        mineSound.PlayMineSfx(mineSound.MineExplosionSfx);
         rb.AddExplosionForce(explosionForce, explosionPosition, explosionRadius);
     }
     
@@ -150,7 +151,8 @@ public class Mine : NetworkBehaviour
     IEnumerator BlinkRed() // 빨간색으로 점등 된 후 _waitForSecondsChangeColor시간 후 원상복귀
     {
         renderer.material.color = Color.red;
-
+        mineSound.PlayMineSfx(mineSound.MinewarningSfx);
+        
         yield return _waitForSecondsChangeColor;
 
         renderer.material.color = _originalColor;

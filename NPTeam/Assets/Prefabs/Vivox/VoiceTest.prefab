@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973dddc8b43139145a3b48ae00ac239e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VoiceTest
-  networkBootstrap: {fileID: 0}
+  vivoxUI: {fileID: 0}

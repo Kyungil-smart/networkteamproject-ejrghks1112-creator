@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode;
 
 public class DroneController : NetworkBehaviour
 {
@@ -41,25 +43,10 @@ public class DroneController : NetworkBehaviour
     private Renderer[] _currentPossessionRenderers;
     // PlayerVehicle 백업
     private PlayerVehicle _playerVehicle;
+    [Header("빙의시 렌더러 Off를 위한 파츠 등록")]
+    [SerializeField] private Renderer[] _dronRenderers;
 
     private void Awake() => Init();
-
-    //private void OnEnable()
-    //{
-    //    _playerInput.Enable();
-
-    //    // 이동 구독
-    //    _playerInput.Player.PlayerMove.performed += DroneOnMove;
-    //    _playerInput.Player.PlayerMove.canceled += DroneMoveCancle;
-    //    // 상승 구독
-    //    _playerInput.Player.PlayerAscend.started += DroneOnAscend;
-    //    _playerInput.Player.PlayerAscend.canceled += DroneOnAscend;
-    //    // 하강 구독
-    //    _playerInput.Player.PlayerDescend.started += DroneOnDescend;
-    //    _playerInput.Player.PlayerDescend.canceled += DroneOnDescend;
-    //    // 빙의 구독
-    //    _playerInput.Player.PlayerInteraction.started += DroneOnPossession;
-    //}
 
     public override void OnNetworkSpawn()
     {
@@ -114,23 +101,6 @@ public class DroneController : NetworkBehaviour
 
         _playerInput.Disable();
     }
-
-    //private void OnDisable()
-    //{
-    //    // 이동 구독 취소
-    //    _playerInput.Player.PlayerMove.performed -= DroneOnMove;
-    //    _playerInput.Player.PlayerMove.canceled -= DroneMoveCancle;
-    //    // 상승 구독 취소
-    //    _playerInput.Player.PlayerAscend.started -= DroneOnAscend;
-    //    _playerInput.Player.PlayerAscend.canceled -= DroneOnAscend;
-    //    // 하강 구독 취소
-    //    _playerInput.Player.PlayerDescend.started -= DroneOnDescend;
-    //    _playerInput.Player.PlayerDescend.canceled -= DroneOnDescend;
-    //    // 빙의 구독 취소
-    //    _playerInput.Player.PlayerInteraction.started -= DroneOnPossession;
-
-    //    _playerInput.Disable();
-    //}
 
     private void OnDrawGizmos()
     {
@@ -216,6 +186,7 @@ public class DroneController : NetworkBehaviour
         if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
 
+        
         TryPossession();
     }
     // 빙의 함수
@@ -262,15 +233,44 @@ public class DroneController : NetworkBehaviour
 
             // 카메라 우선순위 조작
             _cinemachineCamera.Priority = 0;
-            
+
             PlayerVehicle vehicle = hit.transform.GetComponent<PlayerVehicle>();
             if (vehicle != null)
             {
                 vehicle.OnPossessedCameraSync();
-                vehicle.SetColorAndForm(_playerColorChanger.CurrentColor, vehicle.CurrentFormIndex);
-                vehicle.SetForm(vehicle.CurrentFormIndex);
+                vehicle.DroneChangeOwnership();
+                vehicle._formColorChanger.SetColorServerRpc(_playerColorChanger.CurrentColor);
                 _playerVehicle = vehicle;
+                if (IsOwner) InGameUI.Instance.ChangeForm(vehicle.CurrentFormIndex + 1);
             }
+        }
+    }
+    #endregion
+
+    #region 빙의 시 드론 그래픽을 켜고/끄는 함수
+    // 빙의 해제시 드론 렌더러 켬
+    [ServerRpc]
+    private void DronrenderersOnServerRpc()
+    {
+        DronrenderersOnClientRpc();
+    }
+    [ClientRpc]
+    private void DronrenderersOnClientRpc()
+    {
+        for (int i = 0; i < _dronRenderers.Length; i++)
+        {
+            Debug.Log(_dronRenderers[i].name);
+            _dronRenderers[i].enabled = true;
+        }
+    }
+    // 빙의시 드론 렌더러 끔
+    // SetParentServerRpc() 에서 호출
+    [ClientRpc]
+    private void DronrenderersOffClientRpc()
+    {
+        for (int i = 0; i < _dronRenderers.Length; i++)
+        {
+            _dronRenderers[i].enabled = false;
         }
     }
     #endregion
@@ -282,14 +282,15 @@ public class DroneController : NetworkBehaviour
 
         NetworkObject networkObject = PlayerState.Instance.CurrentPossessed.GetComponent<NetworkObject>();
 
+        DronrenderersOnServerRpc();
         // 빙의 취소후 원래 색상으로 복귀
-        _playerColorChanger.Release(_currentPossessionRenderers);
+        ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
         // 플레이어 색상 복구
         _currentPossessionRenderers = null;
-        _playerColorChanger.ApplyColor();
-        ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
+        // 빙의 취소후 원래 색상으로 복귀
         ReleaseParentServerRpc();
         _playerVehicle.DisableCurrentCamera();
+        if (IsOwner) InGameUI.Instance.ChangeForm(0);
         _playerVehicle = null;
         PlayerState.Instance.CurrentPossessed = null;
         _rigidbody.isKinematic = false;
@@ -323,11 +324,12 @@ public class DroneController : NetworkBehaviour
     [ClientRpc]
     private void ReleasePossessionColorClientRpc(ulong targetNetId)
     {
-        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject networkObject))
-            return;
+        //if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetId, out NetworkObject networkObject))
+        //    return;
 
-        Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
-        _playerColorChanger.Release(renderers);
+        //Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
+        //_playerColorChanger.Release(renderers);
+        _playerColorChanger.ApplyColor();
     }
     #endregion
 
@@ -346,6 +348,9 @@ public class DroneController : NetworkBehaviour
         networkObject.TrySetParent(target, true);
 
         target.ChangeOwnership(OwnerClientId);
+
+        // 드론 렌더러 끔
+        DronrenderersOffClientRpc();
     }
 
     [ServerRpc]

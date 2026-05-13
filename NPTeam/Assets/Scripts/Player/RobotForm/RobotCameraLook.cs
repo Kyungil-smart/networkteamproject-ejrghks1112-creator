@@ -23,13 +23,21 @@ public class RobotCameraLook : NetworkBehaviour
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
 
+    [Header("잽 모션에 함수 호출을 위해 왼손 끝 등록")]
+    [SerializeField] private RobotZab _robotZab;
+    
     private Animator _animator;
 
     private PlayerStun _stun;
 
     // 잡기 체크
-    private bool _isGrab = false;
+    public bool isGrab = false;
+
+
+  
+
 
     private void Awake() => Init();
 
@@ -45,6 +53,11 @@ public class RobotCameraLook : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOffForCam == true)
+        {
+            _cameraMoveInput = Vector2.zero;
+            _playerVehicleCS.checkSpeedOffForCam = false;
+        }
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         RobotCameraVectorBackup();
@@ -119,15 +132,22 @@ public class RobotCameraLook : NetworkBehaviour
     {
         if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        _isGrab = true;
-        _animator.SetBool("IsGrab", _isGrab);
+        isGrab = true;
+        _animator.SetBool("IsGrab", isGrab);
     }
     public void RobotGrabCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
         if (!ctx.canceled || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        _isGrab = false;
-        _animator.SetBool("IsGrab", _isGrab);
+        isGrab = false;
+        _animator.SetBool("IsGrab", isGrab);
+    }
+    #endregion
+
+    #region 로봇폼 잽 애니메이션 동기화를 위해 등록
+    public void ZabAttack()
+    {
+        _robotZab.ZabAttack();
     }
     #endregion
 }

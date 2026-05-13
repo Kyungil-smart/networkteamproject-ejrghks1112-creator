@@ -310,7 +310,6 @@ GameObject:
   - component: {fileID: 8495530041224638626}
   - component: {fileID: -4609942877995516623}
   - component: {fileID: 77540329699578228}
-  - component: {fileID: -729179309431272621}
   m_Layer: 6
   m_Name: PlayerDrone
   m_TagString: Untagged
@@ -374,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 729624989
+  GlobalObjectIdHash: 4006127951
   InScenePlacedSourceGlobalObjectIdHash: 729624989
   DeferredDespawnTick: 0
   Ownership: 2
@@ -409,6 +408,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _cinemachineCamera: {fileID: 3820322090921818748}
+  _dronRenderers:
+  - {fileID: 8057690161230645059}
+  - {fileID: 8234398410483712040}
+  - {fileID: 2296022957615103542}
+  - {fileID: 8027234651498776751}
+  - {fileID: 1492084939373386915}
+  - {fileID: 1198248657376550026}
+  - {fileID: 97342604687053018}
+  - {fileID: 5784524292962937154}
 --- !u!114 &9216172038396605342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,18 +542,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &-729179309431272621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971913610480199745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab001d5139b3e440a3da39573287aae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VivoxInputController
 --- !u!1 &2550690608123586003
 GameObject:
   m_ObjectHideFlags: 0

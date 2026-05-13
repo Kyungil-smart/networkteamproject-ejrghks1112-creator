@@ -118,6 +118,9 @@ public class LobbyManager : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(playerName)) return;
         _playerName = playerName;
+        
+        // 연동준 추가. VivoxController에서 아이디 받아 오려고
+        VivoxController.PlayerNickName = _playerName;
     }
 
     /// <summary>
@@ -168,6 +171,10 @@ public class LobbyManager : MonoBehaviour
                     PlayerProperties = BuildLocalPlayerProperties()
                 }.WithRelayNetwork(region);
                 _session = await MultiplayerService.Instance.CreateSessionAsync(options);
+                
+                //연동준 추가 Vivox 채널 입장에 사용
+                VivoxController.Instance.joinCodeChannelName = _session.Code.Trim();
+                
                 if (!await VerifyNgoStartedOrCleanupAsync())
                 {
                     if (attempt < JOIN_MAX_RETRY) continue;
@@ -208,6 +215,10 @@ public class LobbyManager : MonoBehaviour
                     PlayerProperties = BuildLocalPlayerProperties()
                 };
                 _session = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId, options);
+                
+                //연동준 추가 Vivox 채널 입장에 사용
+                VivoxController.Instance.joinCodeChannelName = _session.Code.Trim();
+                
                 if (!await VerifyNgoStartedOrCleanupAsync())
                 {
                     if (attempt < JOIN_MAX_RETRY) continue;

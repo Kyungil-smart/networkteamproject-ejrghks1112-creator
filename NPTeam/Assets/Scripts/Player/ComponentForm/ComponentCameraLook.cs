@@ -20,6 +20,7 @@ public class ComponentCameraLook : NetworkBehaviour
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
 
     private PlayerStun _stun;
 
@@ -34,11 +35,21 @@ public class ComponentCameraLook : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOffForCam == true)
+        {
+            _cameraMoveInput = Vector2.zero;
+            _playerVehicleCS.checkSpeedOffForCam = false;
+        }
         if (!IsOwner) return;
+        if (_playerVehicleCS.isLockTransform == true)
+        {
+            _cameraMoveInput = Vector2.zero;
+            return;
+        }
         if (_stun.IsStunned) return;
         CameraVectorBackup();
         // 카메라 시점 이동
-        _componentPivot.rotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
+        _componentPivot.localRotation = Quaternion.Euler(_cameraY, _cameraX, 0f);
     }
 
     private void OnDisable()
@@ -60,6 +71,7 @@ public class ComponentCameraLook : NetworkBehaviour
     public void DroneOnCameraMove(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _cameraMoveInput = ctx.ReadValue<Vector2>();
     }
@@ -67,6 +79,7 @@ public class ComponentCameraLook : NetworkBehaviour
     public void DroneCameraMoveCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (_playerVehicleCS.isLockTransform == true) return;
         _cameraMoveInput = Vector2.zero;
     }
 

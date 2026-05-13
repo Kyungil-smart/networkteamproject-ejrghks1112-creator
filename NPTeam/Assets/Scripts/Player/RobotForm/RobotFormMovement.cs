@@ -15,6 +15,7 @@ public class RobotFormMovement : NetworkBehaviour
 
     [Header("부모 객체인 PlayerVehicle를 참조")]
     [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
     [Header("부모의 Rigidbody 등록")]
     [SerializeField] private Rigidbody _rigidbody;
     // 로봇 이동 조작키 입력값 저장
@@ -27,12 +28,25 @@ public class RobotFormMovement : NetworkBehaviour
 
     private PlayerStun _stun;
 
+    // 스테미너 초당 회복하게 하기위해
+    private float _timer;
+
     [Header("점프를 위한 바닥 레이어 마스크를 선택")]
     [SerializeField] private LayerMask _jumpCheckLayer;
     [Header("점프를 위한 레이캐스트 피봇(콜라이더)")]
     [SerializeField] private Collider _jumpRayPivot;
     // 점프를 위한 레이캐스트 사거리
     private float _jumpRayDistance = 0.2f;
+
+    // SFX 호출 판정
+    public NetworkVariable<bool> isRobotMoveSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isRobotJumpSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
 
     private void Awake() => Init();
 
@@ -48,8 +62,30 @@ public class RobotFormMovement : NetworkBehaviour
         _playerInput.Player.PlayerAscend.canceled += RobotJumpCancle;
     }
 
+    private void Update()
+    {
+        if (!IsOwner) return;
+
+        if (_playerVehicleCS.Stamina >= 100) return;
+        _timer += Time.deltaTime;
+
+        if (_timer >= 1f)
+        {
+            _timer = 0f;
+            _playerVehicleCS.ChangeStamina(1);
+        }
+    }
+
     private void FixedUpdate()
     {
+        if (_playerVehicleCS.checkSpeedOff == true)
+        {
+            _moveInput = Vector2.zero;
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+            _animator.SetFloat("MoveSpeed", 0f);
+            _playerVehicleCS.checkSpeedOff = false;
+        }
         if (!IsOwner) return;
         if (_stun.IsStunned) return;
         RobotMove();
@@ -130,12 +166,16 @@ public class RobotFormMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         if (!ctx.started || !IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (_playerVehicleCS.Stamina <= 5) return;
 
         _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, _jumpPower, _rigidbody.linearVelocity.z);
+        _playerVehicleCS.ChangeStamina(-5);
+        isRobotJumpSFX.Value = true;
     }
     public void RobotJumpCancle(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        isRobotJumpSFX.Value = false;
         if (_rigidbody.linearVelocity.y <= 0f) return;
 
         Vector3 velocity = _rigidbody.linearVelocity;
@@ -150,6 +190,21 @@ public class RobotFormMovement : NetworkBehaviour
         Vector3 origin = new Vector3(_jumpRayPivot.bounds.center.x, _jumpRayPivot.bounds.min.y + offset, _jumpRayPivot.bounds.center.z);
 
         return Physics.Raycast(origin, Vector3.down, _jumpRayDistance, _jumpCheckLayer);
+    }
+    #endregion
+
+    #region 로봇폼 사운드
+    public void RobotMoveOnSFX()
+    {
+        if (!IsOwner) return;
+        if (!IsGrounded() || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        isRobotMoveSFX.Value = true;
+    }
+
+    public void RobotMoveOffSFX()
+    {
+        if (!IsOwner) return;
+        isRobotMoveSFX.Value = false;
     }
     #endregion
 }

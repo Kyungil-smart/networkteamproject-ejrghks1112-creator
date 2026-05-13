@@ -226,6 +226,15 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerVoiceChatOption"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9fce2ec-c3d8-4110-986c-f26f8b730be4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -437,6 +446,17 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Player Self Mute"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9732b92b-e3c1-40b5-840e-4009038ef4cc"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerVoiceChatOption"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -488,6 +508,7 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         m_Player_PlayerEnter = m_Player.FindAction("PlayerEnter", throwIfNotFound: true);
         m_Player_PlayerInteractionCancel = m_Player.FindAction("PlayerInteractionCancel", throwIfNotFound: true);
         m_Player_PlayerSelfMute = m_Player.FindAction("Player Self Mute", throwIfNotFound: true);
+        m_Player_PlayerVoiceChatOption = m_Player.FindAction("PlayerVoiceChatOption", throwIfNotFound: true);
     }
 
     ~@NPTeamInputActions()
@@ -583,6 +604,7 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PlayerEnter;
     private readonly InputAction m_Player_PlayerInteractionCancel;
     private readonly InputAction m_Player_PlayerSelfMute;
+    private readonly InputAction m_Player_PlayerVoiceChatOption;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -655,6 +677,10 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @PlayerSelfMute => m_Wrapper.m_Player_PlayerSelfMute;
         /// <summary>
+        /// Provides access to the underlying input action "Player/PlayerVoiceChatOption".
+        /// </summary>
+        public InputAction @PlayerVoiceChatOption => m_Wrapper.m_Player_PlayerVoiceChatOption;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -725,6 +751,9 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
             @PlayerSelfMute.started += instance.OnPlayerSelfMute;
             @PlayerSelfMute.performed += instance.OnPlayerSelfMute;
             @PlayerSelfMute.canceled += instance.OnPlayerSelfMute;
+            @PlayerVoiceChatOption.started += instance.OnPlayerVoiceChatOption;
+            @PlayerVoiceChatOption.performed += instance.OnPlayerVoiceChatOption;
+            @PlayerVoiceChatOption.canceled += instance.OnPlayerVoiceChatOption;
         }
 
         /// <summary>
@@ -781,6 +810,9 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
             @PlayerSelfMute.started -= instance.OnPlayerSelfMute;
             @PlayerSelfMute.performed -= instance.OnPlayerSelfMute;
             @PlayerSelfMute.canceled -= instance.OnPlayerSelfMute;
+            @PlayerVoiceChatOption.started -= instance.OnPlayerVoiceChatOption;
+            @PlayerVoiceChatOption.performed -= instance.OnPlayerVoiceChatOption;
+            @PlayerVoiceChatOption.canceled -= instance.OnPlayerVoiceChatOption;
         }
 
         /// <summary>
@@ -952,5 +984,12 @@ public partial class @NPTeamInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPlayerSelfMute(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PlayerVoiceChatOption" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlayerVoiceChatOption(InputAction.CallbackContext context);
     }
 }

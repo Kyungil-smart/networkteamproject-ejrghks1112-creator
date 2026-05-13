@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
@@ -21,6 +22,11 @@ public class Monster : NetworkBehaviour, IDamagable
     private Collider _collider;
     private Renderer _renderer;
     private Rigidbody _rigidbody;
+
+    public event Action OnAttack;
+    public event Action<float> OnMove;
+    public event Action OffAttack; 
+    
     
     [Header("몹 체력")]
     [SerializeField] private NetworkVariable<int> health;
@@ -94,21 +100,35 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         if (!IsServer) return;
         
+        float currentSpeed = _navmeshAgent.velocity.magnitude / chaseSpeed;
+        OnMove?.Invoke(currentSpeed);
+        
         SetTargetPlayer();
         
-        if (_targetPlayer != null && FOV())
+        if (_targetPlayer != null)
         {
-            _detectTime += Time.deltaTime;
-
-            if (_detectTime > 5f && !spawnMonster.Value && _canSpawnMonster)
-            {
-                SpawnMonster();
-            }
-            
-            Chase();
-            
             float distance = Vector3.Distance(transform.position, _targetPlayer.position);
-            if (distance < knockbackRange && !_isCooldown) StartCoroutine(KnockbackRoution());
+
+            if (distance < detectRange)
+            {
+                Chase();
+
+                if (FOV())
+                {
+                    _detectTime += Time.deltaTime;
+
+                    if (_detectTime > 5f && !spawnMonster.Value && _canSpawnMonster) SpawnMonster();
+
+                    if (distance < knockbackRange && !_isCooldown) StartCoroutine(KnockbackRoution());
+                }
+                else _detectTime = 0f;
+            }
+            else
+            {
+                _detectTime = 0f;
+                _targetPlayer = null;
+                Patrol();
+            }
         }
         else
         {
@@ -168,8 +188,8 @@ public class Monster : NetworkBehaviour, IDamagable
         {
             
             Vector3 direction = (_targetPlayer.position - transform.position).normalized;
-            direction += Vector3.up * 0.5f;
-            player.KnockbackClientRpc(direction * knockbackPower);
+            direction.y = 0;
+            player.KnockbackClientRpc((direction + Vector3.up * 0.2f).normalized * knockbackPower);
         }
     }
 
@@ -183,11 +203,17 @@ public class Monster : NetworkBehaviour, IDamagable
             _navmeshAgent.velocity = Vector3.zero;
         }
         
+        OnAttack?.Invoke();
+        
         KnockbackPlayer();
         
         CheckPlayerPos();
 
-        yield return YieldContainer.WaitForSeconds(knockbackCooltime);
+        yield return YieldContainer.WaitForSeconds(knockbackCooltime / 2);
+        
+        OffAttack?.Invoke();
+        
+        yield return YieldContainer.WaitForSeconds(knockbackCooltime / 2);
         
         _navmeshAgent.isStopped = false;
 
