@@ -227,7 +227,7 @@ public class PlayerVehicle : NetworkBehaviour
         _robotForm.SetActive(index == 1);
         _componentForm.SetActive(index == 2);
 
-        _rigidbody.useGravity = (index != 2);
+        //_rigidbody.useGravity = (index != 2);
 
         SetCamera(index);
 
