@@ -239,8 +239,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC870\uC791 \uBC29\uBC95 \uC124\uBA85\n  1 ~~~~~\n  2 ~~~~~~~~~\n  3
-    ~~~~~~~\n  4 ~~~~\n  5 ~~~~~~~~~~~~~~\n  6 ~~~~~~~~~\n  7 ~~~~~\n  8 ~~~~~~~~~~~~~~~~~~~~"
+  m_text: "\uC870\uC791 \uBC29\uBC95 \uC124\uBA85\n  1 W,A,S,D : \uC774\uB3D9\n 
+    2 Num1,2,3 : \uD3FC \uBCC0\uACBD\n  3 Tap : \uC74C\uC131\uB300\uD654 \uB9C8\uC774\uD06C
+    \uC870\uC808\n  4 V : \uC74C\uC131 \uB300\uD654 \uD65C\uC131\uD654/\uBE44\uD65C\uC131\uD654\n 
+    5 \uC88C\uD074\uB9AD : \uC7A1\uAE30 \n  6 \uC6B0\uD074\uB9AD : \uACF5\uACA9\n 
+    7 ESC : \uC124\uC815\uCC3D\n "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -267,7 +270,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 17.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -779,7 +782,14 @@ MonoBehaviour:
   - {fileID: 5051155620598525271}
   - {fileID: 6741755421930896930}
   - {fileID: 2980915380953347304}
-  playerName:
+  playerVoiceImage: {fileID: 5521661749239513818}
+  otherVoiceImages:
+  - {fileID: 3017708731808115387}
+  - {fileID: 3636594619832826318}
+  - {fileID: 5090782692090491652}
+  onVivox: {fileID: 1615154899, guid: 9a5314dc30c68ab4cb206e7b27eebfa9, type: 3}
+  offVivox: {fileID: 1759993112, guid: 13b68dfb872676940b87409ba42a5249, type: 3}
+  playerUis:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0
       MaxSecondsBetweenUpdates: 0
@@ -1273,6 +1283,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7267477230393225369}
     m_Modifications:
+    - target: {fileID: 2019598144131252799, guid: 8798fdb08a321af42bfe8780eb937935, type: 3}
+      propertyPath: m_text
+      value: "\uC6B0\uD074\uB9AD"
+      objectReference: {fileID: 0}
     - target: {fileID: 4456564767888415645, guid: 8798fdb08a321af42bfe8780eb937935, type: 3}
       propertyPath: m_Name
       value: SkillIconPos_02
@@ -1464,6 +1478,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+--- !u!114 &3636594619832826318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3911749049976484487, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 305845115428703049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &4215670209502154184 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
@@ -1716,6 +1741,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7457995700096046, guid: 8096e61829f252b42aad44c1a64b4554, type: 3}
   m_PrefabInstance: {fileID: 1617850318710725518}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5521661749239513818 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6544610211868039508, guid: 8096e61829f252b42aad44c1a64b4554, type: 3}
+  m_PrefabInstance: {fileID: 1617850318710725518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &7173064381520466506 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8500573192682310084, guid: 8096e61829f252b42aad44c1a64b4554, type: 3}
@@ -1840,6 +1876,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4521479040879036033, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
   m_PrefabInstance: {fileID: 2281175549551679548}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3017708731808115387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3911749049976484487, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 2281175549551679548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &5051155620598525271 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6462967097267565931, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
@@ -1966,6 +2013,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7267477230393225369}
     m_Modifications:
+    - target: {fileID: 2019598144131252799, guid: 8798fdb08a321af42bfe8780eb937935, type: 3}
+      propertyPath: m_text
+      value: "\uC88C\uD074\uB9AD"
+      objectReference: {fileID: 0}
     - target: {fileID: 4456564767888415645, guid: 8798fdb08a321af42bfe8780eb937935, type: 3}
       propertyPath: m_Name
       value: SkillIconPos_01
@@ -2267,6 +2318,17 @@ RectTransform:
 --- !u!114 &2980915380953347304 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6462967097267565931, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
+  m_PrefabInstance: {fileID: 8137798831960179075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &5090782692090491652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3911749049976484487, guid: 45a9c87358226394f818f2f833eb5dd6, type: 3}
   m_PrefabInstance: {fileID: 8137798831960179075}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

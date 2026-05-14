@@ -22,6 +22,7 @@ public class Monster : NetworkBehaviour, IDamagable
     private Collider _collider;
     private SkinnedMeshRenderer[] _renderers;
     private Rigidbody _rigidbody;
+    private float _lastSpeed = -1f;
 
     public event Action OnAttack;
     public event Action<float> OnMove;
@@ -101,7 +102,12 @@ public class Monster : NetworkBehaviour, IDamagable
         if (!IsServer || isDie.Value) return;
         
         float currentSpeed = _navmeshAgent.velocity.magnitude / chaseSpeed;
-        OnMove?.Invoke(currentSpeed);
+        
+        if (Mathf.Abs(currentSpeed - _lastSpeed) > 0.04f)
+        {
+            OnMove?.Invoke(currentSpeed);
+            _lastSpeed = currentSpeed;
+        }
         
         SetTargetPlayer();
         
