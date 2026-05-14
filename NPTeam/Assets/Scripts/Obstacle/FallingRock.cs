@@ -79,9 +79,10 @@ public class FallingRock : NetworkBehaviour
         _isDestroyed = true;
         
         EffectManager.Instance.PlayEffect(
-            EffectEnum.ExplosionRed, transform.position, Quaternion.identity);
+            EffectEnum.BombRed, transform.position, Quaternion.identity);
         
-        fallingRockSound.PlayFallingRockSfx(fallingRockSound.FallingRockExplosionSfx);
+        fallingRockSound.PlayClipAtPointFallingRockSfx(
+            fallingRockSound.FallingRockExplosionSfx, transform.position);
         
         // 서버에서 실행중인지 && NetworkObject를 가지고 있는지 && Spawn된 상태인지 체크
         if (IsServer && _netObj != null && _netObj.IsSpawned)

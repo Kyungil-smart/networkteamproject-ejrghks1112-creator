@@ -33,6 +33,13 @@ public class MineSound : MonoBehaviour
     public void PlayMineSfx(AudioClip clip)
     {
         mineAudioSource.PlayOneShot(clip, mineAudioSource.volume);
+        
+    }
+    
+    public void PlayClipAtPointMineSfx(AudioClip clip, Vector3 pos)
+    {
+        // mineAudioSource.PlayOneShot(clip, mineAudioSource.volume);
+        AudioSource.PlayClipAtPoint(clip, pos, mineAudioSource.volume);
     }
     
     void MineSoundChanged(float volume)
