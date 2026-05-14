@@ -33,6 +33,11 @@ public class FallingRockSound : MonoBehaviour
         fallingRockAudioSource.PlayOneShot(clip, fallingRockAudioSource.volume);
     }
     
+    public void PlayClipAtPointFallingRockSfx(AudioClip clip, Vector3 pos)
+    {
+        AudioSource.PlayClipAtPoint(clip, pos, fallingRockAudioSource.volume);
+    }
+    
     void FallingRockSoundChanged(float volume)
     {
         fallingRockAudioSource.volume =  volume;
