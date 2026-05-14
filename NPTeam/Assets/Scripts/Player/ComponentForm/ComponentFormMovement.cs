@@ -96,23 +96,24 @@ public class ComponentFormMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if (_playerVehicleCS.Stamina < 3)
-        {
-            StopMovement();
-        }
+        //if (_playerVehicleCS.Stamina < 3)
+        //{
+        //    StopMovement();
+        //}
 
-        if (isMove == true || isUp == true || isDown == true)
-        {
+        if (isUp == true || isDown == true)
+        { 
             _timer += Time.deltaTime;
 
             if (_timer >= 1f)
             {
                 _timer = 0f;
                 _playerVehicleCS.ChangeStamina(-3);
-                if (isComponentMoveSFX.Value != true) isComponentMoveSFX.Value = true;
             }
+           
+            if (isComponentMoveSFX.Value != true) isComponentMoveSFX.Value = true;
         }
-        else if (isMove == false && isUp == false && isDown == false)
+        else if (isUp == false && isDown == false)
         {
             if (_playerVehicleCS.Stamina >= 100) return;
             _timer += Time.deltaTime;
@@ -158,10 +159,10 @@ public class ComponentFormMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (_playerVehicleCS.isLockTransform == true) return;
         if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        if (_playerVehicleCS.Stamina < 3) return;
+        //if (_playerVehicleCS.Stamina < 3) return;
         _move = ctx.ReadValue<Vector2>();
         isMove = true;
-        _playerVehicleCS.ChangeStamina(-1);
+        //_playerVehicleCS.ChangeStamina(-1);
     }
     private void OnMoveCancel(InputAction.CallbackContext ctx)
     {
@@ -244,7 +245,7 @@ public class ComponentFormMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         if (!ctx.canceled) return;
-            isPressRightMB = false;
+        isPressRightMB = false;
     }
 
     #endregion
