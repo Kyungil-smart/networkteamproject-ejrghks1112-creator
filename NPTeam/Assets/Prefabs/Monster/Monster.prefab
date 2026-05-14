@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2113965588
+  GlobalObjectIdHash: 120845250
   InScenePlacedSourceGlobalObjectIdHash: 120845250
   DeferredDespawnTick: 0
   Ownership: 1
@@ -642,7 +642,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   detectRange: 15
-  knockbackRange: 2
+  knockbackRange: 3
   viewAngle: 110
   chaseSpeed: 5
   patrolSpeed: 10
