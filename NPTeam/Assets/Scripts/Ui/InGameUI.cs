@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.Services.Vivox;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InGameUI : NetworkBehaviour
@@ -38,7 +40,15 @@ public class InGameUI : NetworkBehaviour
 
     [Header("다른 플레이어 폼 표시 용")] 
     [SerializeField] private List<Image> otherForms;
+
+    [Header("음성 대화 표시 용")] 
+    [SerializeField] private Image playerVoiceImage;
+    [SerializeField] private List<Image> otherVoiceImages;
+    [SerializeField] private Sprite onVivox;
+    [SerializeField] private Sprite offVivox;
     
+    private HashSet<string> _speakerName = new HashSet<string>();
+    private VivoxInputController _vivoxController;
     public NetworkList<PlayerUI> playerUis;
     private float _totalDistance;
     private string myName;
@@ -46,18 +56,7 @@ public class InGameUI : NetworkBehaviour
     
     private void Awake()
     {
-        Instance = this;
-        playerUis = new NetworkList<PlayerUI>();
-        vehicles = FindObjectsByType<PlayerVehicle>(FindObjectsSortMode.None);
-        startPos = FindAnyObjectByType<UiDistanceStartPos>();
-        PlayersPosition = new List<Transform>();
-        StartPosition = startPos.transform;
-        playerForm.sprite = forms[0];
-        
-        foreach (var vehicle in vehicles)
-        {
-            PlayersPosition.Add(vehicle.transform);
-        }
+        Init();
     }
 
     public override void OnNetworkSpawn()
@@ -85,6 +84,11 @@ public class InGameUI : NetworkBehaviour
         {
             _totalDistance = Vector3.Distance(StartPosition.position, GoalPosition.position);
         }
+
+        _vivoxController.VoiceChange += OnVoiceMute;
+        VivoxService.Instance.ParticipantAddedToChannel += OnParticipant;
+        
+        if (IsClient) OnVoiceMute(true);
     }
 
     private void Update()
@@ -104,6 +108,58 @@ public class InGameUI : NetworkBehaviour
         }
         
         playerUis.OnListChanged -= CheckPlayerList;
+        _vivoxController.VoiceChange -= OnVoiceMute;
+        VivoxService.Instance.ParticipantAddedToChannel -= OnParticipant;
+    }
+
+    private void Init()
+    {
+        Instance = this;
+        playerUis = new NetworkList<PlayerUI>();
+        vehicles = FindObjectsByType<PlayerVehicle>(FindObjectsSortMode.None);
+        startPos = FindAnyObjectByType<UiDistanceStartPos>();
+        PlayersPosition = new List<Transform>();
+        _vivoxController = FindAnyObjectByType<VivoxInputController>();
+        StartPosition = startPos.transform;
+        playerForm.sprite = forms[0];
+        
+        foreach (var vehicle in vehicles)
+        {
+            PlayersPosition.Add(vehicle.transform);
+        }
+    }
+
+    private void OnVoiceMute(bool mute)
+    {
+        UpdateMuteServerRpc(myName, mute);
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void UpdateMuteServerRpc(string userName, bool mute)
+    {
+        for (int i = 0; i < playerUis.Count; i++)
+        {
+            if (playerUis[i].Name == userName)
+            {
+                var uiUpdate = playerUis[i];
+                uiUpdate.IsMute = mute;
+                playerUis[i] = uiUpdate;
+                break;
+            }
+        }
+    }
+
+    private void OnParticipant(VivoxParticipant participant)
+    {
+        participant.ParticipantSpeechDetected += () => {VoiceChange(participant.DisplayName, participant.SpeechDetected);};
+    }
+    
+    private void VoiceChange(string name, bool isSpeak)
+    {
+        if (isSpeak) _speakerName.Add(name);
+        else  _speakerName.Remove(name);
+        
+        UpdatePlayerList();
     }
 
     public void ChangeForm(int form)
@@ -119,7 +175,8 @@ public class InGameUI : NetworkBehaviour
         {
             if (playerUis[i].Name == userName)
             {
-                playerUis[i] = new PlayerUI { Name = userName, Form = form };
+                var currentUI = playerUis[i];
+                playerUis[i] = new PlayerUI { Name = userName, Form = form, IsMute = currentUI.IsMute };
                 break;
             }
         }
@@ -162,11 +219,31 @@ public class InGameUI : NetworkBehaviour
         {
             string userName = ui.Name.ToString();
             int userForm = ui.Form;
+            
+            bool isMute = ui.IsMute;
+            bool isSpeak = _speakerName.Contains(userName);
 
             if (userName == myName)
             {
                 playerNameText.text = userName;
                 playerForm.sprite = forms[userForm];
+
+                if (isMute)
+                {
+                    playerVoiceImage.sprite = offVivox;
+                    playerVoiceImage.color = new Color(1,1,1,1f);
+                }
+                else if (isSpeak)
+                {
+                    playerVoiceImage.sprite = onVivox;
+                    playerVoiceImage.color = new Color(0,1,1,1f);
+                }
+                else
+                {
+                    playerVoiceImage.sprite = onVivox;
+                    playerVoiceImage.color = new Color(0,1,1,0.2f);
+                }
+                
                 continue;
             }
 
@@ -176,8 +253,27 @@ public class InGameUI : NetworkBehaviour
                 
                 var text = otherPlayers[index].GetComponentInChildren<TextMeshProUGUI>();
                 if (text != null) text.text = userName;
-                
-                if (index < otherForms.Count) otherForms[index].sprite = forms[userForm];
+
+                if (index < otherForms.Count)
+                {
+                    otherForms[index].sprite = forms[userForm];
+
+                    if (isMute)
+                    {
+                        otherVoiceImages[index].sprite = offVivox;
+                        otherVoiceImages[index].color = new Color(1,1,1,1f);
+                    }
+                    else if (isSpeak)
+                    {
+                        otherVoiceImages[index].sprite = onVivox;
+                        otherVoiceImages[index].color = new Color(0,1,1,1f);
+                    }
+                    else
+                    {
+                        otherVoiceImages[index].sprite = onVivox;
+                        otherVoiceImages[index].color = new Color(0,1,1,0.2f);
+                    }
+                }
                 
                 index++;
             }
@@ -217,15 +313,17 @@ public struct PlayerUI : INetworkSerializable, System.IEquatable<PlayerUI>
 {
     public FixedString32Bytes Name;
     public int Form;
+    public bool IsMute;
     
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref Name);
         serializer.SerializeValue(ref Form);
+        serializer.SerializeValue(ref IsMute);
     }
 
     public bool Equals(PlayerUI other)
     {
-        return Name == other.Name && Form == other.Form;
+        return Name == other.Name && Form == other.Form &&  IsMute == other.IsMute;
     }
 }
