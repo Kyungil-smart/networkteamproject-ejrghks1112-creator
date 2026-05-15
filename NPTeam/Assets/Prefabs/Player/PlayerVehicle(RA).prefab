@@ -117,7 +117,7 @@ MonoBehaviour:
   _carNetworkObject: {fileID: 5548509229694028886}
   _robotNetworkObject: {fileID: 345669323039649557}
   _componentNetworkObject: {fileID: 8126048340682314727}
-  _componentConnector: {fileID: 8126048340682314727}
+  _componentConnector: {fileID: 4561946307789280314}
   _upperArm_Root_R_end: {fileID: 3009952111850489936}
   _hand_L_end: {fileID: 3892780085457835258}
   _spawnTransform: {fileID: 0}
@@ -671,6 +671,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &4561946307789280314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9067629286892512497, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
 --- !u!95 &6267792823291583190 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1468830338843077149, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
