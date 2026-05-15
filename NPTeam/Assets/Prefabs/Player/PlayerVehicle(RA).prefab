@@ -479,6 +479,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
+    - target: {fileID: 494346089761878276, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763567799734830554, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778157774485007069, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970396298535777174, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2119100855897093736, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1579002320
@@ -491,9 +507,17 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3040534007128485108, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: m_Name
       value: RightArm
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960177545350365823, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5598839670629456365, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: _playerVehicle
@@ -555,6 +579,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6055099176921557702, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121443146177122609, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567194616942897501, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6676260047108512717, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: _componentSoundAudioSource
       value: 
@@ -582,6 +618,22 @@ PrefabInstance:
     - target: {fileID: 6798584669354051705, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: RotationMaxInterpolationTime
       value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976092295903903561, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403110934496042593, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854539504683541538, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519842180206228472, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9067629286892512497, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
