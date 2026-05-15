@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 게임 씬에서 NGO NetworkSceneManager의 빌트인 이벤트로 합류 판정 및 게임 시작/종료를 처리.
@@ -74,11 +75,14 @@ public class GameSessionManager : NetworkBehaviour
             BindSceneManagerEvents();
             _endGameAction.action.Enable();
 
+            
             // 서버에서만 GameManager의 시간 종료 이벤트 구독 (_returnToLobbyDelay클라이언트는 서버에서 종료 RPC 받는 것으로)
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
             }
+            
+            // StartCoroutine(SubscribeToGameManager());
         }
     }
 
@@ -195,9 +199,11 @@ public class GameSessionManager : NetworkBehaviour
     private void EndGameClientRpc(GameResultType result)
     {
         OnGameEnded?.Invoke(result);
+        Debug.Log("[GameSessionManager] : 클라이언트가 게임 종료 RPC 수신");
         //_ = LobbyManager.Instance.ReturnToRoomAsync();
 
-        StartCoroutine(ReturnToLobbyRoutine());
+
+        // StartCoroutine(ReturnToLobbyRoutine());
     }
 
     private void SetSingleton()
@@ -219,4 +225,19 @@ public class GameSessionManager : NetworkBehaviour
         // 대기가 끝나면 비로소 로비 매니저를 통해 대기방으로
         _ = LobbyManager.Instance.ReturnToRoomAsync();
     }
+
+
+    /*
+    private IEnumerator SubscribeToGameManager()
+    {
+        // GameManager 인스턴스가 존재할 때까지 기다림
+        yield return new WaitUntil(() => GameManager.Instance != null);
+
+        // 이벤트가 두 번 구독되는 것을 막기 위해 뺐다가 다시 더함 (안전장치)
+        GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
+        GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+
+        Debug.Log("[GameSessionManager] : SubscribeToGameManager 완료");
+    }
+    */
 }
