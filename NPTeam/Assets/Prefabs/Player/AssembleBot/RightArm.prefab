@@ -26,11 +26,11 @@ Transform:
   m_GameObject: {fileID: 2051753015898876346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.55, y: 5.11, z: -1.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6775692344249064779}
+  m_Father: {fileID: 1158428214956681516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8402593056989824525
 MonoBehaviour:
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 0}
+    TrackingTarget: {fileID: 6792680913807467702}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2204423968
+  GlobalObjectIdHash: 808055193
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -535,12 +535,12 @@ PrefabInstance:
     - {fileID: 7715706228800926352, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
     - {fileID: -5151554357318365905, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 4358194424977595724}
     - targetCorrespondingSourceObject: {fileID: 3034149758725684209, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       insertIndex: 0
       addedObject: {fileID: 6017504263600635836}
-    - targetCorrespondingSourceObject: {fileID: 5301072551130796940, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 4358194424977595724}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       insertIndex: -1
@@ -978,8 +978,8 @@ ConfigurableJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!4 &6775692344249064779 stripped
+--- !u!4 &6792680913807467702 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5301072551130796940, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
   m_PrefabInstance: {fileID: 1700435618648362695}
   m_PrefabAsset: {fileID: 0}
