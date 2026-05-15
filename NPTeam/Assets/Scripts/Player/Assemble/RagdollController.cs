@@ -1,24 +1,25 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class RagdollController : MonoBehaviour
 {
-
-    [SerializeField] private Animator animator;
+    [FormerlySerializedAs("animator")] [SerializeField] private Animator[] animators;
     [SerializeField] private Transform hipBone;
-    
+
+    [SerializeField] private RagdollList ragdollList;
+
     [SerializeField] private GameObject fistObject;
     private ConfigurableJoint fistJoint;
-    [SerializeField]private Transform fistAnimTarget;
+    [SerializeField] private Transform fistAnimTarget;
     private Rigidbody fistRigidbody;
 
-    private Rigidbody[] ragdollRigidBodies;
+    private List<RagdollTarget> ragdollTargets = new();
     private Collider[] ragdollColliders;
     private Collider mainCollider;
-    private Rigidbody mainRigidbody;
-    
+    private Rigidbody RootRagdoll;
+
     private NPTeamInputActions _playerInput;
 
     private bool isRagdoll = false;
@@ -30,12 +31,11 @@ public class RagdollController : MonoBehaviour
     private void Awake()
     {
         _playerInput = new NPTeamInputActions();
-        ragdollRigidBodies = hipBone.GetComponentsInChildren<Rigidbody>();
+        ragdollTargets = new List<RagdollTarget>(GetComponentsInChildren<RagdollTarget>());
         ragdollColliders = hipBone.GetComponentsInChildren<Collider>();
 
         mainCollider = GetComponent<Collider>();
-        mainRigidbody = GetComponent<Rigidbody>();
-        SetRagdollMode(false);
+        RootRagdoll = GetComponent<Rigidbody>();
 
         if (fistObject)
         {
@@ -43,6 +43,14 @@ public class RagdollController : MonoBehaviour
             fistJoint = fistObject.GetComponent<ConfigurableJoint>();
         }
     }
+
+    private void Start()
+    {
+        
+        InitRagdoll();
+        SetRagdollMode(false);
+    }
+    
 
     private void Update()
     {
@@ -59,8 +67,6 @@ public class RagdollController : MonoBehaviour
         {
             fistRigidbody.linearDamping = 0.05f;
         }
-
-        
     }
 
 
@@ -70,8 +76,8 @@ public class RagdollController : MonoBehaviour
         _playerInput.Player.PlayerAscend.performed += OnRagdoll;
         _playerInput.Player.PlayerDescend.started += OnAim;
         _playerInput.Player.PlayerDescend.canceled += OffAim;
-        
     }
+
     private void OnDisable()
     {
         _playerInput.Player.PlayerAscend.performed -= OnRagdoll;
@@ -97,7 +103,7 @@ public class RagdollController : MonoBehaviour
             SetJointTorque(5000f);
         }
     }
-    
+
     private void OffAim(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled)
@@ -108,14 +114,14 @@ public class RagdollController : MonoBehaviour
             float dist = Vector3.Distance(fistAnimTarget.position, fistRigidbody.position);
 
             float launchPower = 500.0f;
-            
+
             fistRigidbody.AddForce(launchDir * launchPower, ForceMode.Impulse);
             launchDir.y = 0;
-            mainRigidbody.AddForce(launchDir * launchPower, ForceMode.Impulse);
+            RootRagdoll.AddForce(launchDir * launchPower, ForceMode.Impulse);
             Invoke(nameof(ReturnToNormal), 0.5f);
         }
     }
-        
+
     private void ReturnToNormal()
     {
         SetJointTorque(2500f);
@@ -129,21 +135,33 @@ public class RagdollController : MonoBehaviour
         fistJoint.slerpDrive = drive;
     }
 
+    private void InitRagdoll()
+    {
+        foreach (RagdollTarget rb in ragdollTargets)
+        {
+            if (rb.GetRigidBody == RootRagdoll) continue;
+            Debug.Log(rb.gameObject.name);
+            rb.Init(ragdollList.GetTarget(rb.gameObject.name));
+        }
+    }
+
     private void SetRagdollMode(bool active)
     {
-        foreach (Rigidbody rb in ragdollRigidBodies)
+        foreach (RagdollTarget rb in ragdollTargets)
         {
-            if(rb == mainRigidbody) continue;
-            rb.isKinematic = !active;
+            if (rb.GetRigidBody == RootRagdoll) continue;
+            Debug.Log(rb.name);
+            rb.GetRigidBody.isKinematic = !active;
+            //ragdollList
         }
 
-        animator.enabled = !active;
+        foreach (Animator anim in animators)
+        {
+            anim.enabled = !active;            
+        }
+        
         isRagdoll = active;
     }
 
-    void Start()
-    {
-        
-    }
 
 }
