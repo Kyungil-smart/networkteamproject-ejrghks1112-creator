@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 4758249797420255464}
   - component: {fileID: 6095368481923992535}
   m_Layer: 7
-  m_Name: IceCreamBot(LA)
+  m_Name: IceCreamBot(RA)
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
