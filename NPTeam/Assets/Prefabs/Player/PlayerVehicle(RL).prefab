@@ -446,6 +446,14 @@ PrefabInstance:
       propertyPath: _componentAnimator
       value: 
       objectReference: {fileID: 5322061190411388220}
+    - target: {fileID: 5840100857421271685, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876515432653464101, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6877700353912116208, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: RotationInterpolationType
       value: 2
