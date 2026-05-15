@@ -38,7 +38,7 @@ AvatarMask:
   - m_Path: Armature/Root/Spine/Chest/Shoulder_L/UpperArm_L/LowerArm_L/Hand_L
     m_Weight: 1
   - m_Path: Armature/Root/Spine/Chest/Shoulder_L/UpperArm_L/LowerArm_L/Hand_L/Hand_L_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Root/Spine/Chest/Shoulder_L/UpperArm_L/UpperArm_Root_L
     m_Weight: 1
   - m_Path: Armature/Root/Spine/Chest/Shoulder_L/UpperArm_L/UpperArm_Root_L/UpperArm_Root_L_end
@@ -52,7 +52,7 @@ AvatarMask:
   - m_Path: Armature/Root/Spine/Chest/Shoulder_R/UpperArm_R/LowerArm_R/Hand_R
     m_Weight: 1
   - m_Path: Armature/Root/Spine/Chest/Shoulder_R/UpperArm_R/LowerArm_R/Hand_R/Hand_R_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Root/Spine/Chest/Shoulder_R/UpperArm_R/UpperArm_Root_R
     m_Weight: 1
   - m_Path: Armature/Root/Spine/Chest/Shoulder_R/UpperArm_R/UpperArm_Root_R/UpperArm_Root_R_end
@@ -64,7 +64,7 @@ AvatarMask:
   - m_Path: Armature/Root/UpperLeg_L/LowerLeg_L/Foot_L
     m_Weight: 1
   - m_Path: Armature/Root/UpperLeg_L/LowerLeg_L/Foot_L/Foot_L_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Root/UpperLeg_L/UpperLeg_Root_L
     m_Weight: 1
   - m_Path: Armature/Root/UpperLeg_L/UpperLeg_Root_L/UpperLeg_Root_L_end
@@ -76,7 +76,7 @@ AvatarMask:
   - m_Path: Armature/Root/UpperLeg_R/LowerLeg_R/Foot_R
     m_Weight: 1
   - m_Path: Armature/Root/UpperLeg_R/LowerLeg_R/Foot_R/Foot_R_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Root/UpperLeg_R/UpperLeg_Root_R
     m_Weight: 1
   - m_Path: Armature/Root/UpperLeg_R/UpperLeg_Root_R/UpperLeg_Root_R_end
