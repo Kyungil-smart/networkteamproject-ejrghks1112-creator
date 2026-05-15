@@ -51,7 +51,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570259725822164077}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1416044839
+  GlobalObjectIdHash: 3226860893
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -110,14 +110,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _carForm: {fileID: 1463362096567171475}
   _robotForm: {fileID: 1007480048465858609}
-  _componentForm: {fileID: 0}
+  _componentForm: {fileID: 8552019240242694487}
   _carCamera: {fileID: 6177742524728675305}
   _robotCamera: {fileID: 3562099501039532852}
-  _componentCamera: {fileID: 0}
+  _componentCamera: {fileID: 3892791135529973446}
   _carNetworkObject: {fileID: 5548509229694028886}
   _robotNetworkObject: {fileID: 345669323039649557}
-  _componentNetworkObject: {fileID: 0}
-  _componentConnector: {fileID: 0}
+  _componentNetworkObject: {fileID: 8126048340682314727}
+  _componentConnector: {fileID: 8126048340682314727}
   _upperArm_Root_R_end: {fileID: 3009952111850489936}
   _hand_L_end: {fileID: 3892780085457835258}
   _spawnTransform: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   checkSpeedOff: 0
   checkSpeedOffForCam: 0
   isLockTransform: 0
-  _componentFormMovement: {fileID: 0}
+  _componentFormMovement: {fileID: 2291538745035019432}
 --- !u!114 &6065807456793869565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,9 +156,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c82580714267334bb6e351b7c0f40af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrushObstacle
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 3285019482104072620}
   CrushPower: 100
 --- !u!114 &393697990130382609
 MonoBehaviour:
@@ -394,6 +394,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: carFormRigidBody
+      value: 
+      objectReference: {fileID: 3285019482104072620}
+    - target: {fileID: 2233208743250253248, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2342118323
@@ -555,6 +571,33 @@ PrefabInstance:
 --- !u!4 &1341931979135531989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5766429628836825886, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2291538745035019432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6725237004958442595, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552019240242694487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002b69c17a4282544a340b3d447928c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentFormMovement
+--- !u!114 &3892791135529973446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8402593056989824525, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!1 &8552019240242694487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3762503520255719836, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
   m_PrefabInstance: {fileID: 4799140881284690123}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5252698819735297240
