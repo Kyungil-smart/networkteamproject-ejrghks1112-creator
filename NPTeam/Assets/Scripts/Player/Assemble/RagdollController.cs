@@ -20,7 +20,6 @@ public class RagdollController : MonoBehaviour
     private Collider mainCollider;
     private Rigidbody RootRagdoll;
 
-    private NPTeamInputActions _playerInput;
 
     private bool isRagdoll = false;
 
@@ -30,7 +29,6 @@ public class RagdollController : MonoBehaviour
 
     private void Awake()
     {
-        _playerInput = new NPTeamInputActions();
         ragdollTargets = new List<RagdollTarget>(GetComponentsInChildren<RagdollTarget>());
         ragdollColliders = hipBone.GetComponentsInChildren<Collider>();
 
@@ -70,21 +68,7 @@ public class RagdollController : MonoBehaviour
     }
 
 
-    private void OnEnable()
-    {
-        _playerInput.Player.Enable();
-        _playerInput.Player.PlayerAscend.performed += OnRagdoll;
-        _playerInput.Player.PlayerDescend.started += OnAim;
-        _playerInput.Player.PlayerDescend.canceled += OffAim;
-    }
-
-    private void OnDisable()
-    {
-        _playerInput.Player.PlayerAscend.performed -= OnRagdoll;
-        _playerInput.Player.PlayerDescend.started -= OnAim;
-        _playerInput.Player.PlayerDescend.canceled -= OffAim;
-        _playerInput.Player.Disable();
-    }
+  
 
     private void OnRagdoll(InputAction.CallbackContext ctx)
     {
@@ -145,7 +129,7 @@ public class RagdollController : MonoBehaviour
         }
     }
 
-    private void SetRagdollMode(bool active)
+    public void SetRagdollMode(bool active)
     {
         foreach (RagdollTarget rb in ragdollTargets)
         {

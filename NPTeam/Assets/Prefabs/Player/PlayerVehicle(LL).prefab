@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerVehicle
   ShowTopMostFoldoutHeaderGroup: 1
-  _carForm: {fileID: 570259725822164077}
+  _carForm: {fileID: 1702971558791109844}
   _robotForm: {fileID: 6884446425445696803}
   _componentForm: {fileID: 164315903511298624}
   _carCamera: {fileID: 6221445355762445998}
@@ -406,6 +406,10 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 3285019482104072620}
+    - target: {fileID: 5644218411385635002, guid: 8126940de88592645892d0757aea14c1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 431241092
+      objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 8126940de88592645892d0757aea14c1, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -419,6 +423,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8126940de88592645892d0757aea14c1, type: 3}
+--- !u!1 &1702971558791109844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1664890472010085759, guid: 8126940de88592645892d0757aea14c1, type: 3}
+  m_PrefabInstance: {fileID: 52014098866612651}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1720385409663435800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1682309855001488819, guid: 8126940de88592645892d0757aea14c1, type: 3}
@@ -429,7 +438,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5644218411385635002, guid: 8126940de88592645892d0757aea14c1, type: 3}
   m_PrefabInstance: {fileID: 52014098866612651}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1702971558791109844}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
@@ -671,7 +680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.84
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.z
