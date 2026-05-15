@@ -10,6 +10,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private float endTime = 1f;
     [field:SerializeField] public bool IsFinished { get; set; } = false;
 
+
+    private StateMachine gameStateMachine = new ();
+    
+    
+
     public float EndTime
     {
         get => endTime;
@@ -128,5 +133,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             PlayerVehicles[num] = vehicle;
         else
             Debug.LogError("중복된 차량 추가");
+    }
+
+    public void SetPlayerControl(bool isEnabled)
+    {
+        foreach (PlayerVehicle pv in PlayerVehicles.Values)
+        {
+            pv.enabled = isEnabled;
+        }
+    }
+
+    public void EndCutscene()
+    {
+        SetPlayerControl(true);
     }
 }

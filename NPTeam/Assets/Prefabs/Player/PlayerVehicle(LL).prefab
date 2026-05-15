@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3746008743
+  GlobalObjectIdHash: 284244593
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -724,30 +724,6 @@ PrefabInstance:
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130806112224356982, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130806112224356982, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130806112224356982, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130806112224356982, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9914449
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130806112224356982, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.13052616
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130806112224356982, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2316497267382856169, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: _componentSoundAudioSource

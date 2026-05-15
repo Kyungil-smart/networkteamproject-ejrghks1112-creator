@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 427900694
+  GlobalObjectIdHash: 3982340387
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58aa944f8b90a0b41bc5bebe08038971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollController
+  ShowTopMostFoldoutHeaderGroup: 1
   animators:
   - {fileID: 3612578230089295882}
   - {fileID: 0}
@@ -111,9 +112,6 @@ MonoBehaviour:
   - {fileID: 0}
   hipBone: {fileID: 3240066534415477688}
   ragdollList: {fileID: 8200892703634013240}
-  fistObject: {fileID: 0}
-  fistAnimTarget: {fileID: 0}
-  DragObject: {fileID: 0}
 --- !u!54 &3684296227620933809
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,7 +156,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1.5
   m_Height: 7

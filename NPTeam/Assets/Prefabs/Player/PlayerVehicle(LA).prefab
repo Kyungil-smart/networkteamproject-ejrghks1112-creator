@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1416044839
+  GlobalObjectIdHash: 3226860893
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -663,39 +663,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1659008443
+      value: 3123990912
       objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_Name
       value: LeftArm
-      objectReference: {fileID: 0}
-    - target: {fileID: 3762503520255719836, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9961947
-      objectReference: {fileID: 0}
-    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.08715578
-      objectReference: {fileID: 0}
-    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5598839670629456365, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: _playerVehicle
@@ -705,18 +677,6 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
-    - target: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -773,18 +733,6 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
-    - target: {fileID: 6725237004958442595, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: _componentAnimator
-      value: 
-      objectReference: {fileID: 860276583175385778}
-    - target: {fileID: 6798584669354051705, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: RotationInterpolationType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6798584669354051705, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-      propertyPath: RotationMaxInterpolationTime
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 8129249138045495167, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -795,18 +743,13 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 8345340744786642672, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3051249676
+      value: 2433120222
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
---- !u!95 &860276583175385778 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7050886510614877362, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
-  m_PrefabInstance: {fileID: 7649811545832711680}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1871540464923992304 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8345340744786642672, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
