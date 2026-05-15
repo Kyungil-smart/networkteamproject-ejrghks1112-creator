@@ -93,6 +93,12 @@ public class GameSessionManager : NetworkBehaviour
                 Debug.Log("구독 성공");
             }
         }
+
+        // 클라이언트일 시 등록
+        if (IsClient)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
+        }
     }
 
     private async Task WaitForGameManager()
@@ -117,6 +123,11 @@ public class GameSessionManager : NetworkBehaviour
                 // GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
                 GameManager.Instance.OnTimeOverServer -= HandleClearOnServer;
             }
+        }
+
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;
         }
     }
 
@@ -286,7 +297,24 @@ public class GameSessionManager : NetworkBehaviour
     */
 
 
+    private void OnClientDisconnect(ulong clientId)
+    {
+        
+        if (clientId == NetworkManager.ServerClientId || clientId == NetworkManager.Singleton.LocalClientId)
+        {
+            Debug.Log("호스트 서버와의 연결이 끊어졌습니다.");
 
+            // 호스트 종료에 따른 후속 처리
+            HandleHostDisconnected();
+        }
+    }
+
+    private void HandleHostDisconnected()
+    {
+        
+        NetworkManager.Singleton.Shutdown();    // 기존 네트워크 세션 정리
+        SceneLoader.LoadLocal("LobbyScene");   // 로비 씬으로 이동
+    }
 
 
     // 스코어 계산, 원래는 GameSessionManager에서 점수를 받아서 처리하는 게 맞지만, 일단은 여기서 계산하도록 함
