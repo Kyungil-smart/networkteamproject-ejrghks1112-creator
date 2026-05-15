@@ -240,6 +240,7 @@ public class DroneController : NetworkBehaviour
                 vehicle.OnPossessedCameraSync();
                 vehicle.DroneChangeOwnership();
                 vehicle._formColorChanger.SetColorServerRpc(_playerColorChanger.CurrentColor);
+                vehicle.PossessionFreezeRotation();
                 _playerVehicle = vehicle;
                 if (IsOwner) InGameUI.Instance.ChangeForm(vehicle.CurrentFormIndex + 1);
             }

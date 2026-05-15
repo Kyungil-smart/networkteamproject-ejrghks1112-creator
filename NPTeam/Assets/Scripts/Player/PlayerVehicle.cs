@@ -243,6 +243,12 @@ public class PlayerVehicle : NetworkBehaviour
 
         if (IsOwner) InGameUI.Instance.ChangeForm(index + 1);
     }
+    // 빙의시 키네틱 관련
+    public void PossessionFreezeRotation()
+    {
+        _rigidbody.constraints = RigidbodyConstraints.None;
+    }
+
     #endregion
 
     #region 폼에 따른 카메라 우선도
