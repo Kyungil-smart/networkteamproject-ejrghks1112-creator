@@ -28,7 +28,7 @@ public class RoomPlayerSlotUI : MonoBehaviour
         _hostBadge.SetActive(false);
         _readyIndicator.color = _emptyColor;
         _playerNameText.text = "-";
-        _readyText.text = "빈 자리";
+        _readyText.text = "Empty";
     }
 
     /// <summary>
@@ -46,12 +46,12 @@ public class RoomPlayerSlotUI : MonoBehaviour
 
         if (isHost)
         {
-            _readyText.text = "방장";
+            _readyText.text = "Host";
             _readyIndicator.color = _hostColor;
         }
         else
         {
-            _readyText.text = isReady ? "준비 완료" : "대기중";
+            _readyText.text = isReady ? "Ready" : "Waiting";
             _readyIndicator.color = isReady ? _readyColor : _notReadyColor;
         }
     }
