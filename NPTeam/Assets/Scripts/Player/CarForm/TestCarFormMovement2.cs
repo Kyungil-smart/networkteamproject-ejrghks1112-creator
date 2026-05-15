@@ -62,7 +62,7 @@ public class TestCarFormMovement2 : NetworkBehaviour
     {
         _carFormInput.asset.Enable();
         _carFormInput.Player.PlayerMove.performed += CarFormInput;
-        _carFormInput.Player.PlayerMove.canceled += CarFromCancle;
+        _carFormInput.Player.PlayerMove.canceled += CarFormInput;
         _carFormInput.Player.PlayerAscend.performed += CarFormInputBreak;
         _carFormInput.Player.PlayerAscend.canceled += CarFormInputBreak;
     }
@@ -70,7 +70,7 @@ public class TestCarFormMovement2 : NetworkBehaviour
     void OnDisable()
     {
         _carFormInput.Player.PlayerMove.performed -= CarFormInput;
-        _carFormInput.Player.PlayerMove.canceled -= CarFromCancle;
+        _carFormInput.Player.PlayerMove.canceled -= CarFormInput;
         _carFormInput.Player.PlayerAscend.performed -= CarFormInputBreak;
         _carFormInput.Player.PlayerAscend.canceled -= CarFormInputBreak;
         _carFormInput.asset.Disable();
@@ -179,15 +179,6 @@ public class TestCarFormMovement2 : NetworkBehaviour
         Vector2 input = ctx.ReadValue<Vector2>();
         _netHorizontalInput.Value = input.x;
         _netVerticalInput.Value = input.y;
-    }
-
-    void CarFromCancle(InputAction.CallbackContext ctx)
-    {
-        if (!IsOwner) return;
-        _netHorizontalInput.Value = 0;
-        carFormRigidBody.linearVelocity = Vector3.zero;
-        carFormRigidBody.angularVelocity = Vector3.zero;
-        _playerVehicleCS.checkSpeedOff = false;
     }
 
     void CarFormInputBreak(InputAction.CallbackContext ctx)
