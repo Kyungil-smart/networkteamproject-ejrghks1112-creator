@@ -183,6 +183,7 @@ public class TestCarFormMovement2 : NetworkBehaviour
 
     void CarFromCancle(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         _netHorizontalInput.Value = 0;
         carFormRigidBody.linearVelocity = Vector3.zero;
         carFormRigidBody.angularVelocity = Vector3.zero;
