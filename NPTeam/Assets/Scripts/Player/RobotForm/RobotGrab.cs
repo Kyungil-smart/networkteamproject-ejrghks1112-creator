@@ -100,9 +100,9 @@ public class RobotGrab : NetworkBehaviour
             {
                 targetRef = targetNetworkObject;
 
-                if (_playerVehicleCS.Stamina < 15) return;
+                if (_playerVehicleCS.Stamina < 10) return;
                 isGrabGet = true;
-                _playerVehicleCS.ChangeStamina(-15);
+                _playerVehicleCS.ChangeStamina(-10);
                 isGrabSFX.Value = true;
 
                 GrabServerRpc(targetRef);
