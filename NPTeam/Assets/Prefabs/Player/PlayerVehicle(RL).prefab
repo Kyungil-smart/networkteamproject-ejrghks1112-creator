@@ -89,7 +89,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
   _componentForm: {fileID: 5853934371568045877}
   _carCamera: {fileID: 3019524537589292041}
   _robotCamera: {fileID: 7142182170586607142}
-  _componentCamera: {fileID: 5447937955662492089}
+  _componentCamera: {fileID: 3563727551642590494}
   _carNetworkObject: {fileID: 3556720238901943222}
   _robotNetworkObject: {fileID: 6250202584401377799}
   _componentNetworkObject: {fileID: 4344288290715467554}
@@ -334,73 +334,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
-    - target: {fileID: 74649446304753550, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 647185521278213913, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1017537573791604422, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9914449
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.13052616
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044845624283223094, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 1049571438225420583, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3897306403
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124430372762642695, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2200244933080187314, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
+      value: 2489731230
       objectReference: {fileID: 0}
     - target: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: m_LocalPosition.x
@@ -444,23 +380,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2968725808325582160, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 603299969
-      objectReference: {fileID: 0}
-    - target: {fileID: 3951224217464792621, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4715876897650228549, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
+      value: 2018744147
       objectReference: {fileID: 0}
     - target: {fileID: 4919145760332672327, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: m_Name
       value: RightLeg
-      objectReference: {fileID: 0}
-    - target: {fileID: 5453343983229438351, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5630654011978335114, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: _rigidbody
@@ -474,26 +398,6 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
-    - target: {fileID: 5630654011978335114, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: _componentAnimator
-      value: 
-      objectReference: {fileID: 5322061190411388220}
-    - target: {fileID: 5840100857421271685, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876515432653464101, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877700353912116208, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: RotationInterpolationType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877700353912116208, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: RotationMaxInterpolationTime
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 7010549225647772607, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -502,26 +406,10 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
-    - target: {fileID: 7411778712415447119, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813176813445736416, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 8056897230554003959, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: _componentSoundAudioSource
       value: 
       objectReference: {fileID: 7496129784065724302}
-    - target: {fileID: 8960336304109972963, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: _playerVehicle
-      value: 
-      objectReference: {fileID: 570259725822164077}
-    - target: {fileID: 8960336304109972963, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-      propertyPath: _playerVehicleCS
-      value: 
-      objectReference: {fileID: 743696561927525670}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -538,6 +426,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!114 &3563727551642590494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2597992154845544300, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+  m_PrefabInstance: {fileID: 1547280360394203762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
 --- !u!114 &4344288290715467554 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2968725808325582160, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
@@ -554,22 +453,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
   m_PrefabInstance: {fileID: 1547280360394203762}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &5322061190411388220 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6675118869035689806, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-  m_PrefabInstance: {fileID: 1547280360394203762}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5447937955662492089 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6837587930746016715, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
-  m_PrefabInstance: {fileID: 1547280360394203762}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
 --- !u!1 &5853934371568045877 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4919145760332672327, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
@@ -612,7 +495,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1900926991
+      value: 421125132
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 916260593
       objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
@@ -680,7 +571,15 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 923722747
+      value: 938897612
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 916260593
       objectReference: {fileID: 0}
     - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _robotGrab
@@ -839,7 +738,15 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3366710407
+      value: 3302898849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 916260593
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: _playerVehicle

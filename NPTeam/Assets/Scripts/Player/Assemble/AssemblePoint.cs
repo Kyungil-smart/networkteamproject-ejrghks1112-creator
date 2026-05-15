@@ -1,8 +1,5 @@
-using System;
-using System.ComponentModel.Design;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class AssemblePoint : NetworkBehaviour, IInteractable
 {
@@ -33,6 +30,7 @@ public class AssemblePoint : NetworkBehaviour, IInteractable
         vehicle.GetComponentFormMovement.transform.SetParent(transform);
         vehicle.LockTransform();
         
+        
         DoneAssembleServerRpc(type.ToString(), vehicle.GetVehicleNum); //소유권 없는 곳에서 발생한 함수.
     }
 
@@ -55,14 +53,17 @@ public class AssemblePoint : NetworkBehaviour, IInteractable
     private void DoneAssembleServerRpc(string type, int num)
     {
         controller?.AddAssemblePartServerRpc(type, num);
-        DoneAssembleClientRpc();
+        DoneAssembleClientRpc(num);
     }
 
     [ClientRpc]
-    private void DoneAssembleClientRpc()
+    private void DoneAssembleClientRpc(int num)
     {
         _renderer.enabled = false;
         _col.enabled = false;
+
+        RagdollComponentController ct =  GameManager.Instance.GetVehicle(num).GetComponentFormMovement.GetComponent<RagdollComponentController>();
+        ct.Assemble(controller.GetRagdollController);
     }
 }
 

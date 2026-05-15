@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051753015898876346}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.984, y: 4.4, z: -2.54}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: -1, y: 5, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5766429628836825886}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!114 &8402593056989824525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6540695589212430658}
   - component: {fileID: 8129249138045495167}
   - component: {fileID: 8345340744786642672}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Connector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2534869455
+  GlobalObjectIdHash: 3051249676
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 2
@@ -250,6 +250,8 @@ GameObject:
   - component: {fileID: 5598839670629456365}
   - component: {fileID: 6798584669354051705}
   - component: {fileID: 6057068607405701512}
+  - component: {fileID: -8121522506599634963}
+  - component: {fileID: 7225322952678736297}
   m_Layer: 7
   m_Name: LeftArm
   m_TagString: Player
@@ -267,7 +269,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4358194424977595724}
@@ -286,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3001605938
+  GlobalObjectIdHash: 1659008443
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -323,7 +325,7 @@ MonoBehaviour:
       MinSecondsBetweenUpdates: 0
       MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
-  _componentAnimator: {fileID: 0}
+  _componentAnimator: {fileID: 7050886510614877362}
 --- !u!114 &5598839670629456365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,12 +359,12 @@ MonoBehaviour:
   NetworkTransformExpanded: 0
   AutoOwnerAuthorityTickOffset: 1
   PositionInterpolationType: 0
-  RotationInterpolationType: 0
+  RotationInterpolationType: 2
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
   PositionMaxInterpolationTime: 0.1
   RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
+  RotationMaxInterpolationTime: 0.02
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
@@ -401,6 +403,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ComponentSound
   _componentSoundAudioSource: {fileID: 0}
   _componentFormMovement: {fileID: 6725237004958442595}
+--- !u!114 &-8121522506599634963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3762503520255719836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45d47ba4f668514fbe745ea84cd99d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollComponentController
+  ShowTopMostFoldoutHeaderGroup: 1
+  impulseObject: {fileID: 5947634417316896209}
+  impulseAnimTarget: {fileID: 8745031251650947162}
+  DragObject: {fileID: 4358194424977595724}
+--- !u!136 &7225322952678736297
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3762503520255719836}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.67480576
+  m_Height: 2.0150003
+  m_Direction: 1
+  m_Center: {x: -1.5251943, y: 4.4925, z: 0}
 --- !u!1001 &9014658483408867576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,7 +734,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -777,8 +818,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -975,8 +1016,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

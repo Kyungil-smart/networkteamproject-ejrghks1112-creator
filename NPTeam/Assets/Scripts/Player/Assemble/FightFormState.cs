@@ -9,6 +9,6 @@ public class FightFormState : BaseAssembleState
 
     public override void Enter()
     {
-        _controller.GetMovement.OnRagdollMode();
+        _controller.GetRagdollController.SetRagdollMode(true);
     }
 }
