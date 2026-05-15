@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3746008743
+  GlobalObjectIdHash: 3395193655
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -481,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3445863328
+      value: 1098101953
       objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
@@ -561,7 +561,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 193096849
+      value: 985742301
       objectReference: {fileID: 0}
     - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _robotGrab
@@ -740,11 +740,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4788713786796666311, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 628197821
+      value: 4181086357
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976937403422154100, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352632675395657294, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8569910571265416763, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3403701246
+      value: 2752957937
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
