@@ -26,9 +26,17 @@ public class GameSessionManager : NetworkBehaviour
 
     private bool _gameEnded;
 
+
+    [Header("게임 점수")]
+    [field: SerializeField] public int TimeScore { get; set; } = 0;
+    [field: SerializeField] public int ProtectScore { get; set; } = 0;
+    [field: SerializeField] public int TotalScore { get; set; } = 0;
+
+
     
-    [Header("게임 종료 설정")]
     [SerializeField] private float _returnToLobbyDelay = 6.0f;  // 로비로 되돌아가기 대기 시간
+
+
     
 
     /// <summary>
@@ -277,14 +285,20 @@ public class GameSessionManager : NetworkBehaviour
     }
     */
 
+
+
+
+
     // 스코어 계산, 원래는 GameSessionManager에서 점수를 받아서 처리하는 게 맞지만, 일단은 여기서 계산하도록 함
     public void CalculateScore()
     {
         // 점수 계산 로직 (예시)
-        int timeScore = Mathf.RoundToInt(1200 / GameManager.Instance.EndTime) * 100; // 클리어 시간에 반비례한 점수
-        int protectScore = 2000;
-        int totalScore = timeScore + protectScore;
-        Debug.Log($"[GameSessionManager] 점수 계산 완료 : Time Score: {timeScore} | Protect Score: {protectScore} | Total Score: {totalScore}");
+        TimeScore = Mathf.RoundToInt(1200 / GameManager.Instance.EndTime) * 100; // 클리어 시간에 반비례한 점수
+        ProtectScore = 2000;
+        TotalScore = TimeScore + ProtectScore;
+        Debug.Log($"[GameSessionManager] 점수 계산 완료 : Time Score: {TimeScore} | Protect Score: {ProtectScore} | Total Score: {TotalScore}");
     }
+
+
 
 }

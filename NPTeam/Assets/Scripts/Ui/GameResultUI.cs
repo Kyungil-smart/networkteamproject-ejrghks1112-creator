@@ -51,7 +51,7 @@ public class GameResultUI : MonoBehaviour
     public void ShowResult(GameResultType result)
     {
 
-
+        GetScore();
 
         _resultPanel.SetActive(true);
 
@@ -73,9 +73,20 @@ public class GameResultUI : MonoBehaviour
     }
 
 
+    // 계산한 점수 받아오기
     private void GetScore()
     {
+        GameSessionManager.Instance.CalculateScore();
 
+            TimeScoreUI.text = $"{GameSessionManager.Instance.TimeScore}";
+            ProtectScoreUI.text = $"{GameSessionManager.Instance.ProtectScore}";
+            TotalScoreUI.text = $"{GameSessionManager.Instance.TotalScore}";
+    }
+
+
+    public void returnToLobby()
+    {
+            SceneLoader.LoadLocal("LobbyScene");
     }
 
 }
