@@ -19,8 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 10101001
-    m_Localized: "\uC288\uD37C \uC6B0\uC8FC \uC6A9\uC0AC \uD2B9\uACF5\uB300 \uBCC0\uC2E0
-      \uB85C\uBD07"
+    m_Localized: "\uC288\uD37C \uB85C\uBD07 \uD569\uCCB4"
     m_Metadata:
       m_Items: []
   - m_Id: 10101002
@@ -128,16 +127,32 @@ MonoBehaviour:
     m_Localized: "\uD06C\uB808\uB527"
     m_Metadata:
       m_Items: []
-  - m_Id: 5302669458661376
-    m_Localized: "\uB9C8\uC2A4\uD130 \uBCFC\uB968"
+  - m_Id: 10102101
+    m_Localized: "\uB85C\uADF8\uC778 \uC0C1\uD0DC\uAC00 \uC544\uB2D9\uB2C8\uB2E4."
     m_Metadata:
       m_Items: []
-  - m_Id: 5303159525335040
-    m_Localized: "SE \uBCFC\uB968"
+  - m_Id: 10102102
+    m_Localized: "\uBC29 \uBAA9\uB85D \uC870\uD68C \uC911"
     m_Metadata:
       m_Items: []
-  - m_Id: 5303571364044800
-    m_Localized: "BGM \uBCFC\uB968"
+  - m_Id: 10102103
+    m_Localized: "\uBC29 {0}\uAC1C \uC870\uD68C\uB428"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102104
+    m_Localized: "\uBE60\uB978 \uCC38\uC5EC \uC911"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102105
+    m_Localized: "\uCC38\uC5EC\uD560 \uBC29\uC744 \uCC3E\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102106
+    m_Localized: "{0} \uBC29 \uCC38\uC5EC \uC911"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102107
+    m_Localized: "\uBC29 \uCC38\uC5EC \uC2E4\uD328"
     m_Metadata:
       m_Items: []
   references:
