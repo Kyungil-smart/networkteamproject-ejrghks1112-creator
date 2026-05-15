@@ -34,6 +34,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1044845624283223094}
   - {fileID: 739406083019046196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3168999894
+  GlobalObjectIdHash: 1955802435
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -189,13 +190,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6554882563928273304}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.11954863, y: -0, z: -0, w: 0.9928284}
+  m_LocalPosition: {x: 0.6399994, y: 3.29, z: -3.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7814418963841134327}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 2946990286764086495}
+  m_LocalEulerAnglesHint: {x: 13.732, y: 0, z: 0}
 --- !u!114 &6837587930746016715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,9 +564,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5746564759562468899, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       insertIndex: 0
       addedObject: {fileID: 3287825370358595253}
-    - targetCorrespondingSourceObject: {fileID: 7042002756431918120, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 1044845624283223094}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5528860797864257434, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       insertIndex: -1
@@ -1027,8 +1025,3 @@ ConfigurableJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!4 &7814418963841134327 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7042002756431918120, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-  m_PrefabInstance: {fileID: 993145522613230303}
-  m_PrefabAsset: {fileID: 0}

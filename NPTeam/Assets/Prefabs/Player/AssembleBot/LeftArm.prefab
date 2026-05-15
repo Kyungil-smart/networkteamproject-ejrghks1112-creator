@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051753015898876346}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000044703494, y: 0.000000018626457, z: 0.09569001, w: 0.9954112}
-  m_LocalPosition: {x: 0.1, y: 0.02, z: -0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.984, y: 4.4, z: -2.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 36452721394083985}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.982}
+  m_Father: {fileID: 5766429628836825886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8402593056989824525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 0}
+    TrackingTarget: {fileID: 4440652746848225148}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -270,6 +270,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4358194424977595724}
   - {fileID: 8831621938682099475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -285,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2238887627
+  GlobalObjectIdHash: 3001605938
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -590,9 +591,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8867364802979334629, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       insertIndex: 0
       addedObject: {fileID: 8745031251650947162}
-    - targetCorrespondingSourceObject: {fileID: 9050829729791637609, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4358194424977595724}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       insertIndex: -1
@@ -631,11 +629,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2305503204685787610}
   m_SourcePrefab: {fileID: 100100000, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
---- !u!4 &36452721394083985 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9050829729791637609, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-  m_PrefabInstance: {fileID: 9014658483408867576}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &438456029574764829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8867364802979334629, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
@@ -667,6 +660,11 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &4440652746848225148 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4664284474094933892, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
+  m_PrefabInstance: {fileID: 9014658483408867576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4661661705873027787 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4779712567283654093, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
