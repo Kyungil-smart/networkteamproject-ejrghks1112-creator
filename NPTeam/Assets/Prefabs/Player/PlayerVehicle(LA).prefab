@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1416044839
+  GlobalObjectIdHash: 3184168099
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -187,7 +187,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 1
-  AutoUpdateKinematicState: 0
+  AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
 --- !u!114 &5137585688078573009
 MonoBehaviour:
@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1478749683
+      value: 24658199
       objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
@@ -436,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 225917822
+      value: 1501050693
       objectReference: {fileID: 0}
     - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _robotGrab
@@ -529,6 +529,10 @@ PrefabInstance:
       propertyPath: carDriveSoundAudioSource
       value: 
       objectReference: {fileID: 7997090637969301838}
+    - target: {fileID: 837701473247194905, guid: f9bf487699fd2524bb67008b684db934, type: 3}
+      propertyPath: carFormWheelColliderMovement
+      value: 
+      objectReference: {fileID: 5972995730533358901}
     - target: {fileID: 1664890472010085759, guid: f9bf487699fd2524bb67008b684db934, type: 3}
       propertyPath: m_Name
       value: FireTruck(LA)
@@ -573,14 +577,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1854654448606354842, guid: f9bf487699fd2524bb67008b684db934, type: 3}
-      propertyPath: RotationInterpolationType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1854654448606354842, guid: f9bf487699fd2524bb67008b684db934, type: 3}
-      propertyPath: RotationMaxInterpolationTime
-      value: 0.02
-      objectReference: {fileID: 0}
+    - target: {fileID: 1784681505463883916, guid: f9bf487699fd2524bb67008b684db934, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 1784681505463883916, guid: f9bf487699fd2524bb67008b684db934, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 1784681505463883916, guid: f9bf487699fd2524bb67008b684db934, type: 3}
+      propertyPath: carFormRigidBody
+      value: 
+      objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 2233208743250253248, guid: f9bf487699fd2524bb67008b684db934, type: 3}
       propertyPath: rigidbody
       value: 
@@ -624,6 +632,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &5972995730533358901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1784681505463883916, guid: f9bf487699fd2524bb67008b684db934, type: 3}
+  m_PrefabInstance: {fileID: 5341306162849498553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6717893690400452806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d4e2cd434cb0b4693aee7ee8fae1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestCarFormMovement2
 --- !u!1 &6717893690400452806 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1664890472010085759, guid: f9bf487699fd2524bb67008b684db934, type: 3}

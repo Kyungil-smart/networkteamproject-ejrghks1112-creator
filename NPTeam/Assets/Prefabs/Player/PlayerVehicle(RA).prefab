@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2060485857
+  GlobalObjectIdHash: 3226860893
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -350,6 +350,10 @@ PrefabInstance:
       propertyPath: carDriveSoundAudioSource
       value: 
       objectReference: {fileID: 1751779735230325859}
+    - target: {fileID: 837701473247194905, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: carFormWheelColliderMovement
+      value: 
+      objectReference: {fileID: 2251615720605743664}
     - target: {fileID: 1664890472010085759, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: m_Name
       value: IceCreamCar(RA)
@@ -394,14 +398,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1854654448606354842, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
-      propertyPath: RotationInterpolationType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1854654448606354842, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
-      propertyPath: RotationMaxInterpolationTime
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -414,10 +410,6 @@ PrefabInstance:
       propertyPath: carFormRigidBody
       value: 
       objectReference: {fileID: 3285019482104072620}
-    - target: {fileID: 2233208743250253248, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2233208743250253248, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: rigidbody
       value: 
@@ -449,6 +441,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1664890472010085759, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
   m_PrefabInstance: {fileID: 239826588139506924}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2251615720605743664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+  m_PrefabInstance: {fileID: 239826588139506924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463362096567171475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d4e2cd434cb0b4693aee7ee8fae1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestCarFormMovement2
 --- !u!114 &5548509229694028886 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5644218411385635002, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
