@@ -51,7 +51,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570259725822164077}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1416044839
+  GlobalObjectIdHash: 3226860893
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -110,14 +110,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _carForm: {fileID: 1463362096567171475}
   _robotForm: {fileID: 1007480048465858609}
-  _componentForm: {fileID: 0}
+  _componentForm: {fileID: 8552019240242694487}
   _carCamera: {fileID: 6177742524728675305}
   _robotCamera: {fileID: 3562099501039532852}
-  _componentCamera: {fileID: 0}
+  _componentCamera: {fileID: 3892791135529973446}
   _carNetworkObject: {fileID: 5548509229694028886}
   _robotNetworkObject: {fileID: 345669323039649557}
-  _componentNetworkObject: {fileID: 0}
-  _componentConnector: {fileID: 0}
+  _componentNetworkObject: {fileID: 8126048340682314727}
+  _componentConnector: {fileID: 8126048340682314727}
   _upperArm_Root_R_end: {fileID: 3009952111850489936}
   _hand_L_end: {fileID: 3892780085457835258}
   _spawnTransform: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   checkSpeedOff: 0
   checkSpeedOffForCam: 0
   isLockTransform: 0
-  _componentFormMovement: {fileID: 0}
+  _componentFormMovement: {fileID: 2291538745035019432}
 --- !u!114 &6065807456793869565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,13 +141,13 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
   AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
+  PositionInterpolationType: 2
+  RotationInterpolationType: 2
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.05
+  PositionMaxInterpolationTime: 0.02
   RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
+  RotationMaxInterpolationTime: 0.02
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
@@ -156,9 +156,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c82580714267334bb6e351b7c0f40af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrushObstacle
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 3285019482104072620}
   CrushPower: 100
 --- !u!114 &393697990130382609
 MonoBehaviour:
@@ -394,6 +394,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: carFormRigidBody
+      value: 
+      objectReference: {fileID: 3285019482104072620}
+    - target: {fileID: 2233208743250253248, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233208743250253248, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2342118323
@@ -451,6 +479,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
+    - target: {fileID: 494346089761878276, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763567799734830554, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778157774485007069, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970396298535777174, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2119100855897093736, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1579002320
@@ -463,9 +507,17 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3040534007128485108, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: m_Name
       value: RightArm
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960177545350365823, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5598839670629456365, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: _playerVehicle
@@ -527,6 +579,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6055099176921557702, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121443146177122609, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567194616942897501, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6676260047108512717, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: _componentSoundAudioSource
       value: 
@@ -543,6 +607,34 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 6725237004958442595, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: _componentAnimator
+      value: 
+      objectReference: {fileID: 6267792823291583190}
+    - target: {fileID: 6798584669354051705, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798584669354051705, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976092295903903561, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403110934496042593, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854539504683541538, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519842180206228472, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9067629286892512497, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4202007560
@@ -555,6 +647,38 @@ PrefabInstance:
 --- !u!4 &1341931979135531989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5766429628836825886, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2291538745035019432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6725237004958442595, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552019240242694487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002b69c17a4282544a340b3d447928c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentFormMovement
+--- !u!114 &3892791135529973446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8402593056989824525, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!95 &6267792823291583190 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1468830338843077149, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8552019240242694487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3762503520255719836, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
   m_PrefabInstance: {fileID: 4799140881284690123}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5252698819735297240
@@ -573,6 +697,14 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3165461748992073195, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165461748992073195, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: _rigidbody
       value: 

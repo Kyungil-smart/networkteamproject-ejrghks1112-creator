@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1810256468
+  GlobalObjectIdHash: 3063293455
   InScenePlacedSourceGlobalObjectIdHash: 1001791005
   DeferredDespawnTick: 0
   Ownership: 2
@@ -371,6 +371,34 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6652725513331149018, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 075c365115ce8c94eb65a571db9ca6e6, type: 2}
+    - target: {fileID: -5277769136950918531, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 075c365115ce8c94eb65a571db9ca6e6, type: 2}
+    - target: {fileID: -4181711283198634617, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 075c365115ce8c94eb65a571db9ca6e6, type: 2}
+    - target: {fileID: -3274921647565687732, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 075c365115ce8c94eb65a571db9ca6e6, type: 2}
+    - target: {fileID: -93912917512691172, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 075c365115ce8c94eb65a571db9ca6e6, type: 2}
+    - target: {fileID: 94586058172442283, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 075c365115ce8c94eb65a571db9ca6e6, type: 2}
+    - target: {fileID: 348851696270608250, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 075c365115ce8c94eb65a571db9ca6e6, type: 2}
     - target: {fileID: 919132149155446097, guid: c57bef2974fb3a645bd15dc8c19ba477, type: 3}
       propertyPath: m_Name
       value: Firetruck

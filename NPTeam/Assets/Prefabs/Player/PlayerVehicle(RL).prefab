@@ -51,7 +51,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570259725822164077}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -108,13 +108,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerVehicle
   ShowTopMostFoldoutHeaderGroup: 1
-  _carForm: {fileID: 0}
+  _carForm: {fileID: 7499242813087477363}
   _robotForm: {fileID: 6884446425445696803}
   _componentForm: {fileID: 5853934371568045877}
-  _carCamera: {fileID: 0}
+  _carCamera: {fileID: 3019524537589292041}
   _robotCamera: {fileID: 7142182170586607142}
   _componentCamera: {fileID: 5447937955662492089}
-  _carNetworkObject: {fileID: 0}
+  _carNetworkObject: {fileID: 3556720238901943222}
   _robotNetworkObject: {fileID: 6250202584401377799}
   _componentNetworkObject: {fileID: 4344288290715467554}
   _componentConnector: {fileID: 2011377181236548437}
@@ -141,13 +141,13 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
   AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
+  PositionInterpolationType: 2
+  RotationInterpolationType: 2
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.05
+  PositionMaxInterpolationTime: 0.02
   RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
+  RotationMaxInterpolationTime: 0.02
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
@@ -156,9 +156,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c82580714267334bb6e351b7c0f40af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrushObstacle
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 3285019482104072620}
   CrushPower: 100
 --- !u!114 &393697990130382609
 MonoBehaviour:
@@ -334,9 +334,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
+    - target: {fileID: 74649446304753550, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 647185521278213913, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017537573791604422, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1049571438225420583, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2489731230
+      value: 3897306403
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124430372762642695, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200244933080187314, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: m_LocalScale.x
@@ -392,11 +412,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2968725808325582160, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2018744147
+      value: 603299969
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951224217464792621, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715876897650228549, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4919145760332672327, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: m_Name
       value: RightLeg
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453343983229438351, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5630654011978335114, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: _rigidbody
@@ -410,6 +442,18 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 5630654011978335114, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: _componentAnimator
+      value: 
+      objectReference: {fileID: 5322061190411388220}
+    - target: {fileID: 6877700353912116208, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877700353912116208, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7010549225647772607, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -418,6 +462,14 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 7411778712415447119, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813176813445736416, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8056897230554003959, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: _componentSoundAudioSource
       value: 
@@ -460,6 +512,11 @@ MonoBehaviour:
 --- !u!4 &4439664432651810477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+  m_PrefabInstance: {fileID: 1547280360394203762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5322061190411388220 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6675118869035689806, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
   m_PrefabInstance: {fileID: 1547280360394203762}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5447937955662492089 stripped
@@ -505,9 +562,17 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3165461748992073195, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165461748992073195, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1258915027
+      value: 1900926991
       objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
@@ -575,7 +640,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3219256462
+      value: 923722747
       objectReference: {fileID: 0}
     - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _robotGrab
@@ -652,6 +717,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
+    - target: {fileID: 20524080272786053, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 496151989002781081, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 639925063970013624, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -668,6 +741,10 @@ PrefabInstance:
       propertyPath: carDriveSoundAudioSource
       value: 
       objectReference: {fileID: 7496129784065724302}
+    - target: {fileID: 1283573151865360097, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1664890472010085759, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: m_Name
       value: DumpTruct(RL)
@@ -712,10 +789,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 2233208743250253248, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 3285019482104072620}
+    - target: {fileID: 5236352983453242060, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3998061328
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743340973332169897, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6164479471568283897, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402410054482336229, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538189435294658237, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -729,6 +838,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+--- !u!114 &3019524537589292041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6264446723389179653, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+  m_PrefabInstance: {fileID: 9153646005012208396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &3556720238901943222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+  m_PrefabInstance: {fileID: 9153646005012208396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499242813087477363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!1 &7499242813087477363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1664890472010085759, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+  m_PrefabInstance: {fileID: 9153646005012208396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7516661080461784767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1682309855001488819, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
