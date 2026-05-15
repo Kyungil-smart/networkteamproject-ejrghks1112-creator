@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3746008743
+  GlobalObjectIdHash: 1876395470
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -406,6 +406,10 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 3285019482104072620}
+    - target: {fileID: 5644218411385635002, guid: 8126940de88592645892d0757aea14c1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 431241092
+      objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 8126940de88592645892d0757aea14c1, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -671,7 +675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.84
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.z

@@ -94,8 +94,7 @@ public class TestCarFormMovement2 : NetworkBehaviour
     {
         if (_playerVehicleCS.checkSpeedOff == true)
         {
-            _move = Vector3.zero;
-            _turn = Vector3.zero;
+            MotorTorque = 0;
             carFormRigidBody.linearVelocity = Vector3.zero;
             carFormRigidBody.angularVelocity = Vector3.zero;
             _playerVehicleCS.checkSpeedOff = false;
@@ -175,6 +174,8 @@ public class TestCarFormMovement2 : NetworkBehaviour
     void CarFormInput(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (PlayerState.Instance.IsPossession == false ||
+         PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector2 input = ctx.ReadValue<Vector2>();
         _netHorizontalInput.Value = input.x;
         _netVerticalInput.Value = input.y;
@@ -183,6 +184,8 @@ public class TestCarFormMovement2 : NetworkBehaviour
     void CarFormInputBreak(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        if (PlayerState.Instance.IsPossession == false ||
+         PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         _netBrakeInput.Value = ctx.ReadValue<float>();
     }
 }
