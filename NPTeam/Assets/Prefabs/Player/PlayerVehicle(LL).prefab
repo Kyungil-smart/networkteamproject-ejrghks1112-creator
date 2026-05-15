@@ -604,12 +604,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.74
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2.84
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -621,15 +633,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.000000022437685
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.0000000281434
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.000000015221302
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -665,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4736726528890599456, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4788713786796666311, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: GlobalObjectIdHash

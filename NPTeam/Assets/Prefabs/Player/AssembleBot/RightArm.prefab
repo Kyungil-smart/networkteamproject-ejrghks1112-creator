@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &918320073115901220
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6806871883864974351}
-  m_Layer: 7
-  m_Name: Scaler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6806871883864974351
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918320073115901220}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.1099997, y: -11.36, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1158428214956681516}
-  m_Father: {fileID: 5766429628836825886}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051753015898876346
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +109,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6806871883864974351}
+  - {fileID: 1158428214956681516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2119100855897093736
@@ -156,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2003939899
+  GlobalObjectIdHash: 2204423968
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -438,7 +406,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6806871883864974351}
+    m_TransformParent: {fileID: 5766429628836825886}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalScale.x
@@ -470,15 +438,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.000000044703473
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.000000029802315
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.000000029802315
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -491,86 +459,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.00000022286702
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.1960006
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.1394316
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.4760853
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.522822
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.47608534
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.5228218
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -2413289228306483358, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -95.358
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_Name
       value: combine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.024
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.271
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.046
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99624383
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.018481523
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.083591424
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.013002351
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 2.235
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -9.567
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322509715213970033, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 1.308
       objectReference: {fileID: 0}
     - target: {fileID: 7330204662243007036, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: 'm_Bones.Array.data[3]'
@@ -729,11 +621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b3a51b58f739649a1de41c911ab14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollTarget
-  targetBone: {fileID: 0}
   positionSpring: 0
   positionDamper: 0
-  useCustomTargetRotation: 0
-  _targetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!136 &1859288217088095404
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -901,7 +790,7 @@ Animator:
   m_GameObject: {fileID: 1970396298535777174}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
-  m_Controller: {fileID: 9100000, guid: d5f97ad98ade8ed4789a5e6c903194ef, type: 2}
+  m_Controller: {fileID: 9100000, guid: b39c2f28c7c1d7846862e3354320f485, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -935,11 +824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b3a51b58f739649a1de41c911ab14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollTarget
-  targetBone: {fileID: 0}
   positionSpring: 50
   positionDamper: 50
-  useCustomTargetRotation: 0
-  _targetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!136 &7079999686201778674
 CapsuleCollider:
   m_ObjectHideFlags: 0

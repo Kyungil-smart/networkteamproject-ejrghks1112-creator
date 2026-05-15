@@ -16,8 +16,8 @@ AnimatorStateMachine:
     m_State: {fileID: -485882742953270205}
     m_Position: {x: 340, y: 180, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -3764222938658967224}
-    m_Position: {x: 460, y: 90, z: 0}
+    m_State: {fileID: -2903085841847616586}
+    m_Position: {x: 619.1941, y: 188.46767, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -27,8 +27,8 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 130, y: 100, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -485882742953270205}
---- !u!1102 &-3764222938658967224
+  m_DefaultState: {fileID: 1610606422916154456}
+--- !u!1102 &-2903085841847616586
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -86,14 +86,14 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CombineForm
+  m_Name: CombinePartForm
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
     m_StateMachine: {fileID: -8435833641238705094}
-    m_Mask: {fileID: 0}
+    m_Mask: {fileID: 31900000, guid: 43c9c89454562f84f96c429ac4446daf, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
