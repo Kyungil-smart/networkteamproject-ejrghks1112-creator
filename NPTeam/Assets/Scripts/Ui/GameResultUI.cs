@@ -10,11 +10,15 @@ using TMPro;
 
 public class GameResultUI : MonoBehaviour
 {
-    [Header("UI 연결")]
+    [Header("승패 결과 UI 연결")]
     [SerializeField] private GameObject _resultPanel;
     [SerializeField] private GameObject _victoryUI;
     [SerializeField] private GameObject _defeatUI;
 
+    [Header("점수 연결")]
+    [field: SerializeField] private TextMeshProUGUI TimeScoreUI { get; set; }
+    [field: SerializeField] private TextMeshProUGUI ProtectScoreUI { get; set; }
+    [field: SerializeField] private TextMeshProUGUI TotalScoreUI { get; set; }
 
 
     private void Start()
@@ -46,21 +50,32 @@ public class GameResultUI : MonoBehaviour
     // OnGameEnded 이벤트가 발생하면 자동으로 호출
     public void ShowResult(GameResultType result)
     {
+
+
+
         _resultPanel.SetActive(true);
 
-        // 결과 타입에 따라 UI의 텍스트와 색상을 다르게 적용합니다.
+        // 결과 타입에 따라 UI의 텍스트와 색상을 다르게 적용
         switch (result)
         {
             case GameResultType.Victory:
                 _victoryUI.SetActive(true);
                 _defeatUI.SetActive(false);
+                Debug.Log("승리");
                 break;
 
             case GameResultType.Defeat:
                 _victoryUI.SetActive(false);
                 _defeatUI.SetActive(true);
+                Debug.Log("패배");
                 break;
         }
+    }
+
+
+    private void GetScore()
+    {
+
     }
 
 }

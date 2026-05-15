@@ -80,7 +80,8 @@ public class GameSessionManager : NetworkBehaviour
             // 서버에서만 GameManager의 시간 종료 이벤트 구독 (_returnToLobbyDelay클라이언트는 서버에서 종료 RPC 받는 것으로)
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+                // GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+                GameManager.Instance.OnTimeOverServer += HandleClearOnServer;
                 Debug.Log("구독 성공");
             }
         }
@@ -105,7 +106,8 @@ public class GameSessionManager : NetworkBehaviour
 
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
+                // GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
+                GameManager.Instance.OnTimeOverServer -= HandleClearOnServer;
             }
         }
     }
@@ -150,6 +152,19 @@ public class GameSessionManager : NetworkBehaviour
 
         // 패배 정보 전달
         EndGameClientRpc(GameResultType.Defeat);
+    }
+
+
+    private void HandleClearOnServer()
+    {
+        // 예외 처리, 이미 게임이 종료되었다면 무시
+        if (_gameEnded) return;
+        _gameEnded = true;
+
+        Debug.Log("[GameSessionManager] : 서버가 클라이언트들에게 게임 종료를 알림");
+
+        // 승리 정보 전달
+        EndGameClientRpc(GameResultType.Victory);
     }
 
 
@@ -261,4 +276,15 @@ public class GameSessionManager : NetworkBehaviour
         Debug.Log("[GameSessionManager] : SubscribeToGameManager 완료");
     }
     */
+
+    // 스코어 계산, 원래는 GameSessionManager에서 점수를 받아서 처리하는 게 맞지만, 일단은 여기서 계산하도록 함
+    public void CalculateScore()
+    {
+        // 점수 계산 로직 (예시)
+        int timeScore = Mathf.RoundToInt(1200 / GameManager.Instance.EndTime) * 100; // 클리어 시간에 반비례한 점수
+        int protectScore = 2000;
+        int totalScore = timeScore + protectScore;
+        Debug.Log($"[GameSessionManager] 점수 계산 완료 : Time Score: {timeScore} | Protect Score: {protectScore} | Total Score: {totalScore}");
+    }
+
 }

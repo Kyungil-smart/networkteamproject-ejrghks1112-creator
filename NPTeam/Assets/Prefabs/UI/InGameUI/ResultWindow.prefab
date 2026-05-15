@@ -624,7 +624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &12960106077764776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3179,6 +3179,9 @@ MonoBehaviour:
   _resultPanel: {fileID: 2564112324117146244}
   _victoryUI: {fileID: 1698706785797982991}
   _defeatUI: {fileID: 8060313815191557969}
+  <TimeScoreUI>k__BackingField: {fileID: 1450930033688333}
+  <ProtectScoreUI>k__BackingField: {fileID: 5048996638513595849}
+  <TotalScoreUI>k__BackingField: {fileID: 2610413032980827226}
 --- !u!1 &6592536056707681518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3892,7 +3895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &402497188778703872
 RectTransform:
   m_ObjectHideFlags: 0
