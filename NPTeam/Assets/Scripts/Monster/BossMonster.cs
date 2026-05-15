@@ -129,6 +129,6 @@ public class BossMonster : NetworkBehaviour, IDamagable
         
         health.Value -= damage;
 
-        if (health.Value <= 0) GameSessionManager.Instance.KillTheBoss(GameResultType.Victory);
+        if (health.Value <= 0) GameManager.Instance.IsFinished = true;
     }
 }

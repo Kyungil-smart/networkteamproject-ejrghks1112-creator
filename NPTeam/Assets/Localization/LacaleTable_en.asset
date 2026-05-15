@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 10101001
-    m_Localized: 'Super Galactic Brave Squad: Transforming Robot'
+    m_Localized: Super Robot Combination
     m_Metadata:
       m_Items: []
   - m_Id: 10101002
@@ -126,16 +126,32 @@ MonoBehaviour:
     m_Localized: Credits
     m_Metadata:
       m_Items: []
-  - m_Id: 5302669458661376
-    m_Localized: Master Volume
+  - m_Id: 10102101
+    m_Localized: Not logged in.
     m_Metadata:
       m_Items: []
-  - m_Id: 5303159525335040
-    m_Localized: SE Volume
+  - m_Id: 10102102
+    m_Localized: Fetching room list
     m_Metadata:
       m_Items: []
-  - m_Id: 5303571364044800
-    m_Localized: BGM Volume
+  - m_Id: 10102103
+    m_Localized: '{0} room(s) found.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102104
+    m_Localized: Quick joining
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102105
+    m_Localized: No room(s) found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102106
+    m_Localized: Joining room {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102107
+    m_Localized: Failed to join room.
     m_Metadata:
       m_Items: []
   references:

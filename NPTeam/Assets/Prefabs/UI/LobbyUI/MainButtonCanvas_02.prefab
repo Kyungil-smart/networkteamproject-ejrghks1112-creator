@@ -3946,7 +3946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3085005901989521917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4824,7 +4824,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 780, y: 80}
+  m_SizeDelta: {x: 640, y: 80}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2220781150013868533
 CanvasRenderer:
@@ -5120,7 +5120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1128660619734476230
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5361,6 +5361,73 @@ MonoBehaviour:
   _emptyListText: {fileID: 6733836658438729761}
   _createRoomDialog: {fileID: 5991731701996031206}
   _joinByCodeDialog: {fileID: 7334412556314648964}
+  _noLoginMsg:
+    m_TableReference:
+      m_TableCollectionName: GUID:d8ec86738dcf2b44c9ec110200a3dbb1
+    m_TableEntryReference:
+      m_KeyId: 10102101
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _roomListMsg:
+    m_TableReference:
+      m_TableCollectionName: GUID:d8ec86738dcf2b44c9ec110200a3dbb1
+    m_TableEntryReference:
+      m_KeyId: 10102102
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _roomFindMsg:
+    m_TableReference:
+      m_TableCollectionName: GUID:d8ec86738dcf2b44c9ec110200a3dbb1
+    m_TableEntryReference:
+      m_KeyId: 10102103
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _RandomJoinMsg:
+    m_TableReference:
+      m_TableCollectionName: GUID:d8ec86738dcf2b44c9ec110200a3dbb1
+    m_TableEntryReference:
+      m_KeyId: 10102104
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _cannotFindRoomMsg:
+    m_TableReference:
+      m_TableCollectionName: GUID:d8ec86738dcf2b44c9ec110200a3dbb1
+    m_TableEntryReference:
+      m_KeyId: 10102105
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _roomJoinMsg:
+    m_TableReference:
+      m_TableCollectionName: GUID:d8ec86738dcf2b44c9ec110200a3dbb1
+    m_TableEntryReference:
+      m_KeyId: 10102106
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _roomFailedMsg:
+    m_TableReference:
+      m_TableCollectionName: GUID:d8ec86738dcf2b44c9ec110200a3dbb1
+    m_TableEntryReference:
+      m_KeyId: 10102107
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _joinCodeInput: {fileID: 1725548655941604621}
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &7866720905366986707
 GameObject:
   m_ObjectHideFlags: 0
