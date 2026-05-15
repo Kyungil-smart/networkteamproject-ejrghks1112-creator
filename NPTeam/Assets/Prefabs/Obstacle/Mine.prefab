@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mine
   ShowTopMostFoldoutHeaderGroup: 1
-  explosionForce: 1000
+  explosionForce: 800000
   explosionRadius: 4
   depth: 1
   stunTime: 3

@@ -247,6 +247,11 @@ MonoBehaviour:
   _grabCollider: {fileID: 7061008496568826027}
   _playerVehicle: {fileID: 0}
   _playerVehicleCS: {fileID: 0}
+  isGrabSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
 --- !u!114 &6998640827465897096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,6 +984,11 @@ MonoBehaviour:
     m_Bits: 129
   _jumpRayPivot: {fileID: 6555657225432850017}
   isRobotMoveSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
+  isRobotJumpSFX:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0
       MaxSecondsBetweenUpdates: 0
