@@ -133,6 +133,9 @@ public class PlayerVehicle : NetworkBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _formColorChanger = GetComponent<FormColorChanger>();
         _stun = GetComponent<PlayerStun>();
+        
+        //연동준이 추가
+        // _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
     #endregion
 
@@ -169,6 +172,9 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return ;
 
+        //연동준이 추가
+        _rigidbody.constraints = RigidbodyConstraints.None;
+        
         SetForm(0);
         ChangeOwnershipServerRpc(0);
         FormColoerChange(0);
@@ -184,6 +190,8 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return;
 
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
         SetForm(1);
         ChangeOwnershipServerRpc(1);
         FormColoerChange(1);
@@ -198,6 +206,8 @@ public class PlayerVehicle : NetworkBehaviour
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return;
+        
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);

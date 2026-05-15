@@ -51,7 +51,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570259725822164077}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -69,7 +69,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &8126048340682314727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +145,9 @@ MonoBehaviour:
   RotationInterpolationType: 0
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.05
+  PositionMaxInterpolationTime: 0.02
   RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
+  RotationMaxInterpolationTime: 0.03
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
@@ -156,9 +156,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   InLocalSpace: 1
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
-  SlerpPosition: 0
+  SlerpPosition: 1
 --- !u!114 &9085945142113781212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 1
-  AutoUpdateKinematicState: 0
+  AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
 --- !u!114 &5137585688078573009
 MonoBehaviour:
@@ -335,6 +335,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
     - target: {fileID: 639925063970013624, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 639925063970013624, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
@@ -392,6 +396,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1682309855001488819, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: SteerRot
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: BrakeTorque
+      value: 4000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: MotorTorque
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 2047820150003742428, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: carFormRigidBody
+      value: 
+      objectReference: {fileID: 3285019482104072620}
+    - target: {fileID: 2233208743250253248, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
@@ -523,6 +559,10 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 6798584669354051705, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8129249138045495167, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -610,6 +650,10 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3165461748992073195, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: _rigidbody
       value: 
