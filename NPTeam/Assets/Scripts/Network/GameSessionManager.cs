@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using Unity.Netcode;
 using UnityEngine;
@@ -66,23 +67,31 @@ public class GameSessionManager : NetworkBehaviour
         base.OnDestroy();
     }
 
-    public override void OnNetworkSpawn()
+    public override async void OnNetworkSpawn()
     {
         BindNetworkVariableEvents();
         if (IsServer)
         {
+            Debug.Log("서버시작");
             InitServerSide();
             BindSceneManagerEvents();
-            _endGameAction.action.Enable();
 
-            
+            await WaitForGameManager();
             // 서버에서만 GameManager의 시간 종료 이벤트 구독 (_returnToLobbyDelay클라이언트는 서버에서 종료 RPC 받는 것으로)
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+                Debug.Log("구독 성공");
             }
-            
-            // StartCoroutine(SubscribeToGameManager());
+        }
+    }
+
+    private async Task WaitForGameManager()
+    {
+        while (GameManager.Instance == null)
+        {
+            Debug.Log("Waiting for game manager");
+            await Task.Yield();
         }
     }
 
@@ -146,15 +155,27 @@ public class GameSessionManager : NetworkBehaviour
 
 
     // TODO: EndGame 입력 트리거는 임시. 실제 종료 조건(승패/시간 등) 확정 시 교체
-    private void Update()
-    {
-        if (!IsServer || !IsSpawned || !_isGameStartedNet.Value || _gameEnded) return;
-        if (_endGameAction.action.WasPressedThisFrame())
-        {
-            _gameEnded = true;
-            EndGameClientRpc(GameResultType.Defeat);
-        }
-    }
+    // private void Update()
+    // {
+    //     
+    //     if (Keyboard.current.iKey.wasPressedThisFrame)
+    //     {
+    //         Debug.Log($"[Input Test] I Key Pressed! " +
+    //                   $"Server:{IsServer}, " +
+    //                   $"Spawned:{IsSpawned}, " +
+    //                   $"Started:{_isGameStartedNet.Value}, " +
+    //                   $"Ended:{_gameEnded}");
+    //
+    //         if (!IsServer || !IsSpawned || !_isGameStartedNet.Value || _gameEnded)
+    //         {
+    //             Debug.LogWarning("RPC 실행 불가");
+    //             return;
+    //         }
+    //         
+    //         _gameEnded = true;
+    //         EndGameClientRpc(GameResultType.Defeat);
+    //     }
+    // }
 
     private void InitServerSide()
     {
@@ -199,7 +220,7 @@ public class GameSessionManager : NetworkBehaviour
     private void EndGameClientRpc(GameResultType result)
     {
         OnGameEnded?.Invoke(result);
-        Debug.Log("[GameSessionManager] : 클라이언트가 게임 종료 RPC 수신");
+        Debug.Log($"[GameSessionManager] : 클라이언트가 게임 종료 RPC 수신 {result}");
         //_ = LobbyManager.Instance.ReturnToRoomAsync();
 
 
