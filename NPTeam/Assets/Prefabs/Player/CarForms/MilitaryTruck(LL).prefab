@@ -247,7 +247,6 @@ Transform:
   m_Children:
   - {fileID: 7068567487959514773}
   - {fileID: 4585214985279756729}
-  - {fileID: 1300762204976154556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5644218411385635002
@@ -292,6 +291,11 @@ MonoBehaviour:
   MotorTorque: 0
   BrakeTorque: 0
   SteerRot: 0
+  isMove:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
   SteerWheel:
   - {fileID: 5822766894702421094}
   - {fileID: 8292273717536683688}
@@ -448,6 +452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarSound
   carDriveSoundAudioSource: {fileID: 0}
   carFormMovement: {fileID: 639925063970013624}
+  carFormWheelColliderMovement: {fileID: 0}
 --- !u!1 &1685836145058023390
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,11 +784,11 @@ Transform:
   m_GameObject: {fileID: 3522182079497975978}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12619898, y: -0, z: -0, w: 0.992005}
-  m_LocalPosition: {x: 0, y: 2.5, z: -4.09}
+  m_LocalPosition: {x: 0, y: 0.28999996, z: -6.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1682309855001488819}
+  m_Father: {fileID: 4585214985279756729}
   m_LocalEulerAnglesHint: {x: 14.5, y: 0, z: 0}
 --- !u!114 &6264446723389179653
 MonoBehaviour:
@@ -1618,7 +1623,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.21, z: 1.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1300762204976154556}
   m_Father: {fileID: 1682309855001488819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7589488968127996975

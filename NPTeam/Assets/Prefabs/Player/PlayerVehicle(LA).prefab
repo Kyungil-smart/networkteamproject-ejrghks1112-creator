@@ -69,7 +69,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!114 &8126048340682314727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3184168099
+  GlobalObjectIdHash: 1416044839
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 24658199
+      value: 1027978127
       objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
@@ -436,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1501050693
+      value: 1645103495
       objectReference: {fileID: 0}
     - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _robotGrab
@@ -595,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: f9bf487699fd2524bb67008b684db934, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3063293455
+      value: 952876396
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: f9bf487699fd2524bb67008b684db934, type: 3}
       propertyPath: _playerVehicle
@@ -663,7 +663,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2027956303
+      value: 1659008443
       objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_Name
@@ -672,6 +672,30 @@ PrefabInstance:
     - target: {fileID: 3762503520255719836, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9961947
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.08715578
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358194424977595724, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5598839670629456365, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: _playerVehicle
@@ -771,7 +795,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 8345340744786642672, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3185580789
+      value: 3051249676
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
