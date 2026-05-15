@@ -187,7 +187,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 1
-  AutoUpdateKinematicState: 0
+  AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
 --- !u!114 &5137585688078573009
 MonoBehaviour:
@@ -717,14 +717,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
-    - target: {fileID: 20524080272786053, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 496151989002781081, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 639925063970013624, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -741,10 +733,10 @@ PrefabInstance:
       propertyPath: carDriveSoundAudioSource
       value: 
       objectReference: {fileID: 7496129784065724302}
-    - target: {fileID: 1283573151865360097, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
+    - target: {fileID: 837701473247194905, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: carFormWheelColliderMovement
+      value: 
+      objectReference: {fileID: 3950841226042800478}
     - target: {fileID: 1664890472010085759, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: m_Name
       value: DumpTruct(RL)
@@ -789,41 +781,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1854654448606354842, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: RotationInterpolationType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1854654448606354842, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: RotationMaxInterpolationTime
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 2233208743250253248, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 3285019482104072620}
-    - target: {fileID: 5236352983453242060, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
+    - target: {fileID: 5322266996569727570, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 5322266996569727570, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 5322266996569727570, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+      propertyPath: carFormRigidBody
+      value: 
+      objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3998061328
-      objectReference: {fileID: 0}
-    - target: {fileID: 5743340973332169897, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6164479471568283897, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6402410054482336229, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538189435294658237, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
-      propertyPath: m_Layer
-      value: 7
+      value: 3366710407
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: _playerVehicle
@@ -860,6 +836,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!114 &3950841226042800478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5322266996569727570, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+  m_PrefabInstance: {fileID: 9153646005012208396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499242813087477363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d4e2cd434cb0b4693aee7ee8fae1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestCarFormMovement2
 --- !u!1 &7499242813087477363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1664890472010085759, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}

@@ -1,19 +1,24 @@
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestCarFormMovement2 : NetworkBehaviour
+public class CarFormWheelColliderMovement : NetworkBehaviour
 {
     [SerializeField] Rigidbody carFormRigidBody;
     private NPTeamInputActions _carFormInput;
-
-    private Vector3 _move;
-    private Vector3 _turn;
-
+    
     public float MotorTorque;
     public float BrakeTorque;
     public float SteerRot;
+    
+    public NetworkVariable<bool> isMove = new NetworkVariable<bool>
+        (default, 
+        NetworkVariableReadPermission.Everyone, 
+        NetworkVariableWritePermission.Owner);
+    
+    
     
     private NetworkVariable<float> _netHorizontalInput = new NetworkVariable<float>
         (0f, 
@@ -49,15 +54,6 @@ public class TestCarFormMovement2 : NetworkBehaviour
         WheelCenterSetting();
     }
     
-    // public override void OnNetworkSpawn()
-    // {
-    //     _carFormInput.asset.Enable();
-    //     _carFormInput.Player.PlayerMove.performed += CarFormInput;
-    //     _carFormInput.Player.PlayerMove.canceled += CarFormInput;
-    //     _carFormInput.Player.PlayerAscend.performed += CarFormInputBreak;
-    //     _carFormInput.Player.PlayerAscend.canceled += CarFormInputBreak;
-    //     
-    // }
     void OnEnable()
     {
         _carFormInput.asset.Enable();
@@ -179,6 +175,8 @@ public class TestCarFormMovement2 : NetworkBehaviour
         Vector2 input = ctx.ReadValue<Vector2>();
         _netHorizontalInput.Value = input.x;
         _netVerticalInput.Value = input.y;
+
+        isMove.Value = Mathf.Abs(input.y) > 0.01f;
     }
 
     void CarFormInputBreak(InputAction.CallbackContext ctx)
