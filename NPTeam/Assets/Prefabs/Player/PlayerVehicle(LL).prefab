@@ -51,7 +51,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570259725822164077}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -108,13 +108,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerVehicle
   ShowTopMostFoldoutHeaderGroup: 1
-  _carForm: {fileID: 0}
+  _carForm: {fileID: 570259725822164077}
   _robotForm: {fileID: 6884446425445696803}
   _componentForm: {fileID: 164315903511298624}
-  _carCamera: {fileID: 0}
+  _carCamera: {fileID: 6221445355762445998}
   _robotCamera: {fileID: 7142182170586607142}
   _componentCamera: {fileID: 1236418471182950529}
-  _carNetworkObject: {fileID: 0}
+  _carNetworkObject: {fileID: 5687061380543146257}
   _robotNetworkObject: {fileID: 6250202584401377799}
   _componentNetworkObject: {fileID: 112328368557103015}
   _componentConnector: {fileID: 3825121364171269211}
@@ -141,13 +141,13 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
   AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
+  PositionInterpolationType: 2
+  RotationInterpolationType: 2
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.05
+  PositionMaxInterpolationTime: 0.02
   RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
+  RotationMaxInterpolationTime: 0.02
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
@@ -156,9 +156,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -394,6 +394,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: 8126940de88592645892d0757aea14c1, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854654448606354842, guid: 8126940de88592645892d0757aea14c1, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233208743250253248, guid: 8126940de88592645892d0757aea14c1, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 8523679854449922528, guid: 8126940de88592645892d0757aea14c1, type: 3}
       propertyPath: _playerVehicle
       value: 
@@ -412,6 +424,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1682309855001488819, guid: 8126940de88592645892d0757aea14c1, type: 3}
   m_PrefabInstance: {fileID: 52014098866612651}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5687061380543146257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5644218411385635002, guid: 8126940de88592645892d0757aea14c1, type: 3}
+  m_PrefabInstance: {fileID: 52014098866612651}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!114 &6221445355762445998 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6264446723389179653, guid: 8126940de88592645892d0757aea14c1, type: 3}
+  m_PrefabInstance: {fileID: 52014098866612651}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
 --- !u!1001 &1915274451592694218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -428,6 +462,14 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3165461748992073195, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165461748992073195, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3445863328
@@ -603,6 +645,14 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 1587709887026745886, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: RotationInterpolationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587709887026745886, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: RotationMaxInterpolationTime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalScale.x
       value: 3

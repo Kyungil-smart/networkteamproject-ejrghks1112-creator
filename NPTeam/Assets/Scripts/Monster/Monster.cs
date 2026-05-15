@@ -99,7 +99,13 @@ public class Monster : NetworkBehaviour, IDamagable
 
     private void Update()
     {
-        if (!IsServer || isDie.Value) return;
+        if (!IsServer || isDie.Value || !_navmeshAgent.isActiveAndEnabled) return;
+
+        if (!_navmeshAgent.isOnNavMesh || _navmeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        {
+            BackToPath();
+            return;
+        }
         
         float currentSpeed = _navmeshAgent.velocity.magnitude / chaseSpeed;
         
@@ -150,6 +156,15 @@ public class Monster : NetworkBehaviour, IDamagable
         _collider = GetComponent<Collider>();
         _renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void BackToPath()
+    {
+        if (!_navmeshAgent.isOnNavMesh)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(_spawnPos, out hit, 5f, NavMesh.AllAreas)) _navmeshAgent.Warp(hit.position);
+        }
     }
 
     private void OnHealthChanged(int oldValue, int newValue)
@@ -310,6 +325,8 @@ public class Monster : NetworkBehaviour, IDamagable
 
     private void Patrol()
     {
+        if (!_navmeshAgent.enabled || !_navmeshAgent.isOnNavMesh) return;
+        
         _navmeshAgent.speed = patrolSpeed;
 
         if (_navmeshAgent.isStopped) _navmeshAgent.isStopped = false;
