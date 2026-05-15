@@ -134,8 +134,8 @@ public class RoomUI : MonoBehaviour
         bool isHost = LobbyManager.Instance.IsHost;
 
         _readyButtonLabel.text = isHost
-            ? "게임 시작"
-            : (_isLocalPlayerReady ? "레디 취소" : "레디");
+            ? "Game Start"
+            : (_isLocalPlayerReady ? "Ready Cancel" : "Ready");
 
         if (!_isProcessingReady)
         {
@@ -152,15 +152,15 @@ public class RoomUI : MonoBehaviour
 
         if (total < _settings.MinPlayersToStart)
         {
-            _statusText.text = $"최소 {_settings.MinPlayersToStart}명 필요 ({total}/{_settings.MaxPlayers})";
+            _statusText.text = $"At least {_settings.MinPlayersToStart}players required ({total}/{_settings.MaxPlayers})";
         }
         else if (nonHostReady < nonHostTotal)
         {
-            _statusText.text = $"다른 플레이어 레디 대기 ({nonHostReady}/{nonHostTotal})";
+            _statusText.text = $"Waiting for players... ({nonHostReady}/{nonHostTotal})";
         }
         else
         {
-            _statusText.text = "호스트가 게임을 시작할 수 있습니다";
+            _statusText.text = "Host can start game.";
         }
     }
 
@@ -218,7 +218,7 @@ public class RoomUI : MonoBehaviour
 
     private void OnGameStarting()
     {
-        _statusText.text = "게임에 입장합니다...";
+        _statusText.text = "Entering the game...";
         _readyButton.interactable = false;
         _leaveButton.interactable = false;
     }
