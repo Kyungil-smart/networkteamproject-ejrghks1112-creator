@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -18,11 +19,11 @@ public class PopUpManager : MonoBehaviour
 
 
     // 싱글톤 처리
-    public static PopUpManager Instance { get; private set; }
+    // public static PopUpManager Instance { get; private set; }
 
     private void Awake()
     {
-        SetSingleton();
+        // SetSingleton();
         Init();
     }
 
@@ -51,7 +52,7 @@ public class PopUpManager : MonoBehaviour
     }
     */
 
-
+    /*
     private void SetSingleton()
     {
         if (Instance != null)
@@ -62,13 +63,14 @@ public class PopUpManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    */
 
 
     private void Init()
     {
         // 시작은 팝업 끄기
-        _popupSettingsWindow.SetActive(false);
-        _popupCreditsWindow.SetActive(false);
+        if (_popupSettingsWindow != null) _popupSettingsWindow.SetActive(false);
+        if (_popupCreditsWindow != null) _popupCreditsWindow.SetActive(false);
 
 
         // 입력 시스템 인스턴스화
@@ -78,6 +80,11 @@ public class PopUpManager : MonoBehaviour
 
     private void OnMenuInput(InputAction.CallbackContext context)
     {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
         ToggleSettingsPanel();
     }
 
@@ -94,6 +101,8 @@ public class PopUpManager : MonoBehaviour
         {
             _popupCreditsWindow.SetActive(false);
         }
+
+
     }
 
 
