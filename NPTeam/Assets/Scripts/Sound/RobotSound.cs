@@ -5,6 +5,7 @@ public class RobotSound : MonoBehaviour
     [SerializeField] private AudioSource _robotWalkSoundAudioSource;
     [SerializeField] private RobotFormMovement _robotFormMovement;
     [SerializeField] private RobotGrab _robotGrab;
+    [SerializeField] private RobotZab _robotZab;
 
     void Start()
     {
@@ -18,14 +19,16 @@ public class RobotSound : MonoBehaviour
         _robotFormMovement.isRobotMoveSFX.OnValueChanged += PlayRobotWalkSound;
         _robotFormMovement.isRobotJumpSFX.OnValueChanged += PlayRobotJumpSound;
         _robotGrab.isGrabSFX.OnValueChanged += PlayRobotGrabSound;
+        _robotZab.isZabSFX.OnValueChanged += PlayRobotZabSound;
         SoundManager.Instance.OnSfxVolumeChanged += RobotSoundChanged;
     }
 
     void OnDisable()
     {
         _robotFormMovement.isRobotMoveSFX.OnValueChanged -= PlayRobotWalkSound;
-        _robotFormMovement.isRobotJumpSFX.OnValueChanged += PlayRobotJumpSound;
-        _robotGrab.isGrabSFX.OnValueChanged += PlayRobotGrabSound;
+        _robotFormMovement.isRobotJumpSFX.OnValueChanged -= PlayRobotJumpSound;
+        _robotGrab.isGrabSFX.OnValueChanged -= PlayRobotGrabSound;
+        _robotZab.isZabSFX.OnValueChanged -= PlayRobotZabSound;
         SoundManager.Instance.OnSfxVolumeChanged -= RobotSoundChanged;
     }
 
@@ -55,6 +58,14 @@ public class RobotSound : MonoBehaviour
     
     }
 
+    void PlayRobotZabSound(bool previous, bool current)
+    {
+        if (current)
+        {
+            _robotWalkSoundAudioSource.PlayOneShot(SoundManager.Instance.PunchAttackSfx);
+        }
+    
+    }
 
     void RobotSoundChanged(float volume)
     {

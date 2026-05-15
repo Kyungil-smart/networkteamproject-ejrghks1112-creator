@@ -410,6 +410,7 @@ Transform:
   m_Children:
   - {fileID: 6021944549222335327}
   - {fileID: 4585214985279756729}
+  - {fileID: 1300762204976154556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5644218411385635002
@@ -631,12 +632,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3522182079497975978}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12619898, y: 0, z: 0, w: 0.992005}
-  m_LocalPosition: {x: 0, y: 2.5, z: -4.09}
+  m_LocalRotation: {x: 0.12619898, y: -0, z: -0, w: 0.992005}
+  m_LocalPosition: {x: 0, y: 5.0699997, z: -4.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4585214985279756729}
+  m_Father: {fileID: 1682309855001488819}
   m_LocalEulerAnglesHint: {x: 14.5, y: 0, z: 0}
 --- !u!114 &6264446723389179653
 MonoBehaviour:
@@ -658,7 +659,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 0}
+    TrackingTarget: {fileID: 4585214985279756729}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -1393,11 +1394,10 @@ Transform:
   m_GameObject: {fileID: 7525799472090141039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.9, z: 2.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1300762204976154556}
+  m_Children: []
   m_Father: {fileID: 1682309855001488819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7538189435294658237
