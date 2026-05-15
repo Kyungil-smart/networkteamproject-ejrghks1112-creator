@@ -6,7 +6,8 @@ public enum EffectEnum
 {
     BombYellow,
     BombRed,
-    Bam
+    Bam,
+    ExplosionZap
 }
 
 public class EffectManager : MonoBehaviour

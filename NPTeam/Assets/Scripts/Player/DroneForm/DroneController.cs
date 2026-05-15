@@ -46,6 +46,16 @@ public class DroneController : NetworkBehaviour
     [Header("빙의시 렌더러 Off를 위한 파츠 등록")]
     [SerializeField] private Renderer[] _dronRenderers;
 
+    // SFX 호출 판정
+    public NetworkVariable<bool> isDroneMoveSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isDronePossessionSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
     private void Awake() => Init();
 
     public override void OnNetworkSpawn()
@@ -177,6 +187,17 @@ public class DroneController : NetworkBehaviour
 
         // 드론 이동
         _rigidbody.linearVelocity = new Vector3(move.x, _verticalInput * _playerVertical, move.z);
+
+        bool isMoving = _moveInput != Vector2.zero || Mathf.Abs(_verticalInput) > 0.01f;
+
+        if (isMoving)
+        {
+            isDroneMoveSFX.Value = true;
+        }
+        else
+        {
+            isDroneMoveSFX.Value = false;
+        }
     }
     #endregion
 
@@ -186,8 +207,8 @@ public class DroneController : NetworkBehaviour
         if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
 
-        
         TryPossession();
+
     }
     // 빙의 함수
     private void TryPossession()
@@ -201,6 +222,8 @@ public class DroneController : NetworkBehaviour
             _rigidbody.linearVelocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.isKinematic = true;
+            isDroneMoveSFX.Value = false;
+            isDronePossessionSFX.Value = true;
 
             // 대상의 네트워크 오브젝트 저장
             NetworkObject networkObject = hit.transform.GetComponent<NetworkObject>();
@@ -296,6 +319,7 @@ public class DroneController : NetworkBehaviour
         PlayerState.Instance.CurrentPossessed = null;
         _rigidbody.isKinematic = false;
         _cinemachineCamera.Priority = 3;
+        isDronePossessionSFX.Value = false;
     }
     #endregion
 

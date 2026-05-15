@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3226860893
+  GlobalObjectIdHash: 2060485857
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -117,7 +117,7 @@ MonoBehaviour:
   _carNetworkObject: {fileID: 5548509229694028886}
   _robotNetworkObject: {fileID: 345669323039649557}
   _componentNetworkObject: {fileID: 8126048340682314727}
-  _componentConnector: {fileID: 8126048340682314727}
+  _componentConnector: {fileID: 4561946307789280314}
   _upperArm_Root_R_end: {fileID: 3009952111850489936}
   _hand_L_end: {fileID: 3892780085457835258}
   _spawnTransform: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 1
-  AutoUpdateKinematicState: 0
+  AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
 --- !u!114 &5137585688078573009
 MonoBehaviour:
@@ -424,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2342118323
+      value: 1936382718
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: _playerVehicle
@@ -497,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2119100855897093736, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1579002320
+      value: 2268016703
       objectReference: {fileID: 0}
     - target: {fileID: 2744812768181547937, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: _playerVehicle
@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9067629286892512497, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4202007560
+      value: 1248559537
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -671,6 +671,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &4561946307789280314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9067629286892512497, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
 --- !u!95 &6267792823291583190 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1468830338843077149, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
@@ -697,6 +708,14 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 2822178044499931416, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00005030632
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822178044499931416, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00068950653
+      objectReference: {fileID: 0}
     - target: {fileID: 3165461748992073195, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: RotationInterpolationType
       value: 2
@@ -771,7 +790,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 350951283
+      value: 1842952323
       objectReference: {fileID: 0}
     - target: {fileID: 5871695677437734310, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: _playerVehicle
@@ -783,11 +802,11 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 6998640827465897096, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4189256722
+      value: 106829912
       objectReference: {fileID: 0}
     - target: {fileID: 9142513281599162402, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3808752646
+      value: 494554726
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -833,6 +852,18 @@ MonoBehaviour:
   _robotWalkSoundAudioSource: {fileID: 1751779735230325859}
   _robotFormMovement: {fileID: 8362658916487904247}
   _robotGrab: {fileID: 6138529250808952214}
+  _robotZab: {fileID: 1844542514748518782}
+--- !u!114 &1844542514748518782 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5871695677437734310, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+  m_PrefabInstance: {fileID: 5252698819735297240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1bc1400a3a3525428c638a6d15e82f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotZab
 --- !u!114 &3009952111850489936 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6998640827465897096, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
