@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1936382718
+  GlobalObjectIdHash: 4098221523
   InScenePlacedSourceGlobalObjectIdHash: 1001791005
   DeferredDespawnTick: 0
   Ownership: 2
@@ -263,6 +263,11 @@ MonoBehaviour:
   MotorTorque: 1500
   BrakeTorque: 3000
   SteerRot: 30
+  isMove:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
   SteerWheel:
   - {fileID: 8451770200744972467}
   - {fileID: 5523796622787236186}
@@ -395,8 +400,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 2.8}
-  m_Center: {x: 0, y: 0.85, z: 0}
+  m_Size: {x: 2.1, y: 2.2, z: 5.5}
+  m_Center: {x: 0, y: 1.6, z: -0.01}
 --- !u!114 &837701473247194905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarSound
   carDriveSoundAudioSource: {fileID: 0}
   carFormMovement: {fileID: 639925063970013624}
+  carFormWheelColliderMovement: {fileID: 0}
 --- !u!1 &1932299096484403813
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,13 +812,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3522182079497975978}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12619898, y: 0, z: 0, w: 0.992005}
-  m_LocalPosition: {x: 0, y: 2.5, z: -4.09}
+  m_LocalRotation: {x: 0.12186928, y: 0, z: 0, w: 0.9925462}
+  m_LocalPosition: {x: 0, y: 4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4585214985279756729}
-  m_LocalEulerAnglesHint: {x: 14.5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 14, y: 0, z: 0}
 --- !u!114 &6264446723389179653
 MonoBehaviour:
   m_ObjectHideFlags: 0
