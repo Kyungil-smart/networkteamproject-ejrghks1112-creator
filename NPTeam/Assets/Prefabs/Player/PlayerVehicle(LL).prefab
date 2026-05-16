@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 284244593
+  GlobalObjectIdHash: 3746008743
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -124,6 +124,9 @@ MonoBehaviour:
   _formColorChanger: {fileID: 0}
   checkSpeedOff: 0
   checkSpeedOffForCam: 0
+  _carRenderer: {fileID: 5081800048190719987}
+  _robotRenderer: {fileID: 0}
+  _componentRenderer: {fileID: 6588281678283205066}
   isLockTransform: 0
   _componentFormMovement: {fileID: 6944575291213029899}
 --- !u!114 &6065807456793869565
@@ -428,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: 8126940de88592645892d0757aea14c1, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 431241092
+      value: 1144988837
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 8126940de88592645892d0757aea14c1, type: 3}
       propertyPath: _playerVehicle
@@ -451,6 +454,11 @@ GameObject:
 --- !u!4 &1720385409663435800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1682309855001488819, guid: 8126940de88592645892d0757aea14c1, type: 3}
+  m_PrefabInstance: {fileID: 52014098866612651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5081800048190719987 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5061734493991808600, guid: 8126940de88592645892d0757aea14c1, type: 3}
   m_PrefabInstance: {fileID: 52014098866612651}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5280257152496989011 stripped
@@ -747,11 +755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4788713786796666311, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 628197821
+      value: 4181086357
       objectReference: {fileID: 0}
     - target: {fileID: 8569910571265416763, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3403701246
+      value: 2752957937
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -799,6 +807,11 @@ MonoBehaviour:
 --- !u!4 &6563061854723744002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+  m_PrefabInstance: {fileID: 4898790353392138848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6588281678283205066 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1771524994120324010, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
   m_PrefabInstance: {fileID: 4898790353392138848}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6944575291213029899 stripped
