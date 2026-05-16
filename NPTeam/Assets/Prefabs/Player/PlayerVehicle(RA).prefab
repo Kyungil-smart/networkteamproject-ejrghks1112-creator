@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1416044839
+  GlobalObjectIdHash: 2060485857
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -124,6 +124,9 @@ MonoBehaviour:
   _formColorChanger: {fileID: 0}
   checkSpeedOff: 0
   checkSpeedOffForCam: 0
+  _carRenderer: {fileID: 8799307322126357281}
+  _robotRenderer: {fileID: 5231825194858033}
+  _componentRenderer: {fileID: 3511345730048123952}
   isLockTransform: 0
   _componentFormMovement: {fileID: 2291538745035019432}
 --- !u!114 &6065807456793869565
@@ -474,6 +477,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!23 &8799307322126357281 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8739624722341961677, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
+  m_PrefabInstance: {fileID: 239826588139506924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4799140881284690123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -484,7 +492,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1579002320
+      value: 2268016703
       objectReference: {fileID: 0}
     - target: {fileID: 2744812768181547937, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: _playerVehicle
@@ -564,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 9067629286892512497, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4202007560
+      value: 1248559537
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -587,6 +595,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002b69c17a4282544a340b3d447928c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComponentFormMovement
+--- !u!137 &3511345730048123952 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8224478238741435643, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3892791135529973446 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8402593056989824525, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
@@ -738,6 +751,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5669019966208076846}
   m_SourcePrefab: {fileID: 100100000, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+--- !u!137 &5231825194858033 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5257886517554817769, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+  m_PrefabInstance: {fileID: 5252698819735297240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &345669323039649557 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5487994405948797901, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}

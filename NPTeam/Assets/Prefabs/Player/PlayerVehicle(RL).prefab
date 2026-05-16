@@ -124,6 +124,9 @@ MonoBehaviour:
   _formColorChanger: {fileID: 0}
   checkSpeedOff: 0
   checkSpeedOffForCam: 0
+  _carRenderer: {fileID: 1486413240867738603}
+  _robotRenderer: {fileID: 0}
+  _componentRenderer: {fileID: 5502106036077830892}
   isLockTransform: 0
   _componentFormMovement: {fileID: 6583438811569906168}
 --- !u!114 &6065807456793869565
@@ -336,7 +339,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1049571438225420583, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2489731230
+      value: 3897306403
       objectReference: {fileID: 0}
     - target: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: m_LocalPosition.x
@@ -380,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2968725808325582160, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2018744147
+      value: 603299969
       objectReference: {fileID: 0}
     - target: {fileID: 4919145760332672327, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
       propertyPath: m_Name
@@ -453,6 +456,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2946990286764086495, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
   m_PrefabInstance: {fileID: 1547280360394203762}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &5502106036077830892 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6422804887109599390, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
+  m_PrefabInstance: {fileID: 1547280360394203762}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5853934371568045877 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4919145760332672327, guid: f68fa4c3bc8485348a7843d749177499, type: 3}
@@ -495,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 421125132
+      value: 1900926991
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -571,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 938897612
+      value: 923722747
       objectReference: {fileID: 0}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -738,7 +746,7 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3302898849
+      value: 3998061328
       objectReference: {fileID: 0}
     - target: {fileID: 5644218411385635002, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -761,6 +769,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+--- !u!23 &1486413240867738603 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7757596029397420263, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
+  m_PrefabInstance: {fileID: 9153646005012208396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3019524537589292041 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6264446723389179653, guid: 33fca6c298b539b47a25f3f198b3158c, type: 3}
