@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2060485857
+  GlobalObjectIdHash: 3250306090
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -116,7 +116,7 @@ MonoBehaviour:
   _componentCamera: {fileID: 3892791135529973446}
   _carNetworkObject: {fileID: 5548509229694028886}
   _robotNetworkObject: {fileID: 345669323039649557}
-  _componentNetworkObject: {fileID: 8126048340682314727}
+  _componentNetworkObject: {fileID: 6913436870294603427}
   _componentConnector: {fileID: 4561946307789280314}
   _upperArm_Root_R_end: {fileID: 3009952111850489936}
   _hand_L_end: {fileID: 3892780085457835258}
@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1936382718
+      value: 1168719035
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: fa10265d22e2c3a4d82f8a3962b2b42c, type: 3}
       propertyPath: _playerVehicle
@@ -492,7 +492,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2268016703
+      value: 3659640385
       objectReference: {fileID: 0}
     - target: {fileID: 2744812768181547937, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: _playerVehicle
@@ -516,11 +516,11 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5766429628836825886, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5766429628836825886, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5766429628836825886, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: m_LocalPosition.z
@@ -572,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 9067629286892512497, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1248559537
+      value: 1341327838
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -617,6 +617,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4799140881284690123}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!114 &6913436870294603427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2119100855897093736, guid: b1b55656c89ba854aa1c6c83132d1b34, type: 3}
+  m_PrefabInstance: {fileID: 4799140881284690123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552019240242694487}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
@@ -725,7 +736,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1842952323
+      value: 4097612226
       objectReference: {fileID: 0}
     - target: {fileID: 5871695677437734310, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: _playerVehicle
@@ -737,11 +748,11 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 6998640827465897096, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 106829912
+      value: 964543503
       objectReference: {fileID: 0}
     - target: {fileID: 9142513281599162402, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 494554726
+      value: 2237971914
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

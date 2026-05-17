@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1587709887026745886}
   - component: {fileID: 2316497267382856169}
   - component: {fileID: 4046232932402690559}
+  - component: {fileID: 3149055761182176992}
   m_Layer: 7
   m_Name: LeftLeg
   m_TagString: Player
@@ -31,11 +32,11 @@ Transform:
   m_GameObject: {fileID: 4736726528890599456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.21, y: 6.86, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2130806112224356982}
+  - {fileID: 1280022820064702296}
   - {fileID: 3715202888078473724}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -189,6 +190,54 @@ CapsuleCollider:
   m_Height: 2.148759
   m_Direction: 1
   m_Center: {x: -0.66598976, y: 2.0938704, z: 0}
+--- !u!114 &3149055761182176992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736726528890599456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45d47ba4f668514fbe745ea84cd99d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollComponentController
+  ShowTopMostFoldoutHeaderGroup: 1
+  impulseObject: {fileID: 2632966388891836535}
+  impulseAnimTarget: {fileID: 5952952539495949931}
+  DragObject: {fileID: 2130806112224356982}
+--- !u!1 &5353960878250633357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1280022820064702296}
+  m_Layer: 7
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1280022820064702296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5353960878250633357}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2130806112224356982}
+  m_Father: {fileID: 1796745094719986530}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5498967766178980442
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,12 +263,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5498967766178980442}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: -0.5, y: 3.5, z: -3}
+  m_LocalRotation: {x: 0.13052616, y: -0, z: -6.706492e-16, w: 0.9914449}
+  m_LocalPosition: {x: -0.5, y: 4.03, z: -2.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1796745094719986530}
+  m_Father: {fileID: 1280022820064702296}
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!114 &5968214894663375585
 MonoBehaviour:
@@ -412,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3403701246
+  GlobalObjectIdHash: 245923643
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 2
@@ -447,11 +496,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.6666667
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.68333334
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a50b454d5ba3fc447955e7ddb40fb71d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1103,7 +1152,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!4 &8915528679773102132 stripped
