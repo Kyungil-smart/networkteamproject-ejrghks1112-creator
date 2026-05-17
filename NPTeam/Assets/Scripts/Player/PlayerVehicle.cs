@@ -178,6 +178,12 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return ;
 
+        if (_currentFormIndex == 1)
+        {
+            RobotGrab grab = GetComponentInChildren<RobotGrab>();
+            if (grab != null) grab.GrabCancel();
+        }
+        
         //연동준이 추가
         _rigidbody.constraints = RigidbodyConstraints.None;
 
@@ -212,6 +218,12 @@ public class PlayerVehicle : NetworkBehaviour
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return;
+        
+        if (_currentFormIndex == 1)
+        {
+            RobotGrab grab = GetComponentInChildren<RobotGrab>();
+            if (grab != null) grab.GrabCancel();
+        }
 
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 

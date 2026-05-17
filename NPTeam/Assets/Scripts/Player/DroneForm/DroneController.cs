@@ -323,8 +323,23 @@ public class DroneController : NetworkBehaviour
         ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
         _currentPossessionRenderers = null;
         _playerVehicle.ForDroneOffControlMaterial();
+        
+        Vector3 escapePos = transform.position;
+        if (PlayerState.Instance.CurrentPossessed != null)
+        {
+            Renderer[] vehicleRenderers = PlayerState.Instance.CurrentPossessed.GetComponentsInChildren<Renderer>();
+            float maxY = PlayerState.Instance.CurrentPossessed.transform.position.y;
+            
+            foreach (Renderer renderer in vehicleRenderers)
+            {
+                if (renderer.bounds.max.y > maxY) maxY = renderer.bounds.max.y;
+            }
+            
+            escapePos = new Vector3(PlayerState.Instance.CurrentPossessed.transform.position.x, maxY + 3f, PlayerState.Instance.CurrentPossessed.transform.position.z);
+        }
+        
         // 빙의 취소후 부모 오브젝트에서 독립
-        ReleaseParentServerRpc();
+        ReleaseParentServerRpc(escapePos);
         _playerVehicle.DisableCurrentCamera();
         _playerVehicle.PossessionFreezeRotationLock();
 
@@ -398,11 +413,22 @@ public class DroneController : NetworkBehaviour
     }
 
     [ServerRpc]
-    private void ReleaseParentServerRpc()
+    private void ReleaseParentServerRpc(Vector3 escapePos)
     {
         GetComponent<NetworkObject>().TryRemoveParent(true);
         _DronCollider1.enabled = true;
         _DronCollider2.enabled = true;
+        
+        transform.position = escapePos;
+        transform.rotation = Quaternion.identity;
+
+        EscapePosClientRpc(escapePos);
+    }
+
+    [ClientRpc]
+    private void EscapePosClientRpc(Vector3 escapePos)
+    {
+        transform.position = escapePos;
     }
     #endregion
 
