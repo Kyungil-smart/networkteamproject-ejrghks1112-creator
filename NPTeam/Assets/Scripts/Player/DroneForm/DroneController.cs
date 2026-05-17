@@ -36,6 +36,9 @@ public class DroneController : NetworkBehaviour
     [SerializeField] private LayerMask _targetLayer;
     [Header("빙의시 카메라 우선도를 위한 자신의 카메라 등록")]
     [SerializeField] private CinemachineCamera _cinemachineCamera;
+    [Header("빙의시 On/Off 할 콜라이더 등록")]
+    [SerializeField] private Collider _DronCollider1;
+    [SerializeField] private Collider _DronCollider2;
 
     // 빙의시 색상 적용을 위한 변수
     private PlayerColorChanger _playerColorChanger;
@@ -232,6 +235,8 @@ public class DroneController : NetworkBehaviour
             isDroneMoveSFX.Value = false;
             isDronePossessionSFX.Value = true;
 
+          
+
             // 대상의 네트워크 오브젝트 저장
             NetworkObject networkObject = hit.transform.GetComponent<NetworkObject>();
             if (networkObject == null) return;
@@ -321,6 +326,8 @@ public class DroneController : NetworkBehaviour
         // 빙의 취소후 부모 오브젝트에서 독립
         ReleaseParentServerRpc();
         _playerVehicle.DisableCurrentCamera();
+        _playerVehicle.PossessionFreezeRotationLock();
+
         if (IsOwner) InGameUI.Instance.ChangeForm(0);
 
         _playerVehicle = null;
@@ -385,12 +392,17 @@ public class DroneController : NetworkBehaviour
 
         // 드론 렌더러 끔
         DronrenderersOffClientRpc();
+        // 콜라이더 끔
+        _DronCollider1.enabled = false;
+        _DronCollider2.enabled = false;
     }
 
     [ServerRpc]
     private void ReleaseParentServerRpc()
     {
         GetComponent<NetworkObject>().TryRemoveParent(true);
+        _DronCollider1.enabled = true;
+        _DronCollider2.enabled = true;
     }
     #endregion
 

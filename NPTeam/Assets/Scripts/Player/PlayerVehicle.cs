@@ -260,9 +260,15 @@ public class PlayerVehicle : NetworkBehaviour
     // 빙의시 키네틱 관련
     public void PossessionFreezeRotation()
     {
+        if (_currentFormIndex != 0) return;
         _rigidbody.constraints = RigidbodyConstraints.None;
     }
-
+    // 빙의 해제용
+    public void PossessionFreezeRotationLock()
+    {
+        if (_currentFormIndex != 0) return;
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+    }
     #endregion
 
     #region 폼에 따른 카메라 우선도
