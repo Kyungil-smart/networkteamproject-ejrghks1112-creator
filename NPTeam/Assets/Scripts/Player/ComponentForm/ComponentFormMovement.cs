@@ -146,7 +146,7 @@ public class ComponentFormMovement : NetworkBehaviour
             _flyDown = 0;
             _rigidbody.linearVelocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
-            _playerVehicleCS.LockTransformAgain();
+            isComponentMoveSFX.Value = false;
             return;
         }
         if (_stun.IsStunned) return;
