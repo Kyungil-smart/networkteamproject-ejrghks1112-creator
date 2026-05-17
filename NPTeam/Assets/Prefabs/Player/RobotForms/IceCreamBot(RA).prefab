@@ -242,7 +242,7 @@ MonoBehaviour:
   _robotCameraLook: {fileID: 5221148021317211286}
   _canGrabLayer:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 641
   _myNetworkObject: {fileID: 6998640827465897096}
   _grabCollider: {fileID: 7061008496568826027}
   _playerVehicle: {fileID: 0}
@@ -928,7 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 350951283
+  GlobalObjectIdHash: 935669767
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 2

@@ -942,11 +942,16 @@ MonoBehaviour:
   _robotCameraLook: {fileID: 5221148021317211286}
   _canGrabLayer:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 641
   _myNetworkObject: {fileID: 4079098750944171030}
   _grabCollider: {fileID: 1442187682302573354}
   _playerVehicle: {fileID: 0}
   _playerVehicleCS: {fileID: 0}
+  isGrabSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
 --- !u!114 &4079098750944171030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,6 +1188,11 @@ MonoBehaviour:
       MinSecondsBetweenUpdates: 0
       MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
+  isRobotJumpSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
 --- !u!114 &3165461748992073195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,6 +1342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RobotSound
   _robotWalkSoundAudioSource: {fileID: 0}
   _robotFormMovement: {fileID: 4389730102333417263}
+  _robotGrab: {fileID: 0}
+  _robotZab: {fileID: 0}
 --- !u!1 &5159723836595285610
 GameObject:
   m_ObjectHideFlags: 0
