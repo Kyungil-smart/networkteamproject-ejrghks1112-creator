@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3570418626455713494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2556817464320145868}
+  m_Layer: 7
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2556817464320145868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3570418626455713494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1677496233660818574}
+  m_Father: {fileID: 2946990286764086495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4919145760332672327
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +43,7 @@ GameObject:
   - component: {fileID: 2946990286764086495}
   - component: {fileID: 2968725808325582160}
   - component: {fileID: 5630654011978335114}
+  - component: {fileID: 3848621607118572686}
   - component: {fileID: 6877700353912116208}
   - component: {fileID: 8056897230554003959}
   - component: {fileID: 2746184387622195891}
@@ -31,11 +64,11 @@ Transform:
   m_GameObject: {fileID: 4919145760332672327}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.21, y: 6.86, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1677496233660818574}
+  - {fileID: 2556817464320145868}
   - {fileID: 739406083019046196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,14 +84,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 592183722
+  GlobalObjectIdHash: 1840384413
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
+  SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
@@ -89,6 +122,23 @@ MonoBehaviour:
       MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
   _componentAnimator: {fileID: 6675118869035689806}
+--- !u!114 &3848621607118572686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919145760332672327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51fad74f666ef2c4693e2f2b9472a29e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ComponentCameraLook
+  ShowTopMostFoldoutHeaderGroup: 1
+  _cameraSpeed: 0.2
+  _componentPivot: {fileID: 2946990286764086495}
+  _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
 --- !u!114 &6877700353912116208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +214,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   impulseObject: {fileID: 5453343983229438351}
   impulseAnimTarget: {fileID: 3287825370358595253}
-  DragObject: {fileID: 0}
+  DragObject: {fileID: 1677496233660818574}
 --- !u!136 &-6804158130476050700
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -214,11 +264,11 @@ Transform:
   m_GameObject: {fileID: 5816248445789161749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.043619405, y: -0, z: -0, w: 0.9990483}
-  m_LocalPosition: {x: 0.51, y: 2.39, z: -0.7}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_LocalPosition: {x: 0.51, y: 2.83, z: -2.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2946990286764086495}
+  m_Father: {fileID: 2556817464320145868}
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!114 &2597992154845544300
 MonoBehaviour:
@@ -411,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3139762113
+  GlobalObjectIdHash: 1526844361
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -730,7 +780,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!4 &4789501944448034044 stripped
@@ -803,7 +853,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -979,7 +1029,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

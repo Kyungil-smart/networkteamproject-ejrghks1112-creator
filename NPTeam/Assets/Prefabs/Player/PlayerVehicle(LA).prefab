@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1416044839
+  GlobalObjectIdHash: 3625182262
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -355,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 24658199
+      value: 1908309888
       objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
@@ -439,7 +439,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1501050693
+      value: 3386244452
       objectReference: {fileID: 0}
     - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _robotGrab
@@ -598,7 +598,7 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: f9bf487699fd2524bb67008b684db934, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3063293455
+      value: 2374009428
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: f9bf487699fd2524bb67008b684db934, type: 3}
       propertyPath: _playerVehicle
@@ -671,7 +671,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2119100855897093736, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2027956303
+      value: 1609546457
       objectReference: {fileID: 0}
     - target: {fileID: 3762503520255719836, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_Name
@@ -687,11 +687,11 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5766429628836825886, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -751,7 +751,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 8345340744786642672, guid: 18fbe99823868754982b7c16d5cc2fad, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3185580789
+      value: 1125575846
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

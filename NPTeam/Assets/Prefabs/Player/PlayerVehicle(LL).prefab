@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3746008743
+  GlobalObjectIdHash: 1432431043
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c82580714267334bb6e351b7c0f40af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrushObstacle
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 3285019482104072620}
   CrushPower: 100
 --- !u!114 &393697990130382609
 MonoBehaviour:
@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 3285019482104072620}
     - target: {fileID: 5644218411385635002, guid: 8126940de88592645892d0757aea14c1, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1144988837
+      value: 431241092
       objectReference: {fileID: 0}
     - target: {fileID: 8523679854449922528, guid: 8126940de88592645892d0757aea14c1, type: 3}
       propertyPath: _playerVehicle
@@ -520,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1098101953
+      value: 3445863328
       objectReference: {fileID: 0}
     - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _rigidbody
@@ -600,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 985742301
+      value: 193096849
       objectReference: {fileID: 0}
     - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
       propertyPath: _robotGrab
@@ -695,11 +695,11 @@ PrefabInstance:
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1796745094719986530, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -755,11 +755,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4788713786796666311, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4181086357
+      value: 628197821
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309097567727510406, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309097567727510406, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8569910571265416763, guid: ed57ca22a58187e4d8aa1b05a065cd4c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2752957937
+      value: 3403701246
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
