@@ -155,6 +155,27 @@ MonoBehaviour:
     m_Key: UI_Settings_Credit
     m_Metadata:
       m_Items: []
+  - m_Id: 10103012
+    m_Key: UI_Settings_Sound_Total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104001
+    m_Key: Battle_01
+    m_Metadata:
+      m_Items:
+      - rid: 3410533730318811228
+  - m_Id: 10104002
+    m_Key: Battle_02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104003
+    m_Key: Battle_03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104004
+    m_Key: Battle_04
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -166,6 +187,10 @@ MonoBehaviour:
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_CommentText: "\uB85C\uBE44 \uC52C - \uBA54\uC2DC\uC9C0"
+    - rid: 3410533730318811228
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "\uC804\uD22C \uC52C"
     - rid: 3634113048433656049
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
