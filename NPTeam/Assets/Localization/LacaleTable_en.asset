@@ -154,6 +154,28 @@ MonoBehaviour:
     m_Localized: Failed to join room.
     m_Metadata:
       m_Items: []
+  - m_Id: 10103012
+    m_Localized: Master Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104001
+    m_Localized: Left Click
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104002
+    m_Localized: Right Click
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104003
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104004
+    m_Localized: ' 1 W,A,S,D : Move\n 2 Num1,2,3 : Change Form\n 3 Tab : Adjust Voice
+      Chat Mic\n 4 V : Enable/Disable Voice Chat\n 5 Left Click : Grab\n 6 Right
+      Click : Attack\n 7 ESC : Settings'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

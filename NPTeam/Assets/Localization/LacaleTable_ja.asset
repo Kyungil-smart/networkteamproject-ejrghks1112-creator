@@ -154,6 +154,30 @@ MonoBehaviour:
     m_Localized: "\u30EB\u30FC\u30E0\u53C2\u52A0\u5931\u6557"
     m_Metadata:
       m_Items: []
+  - m_Id: 10103012
+    m_Localized: "\u30DE\u30B9\u30BF\u30FC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104001
+    m_Localized: "\u5DE6\u30AF\u30EA\u30C3\u30AF"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104002
+    m_Localized: "\u53F3\u30AF\u30EA\u30C3\u30AF"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104003
+    m_Localized: "\u64CD\u4F5C\u65B9\u6CD5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104004
+    m_Localized: " 1 W,A,S,D : \u79FB\u52D5\\n 2 Num1,2,3 : \u30D5\u30A9\u30FC\u30E0\u5909\u66F4\\n
+      3 Tab : \u30DC\u30A4\u30B9\u30C1\u30E3\u30C3\u30C8\u30DE\u30A4\u30AF\u8ABF\u6574\\n
+      4 V : \u30DC\u30A4\u30B9\u30C1\u30E3\u30C3\u30C8\u6709\u52B9/\u7121\u52B9\\n
+      5 \u5DE6\u30AF\u30EA\u30C3\u30AF : \u63B4\u3080\\n 6 \u53F3\u30AF\u30EA\u30C3\u30AF
+      : \u653B\u6483\\n 7 ESC : \u8A2D\u5B9A\u753B\u9762"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
