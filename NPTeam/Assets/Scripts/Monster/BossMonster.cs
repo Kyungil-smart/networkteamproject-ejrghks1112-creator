@@ -52,6 +52,8 @@ public class BossMonster : NetworkBehaviour, IDamagable
         if (!IsServer) return;
         
         if (_target == null) SetTargetPlayer();
+
+        if (_target == null) return;
         
         float distance = Vector3.Distance(transform.position, _target.transform.position);
 
@@ -110,16 +112,11 @@ public class BossMonster : NetworkBehaviour, IDamagable
     
     private void SetTargetPlayer()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, detectRange);
+        if (GameManager.Instance == null) return;
 
-        foreach (Collider target in targets)
+        if (GameManager.Instance.LeaderVehicle != null)
         {
-            var player = target.GetComponent<AssembleController>();
-            if (player != null)
-            {
-                _target = player;
-                break;
-            }
+            _target = GameManager.Instance.LeaderVehicle;
         }
     }
     
