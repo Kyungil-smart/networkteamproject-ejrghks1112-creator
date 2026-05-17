@@ -137,8 +137,8 @@ public class Mine : NetworkBehaviour
 
         // 실제 폭발이 일어나는 곳 
         EffectManager.Instance.PlayEffect(
-            EffectEnum.ExplosionYellow, transform.position, Quaternion.identity);
-        mineSound.PlayMineSfx(mineSound.MineExplosionSfx);
+            EffectEnum.BombYellow, transform.position, Quaternion.identity);
+        mineSound.PlayClipAtPointMineSfx(mineSound.MineExplosionSfx, transform.position);
         rb.AddExplosionForce(explosionForce, explosionPosition, explosionRadius);
     }
     

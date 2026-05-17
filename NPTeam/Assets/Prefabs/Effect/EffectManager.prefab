@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df2d45014c884643a6b2f473d53784d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EffectManager
-  explosionEffectYellow: {fileID: 3784945155588612436, guid: b33d991b542eaae4bb87332955c73ce0, type: 3}
-  explosionEffectRed: {fileID: 5033180708955247871, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
   oneShotEffects:
   - {fileID: 3784945155588612436, guid: b33d991b542eaae4bb87332955c73ce0, type: 3}
   - {fileID: 5033180708955247871, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
+  - {fileID: 8367907410985086596, guid: 0b493b97a8e419d46903c1b023460740, type: 3}
+  - {fileID: 4062496106243499295, guid: 304da8401b8ea6849b9f5f96f0f6eb57, type: 3}

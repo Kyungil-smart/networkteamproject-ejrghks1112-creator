@@ -19,8 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 10101001
-    m_Localized: "\uC288\uD37C \uC6B0\uC8FC \uC6A9\uC0AC \uD2B9\uACF5\uB300 \uBCC0\uC2E0
-      \uB85C\uBD07"
+    m_Localized: "\uC288\uD37C \uB85C\uBD07 \uD569\uCCB4"
     m_Metadata:
       m_Items: []
   - m_Id: 10101002
@@ -128,16 +127,55 @@ MonoBehaviour:
     m_Localized: "\uD06C\uB808\uB527"
     m_Metadata:
       m_Items: []
-  - m_Id: 5302669458661376
-    m_Localized: "\uB9C8\uC2A4\uD130 \uBCFC\uB968"
+  - m_Id: 10102101
+    m_Localized: "\uB85C\uADF8\uC778 \uC0C1\uD0DC\uAC00 \uC544\uB2D9\uB2C8\uB2E4."
     m_Metadata:
       m_Items: []
-  - m_Id: 5303159525335040
-    m_Localized: "SE \uBCFC\uB968"
+  - m_Id: 10102102
+    m_Localized: "\uBC29 \uBAA9\uB85D \uC870\uD68C \uC911"
     m_Metadata:
       m_Items: []
-  - m_Id: 5303571364044800
-    m_Localized: "BGM \uBCFC\uB968"
+  - m_Id: 10102103
+    m_Localized: "\uBC29 {0}\uAC1C \uC870\uD68C\uB428"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102104
+    m_Localized: "\uBE60\uB978 \uCC38\uC5EC \uC911"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102105
+    m_Localized: "\uCC38\uC5EC\uD560 \uBC29\uC744 \uCC3E\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102106
+    m_Localized: "{0} \uBC29 \uCC38\uC5EC \uC911"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10102107
+    m_Localized: "\uBC29 \uCC38\uC5EC \uC2E4\uD328"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10103012
+    m_Localized: "\uC804\uCCB4 \uC74C\uB7C9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104001
+    m_Localized: "\uC88C \uD074\uB9AD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104002
+    m_Localized: "\uC6B0 \uD074\uB9AD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104003
+    m_Localized: "\uC870\uC791 \uBC29\uBC95"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10104004
+    m_Localized: " 1 W,A,S,D : \uC774\uB3D9\\n 2 Num1,2,3 : \uD3FC \uBCC0\uACBD\\n
+      3 Tap : \uC74C\uC131\uB300\uD654 \uB9C8\uC774\uD06C \uC870\uC808\\n 4 V : \uC74C\uC131
+      \uB300\uD654 \uD65C\uC131\uD654/\uBE44\uD65C\uC131\uD654\\n 5 \uC88C\uD074\uB9AD
+      : \uC7A1\uAE30\\n 6 \uC6B0\uD074\uB9AD : \uACF5\uACA9\\n 7 ESC : \uC124\uC815\uCC3D"
     m_Metadata:
       m_Items: []
   references:

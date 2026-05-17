@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Multiplayer;
-using TMPro;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.UI;
 
 /// <summary>
 /// 로비 씬의 세션 목록 UI + 방 생성/빠른참여/새로고침 컨트롤
@@ -24,6 +25,18 @@ public class LobbyListUI : MonoBehaviour
     [SerializeField] private TMP_Text _emptyListText;
     [SerializeField] private CreateRoomDialogUI _createRoomDialog;
     [SerializeField] private JoinByCodeDialogUI _joinByCodeDialog;
+
+    [Header("로컬라이즈 키")]
+    [SerializeField] private LocalizedString _noLoginMsg;
+    [SerializeField] private LocalizedString _roomListMsg;
+    [SerializeField] private LocalizedString _roomFindMsg;
+    [SerializeField] private LocalizedString _RandomJoinMsg;
+    [SerializeField] private LocalizedString _cannotFindRoomMsg;
+    [SerializeField] private LocalizedString _roomJoinMsg;
+    [SerializeField] private LocalizedString _roomFailedMsg;
+
+    [Header("조인 코드 입력")]
+    [SerializeField] private TMP_InputField _joinCodeInput;
 
     private readonly List<LobbyEntryUI> _spawnedEntries = new List<LobbyEntryUI>();
     private bool _isBusy;
@@ -92,18 +105,18 @@ public class LobbyListUI : MonoBehaviour
         if (_isBusy) return;
         if (!AuthenticationService.Instance.IsSignedIn)
         {
-            SetStatusMessege("로그인 상태가 아닙니다.");
+            SetStatusMessege(_noLoginMsg);
             return;
         }
 
         SetBusy(true);
-        SetStatusMessege("방 목록 조회 중...");
+        SetStatusMessege(_roomListMsg);
         try
         {
             IList<ISessionInfo> sessions = await LobbyManager.Instance.QuerySessionsAsync();
             PopulateEntries(sessions);
             RefreshEmptyLabel(sessions.Count);
-            SetStatusMessege($"방 {sessions.Count}개 조회됨");
+            SetStatusMessege(_roomFindMsg, sessions.Count);
         }
         finally
         {
@@ -146,17 +159,67 @@ public class LobbyListUI : MonoBehaviour
     {
         if (_isBusy) return;
         _joinByCodeDialog.Open();
+
+
+
+        /*
+        if (_isBusy) return;
+        // _joinByCodeDialog.Open();
+
+
+        // 코드 입력 후 이상한 값 제거
+        string code = _joinCodeInput.text.Trim();
+        code = code.Replace("\u200B", ""); // Zero-width space 제거
+        code = code.ToUpper();             // 무조건 대문자로 치환
+
+
+        if (string.IsNullOrEmpty(code))
+        {
+            SetStatusMessege(_roomJoinMsg);
+            return;
+        }
+
+        SetBusy(true);  // 중복 클릭 방지 UI 잠금
+
+        SetStatusMessege(_roomJoinMsg, code);
+
+        try
+        {
+            // 로비 매니저를 통한 접속 시도
+            bool success = await LobbyManager.Instance.JoinSessionByCodeAsync(code);
+
+            if (!success)   // 접속 실패 시 에러 메시지 출력
+            {
+                
+                SetStatusMessege(_roomFailedMsg);
+            }
+            else  // 접속 성공 시 입력 필드 초기화
+            {
+                _joinCodeInput.text = string.Empty;
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[LobbyListUI] : 조인 코드 접속 중 예외 발생 {e.Message}");
+            SetStatusMessege(_cannotFindRoomMsg);
+        }
+        finally // 작업이 끝나면 UI 잠금 해제
+        {
+            
+            SetBusy(false);
+        }
+        */
     }
 
     private async void OnQuickJoinClicked()
     {
         if (_isBusy) return;
         SetBusy(true);
-        SetStatusMessege("빠른 참여 중...");
+        SetStatusMessege(_RandomJoinMsg);
         try
         {
             bool success = await LobbyManager.Instance.QuickJoinAsync();
-            if (!success) SetStatusMessege("참여할 방을 찾지 못했습니다.");
+            if (!success) SetStatusMessege(_cannotFindRoomMsg);
         }
         finally
         {
@@ -168,11 +231,11 @@ public class LobbyListUI : MonoBehaviour
     {
         if (_isBusy) return;
         SetBusy(true);
-        SetStatusMessege($"'{sessionInfo.Name}' 참여 중...");
+        SetStatusMessege(_roomJoinMsg, sessionInfo.Name);
         try
         {
             bool success = await LobbyManager.Instance.JoinSessionByIdAsync(sessionInfo.Id);
-            if (!success) SetStatusMessege("방 참여 실패");
+            if (!success) SetStatusMessege(_roomFailedMsg);
         }
         finally
         {
@@ -214,4 +277,13 @@ public class LobbyListUI : MonoBehaviour
     {
         _statusText.text = message;
     }
+
+    // 로컬라이즈 스트링 사용하는 오버로딩
+    private void SetStatusMessege(LocalizedString locString, params object[] args)
+    {
+        if (locString == null || locString.IsEmpty) return;
+
+        _statusText.text = locString.GetLocalizedString(args);
+    }
+
 }

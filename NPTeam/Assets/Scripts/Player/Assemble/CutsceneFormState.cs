@@ -11,4 +11,9 @@ public class CutsceneFormState : BaseAssembleState
     {
         _controller.GetMovement.PlayTransformAnim();
     }
+
+    public override void Exit()
+    {
+        
+    }
 }

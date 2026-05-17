@@ -36,6 +36,9 @@ public class DroneController : NetworkBehaviour
     [SerializeField] private LayerMask _targetLayer;
     [Header("빙의시 카메라 우선도를 위한 자신의 카메라 등록")]
     [SerializeField] private CinemachineCamera _cinemachineCamera;
+    [Header("빙의시 On/Off 할 콜라이더 등록")]
+    [SerializeField] private Collider _DronCollider1;
+    [SerializeField] private Collider _DronCollider2;
 
     // 빙의시 색상 적용을 위한 변수
     private PlayerColorChanger _playerColorChanger;
@@ -45,6 +48,19 @@ public class DroneController : NetworkBehaviour
     private PlayerVehicle _playerVehicle;
     [Header("빙의시 렌더러 Off를 위한 파츠 등록")]
     [SerializeField] private Renderer[] _dronRenderers;
+
+    // SFX 호출 판정
+    public NetworkVariable<bool> isDroneMoveSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isDronePossessionSFX = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
+    // 빙의시 빙의 해제 방지용
+    private bool _possessionCheck = false;
 
     private void Awake() => Init();
 
@@ -76,6 +92,10 @@ public class DroneController : NetworkBehaviour
         if (!IsOwner) return;
         // 빙의를 위한 레이캐스트 셋팅
         _possessionRay = new Ray(_possessionRayPivot.position, _possessionRayPivot.forward);
+
+        // 남이 빙의 하면 빙의 해제
+        if (_playerVehicle == null) return;
+        if (_playerVehicle.OwnerClientId != NetworkManager.Singleton.LocalClientId && PlayerState.Instance.IsPossession == true && _possessionCheck == true) DroneControllerOn();
     }
 
     private void FixedUpdate()
@@ -177,6 +197,17 @@ public class DroneController : NetworkBehaviour
 
         // 드론 이동
         _rigidbody.linearVelocity = new Vector3(move.x, _verticalInput * _playerVertical, move.z);
+
+        bool isMoving = _moveInput != Vector2.zero || Mathf.Abs(_verticalInput) > 0.01f;
+
+        if (isMoving)
+        {
+            isDroneMoveSFX.Value = true;
+        }
+        else
+        {
+            isDroneMoveSFX.Value = false;
+        }
     }
     #endregion
 
@@ -186,8 +217,8 @@ public class DroneController : NetworkBehaviour
         if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == true) return;
 
-        
         TryPossession();
+
     }
     // 빙의 함수
     private void TryPossession()
@@ -201,6 +232,10 @@ public class DroneController : NetworkBehaviour
             _rigidbody.linearVelocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.isKinematic = true;
+            isDroneMoveSFX.Value = false;
+            isDronePossessionSFX.Value = true;
+
+          
 
             // 대상의 네트워크 오브젝트 저장
             NetworkObject networkObject = hit.transform.GetComponent<NetworkObject>();
@@ -240,8 +275,10 @@ public class DroneController : NetworkBehaviour
                 vehicle.OnPossessedCameraSync();
                 vehicle.DroneChangeOwnership();
                 vehicle._formColorChanger.SetColorServerRpc(_playerColorChanger.CurrentColor);
+                vehicle.PossessionFreezeRotation();
                 _playerVehicle = vehicle;
                 if (IsOwner) InGameUI.Instance.ChangeForm(vehicle.CurrentFormIndex + 1);
+                StartCoroutine(EPossessionCheck());
             }
         }
     }
@@ -259,7 +296,6 @@ public class DroneController : NetworkBehaviour
     {
         for (int i = 0; i < _dronRenderers.Length; i++)
         {
-            Debug.Log(_dronRenderers[i].name);
             _dronRenderers[i].enabled = true;
         }
     }
@@ -285,16 +321,36 @@ public class DroneController : NetworkBehaviour
         DronrenderersOnServerRpc();
         // 빙의 취소후 원래 색상으로 복귀
         ReleasePossessionColorServerRpc(networkObject.NetworkObjectId);
-        // 플레이어 색상 복구
         _currentPossessionRenderers = null;
-        // 빙의 취소후 원래 색상으로 복귀
-        ReleaseParentServerRpc();
+        _playerVehicle.ForDroneOffControlMaterial();
+        
+        Vector3 escapePos = transform.position;
+        if (PlayerState.Instance.CurrentPossessed != null)
+        {
+            Renderer[] vehicleRenderers = PlayerState.Instance.CurrentPossessed.GetComponentsInChildren<Renderer>();
+            float maxY = PlayerState.Instance.CurrentPossessed.transform.position.y;
+            
+            foreach (Renderer renderer in vehicleRenderers)
+            {
+                if (renderer.bounds.max.y > maxY) maxY = renderer.bounds.max.y;
+            }
+            
+            escapePos = new Vector3(PlayerState.Instance.CurrentPossessed.transform.position.x, maxY + 3f, PlayerState.Instance.CurrentPossessed.transform.position.z);
+        }
+        
+        // 빙의 취소후 부모 오브젝트에서 독립
+        ReleaseParentServerRpc(escapePos);
         _playerVehicle.DisableCurrentCamera();
+        _playerVehicle.PossessionFreezeRotationLock();
+
         if (IsOwner) InGameUI.Instance.ChangeForm(0);
+
         _playerVehicle = null;
         PlayerState.Instance.CurrentPossessed = null;
         _rigidbody.isKinematic = false;
         _cinemachineCamera.Priority = 3;
+        isDronePossessionSFX.Value = false;
+        _possessionCheck = false;
     }
     #endregion
 
@@ -351,12 +407,38 @@ public class DroneController : NetworkBehaviour
 
         // 드론 렌더러 끔
         DronrenderersOffClientRpc();
+        // 콜라이더 끔
+        _DronCollider1.enabled = false;
+        _DronCollider2.enabled = false;
     }
 
     [ServerRpc]
-    private void ReleaseParentServerRpc()
+    private void ReleaseParentServerRpc(Vector3 escapePos)
     {
         GetComponent<NetworkObject>().TryRemoveParent(true);
+        _DronCollider1.enabled = true;
+        _DronCollider2.enabled = true;
+        
+        transform.position = escapePos;
+        transform.rotation = Quaternion.identity;
+
+        EscapePosClientRpc(escapePos);
+    }
+
+    [ClientRpc]
+    private void EscapePosClientRpc(Vector3 escapePos)
+    {
+        transform.position = escapePos;
+    }
+    #endregion
+
+    #region 빙의시 _possessionCheck = true 코루틴 
+    private IEnumerator EPossessionCheck()
+    {
+        if (!IsOwner) yield break;
+        if (_possessionCheck == true) yield break;
+        yield return new WaitForSeconds(0.5f);
+        _possessionCheck = true;
     }
     #endregion
 }

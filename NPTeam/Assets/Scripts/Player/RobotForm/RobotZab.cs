@@ -15,6 +15,13 @@ public class RobotZab : NetworkBehaviour
 
     private InputAction _playerZab;
 
+    public NetworkVariable<bool> isZabSFX = new NetworkVariable<bool>(
+     default,
+     NetworkVariableReadPermission.Everyone,
+     NetworkVariableWritePermission.Owner);
+
+    private bool _isHit = false;
+
     private void Awake() => Init();
 
     private void OnEnable()
@@ -36,14 +43,17 @@ public class RobotZab : NetworkBehaviour
     {
         if (!IsOwner) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
-        if (_playerVehicleCS.Stamina < 10) return;
+        if (_playerVehicleCS.Stamina < 5) return;
         _animator.SetTrigger("IsZab");
-        _playerVehicleCS.ChangeStamina(-10);
+        _playerVehicleCS.ChangeStamina(-5);
     }
 
     public void ZabAttack()
     {
         Collider[] hits = Physics.OverlapSphere(_zabCollider.transform.position, _zabCollider.radius, _canZabLayer);
+
+        _isHit = false;
+        isZabSFX.Value = false;
 
         foreach (Collider hit in hits)
         {
@@ -52,7 +62,13 @@ public class RobotZab : NetworkBehaviour
             if (monster != null)
             {
                 monster.TakeDamage(100);
+                _isHit = true;
             }
+        }
+        if (_isHit == true)
+        {
+            EffectManager.Instance.PlayEffect(EffectEnum.ExplosionZap, transform.position, transform.rotation);
+            isZabSFX.Value = true;
         }
     }
 

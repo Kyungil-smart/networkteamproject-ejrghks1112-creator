@@ -20,8 +20,9 @@ public class Monster : NetworkBehaviour, IDamagable
     private bool _canSpawnMonster = true;
     private Vector3 _spawnPos;
     private Collider _collider;
-    private Renderer _renderer;
+    private SkinnedMeshRenderer[] _renderers;
     private Rigidbody _rigidbody;
+    private float _lastSpeed = -1f;
 
     public event Action OnAttack;
     public event Action<float> OnMove;
@@ -98,10 +99,21 @@ public class Monster : NetworkBehaviour, IDamagable
 
     private void Update()
     {
-        if (!IsServer) return;
+        if (!IsServer || isDie.Value || !_navmeshAgent.isActiveAndEnabled) return;
+
+        if (!_navmeshAgent.isOnNavMesh || _navmeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        {
+            BackToPath();
+            return;
+        }
         
         float currentSpeed = _navmeshAgent.velocity.magnitude / chaseSpeed;
-        OnMove?.Invoke(currentSpeed);
+        
+        if (Mathf.Abs(currentSpeed - _lastSpeed) > 0.04f)
+        {
+            OnMove?.Invoke(currentSpeed);
+            _lastSpeed = currentSpeed;
+        }
         
         SetTargetPlayer();
         
@@ -142,8 +154,17 @@ public class Monster : NetworkBehaviour, IDamagable
     {
         _navmeshAgent = GetComponent<NavMeshAgent>();
         _collider = GetComponent<Collider>();
-        _renderer = GetComponent<Renderer>();
+        _renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void BackToPath()
+    {
+        if (!_navmeshAgent.isOnNavMesh)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(_spawnPos, out hit, 5f, NavMesh.AllAreas)) _navmeshAgent.Warp(hit.position);
+        }
     }
 
     private void OnHealthChanged(int oldValue, int newValue)
@@ -183,11 +204,10 @@ public class Monster : NetworkBehaviour, IDamagable
         
         var player = _targetPlayer.GetComponent<PlayerVehicle>();
 
-        Debug.Log("플레이어 공격");
         if (player != null)
         {
-            
-            Vector3 direction = (_targetPlayer.position - transform.position).normalized;
+
+            Vector3 direction = transform.forward;
             direction.y = 0;
             player.KnockbackClientRpc((direction + Vector3.up * 0.2f).normalized * knockbackPower);
         }
@@ -228,6 +248,9 @@ public class Monster : NetworkBehaviour, IDamagable
     private IEnumerator RespawnRoution()
     {
         isDie.Value = true;
+
+        _navmeshAgent.isStopped = true;
+        _navmeshAgent.velocity = Vector3.zero;
         
         MonsterSetActiveClientRpc(false);
         
@@ -236,6 +259,9 @@ public class Monster : NetworkBehaviour, IDamagable
         health.Value = maxHealth;
         transform.position = _spawnPos;
         isDie.Value = false;
+
+        _navmeshAgent.isStopped = false;
+        SetWayPoint();
         
         MonsterSetActiveClientRpc(true);
     }
@@ -244,8 +270,11 @@ public class Monster : NetworkBehaviour, IDamagable
     private void MonsterSetActiveClientRpc(bool active)
     {
         _collider.enabled = active;
-        _renderer.enabled = active;
-        _rigidbody.linearVelocity = Vector3.zero;
+        foreach (var _renderer in _renderers)
+        {
+            _renderer.enabled = active;
+        }
+        if (_rigidbody != null) _rigidbody.linearVelocity = Vector3.zero;
     }
 
     private void SetWayPoint()
@@ -296,6 +325,8 @@ public class Monster : NetworkBehaviour, IDamagable
 
     private void Patrol()
     {
+        if (!_navmeshAgent.enabled || !_navmeshAgent.isOnNavMesh) return;
+        
         _navmeshAgent.speed = patrolSpeed;
 
         if (_navmeshAgent.isStopped) _navmeshAgent.isStopped = false;

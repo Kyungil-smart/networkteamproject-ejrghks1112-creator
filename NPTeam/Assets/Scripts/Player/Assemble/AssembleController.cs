@@ -24,9 +24,14 @@ public class AssembleController : NetworkBehaviour
     private AssembleMovement _movement;
     public AssembleMovement GetMovement => _movement;
 
+    private RagdollController _ragdollController;
+
+    public RagdollController GetRagdollController => _ragdollController;
+
     private void Awake()
     {
         _movement = GetComponent<AssembleMovement>();
+        _ragdollController = GetComponent<RagdollController>();
         
         //state 초기화
         _robotFormState = new(this);

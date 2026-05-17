@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+using System.Threading.Tasks;
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 게임 씬에서 NGO NetworkSceneManager의 빌트인 이벤트로 합류 판정 및 게임 시작/종료를 처리.
@@ -24,9 +26,17 @@ public class GameSessionManager : NetworkBehaviour
 
     private bool _gameEnded;
 
+
+    [Header("게임 점수")]
+    [field: SerializeField] public int TimeScore { get; set; } = 0;
+    [field: SerializeField] public int ProtectScore { get; set; } = 0;
+    [field: SerializeField] public int TotalScore { get; set; } = 0;
+
+
     
-    [Header("게임 종료 설정")]
     [SerializeField] private float _returnToLobbyDelay = 6.0f;  // 로비로 되돌아가기 대기 시간
+
+
     
 
     /// <summary>
@@ -65,20 +75,38 @@ public class GameSessionManager : NetworkBehaviour
         base.OnDestroy();
     }
 
-    public override void OnNetworkSpawn()
+    public override async void OnNetworkSpawn()
     {
         BindNetworkVariableEvents();
         if (IsServer)
         {
+            Debug.Log("서버시작");
             InitServerSide();
             BindSceneManagerEvents();
-            _endGameAction.action.Enable();
 
+            await WaitForGameManager();
             // 서버에서만 GameManager의 시간 종료 이벤트 구독 (_returnToLobbyDelay클라이언트는 서버에서 종료 RPC 받는 것으로)
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+                // GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+                GameManager.Instance.OnTimeOverServer += HandleClearOnServer;
+                Debug.Log("구독 성공");
             }
+        }
+
+        // 클라이언트일 시 등록
+        if (IsClient)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
+        }
+    }
+
+    private async Task WaitForGameManager()
+    {
+        while (GameManager.Instance == null)
+        {
+            Debug.Log("Waiting for game manager");
+            await Task.Yield();
         }
     }
 
@@ -92,8 +120,14 @@ public class GameSessionManager : NetworkBehaviour
 
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
+                // GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
+                GameManager.Instance.OnTimeOverServer -= HandleClearOnServer;
             }
+        }
+
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;
         }
     }
 
@@ -140,17 +174,42 @@ public class GameSessionManager : NetworkBehaviour
     }
 
 
+    private void HandleClearOnServer()
+    {
+        // 예외 처리, 이미 게임이 종료되었다면 무시
+        if (_gameEnded) return;
+        _gameEnded = true;
+
+        Debug.Log("[GameSessionManager] : 서버가 클라이언트들에게 게임 종료를 알림");
+
+        // 승리 정보 전달
+        EndGameClientRpc(GameResultType.Victory);
+    }
+
+
 
     // TODO: EndGame 입력 트리거는 임시. 실제 종료 조건(승패/시간 등) 확정 시 교체
-    private void Update()
-    {
-        if (!IsServer || !IsSpawned || !_isGameStartedNet.Value || _gameEnded) return;
-        if (_endGameAction.action.WasPressedThisFrame())
-        {
-            _gameEnded = true;
-            EndGameClientRpc(GameResultType.Defeat);
-        }
-    }
+    // private void Update()
+    // {
+    //     
+    //     if (Keyboard.current.iKey.wasPressedThisFrame)
+    //     {
+    //         Debug.Log($"[Input Test] I Key Pressed! " +
+    //                   $"Server:{IsServer}, " +
+    //                   $"Spawned:{IsSpawned}, " +
+    //                   $"Started:{_isGameStartedNet.Value}, " +
+    //                   $"Ended:{_gameEnded}");
+    //
+    //         if (!IsServer || !IsSpawned || !_isGameStartedNet.Value || _gameEnded)
+    //         {
+    //             Debug.LogWarning("RPC 실행 불가");
+    //             return;
+    //         }
+    //         
+    //         _gameEnded = true;
+    //         EndGameClientRpc(GameResultType.Defeat);
+    //     }
+    // }
 
     private void InitServerSide()
     {
@@ -195,9 +254,11 @@ public class GameSessionManager : NetworkBehaviour
     private void EndGameClientRpc(GameResultType result)
     {
         OnGameEnded?.Invoke(result);
+        Debug.Log($"[GameSessionManager] : 클라이언트가 게임 종료 RPC 수신 {result}");
         //_ = LobbyManager.Instance.ReturnToRoomAsync();
 
-        StartCoroutine(ReturnToLobbyRoutine());
+
+        // StartCoroutine(ReturnToLobbyRoutine());
     }
 
     private void SetSingleton()
@@ -219,4 +280,53 @@ public class GameSessionManager : NetworkBehaviour
         // 대기가 끝나면 비로소 로비 매니저를 통해 대기방으로
         _ = LobbyManager.Instance.ReturnToRoomAsync();
     }
+
+
+    /*
+    private IEnumerator SubscribeToGameManager()
+    {
+        // GameManager 인스턴스가 존재할 때까지 기다림
+        yield return new WaitUntil(() => GameManager.Instance != null);
+
+        // 이벤트가 두 번 구독되는 것을 막기 위해 뺐다가 다시 더함 (안전장치)
+        GameManager.Instance.OnTimeOverServer -= HandleTimeOverOnServer;
+        GameManager.Instance.OnTimeOverServer += HandleTimeOverOnServer;
+
+        Debug.Log("[GameSessionManager] : SubscribeToGameManager 완료");
+    }
+    */
+
+
+    private void OnClientDisconnect(ulong clientId)
+    {
+        
+        if (clientId == NetworkManager.ServerClientId || clientId == NetworkManager.Singleton.LocalClientId)
+        {
+            Debug.Log("호스트 서버와의 연결이 끊어졌습니다.");
+
+            // 호스트 종료에 따른 후속 처리
+            HandleHostDisconnected();
+        }
+    }
+
+    private void HandleHostDisconnected()
+    {
+        
+        NetworkManager.Singleton.Shutdown();    // 기존 네트워크 세션 정리
+        SceneLoader.LoadLocal("LobbyScene");   // 로비 씬으로 이동
+    }
+
+
+    // 스코어 계산, 원래는 GameSessionManager에서 점수를 받아서 처리하는 게 맞지만, 일단은 여기서 계산하도록 함
+    public void CalculateScore()
+    {
+        // 점수 계산 로직 (예시)
+        TimeScore = Mathf.RoundToInt(1200 / GameManager.Instance.EndTime) * 100; // 클리어 시간에 반비례한 점수
+        ProtectScore = 2000;
+        TotalScore = TimeScore + ProtectScore;
+        Debug.Log($"[GameSessionManager] 점수 계산 완료 : Time Score: {TimeScore} | Protect Score: {ProtectScore} | Total Score: {TotalScore}");
+    }
+
+
+
 }

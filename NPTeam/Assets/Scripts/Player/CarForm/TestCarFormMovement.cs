@@ -1,97 +1,159 @@
-using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestCarFormMovement : NetworkBehaviour, IStunable
+public class TestCarFormMovement : NetworkBehaviour
 {
-    private NPTeamInputActions _carFormInput; // 근형님이 만드신 inputSystem
-    private Vector3 _move; // 앞뒤 움직임
-    private Vector3 _turn; // 왼쪽 오른쪽 회전
-    private float _direction; // 전진, 후진 시 사용
-    private Rigidbody _carFormRigidBody;
-    [SerializeField] private float carFormSpeed = 5.0f;
-    [SerializeField] private float carFormTurnSpeed = 5.0f;
-    // [SerializeField] private float rotateInterpolate = 5.0f; // 회전 속도
-    private bool _isMove; // 전진 중인지, 후진 중인지
-    private bool _isStunned;
+    [SerializeField] Rigidbody carFormRigidBody;
+    private NPTeamInputActions _carFormInput;
+
+    private Vector3 _move;
+    private Vector3 _turn;
+
+    public float MotorTorque;
+    public float BrakeTorque;
+    public float SteerRot;
     
-    public override void OnNetworkSpawn()
-    {
-        if (!IsOwner) return;
-        // 소유자 전용 입력 바인딩 등 초기화
-    }
+    private NetworkVariable<float> _netHorizontalInput = new NetworkVariable<float>
+        (0f, 
+        NetworkVariableReadPermission.Everyone, 
+        NetworkVariableWritePermission.Owner);
     
+    private NetworkVariable<float> _netVerticalInput = new NetworkVariable<float>(
+        0f, 
+        NetworkVariableReadPermission.Everyone, 
+        NetworkVariableWritePermission.Owner);
+    
+    private NetworkVariable<float> _netBrakeInput = new NetworkVariable<float>(
+        0f, 
+        NetworkVariableReadPermission.Everyone, 
+        NetworkVariableWritePermission.Owner);
+
+    public WheelCollider[] SteerWheel;
+    public WheelCollider[] MotorWheel;
+    public WheelCollider[] AllWheel;
+
+    [Header("부모 객체인 PlayerVehicle를 참조")]
+    [SerializeField] private GameObject _playerVehicle;
+    [SerializeField] private PlayerVehicle _playerVehicleCS;
+
+    private float _timer;
+    private PlayerStun _stun;
+
     void Awake()
     {
+        carFormRigidBody.centerOfMass = new Vector3(0f, -0.5f, 0f);
         _carFormInput = new NPTeamInputActions();
-        _carFormRigidBody = GetComponent<Rigidbody>();
+        _stun = GetComponentInParent<PlayerStun>();
+        WheelCenterSetting();
     }
-
+    
     void OnEnable()
     {
         _carFormInput.asset.Enable();
-        _carFormInput.Player.PlayerMove.performed += CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  += CarForntAndBackMove;
+        _carFormInput.Player.PlayerMove.performed += CarFormInput;
+        _carFormInput.Player.PlayerMove.canceled += CarFormInput;
+        _carFormInput.Player.PlayerAscend.performed += CarFormInputBreak;
+        _carFormInput.Player.PlayerAscend.canceled += CarFormInputBreak;
     }
 
     void OnDisable()
     {
-        _carFormInput.Player.PlayerMove.performed -= CarForntAndBackMove;
-        _carFormInput.Player.PlayerMove.canceled  -= CarForntAndBackMove;
+        _carFormInput.Player.PlayerMove.performed -= CarFormInput;
+        _carFormInput.Player.PlayerMove.canceled -= CarFormInput;
+        _carFormInput.Player.PlayerAscend.performed -= CarFormInputBreak;
+        _carFormInput.Player.PlayerAscend.canceled -= CarFormInputBreak;
         _carFormInput.asset.Disable();
+    }
+
+    private void Update()
+    {
+        if (!IsOwner) return;
+
+        if (_playerVehicleCS.Stamina >= 100) return;
+
+        _timer += Time.deltaTime;
+        if (_timer >= 1f)
+        {
+            _timer = 0f;
+            _playerVehicleCS.ChangeStamina(2);
+        }
     }
 
     void FixedUpdate()
     {
-        // if (!IsOwner) return;
-        if (_isStunned) return;
-        CarMove();
+        WheelControl();
+        UpdateAllWheelVisuals();
     }
 
-    void CarForntAndBackMove(InputAction.CallbackContext ctx)
+    void WheelCenterSetting()
     {
-        Vector2 input = ctx.ReadValue<Vector2>();
-        // Debug.Log($"Input: {input}");
-        
-        _turn = new Vector3(input.x, 0, 0);
-        Debug.Log($"앞뒤 입력 : {_turn.x}");
-        
-        _move = new Vector3(0, 0, input.y).normalized;
-        Debug.Log($"왼쪽 오른쪽 : {_move.z}");
+        foreach (WheelCollider wheel in AllWheel)
+        {
+            wheel.center = wheel.transform.GetChild(0).transform.localPosition;
+        }
     }
     
-    void CarMove()
+    void WheelControl()
     {
-        // 전진, 후진 중일 때만 회전 할 수 있도록
-        _isMove = _move.sqrMagnitude > 0;
-        // 전진시 1f, 후진시 -1f
-        _direction = _move.z > 0 ?  1f : -1f; 
+        float rot = SteerRot * _netHorizontalInput.Value;
+        float Torque = MotorTorque * _netVerticalInput.Value;
+        float Brake = BrakeTorque * _netBrakeInput.Value;
 
-        if (_isMove)
+        foreach (WheelCollider wheel in SteerWheel)
         {
-            transform.Rotate(_direction * _turn.x * carFormTurnSpeed * Time.deltaTime * Vector3.up);
+            wheel.steerAngle = rot;
         }
 
-        // _carFormRigidBody.linearVelocity = _move.z * carFormSpeed * transform.forward;
-        Vector3 velocity = _carFormRigidBody.linearVelocity;
-
-        // y축이 중력을 받기 위해 x, z만 갱신
-        velocity.x = transform.forward.x * _move.z * carFormSpeed;
-        velocity.z = transform.forward.z * _move.z * carFormSpeed;
-
-        _carFormRigidBody.linearVelocity = velocity;
+        foreach (WheelCollider wheel in MotorWheel)
+        {
+            wheel.motorTorque = Torque; 
+            wheel.brakeTorque = Brake;
+        }
     }
     
-    public void SetStun(float time)
+    void UpdateSteerWheelVisuals()
     {
-        StartCoroutine(StunRoutine(time));
+        float rot = SteerRot * _netHorizontalInput.Value;
+        
+        foreach (WheelCollider wheel in SteerWheel) 
+        { 
+            wheel.steerAngle = rot; 
+        }
     }
 
-    private IEnumerator StunRoutine(float time)
+    void UpdateAllWheelVisuals()
     {
-        _isStunned = true;
-        yield return new WaitForSeconds(time);
-        _isStunned = false;
+        foreach (WheelCollider wheel in SteerWheel)
+        {
+            UpdateWheelVisual(wheel.transform.GetChild(0), wheel);
+        }
+
+        foreach (WheelCollider wheel in MotorWheel)
+        {
+            UpdateWheelVisual(wheel.transform.GetChild(0), wheel);
+        }
+    }
+
+    void UpdateWheelVisual(Transform trans, WheelCollider wheelCol)
+    {
+        Vector3 UpdatePos;
+        Quaternion UpdateRot;
+        wheelCol.GetWorldPose(out UpdatePos, out UpdateRot);
+        trans.position = UpdatePos;
+        trans.rotation = UpdateRot;
+    }
+    
+    void CarFormInput(InputAction.CallbackContext ctx)
+    {
+        Vector2 input = ctx.ReadValue<Vector2>();
+        _netHorizontalInput.Value = input.x;
+        _netVerticalInput.Value = input.y;
+    }
+
+    void CarFormInputBreak(InputAction.CallbackContext ctx)
+    {
+        _netBrakeInput.Value = ctx.ReadValue<float>();
     }
 }

@@ -74,7 +74,7 @@ public class CreateRoomDialogUI : MonoBehaviour
 
         _isProcessing = true;
         _confirmButton.interactable = false;
-        SetWarning("방 생성 중...");
+        SetWarning("Creating room...");
 
         bool success = await LobbyManager.Instance.CreateSessionAsync(roomName);
 
@@ -86,7 +86,7 @@ public class CreateRoomDialogUI : MonoBehaviour
         else
         {
             _confirmButton.interactable = true;
-            SetWarning("방 생성 실패. 다시 시도하세요.");
+            SetWarning("Lobby creation failed. Please try again.");
         }
     }
 

@@ -7,11 +7,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerVehicle : NetworkBehaviour
 {
-    
-   private NetworkVariable<int> _stamina = new NetworkVariable<int>(
-        100,
-        NetworkVariableReadPermission.Everyone,
-        NetworkVariableWritePermission.Server);
+
+    private NetworkVariable<int> _stamina = new NetworkVariable<int>(
+         100,
+         NetworkVariableReadPermission.Everyone,
+         NetworkVariableWritePermission.Server);
 
     public int Stamina => _stamina.Value;
 
@@ -57,6 +57,12 @@ public class PlayerVehicle : NetworkBehaviour
     public bool checkSpeedOff = false;
     public bool checkSpeedOffForCam = false;
 
+    [Header("현재 차량의 머테리얼 등록")]
+    [SerializeField] private Renderer _carRenderer;
+    [SerializeField] private Renderer _robotRenderer;
+    [SerializeField] private Renderer _componentRenderer;
+    private bool _startCheck = false;
+
     #region 합체 관련 필드들
     // 차량 번호. -1은 미등록
     int _vehicleNum = -1;
@@ -70,7 +76,7 @@ public class PlayerVehicle : NetworkBehaviour
     {
         get => _componentFormMovement;
     }
-         
+
     #endregion
 
     private void Awake() => Init();
@@ -133,6 +139,9 @@ public class PlayerVehicle : NetworkBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _formColorChanger = GetComponent<FormColorChanger>();
         _stun = GetComponent<PlayerStun>();
+
+        //연동준이 추가
+        // _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
     #endregion
 
@@ -169,6 +178,15 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return ;
 
+        if (_currentFormIndex == 1)
+        {
+            RobotGrab grab = GetComponentInChildren<RobotGrab>();
+            if (grab != null) grab.GrabCancel();
+        }
+        
+        //연동준이 추가
+        _rigidbody.constraints = RigidbodyConstraints.None;
+
         SetForm(0);
         ChangeOwnershipServerRpc(0);
         FormColoerChange(0);
@@ -184,6 +202,8 @@ public class PlayerVehicle : NetworkBehaviour
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return;
 
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
         SetForm(1);
         ChangeOwnershipServerRpc(1);
         FormColoerChange(1);
@@ -198,6 +218,14 @@ public class PlayerVehicle : NetworkBehaviour
         if (isLockTransform == true) return;
         if (!ctx.started || PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != gameObject || _stun.IsStunned) return;
         //if (_stamina.Value < 30) return;
+        
+        if (_currentFormIndex == 1)
+        {
+            RobotGrab grab = GetComponentInChildren<RobotGrab>();
+            if (grab != null) grab.GrabCancel();
+        }
+
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
         SetForm(2);
         ChangeOwnershipServerRpc(2);
@@ -227,11 +255,31 @@ public class PlayerVehicle : NetworkBehaviour
         _robotForm.SetActive(index == 1);
         _componentForm.SetActive(index == 2);
 
-        _rigidbody.useGravity = (index != 2);
+        //_rigidbody.useGravity = (index != 2);
+
+        if (_startCheck == true)
+        {
+            if (_carRenderer != null && _currentFormIndex == 0) _carRenderer.material.SetFloat("_IsControll", 1f);
+            if (_robotRenderer != null && _currentFormIndex == 1) _robotRenderer.material.SetFloat("_IsControll", 1f);
+            if (_componentRenderer != null && _currentFormIndex == 2) _componentRenderer.material.SetFloat("_IsControll", 1f);
+        }
+        _startCheck = true;
 
         SetCamera(index);
 
         if (IsOwner) InGameUI.Instance.ChangeForm(index + 1);
+    }
+    // 빙의시 키네틱 관련
+    public void PossessionFreezeRotation()
+    {
+        if (_currentFormIndex != 0) return;
+        _rigidbody.constraints = RigidbodyConstraints.None;
+    }
+    // 빙의 해제용
+    public void PossessionFreezeRotationLock()
+    {
+        if (_currentFormIndex != 0) return;
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
     #endregion
 
@@ -279,6 +327,8 @@ public class PlayerVehicle : NetworkBehaviour
             _upperArm_Root_R_end.ChangeOwnership(OwnerClientId);
             _hand_L_end.ChangeOwnership(OwnerClientId);
         }
+
+        OnControlMaterialClientRpc(index);
     }
 
     private NetworkObject GetFormNetworkObject(int index)
@@ -300,7 +350,7 @@ public class PlayerVehicle : NetworkBehaviour
     #endregion
 
     #region 폼 체인지 색상 변경 네트워크 처리
-    private void FormColoerChange(int index)
+    public void FormColoerChange(int index)
     {
         SetPossessionColorServerRpc(GetFormNetworkObject(index).NetworkObjectId);
     }
@@ -319,6 +369,36 @@ public class PlayerVehicle : NetworkBehaviour
 
         Renderer[] renderers = networkObject.GetComponentsInChildren<Renderer>();
         _formColorChanger.FormChangeColor(renderers);
+    }
+
+    // 오너쉽 변경때 마테리얼 _IsControll On
+    [ClientRpc]
+    private void OnControlMaterialClientRpc(int index)
+    {
+        if (_carRenderer != null && index == 0) _carRenderer.material.SetFloat("_IsControll", 1f);
+        if (_robotRenderer != null && index == 1) _robotRenderer.material.SetFloat("_IsControll", 1f);
+        if (_componentRenderer != null && index == 2) _componentRenderer.material.SetFloat("_IsControll", 1f);
+    }
+
+    // 드론 빙의 취소시 호출할 마테리얼 _IsControll Off
+    public void ForDroneOffControlMaterial()
+    {
+        if (OwnerClientId != NetworkManager.Singleton.LocalClientId) return;
+        OffControlMaterialServerRpc(_currentFormIndex);
+    }
+
+    [ServerRpc]
+    private void OffControlMaterialServerRpc(int index)
+    {
+        OffControlMaterialClientRpc(index);
+    }
+
+    [ClientRpc]
+    private void OffControlMaterialClientRpc(int index)
+    {
+        if (_carRenderer != null && index == 0) _carRenderer.material.SetFloat("_IsControll", 0f);
+        if (_robotRenderer != null && index == 1) _robotRenderer.material.SetFloat("_IsControll", 0f);
+        if (_componentRenderer != null && index == 2) _componentRenderer.material.SetFloat("_IsControll", 0f);
     }
     #endregion
 

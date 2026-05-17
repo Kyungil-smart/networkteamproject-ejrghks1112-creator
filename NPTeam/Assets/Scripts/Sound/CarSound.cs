@@ -4,6 +4,7 @@ public class CarSound : MonoBehaviour
 {
     [SerializeField] AudioSource carDriveSoundAudioSource;
     [SerializeField] CarFormMovement carFormMovement;
+    [SerializeField] CarFormWheelColliderMovement carFormWheelColliderMovement;
 
     void Start()
     {
@@ -15,13 +16,13 @@ public class CarSound : MonoBehaviour
     void OnEnable()
     {
         carDriveSoundAudioSource.Stop();
-        carFormMovement.isMove.OnValueChanged += PlayCarDriveSound;
+        carFormWheelColliderMovement.isMove.OnValueChanged += PlayCarDriveSound;
         SoundManager.Instance.OnSfxVolumeChanged += CarSoundChanged;
     }
 
     void OnDisable()
     {
-        carFormMovement.isMove.OnValueChanged -= PlayCarDriveSound;
+        carFormWheelColliderMovement.isMove.OnValueChanged -= PlayCarDriveSound;
         SoundManager.Instance.OnSfxVolumeChanged -= CarSoundChanged;
     }
     

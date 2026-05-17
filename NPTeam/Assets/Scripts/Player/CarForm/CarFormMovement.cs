@@ -90,7 +90,8 @@ public class CarFormMovement : NetworkBehaviour
     void CarForntAndBackMove(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        if (PlayerState.Instance.IsPossession == false || PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
+        if (PlayerState.Instance.IsPossession == false || 
+            PlayerState.Instance.CurrentPossessed != _playerVehicle) return;
         Vector2 input = ctx.ReadValue<Vector2>();
 
         _turn = new Vector3(input.x, 0, 0);
@@ -110,11 +111,10 @@ public class CarFormMovement : NetworkBehaviour
 
     void CarMove()
     {
-        // 전진, 후진 중일 때만 회전 할 수 있도록
-        // isMove.Value = _move.sqrMagnitude > 0;
         // 전진시 1f, 후진시 -1f
         _direction = _move.z > 0 ? 1f : -1f;
 
+        // 전진 후진 중일때만 우회전 좌회전 가능
         if (isMove.Value)
         {
             transform.Rotate(_direction * _turn.x * carFormTurnSpeed * Time.deltaTime * Vector3.up);

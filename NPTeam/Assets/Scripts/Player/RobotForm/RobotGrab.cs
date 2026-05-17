@@ -89,25 +89,51 @@ public class RobotGrab : NetworkBehaviour
 
         foreach (Collider hit in hits)
         {
-            if (hit.transform.root == transform.root)
+            PlayerVehicle targetVehicle = hit.GetComponentInParent<PlayerVehicle>();
+                
+            if (targetVehicle != null && targetVehicle == _playerVehicleCS) continue;
+                
+            if (targetVehicle != null)
             {
-                continue;
+                NetworkObject targetNetworkObject = targetVehicle.GetComponentInParent<NetworkObject>();
+                
+                if (targetNetworkObject != null)
+                {
+                    if (targetVehicle != null && targetVehicle.isLockTransform) continue;
+                
+                    targetRef = targetNetworkObject;
+                
+                    if (_playerVehicleCS.Stamina < 10) return;
+                    isGrabGet = true;
+                    _playerVehicleCS.ChangeStamina(-10);
+                    isGrabSFX.Value = true;
+                
+                    GrabServerRpc(targetRef);
+                    break;
+                    
+                }
             }
-
-            NetworkObject targetNetworkObject =  hit.GetComponentInParent<NetworkObject>();
-
-            if (targetNetworkObject != null)
+            else
             {
-                targetRef = targetNetworkObject;
+                Monster monster = hit.GetComponent<Monster>();
 
-                if (_playerVehicleCS.Stamina < 15) return;
-                isGrabGet = true;
-                _playerVehicleCS.ChangeStamina(-15);
-                isGrabSFX.Value = true;
+                if (monster != null)
+                {
+                    NetworkObject targetNetworkObject = monster.GetComponent<NetworkObject>();
 
-                GrabServerRpc(targetRef);
-
-                break;
+                    if (targetNetworkObject != null)
+                    {
+                        targetRef = targetNetworkObject;
+                        
+                        if  (_playerVehicleCS.Stamina < 10) return;
+                        isGrabGet = true;
+                        _playerVehicleCS.ChangeStamina(-10);
+                        isGrabSFX.Value = true;
+                        
+                        GrabServerRpc(targetRef);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -129,35 +155,96 @@ public class RobotGrab : NetworkBehaviour
         NavMeshAgent nav = target.GetComponent<NavMeshAgent>();
         Monster monster = target.GetComponent<Monster>();
 
-        if (nav != null)
+        if (nav != null) nav.enabled = false;
+        if (monster != null) monster.enabled = false;
+        
+        if (target.TryGetComponent<PlayerVehicle>(out PlayerVehicle targetVehicle))
         {
-            monster.enabled = false;
-            nav.enabled = false;
+            targetVehicle.LockTransform();
+
+            if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRb))
+            {
+                targetRb.isKinematic = true;
+            }
+            
+            SetPlayerRigidbodyClientRpc(targetRef, true);
         }
     }
 
     [ServerRpc]
     private void ReleaseServerRpc(NetworkObjectReference targetRef)
     {
-        if (!targetRef.TryGet(out NetworkObject target))
-            return;
+        if (!targetRef.TryGet(out NetworkObject target)) return;
 
         target.TryRemoveParent(true);
-
-        Vector3 pos = target.transform.position;
-        pos.y = _originY;
-        target.transform.position = pos;
 
         NavMeshAgent nav = target.GetComponent<NavMeshAgent>();
         Monster monster = target.GetComponent<Monster>();
 
-        if (nav != null)
+        if (monster != null)
         {
+            Vector3 pos = target.transform.position;
+            pos.y = _originY;
+            target.transform.position = pos;
+            
             nav.enabled = true;
             monster.enabled = true;
         }
 
-        targetRef = default;
+        if (target.TryGetComponent<PlayerVehicle>(out PlayerVehicle targetVehicle))
+        {
+            targetVehicle.isLockTransform = false;
+
+            if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRb))
+            {
+                targetRb.isKinematic = false;
+
+                if (targetVehicle.CurrentFormIndex == 0) targetRb.constraints = RigidbodyConstraints.None;
+                else                                     targetRb.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+        }
+
+        SetPlayerRigidbodyClientRpc(targetRef, false);
+        
+        this.targetRef = default;
+    }
+
+    [ClientRpc]
+    private void SetPlayerRigidbodyClientRpc(NetworkObjectReference targetRef, bool isGrabed)
+    {
+        if (!targetRef.TryGet(out NetworkObject target))  return;
+
+        if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRb))
+        {
+            targetRb.isKinematic = isGrabed;
+
+            if (!isGrabed)
+            {
+                if (target.TryGetComponent<PlayerVehicle>(out PlayerVehicle targetVehicle))
+                {
+                    targetRb.constraints = (targetVehicle.CurrentFormIndex == 0) ? RigidbodyConstraints.None : RigidbodyConstraints.FreezeRotation;
+                }
+            }
+        }
+        
+        WheelCollider[] wheels = target.GetComponentsInChildren<WheelCollider>(true);
+
+        foreach (var wheel in wheels)
+        {
+            wheel.gameObject.SetActive(!isGrabed);
+        }
+    }
+
+    public void GrabCancel()
+    {
+        if (isGrabGet)
+        {
+            isGrab = false;
+            isGrabGet = false;
+            isGrabSFX.Value = false;
+            
+            ReleaseServerRpc(targetRef);
+        }
     }
 
     private void OnDrawGizmos()
