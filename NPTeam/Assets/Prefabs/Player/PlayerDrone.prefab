@@ -410,6 +410,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _cinemachineCamera: {fileID: 3820322090921818748}
+  _DronCollider1: {fileID: 77540329699578228}
+  _DronCollider2: {fileID: 2222877762877185331}
   _dronRenderers:
   - {fileID: 8057690161230645059}
   - {fileID: 8234398410483712040}
@@ -419,6 +421,16 @@ MonoBehaviour:
   - {fileID: 1198248657376550026}
   - {fileID: 97342604687053018}
   - {fileID: 5784524292962937154}
+  isDroneMoveSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
+  isDronePossessionSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
 --- !u!114 &9216172038396605342
 MonoBehaviour:
   m_ObjectHideFlags: 0
