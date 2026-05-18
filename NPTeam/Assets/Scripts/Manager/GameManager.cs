@@ -60,7 +60,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public event Action OnTimeOverServer;   // 서버에서 시간이 다 되었을 때, 클라이언트에게 게임 종료를 알리는 이벤트
     private bool _isGameEndTriggered = false;  // 타이머 종료 이벤트를 한 번만 트리거하기 위한 변수
-
+    
 
     public int GetVehiclesNum => PlayerVehicles.Count;
     
@@ -148,5 +148,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void EndCutscene()
     {
         SetPlayerControl(true);
+    }
+
+    public void GameEnd()
+    {
+        _isGameEndTriggered = true;
     }
 }
