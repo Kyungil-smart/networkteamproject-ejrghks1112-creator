@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3250306090
+  GlobalObjectIdHash: 3226860893
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -683,6 +683,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 743696561927525670}
     - target: {fileID: 4700365608077339858, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700365608077339858, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700365608077339858, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700365608077339858, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -746,6 +758,10 @@ PrefabInstance:
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 6095368481923992535, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
+      propertyPath: _robotWalkSoundAudioSource
+      value: 
+      objectReference: {fileID: 1751779735230325859}
     - target: {fileID: 6998640827465897096, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 964543503
@@ -757,10 +773,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4980449553488956649, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5669019966208076846}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
 --- !u!137 &5231825194858033 stripped
 SkinnedMeshRenderer:
@@ -788,33 +801,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4980449553488956649, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
   m_PrefabInstance: {fileID: 5252698819735297240}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5669019966208076846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007480048465858609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524951190e5e5984195570bf18e56a0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RobotSound
-  _robotWalkSoundAudioSource: {fileID: 1751779735230325859}
-  _robotFormMovement: {fileID: 8362658916487904247}
-  _robotGrab: {fileID: 6138529250808952214}
-  _robotZab: {fileID: 1844542514748518782}
---- !u!114 &1844542514748518782 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5871695677437734310, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
-  m_PrefabInstance: {fileID: 5252698819735297240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1bc1400a3a3525428c638a6d15e82f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RobotZab
 --- !u!114 &3009952111850489936 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6998640827465897096, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
@@ -848,25 +834,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
---- !u!114 &6138529250808952214 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2149688630851955022, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
-  m_PrefabInstance: {fileID: 5252698819735297240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c31ac3662be16e4f8bb111bb2459654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RobotGrab
---- !u!114 &8362658916487904247 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4389730102333417263, guid: c77f18b5c51e97e418ca14ca1e0ee41b, type: 3}
-  m_PrefabInstance: {fileID: 5252698819735297240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007480048465858609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195e92b2b3c76ef4ba0df87dc85d256f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RobotFormMovement

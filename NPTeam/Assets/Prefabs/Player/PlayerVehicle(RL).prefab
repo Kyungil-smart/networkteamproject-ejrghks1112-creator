@@ -39,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7516661080461784767}
-  - {fileID: 6606611786940146968}
+  - {fileID: 3454741876912540203}
   - {fileID: 4439664432651810477}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1057676790
+  GlobalObjectIdHash: 916260593
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -109,23 +109,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerVehicle
   ShowTopMostFoldoutHeaderGroup: 1
   _carForm: {fileID: 7499242813087477363}
-  _robotForm: {fileID: 6884446425445696803}
+  _robotForm: {fileID: 3158330142893681168}
   _componentForm: {fileID: 5853934371568045877}
   _carCamera: {fileID: 3019524537589292041}
-  _robotCamera: {fileID: 7142182170586607142}
+  _robotCamera: {fileID: 1675607152091283733}
   _componentCamera: {fileID: 3563727551642590494}
   _carNetworkObject: {fileID: 3556720238901943222}
-  _robotNetworkObject: {fileID: 6250202584401377799}
+  _robotNetworkObject: {fileID: 2514131360210801972}
   _componentNetworkObject: {fileID: 4344288290715467554}
   _componentConnector: {fileID: 2011377181236548437}
-  _upperArm_Root_R_end: {fileID: 2454379629416553948}
-  _hand_L_end: {fileID: 0}
+  _upperArm_Root_R_end: {fileID: 524718152804934011}
+  _hand_L_end: {fileID: 2377215813293076242}
   _spawnTransform: {fileID: 0}
   _formColorChanger: {fileID: 0}
   checkSpeedOff: 0
   checkSpeedOffForCam: 0
   _carRenderer: {fileID: 1486413240867738603}
-  _robotRenderer: {fileID: 0}
+  _robotRenderer: {fileID: 3550050050173562326}
   _componentRenderer: {fileID: 5502106036077830892}
   isLockTransform: 0
   _componentFormMovement: {fileID: 6583438811569906168}
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002b69c17a4282544a340b3d447928c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComponentFormMovement
---- !u!1001 &1915274451592694218
+--- !u!1001 &7983396644154533625
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -545,115 +545,139 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
-    - target: {fileID: 2460561279136994824, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 667094776564691418, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 2606871388793226971}
+    - target: {fileID: 667094776564691418, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _zabCollider
+      value: 
+      objectReference: {fileID: 5067744975751872432}
+    - target: {fileID: 667094776564691418, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
-    - target: {fileID: 2460561279136994824, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 667094776564691418, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
-    - target: {fileID: 3165461748992073195, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: RotationInterpolationType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165461748992073195, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: RotationMaxInterpolationTime
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 2117250630
-      objectReference: {fileID: 0}
-    - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: SceneMigrationSynchronization
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 916260593
-      objectReference: {fileID: 0}
-    - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 2987077454701153790, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 2987077454701153790, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3723768529796080274, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _grabCollider
+      value: 
+      objectReference: {fileID: 8142644110120926397}
+    - target: {fileID: 3723768529796080274, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 3723768529796080274, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _myNetworkObject
+      value: 
+      objectReference: {fileID: 524718152804934011}
+    - target: {fileID: 3723768529796080274, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 3723768529796080274, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _robotCameraLook
+      value: 
+      objectReference: {fileID: 2792098201287062127}
+    - target: {fileID: 4389730102333417263, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _rigidbody
       value: 
       objectReference: {fileID: 3285019482104072620}
-    - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4389730102333417263, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
-    - target: {fileID: 4389730102333417263, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4389730102333417263, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4980449553488956649, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 4980449553488956649, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: m_Name
-      value: Robot
+      value: DumpTruckBot(RL)
       objectReference: {fileID: 0}
-    - target: {fileID: 5221148021317211286, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 5221148021317211286, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _robotZab
+      value: 
+      objectReference: {fileID: 7461136205125015331}
+    - target: {fileID: 5221148021317211286, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _playerVehicle
       value: 
       objectReference: {fileID: 570259725822164077}
-    - target: {fileID: 5221148021317211286, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 5221148021317211286, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _playerVehicleCS
       value: 
       objectReference: {fileID: 743696561927525670}
-    - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 599621156
-      objectReference: {fileID: 0}
-    - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: SceneMigrationSynchronization
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 916260593
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
+    - target: {fileID: 6095368481923992535, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+      propertyPath: _robotZab
+      value: 
+      objectReference: {fileID: 7461136205125015331}
+    - target: {fileID: 6095368481923992535, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _robotGrab
       value: 
-      objectReference: {fileID: 4085258014626078658}
-    - target: {fileID: 5528388037950767784, guid: 37e11302777227845bc936a0f2264384, type: 3}
+      objectReference: {fileID: 6730562902260335723}
+    - target: {fileID: 6095368481923992535, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
       propertyPath: _robotWalkSoundAudioSource
       value: 
       objectReference: {fileID: 7496129784065724302}
@@ -661,11 +685,11 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 37e11302777227845bc936a0f2264384, type: 3}
---- !u!114 &2454379629416553948 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+--- !u!114 &524718152804934011 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4079098750944171030, guid: 37e11302777227845bc936a0f2264384, type: 3}
-  m_PrefabInstance: {fileID: 1915274451592694218}
+  m_CorrespondingSourceObject: {fileID: 7602802477666355074, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -673,42 +697,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
---- !u!114 &4085258014626078658 stripped
+--- !u!114 &1675607152091283733 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2460561279136994824, guid: 37e11302777227845bc936a0f2264384, type: 3}
-  m_PrefabInstance: {fileID: 1915274451592694218}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c31ac3662be16e4f8bb111bb2459654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RobotGrab
---- !u!114 &6250202584401377799 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5487994405948797901, guid: 37e11302777227845bc936a0f2264384, type: 3}
-  m_PrefabInstance: {fileID: 1915274451592694218}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6884446425445696803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
---- !u!4 &6606611786940146968 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4700365608077339858, guid: 37e11302777227845bc936a0f2264384, type: 3}
-  m_PrefabInstance: {fileID: 1915274451592694218}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6884446425445696803 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4980449553488956649, guid: 37e11302777227845bc936a0f2264384, type: 3}
-  m_PrefabInstance: {fileID: 1915274451592694218}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7142182170586607142 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8757895028474456044, guid: 37e11302777227845bc936a0f2264384, type: 3}
-  m_PrefabInstance: {fileID: 1915274451592694218}
+  m_CorrespondingSourceObject: {fileID: 8757895028474456044, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -716,6 +708,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &2377215813293076242 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5636019487206935019, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!114 &2514131360210801972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5487994405948797901, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3158330142893681168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!95 &2606871388793226971 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5397510570797047842, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2792098201287062127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5221148021317211286, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3158330142893681168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507e3f60be577ca40842ade8c027d4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotCameraLook
+--- !u!1 &3158330142893681168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4980449553488956649, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3454741876912540203 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4700365608077339858, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3550050050173562326 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6885712756500302639, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &5067744975751872432 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2926926099291412809, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6730562902260335723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3723768529796080274, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c31ac3662be16e4f8bb111bb2459654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotGrab
+--- !u!114 &7461136205125015331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 667094776564691418, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1bc1400a3a3525428c638a6d15e82f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotZab
+--- !u!135 &8142644110120926397 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2290858169096690244, guid: dae131732d456ad479a0e0063e9f2d9c, type: 3}
+  m_PrefabInstance: {fileID: 7983396644154533625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9153646005012208396
 PrefabInstance:
   m_ObjectHideFlags: 0
