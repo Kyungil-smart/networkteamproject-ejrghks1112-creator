@@ -256,7 +256,7 @@ public class DroneController : NetworkBehaviour
                     maxY = renderer.bounds.max.y;
             }
 
-            Vector3 targetPos = new Vector3(hit.transform.position.x, maxY + 4f, hit.transform.position.z);
+            Vector3 targetPos = new Vector3(hit.transform.position.x, maxY + 6.5f, hit.transform.position.z);
 
             // 자식 오브젝트로 들어감
             SetParentServerRpc(networkObject.NetworkObjectId, targetPos);
