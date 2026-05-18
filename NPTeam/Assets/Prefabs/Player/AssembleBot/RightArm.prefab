@@ -278,9 +278,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollComponentController
   ShowTopMostFoldoutHeaderGroup: 1
+  componentType: 3
   impulseObject: {fileID: 1778157774485007069}
   impulseAnimTarget: {fileID: 6017504263600635836}
   DragObject: {fileID: 4358194424977595724}
+  _animator: {fileID: 1468830338843077149}
+  _mainJoint: {fileID: 828961684389766369}
 --- !u!1 &6170198593055959448
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +781,7 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778157774485007069}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 683577940367299888}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}

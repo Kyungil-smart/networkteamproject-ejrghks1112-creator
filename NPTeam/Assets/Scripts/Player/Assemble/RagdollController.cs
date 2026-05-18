@@ -10,6 +10,9 @@ public class RagdollController : NetworkBehaviour
     [SerializeField] private Transform hipBone;
     [SerializeField] private RagdollList ragdollList;
     [SerializeField] private Animator mainAnimator;
+
+    [SerializeField] private Rigidbody SpineRigidbody;
+    [SerializeField] private Rigidbody RootRigidbody;
     
     private List<RagdollTarget> ragdollTargets = new();
     private List<Animator> animators = new();
@@ -34,13 +37,14 @@ public class RagdollController : NetworkBehaviour
         SetRagdollMode(false);
     }
     
-    private void InitRagdoll()
+    public void InitRagdoll()
     {
         foreach (RagdollTarget rb in ragdollTargets)
         {
             if (rb.GetRigidBody == RootRagdoll) continue;
             rb.Init(ragdollList.GetTarget(rb.gameObject.name));
         }
+        animators.AddRange(hipBone.GetComponentsInChildren<Animator>());
     }
 
     public void SetRagdollMode(bool active)
@@ -66,10 +70,17 @@ public class RagdollController : NetworkBehaviour
         RootRagdoll.AddForce(force, ForceMode.Impulse);
     }
 
-    public void AddTarget(List<RagdollTarget> targets)
+    public void AddTarget(RagdollComponentController target)
     {
-        ragdollTargets.AddRange(targets);
-        animators.Add(mainAnimator);
+        ragdollTargets.AddRange(target.GetRagdollTargets);
+        animators.Add(target.GetAnimator);
+        if (target.ComponentType == AssemblePartType.LeftArm || target.ComponentType == AssemblePartType.RightArm)
+            target.ConnectorJoint.connectedBody = SpineRigidbody;
+        else
+            target.ConnectorJoint.connectedBody = RootRigidbody;
+
+        if (IsOwner) 
+            target.EnableInput();
     }
 
 

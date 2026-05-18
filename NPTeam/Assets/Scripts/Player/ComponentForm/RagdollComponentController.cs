@@ -11,6 +11,8 @@ public class RagdollComponentController : NetworkBehaviour
     private RagdollController _mainController;
     
     private NPTeamInputActions _playerInput;
+    [SerializeField]private AssemblePartType componentType;
+    public AssemblePartType ComponentType => componentType;
     
     [SerializeField] private GameObject impulseObject;
     [SerializeField] private Transform impulseAnimTarget;
@@ -19,11 +21,18 @@ public class RagdollComponentController : NetworkBehaviour
 
     [SerializeField] private Transform DragObject;
 
-    private List<RagdollTarget> ragdollTargets = new();
+    private List<RagdollTarget> _ragdollTargets = new();
+    public List<RagdollTarget> GetRagdollTargets => _ragdollTargets;
+    
+    [SerializeField] private Animator _animator;
+    public Animator GetAnimator => _animator;
+    [SerializeField] private FixedJoint _mainJoint;
+    public FixedJoint ConnectorJoint => _mainJoint;
     
     private void Awake()
     {
-        ragdollTargets = new List<RagdollTarget>(GetComponentsInChildren<RagdollTarget>());
+        _playerInput = new();
+        _ragdollTargets = new List<RagdollTarget>(GetComponentsInChildren<RagdollTarget>());
         if (impulseObject)
         {
             impulseRigidbody = impulseObject.GetComponent<Rigidbody>();
@@ -55,8 +64,9 @@ public class RagdollComponentController : NetworkBehaviour
         _playerInput.Player.PlayerLeftMB.canceled += OffAim;
     }
 
-    public void DisableInput()
+    public void OnDisable()
     {
+        if (!_playerInput.Player.enabled) return;
         _playerInput.Player.PlayerLeftMB.started -= OnAim;
         _playerInput.Player.PlayerLeftMB.canceled -= OffAim;
         _playerInput.Player.Disable();
@@ -66,7 +76,7 @@ public class RagdollComponentController : NetworkBehaviour
     public void Assemble(RagdollController controller)
     {
         _mainController = controller;
-        _mainController.AddTarget(ragdollTargets);
+        _mainController.AddTarget(this);
         GetComponent<CapsuleCollider>().enabled = false;
     }
     
