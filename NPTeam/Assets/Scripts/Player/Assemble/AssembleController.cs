@@ -11,6 +11,7 @@ public class AssembleController : NetworkBehaviour
     // fight상태
 
     //[SerializeField]
+    [SerializeField] private AnimationReceiver _receiver;
     private StateMachine _robotStateMachine = new();
 
     private RobotFormState _robotFormState;
@@ -28,6 +29,8 @@ public class AssembleController : NetworkBehaviour
 
     public RagdollController GetRagdollController => _ragdollController;
 
+   
+
     private void Awake()
     {
         _movement = GetComponent<AssembleMovement>();
@@ -40,7 +43,7 @@ public class AssembleController : NetworkBehaviour
         _fightFormState = new(this);
 
         _robotStateMachine.ChangeState(_combineFormState);
-
+        _receiver.OnEndAssemble.AddListener(EndAssemble);
         GameManager.Instance.LeaderVehicle = this;
     }
 
@@ -70,5 +73,10 @@ public class AssembleController : NetworkBehaviour
     private void ChangeCutsceneStateClientRpc()
     {
         _robotStateMachine.ChangeState(_cutsceneFormState);
+    }
+
+    private void EndAssemble()
+    {
+        GameManager.Instance.GameEnd();
     }
 }

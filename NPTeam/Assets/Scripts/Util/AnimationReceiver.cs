@@ -5,5 +5,5 @@ public class AnimationReceiver : MonoBehaviour
 {
     public UnityEvent OnEndAssemble = new();
 
-    private void EndLand() => OnEndAssemble?.Invoke();
+    private void EndAssemble() => OnEndAssemble?.Invoke();
 }
