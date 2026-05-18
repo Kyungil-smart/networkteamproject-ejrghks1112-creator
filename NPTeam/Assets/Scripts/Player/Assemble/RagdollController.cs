@@ -6,11 +6,12 @@ using UnityEngine.Serialization;
 
 public class RagdollController : NetworkBehaviour
 {
-    [FormerlySerializedAs("animator")] [SerializeField] private Animator[] animators;
     [SerializeField] private Transform hipBone;
     [SerializeField] private RagdollList ragdollList;
-
+    [SerializeField] private Animator mainAnimator;
+    
     private List<RagdollTarget> ragdollTargets = new();
+    private List<Animator> animators = new();
     private Rigidbody RootRagdoll;
 
 
@@ -23,11 +24,11 @@ public class RagdollController : NetworkBehaviour
     {
         ragdollTargets = new List<RagdollTarget>(GetComponentsInChildren<RagdollTarget>());
         RootRagdoll = GetComponent<Rigidbody>();
+        animators.Add(mainAnimator);
     }
 
     private void Start()
     {
-        
         InitRagdoll();
         SetRagdollMode(false);
     }
@@ -37,7 +38,6 @@ public class RagdollController : NetworkBehaviour
         foreach (RagdollTarget rb in ragdollTargets)
         {
             if (rb.GetRigidBody == RootRagdoll) continue;
-            Debug.Log(rb.gameObject.name);
             rb.Init(ragdollList.GetTarget(rb.gameObject.name));
         }
     }
@@ -47,7 +47,6 @@ public class RagdollController : NetworkBehaviour
         foreach (RagdollTarget rb in ragdollTargets)
         {
             if (rb.GetRigidBody == RootRagdoll) continue;
-            Debug.Log(rb.name);
             rb.GetRigidBody.isKinematic = !active;
             //ragdollList
         }
@@ -69,8 +68,7 @@ public class RagdollController : NetworkBehaviour
     public void AddTarget(List<RagdollTarget> targets)
     {
         ragdollTargets.AddRange(targets);
-        Debug.Log(targets.Count);
-        Debug.Log(ragdollTargets.Count);
+        animators.Add(mainAnimator);
     }
 
 

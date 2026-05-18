@@ -178,6 +178,18 @@ MonoBehaviour:
       : \u653B\u6483\\n 7 ESC : \u8A2D\u5B9A\u753B\u9762"
     m_Metadata:
       m_Items: []
+  - m_Id: 10103013
+    m_Localized: "\u30E2\u30C7\u30EA\u30F3\u30B0\\n\u90FD\u5E02 : https://assetstore.unity.com/packages/3d/environments/urban/cubexcube-free-city-pack-i-199815\\n\u90FD\u5E02
+      : https://assetstore.unity.com/packages/3d/environments/stylized-city-asset-pack-307453\\n\u4E57\u308A\u7269
+      : https://assetstore.unity.com/packages/3d/vehicles/mobile-optimize-free-low-poly-cars-327313\\n\u969C\u5BB3\u7269
+      : https://assetstore.unity.com/packages/3d/props/traffic-control-pack1-4919\\n\u969C\u5BB3\u7269
+      : https://assetstore.unity.com/packages/3d/environments/sci-fi/asteroids-low-poly-pack-142164\\n\u969C\u5BB3\u7269
+      : https://www.fab.com/listings/17b06dbb-da9d-4248-8f22-64e3566a1343\\n\\n\u30A8\u30D5\u30A7\u30AF\u30C8\\nhttps://assetstore.unity.com/packages/vfx/particles/fire-explosions/comic-explosion-effect-317348\\n\\n\u30B5\u30A6\u30F3\u30C9\\n\u52B9\u679C\u97F3
+      : https://taira-komori.net/freesoundkr.html\\n\u52B9\u679C\u97F3 : https://soundeffect-lab.info/sound/anime/\\n\\n\u30D5\u30A9\u30F3\u30C8\\n\u97D3\u56FD\u8A9E\u30D5\u30A9\u30F3\u30C8
+      : https://maplestory.nexon.com/Media/Font\\n\u65E5\u672C\u8A9E\u30D5\u30A9\u30F3\u30C8
+      : https://fonts.google.com/noto/specimen/Noto+Sans+JP\\n\\nUI\\nhttps://assetstore.unity.com/packages/2d/gui/icons/371-simple-buttons-pack-97516\\nhttps://assetstore.unity.com/packages/2d/gui/sci-fi-gui-skin-15606\\nhttps://assetstore.unity.com/packages/2d/gui/icons/simple-button-set-02-184903\\nhttps://assetstore.unity.com/packages/2d/gui/icons/white-black-gui-by-gamertose-168805\\n\\n\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\\nhttps://assetstore.unity.com/packages/p/colourful-hierarchy-category-gameobject-205934"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
