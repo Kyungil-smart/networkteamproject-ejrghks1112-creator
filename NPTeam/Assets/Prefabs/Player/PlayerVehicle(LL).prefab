@@ -746,6 +746,34 @@ PrefabInstance:
       propertyPath: _robotWalkSoundAudioSource
       value: 
       objectReference: {fileID: 6379115788147853075}
+    - target: {fileID: 6236589694506658112, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+      propertyPath: _grabCollider
+      value: 
+      objectReference: {fileID: 2209420872188488184}
+    - target: {fileID: 6236589694506658112, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 6236589694506658112, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+      propertyPath: _myNetworkObject
+      value: 
+      objectReference: {fileID: 1977697637219729687}
+    - target: {fileID: 6236589694506658112, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
+    - target: {fileID: 7957985231629140100, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+      propertyPath: _zabCollider
+      value: 
+      objectReference: {fileID: 1922188186627018362}
+    - target: {fileID: 7957985231629140100, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 7957985231629140100, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -762,6 +790,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+--- !u!135 &1922188186627018362 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 4635688021578956080, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+  m_PrefabInstance: {fileID: 6555479954981925706}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1977697637219729687 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4723026743575229021, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
@@ -776,6 +809,11 @@ MonoBehaviour:
 --- !u!4 &2000358910020394904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4700365608077339858, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
+  m_PrefabInstance: {fileID: 6555479954981925706}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2209420872188488184 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 4922661831212063410, guid: 77f551d595741dd4dbaf0460b8bf6ef0, type: 3}
   m_PrefabInstance: {fileID: 6555479954981925706}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2298984471930765219 stripped

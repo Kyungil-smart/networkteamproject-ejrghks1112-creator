@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3226860893
+  GlobalObjectIdHash: 1416044839
   InScenePlacedSourceGlobalObjectIdHash: 916260593
   DeferredDespawnTick: 0
   Ownership: 2
@@ -337,6 +337,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3258869572978238480}
     m_Modifications:
+    - target: {fileID: 948940158992760958, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+      propertyPath: _grabCollider
+      value: 
+      objectReference: {fileID: 2148598150906968609}
+    - target: {fileID: 948940158992760958, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 948940158992760958, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+      propertyPath: _myNetworkObject
+      value: 
+      objectReference: {fileID: 8633486688108595524}
+    - target: {fileID: 948940158992760958, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
     - target: {fileID: 4389730102333417263, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
       propertyPath: _rigidbody
       value: 
@@ -401,6 +417,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4760877831090145025, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+      propertyPath: _zabCollider
+      value: 
+      objectReference: {fileID: 8923441897803732494}
+    - target: {fileID: 4760877831090145025, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+      propertyPath: _playerVehicle
+      value: 
+      objectReference: {fileID: 570259725822164077}
+    - target: {fileID: 4760877831090145025, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+      propertyPath: _playerVehicleCS
+      value: 
+      objectReference: {fileID: 743696561927525670}
     - target: {fileID: 4980449553488956649, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
       propertyPath: m_Name
       value: FireTruckBot(LA)
@@ -434,6 +462,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+--- !u!135 &2148598150906968609 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2794631856390162538, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+  m_PrefabInstance: {fileID: 4258677363023196747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &4247605290529128000 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 138304261672946699, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
@@ -486,6 +519,11 @@ MonoBehaviour:
 --- !u!4 &8800827392107421337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4700365608077339858, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
+  m_PrefabInstance: {fileID: 4258677363023196747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &8923441897803732494 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 4670148559873729605, guid: 7773f60e50ab8f84cba8148c42f92894, type: 3}
   m_PrefabInstance: {fileID: 4258677363023196747}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &9081438300023619234 stripped

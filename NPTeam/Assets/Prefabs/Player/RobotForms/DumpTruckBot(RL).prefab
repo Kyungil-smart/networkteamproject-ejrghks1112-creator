@@ -486,10 +486,181 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1818212559908673060, guid: 644277a92df6faf43996f797b6288929, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2926926099291412809}
+    - targetCorrespondingSourceObject: {fileID: 1818212559908673060, guid: 644277a92df6faf43996f797b6288929, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 667094776564691418}
+    - targetCorrespondingSourceObject: {fileID: 1818212559908673060, guid: 644277a92df6faf43996f797b6288929, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5636019487206935019}
+    - targetCorrespondingSourceObject: {fileID: 8152653339394789542, guid: 644277a92df6faf43996f797b6288929, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2290858169096690244}
+    - targetCorrespondingSourceObject: {fileID: 8152653339394789542, guid: 644277a92df6faf43996f797b6288929, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3723768529796080274}
+    - targetCorrespondingSourceObject: {fileID: 8152653339394789542, guid: 644277a92df6faf43996f797b6288929, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7602802477666355074}
   m_SourcePrefab: {fileID: 100100000, guid: 644277a92df6faf43996f797b6288929, type: 3}
+--- !u!1 &4313830816743159510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8152653339394789542, guid: 644277a92df6faf43996f797b6288929, type: 3}
+  m_PrefabInstance: {fileID: 5402566114504648304}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2290858169096690244
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4313830816743159510}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0.65, y: 0.4, z: 0.4}
+--- !u!114 &3723768529796080274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4313830816743159510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c31ac3662be16e4f8bb111bb2459654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotGrab
+  ShowTopMostFoldoutHeaderGroup: 1
+  _robotCameraLook: {fileID: 0}
+  _canGrabLayer:
+    serializedVersion: 2
+    m_Bits: 641
+  _myNetworkObject: {fileID: 0}
+  _grabCollider: {fileID: 0}
+  _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
+  isGrabSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
+--- !u!114 &7602802477666355074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4313830816743159510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2532771806
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 2
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 1
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 1
 --- !u!4 &5580940963269951899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 644277a92df6faf43996f797b6288929, type: 3}
   m_PrefabInstance: {fileID: 5402566114504648304}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6035478746475933780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1818212559908673060, guid: 644277a92df6faf43996f797b6288929, type: 3}
+  m_PrefabInstance: {fileID: 5402566114504648304}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2926926099291412809
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035478746475933780}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &667094776564691418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035478746475933780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1bc1400a3a3525428c638a6d15e82f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotZab
+  ShowTopMostFoldoutHeaderGroup: 1
+  _playerVehicle: {fileID: 0}
+  _playerVehicleCS: {fileID: 0}
+  _animator: {fileID: 0}
+  _zabCollider: {fileID: 0}
+  _canZabLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  isZabSFX:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
+--- !u!114 &5636019487206935019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035478746475933780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2373031691
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 2
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 1
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 1
