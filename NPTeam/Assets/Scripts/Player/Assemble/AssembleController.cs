@@ -12,6 +12,8 @@ public class AssembleController : NetworkBehaviour
 
     //[SerializeField]
     [SerializeField] private AnimationReceiver _receiver;
+    [SerializeField] private GameObject BarriorField;
+    [SerializeField] private Collider mainCollider;
     private StateMachine _robotStateMachine = new();
 
     private RobotFormState _robotFormState;
@@ -73,10 +75,15 @@ public class AssembleController : NetworkBehaviour
     private void ChangeCutsceneStateClientRpc()
     {
         _robotStateMachine.ChangeState(_cutsceneFormState);
+        _ragdollController.InitRagdoll();
     }
 
     private void EndAssemble()
     {
-        GameManager.Instance.GameEnd();
+        _robotStateMachine.ChangeState(_fightFormState);
+        BarriorField.SetActive(false);
+        mainCollider.enabled = true;
+        GameManager.Instance.GameEndServerRpc();
+        
     }
 }

@@ -416,9 +416,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollComponentController
   ShowTopMostFoldoutHeaderGroup: 1
+  componentType: 2
   impulseObject: {fileID: 5947634417316896209}
   impulseAnimTarget: {fileID: 8745031251650947162}
   DragObject: {fileID: 4358194424977595724}
+  _animator: {fileID: 7050886510614877362}
+  _mainJoint: {fileID: 4064379855427986425}
 --- !u!136 &7225322952678736297
 CapsuleCollider:
   m_ObjectHideFlags: 0
