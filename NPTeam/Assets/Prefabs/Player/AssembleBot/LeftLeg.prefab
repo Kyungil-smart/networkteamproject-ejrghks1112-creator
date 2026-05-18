@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 628197821
+  GlobalObjectIdHash: 1564308897
   InScenePlacedSourceGlobalObjectIdHash: 606915704
   DeferredDespawnTick: 0
   Ownership: 2
@@ -203,9 +203,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollComponentController
   ShowTopMostFoldoutHeaderGroup: 1
+  componentType: 0
   impulseObject: {fileID: 2632966388891836535}
   impulseAnimTarget: {fileID: 5952952539495949931}
   DragObject: {fileID: 2130806112224356982}
+  _animator: {fileID: 7309097567727510406}
+  _mainJoint: {fileID: 5758177342281551041}
 --- !u!1 &5353960878250633357
 GameObject:
   m_ObjectHideFlags: 0

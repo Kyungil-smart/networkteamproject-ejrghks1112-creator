@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1134446858570161853}
   - component: {fileID: 3684296227620933809}
   - component: {fileID: 8059901296725572689}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AssembleBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssembleController
   ShowTopMostFoldoutHeaderGroup: 1
   _receiver: {fileID: 7749335686594832762}
+  BarriorField: {fileID: 2642282501244289345}
+  mainCollider: {fileID: 8059901296725572689}
 --- !u!114 &2311326241696784368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +109,9 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   hipBone: {fileID: 3240066534415477688}
   ragdollList: {fileID: 8200892703634013240}
-  mainAnimator: {fileID: 0}
+  mainAnimator: {fileID: 3612578230089295882}
+  SpineRigidbody: {fileID: 8261581733047478297}
+  RootRigidbody: {fileID: 3290375096580686203}
 --- !u!54 &3684296227620933809
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -168,7 +172,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1039416655
+      value: 3762181785
       objectReference: {fileID: 0}
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -318,17 +322,50 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 33f79a8db1c3f524697624e4e50e417a, type: 2}
     - target: {fileID: 919132149155446097, guid: f1a7aa37e06b481488b9515e70caba2d, type: 3}
       propertyPath: m_Name
-      value: ATField
+      value: BarriorField
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f1a7aa37e06b481488b9515e70caba2d, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f1a7aa37e06b481488b9515e70caba2d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f1a7aa37e06b481488b9515e70caba2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 727431332485874773}
   m_SourcePrefab: {fileID: 100100000, guid: f1a7aa37e06b481488b9515e70caba2d, type: 3}
+--- !u!1 &2642282501244289345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f1a7aa37e06b481488b9515e70caba2d, type: 3}
+  m_PrefabInstance: {fileID: 2912188756514094096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &727431332485874773
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642282501244289345}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.01
+  m_Center: {x: -0.000000003259629, y: 0.000000003259629, z: 0}
 --- !u!4 &3449921433324870651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f1a7aa37e06b481488b9515e70caba2d, type: 3}
@@ -344,7 +381,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3058195789
+      value: 287470777
       objectReference: {fileID: 0}
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -632,7 +669,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2411814082
+      value: 2368442454
       objectReference: {fileID: 0}
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -1459,7 +1496,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2028503857
+      value: 609162253
       objectReference: {fileID: 0}
     - target: {fileID: -3704192151098453199, guid: 949bc8204361a244d9abcd6c8a9f4d4e, type: 3}
       propertyPath: SceneMigrationSynchronization

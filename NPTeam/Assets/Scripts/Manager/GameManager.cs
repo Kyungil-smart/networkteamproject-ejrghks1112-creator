@@ -150,8 +150,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         SetPlayerControl(true);
     }
 
-    public void GameEnd()
+    [Rpc(SendTo.Everyone, InvokePermission = RpcInvokePermission.Everyone)]
+    public void GameEndServerRpc()
     {
-        _isGameEndTriggered = true;
+        IsFinished = true;
+        Debug.Log("GameEnd");
     }
 }
