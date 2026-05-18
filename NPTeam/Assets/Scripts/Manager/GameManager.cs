@@ -70,14 +70,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
         // 게임 진행되면 시간 증가하는 기능
-        if (EndTime > 0)
+        if (EndTime >= 0)
         {
             EndTime += Time.deltaTime;
         }
-        // 서버일 경우, 점수가 0이면 게임 종료(게임 오버), 그리고 이를 다른 클라이언트에 전해줘야함
-        else if (EndTime <= 0 && !_isGameEndTriggered)
+        // 패배 시 (사실상 작동 안함)
+        // 서버일 경우, 시간이 -1이면 게임 종료(게임 오버), 그리고 이를 다른 클라이언트에 전해줘야함
+        else if (EndTime < -1 && !_isGameEndTriggered)
         {
-            EndTime = 0;    // 0 이하면 0으로 고정
+            EndTime = -1;    // 사실상 작동 안됨
 
             _isGameEndTriggered = true;
 
@@ -97,6 +98,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
 
 
+        // 승리 시
         if (IsFinished == true)
         {
             _isGameEndTriggered = true;

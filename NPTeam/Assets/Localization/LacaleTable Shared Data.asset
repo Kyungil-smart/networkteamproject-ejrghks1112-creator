@@ -159,6 +159,10 @@ MonoBehaviour:
     m_Key: UI_Settings_Sound_Total
     m_Metadata:
       m_Items: []
+  - m_Id: 10103013
+    m_Key: UI_Settings_Credits_Desc
+    m_Metadata:
+      m_Items: []
   - m_Id: 10104001
     m_Key: Battle_01
     m_Metadata:
